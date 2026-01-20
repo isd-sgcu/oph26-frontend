@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+.tanstack
+pnpm-lock.yaml
+routeTree.gen.ts
+*.min.js
+*.min.css
+
