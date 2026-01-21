@@ -4,7 +4,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import Header from '../components/Header'
 
-import appCss from '../styles.css?url'
+import appCss from '../styles/app.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -17,14 +17,12 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'CU Openhouse 2026',
       },
     ],
     links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
+      { rel: 'stylesheet', href: appCss },
+      { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
     ],
   }),
 

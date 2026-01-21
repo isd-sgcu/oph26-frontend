@@ -1,27 +1,26 @@
 import { Link } from '@tanstack/react-router'
 
-import './Header.css'
-
 export default function Header() {
   return (
-    <header className="header">
-      <nav className="nav">
+    <header>
+      <nav className="flex gap-4 bg-gray-200 p-4">
         <div className="nav-item">
           <Link to="/">Home</Link>
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/start/server-funcs">Start - Server Functions</Link>
+          <Link to="/test">Test Page</Link>
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/start/api-request">Start - API Request</Link>
+          <Link to="/test/$id" params={{ id: '1' }}>
+            Test Page 1
+          </Link>
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/start/ssr">Start - SSR Demos</Link>
+          <Link to="/test/component">Component Test</Link>
         </div>
-        <div>YOYOYO</div>
       </nav>
     </header>
   )
