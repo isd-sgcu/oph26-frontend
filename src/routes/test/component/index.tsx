@@ -8,7 +8,7 @@ export const Route = createFileRoute('/test/component/')({
 
 function RouteComponent() {
   return (
-    <div className="flex flex-col gap-8 px-8 py-16">
+    <div className="flex flex-col flex-wrap gap-8 overflow-auto px-8 py-16">
       {/* Color */}
       <div>
         <h1 className="text-2xl font-semibold">Colors</h1>
@@ -23,6 +23,7 @@ function RouteComponent() {
           <div className="bg-sub-green h-16 w-16"></div>
           <div className="h-16 w-16 bg-black"></div>
           <div className="bg-grey h-16 w-16"></div>
+          <div className="h-16 w-16 bg-white"></div>
           <div className="bg-gradient-pink h-16 w-16"></div>
           <div className="bg-gradient-beige h-16 w-16"></div>
           <div className="bg-gradient-purple h-16 w-16"></div>
@@ -30,7 +31,7 @@ function RouteComponent() {
           <div className="bg-gradient-blue h-16 w-16"></div>
           <div className="bg-gradient-beige-darker h-16 w-16"></div>
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap bg-black">
           <p className="text-main-pink p-2">
             โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
           </p>
@@ -64,24 +65,6 @@ function RouteComponent() {
           <p className="p-2 text-white">
             โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
           </p>
-          <p className="text-gradient-pink p-2">
-            โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
-          </p>
-          <p className="text-gradient-beige p-2">
-            โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
-          </p>
-          <p className="text-gradient-purple p-2">
-            โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
-          </p>
-          <p className="text-gradient-green p-2">
-            โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
-          </p>
-          <p className="text-gradient-blue p-2">
-            โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
-          </p>
-          <p className="text-gradient-beige-darker bg-black p-2">
-            โดยที่ประชาชนแห่งสหประชาชาติได้ยืนยันอีกครั้งไว้ในกฎบัตรถึงศรัทธาในสิทธิมนุษยชนขั้นพื้นฐาน
-          </p>
         </div>
       </div>
 
@@ -113,10 +96,10 @@ function RouteComponent() {
       </div>
 
       {/* Buttons */}
-      <div>
+      <div className="flex w-full flex-col">
         <h1 className="text-2xl font-semibold">Buttons</h1>
         {/* Solid Background */}
-        <div className="mt-2 grid grid-cols-3 gap-4">
+        <div className="mt-2 flex flex-wrap gap-4">
           <Button size="sm" showBorder borderClassName="bg-main-pink">
             <FlatIcon name="fi-rr-plus-small" size={16} />
             <span>เลือก</span>
@@ -213,7 +196,7 @@ function RouteComponent() {
         </div>
 
         {/* Solid Background + Expanded */}
-        <div className="mt-2 grid grid-cols-3 gap-4">
+        <div className="mt-2 flex flex-wrap gap-4">
           <Button size="sm" showBorder expanded borderClassName="bg-main-pink">
             <FlatIcon name="fi-rr-plus-small" size={16} />
             <span>Sign In With Google</span>
@@ -310,7 +293,7 @@ function RouteComponent() {
         </div>
 
         {/* Solid Background + Expanded */}
-        <div className="mt-2 grid grid-cols-3 gap-4">
+        <div className="mt-2 flex flex-wrap gap-4">
           <Button
             size="sm"
             showBorder
@@ -425,7 +408,7 @@ function RouteComponent() {
         </div>
 
         {/* Gradient Background */}
-        <div className="mt-2 grid grid-cols-3 gap-4">
+        <div className="mt-2 flex flex-wrap gap-4">
           <Button size="sm" showBorder borderClassName="bg-main-light-pink">
             <FlatIcon name="fi-rr-plus-small" size={16} />
             <span>เลือก</span>
@@ -522,7 +505,7 @@ function RouteComponent() {
         </div>
 
         {/* Gradient Background + Expanded */}
-        <div className="mt-2 grid grid-cols-3 gap-4">
+        <div className="mt-2 flex flex-wrap gap-4">
           <Button
             size="sm"
             showBorder
@@ -634,7 +617,7 @@ function RouteComponent() {
         </div>
 
         {/* Gradient Background + Expanded + Disabled */}
-        <div className="mt-2 grid grid-cols-3 gap-4">
+        <div className="mt-2 flex flex-wrap gap-4">
           <Button
             size="sm"
             showBorder
@@ -757,6 +740,24 @@ function RouteComponent() {
             borderWidth={20}
             className="bg-gradient-beige"
             borderClassName="bg-gradient-pink"
+            onClick={() => {
+              alert('Test Test')
+            }}
+          >
+            <FlatIcon name="fi-rr-plus-small text-main-pink" size={16} />
+            <span className="text-main-pink">Sign In With Google</span>
+            <FlatIcon name="fi-rr-plus-small text-main-pink" size={16} />
+          </Button>
+          <Button
+            size="sm"
+            showBorder
+            expanded
+            borderWidth={5}
+            className="bg-gradient-beige"
+            borderClassName="bg-gradient-purple"
+            onClick={() => {
+              alert('Test Test')
+            }}
           >
             <FlatIcon name="fi-rr-plus-small text-main-pink" size={16} />
             <span className="text-main-pink">Sign In With Google</span>

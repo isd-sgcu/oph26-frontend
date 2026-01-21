@@ -61,20 +61,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       showBorder = false,
       borderClassName = 'bg-black',
       borderWidth = 1,
+      onClick,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : 'button'
+    const innerRef = React.useRef<HTMLButtonElement>(null)
+
+    React.useImperativeHandle(ref, () => innerRef.current!)
+
+    const handleBorderClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === e.currentTarget && innerRef.current) {
+        innerRef.current.click()
+      }
+    }
 
     const button = (
       <Comp
-        ref={ref}
+        ref={innerRef}
         className={cn(
           'bg-gradient-pink text-white',
           buttonVariants({ size, expanded }),
           className
         )}
+        onClick={onClick}
         {...props}
       />
     )
@@ -83,8 +94,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <div
-        className={cn('inline-flex h-fit w-fit rounded-full', borderClassName)}
+        className={cn(
+          'inline-flex h-fit w-fit cursor-pointer rounded-full',
+          borderClassName
+        )}
         style={{ padding: `${borderWidth}px` }}
+        onClick={handleBorderClick}
       >
         {button}
       </div>

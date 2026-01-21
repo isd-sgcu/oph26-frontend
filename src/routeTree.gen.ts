@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestIndexRouteImport } from './routes/test/index'
+import { Route as InfoIndexRouteImport } from './routes/info/index'
+import { Route as GameIndexRouteImport } from './routes/game/index'
+import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as TestIdRouteImport } from './routes/test/$id'
 import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
 
@@ -22,6 +25,21 @@ const IndexRoute = IndexRouteImport.update({
 const TestIndexRoute = TestIndexRouteImport.update({
   id: '/test/',
   path: '/test/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoIndexRoute = InfoIndexRouteImport.update({
+  id: '/info/',
+  path: '/info/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GameIndexRoute = GameIndexRouteImport.update({
+  id: '/game/',
+  path: '/game/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/auth/',
+  path: '/auth/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestIdRoute = TestIdRouteImport.update({
@@ -38,12 +56,18 @@ const TestComponentIndexRoute = TestComponentIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/test/$id': typeof TestIdRoute
+  '/auth/': typeof AuthIndexRoute
+  '/game/': typeof GameIndexRoute
+  '/info/': typeof InfoIndexRoute
   '/test/': typeof TestIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/test/$id': typeof TestIdRoute
+  '/auth': typeof AuthIndexRoute
+  '/game': typeof GameIndexRoute
+  '/info': typeof InfoIndexRoute
   '/test': typeof TestIndexRoute
   '/test/component': typeof TestComponentIndexRoute
 }
@@ -51,20 +75,48 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/test/$id': typeof TestIdRoute
+  '/auth/': typeof AuthIndexRoute
+  '/game/': typeof GameIndexRoute
+  '/info/': typeof InfoIndexRoute
   '/test/': typeof TestIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/test/$id' | '/test/' | '/test/component/'
+  fullPaths:
+    | '/'
+    | '/test/$id'
+    | '/auth/'
+    | '/game/'
+    | '/info/'
+    | '/test/'
+    | '/test/component/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/test/$id' | '/test' | '/test/component'
-  id: '__root__' | '/' | '/test/$id' | '/test/' | '/test/component/'
+  to:
+    | '/'
+    | '/test/$id'
+    | '/auth'
+    | '/game'
+    | '/info'
+    | '/test'
+    | '/test/component'
+  id:
+    | '__root__'
+    | '/'
+    | '/test/$id'
+    | '/auth/'
+    | '/game/'
+    | '/info/'
+    | '/test/'
+    | '/test/component/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TestIdRoute: typeof TestIdRoute
+  AuthIndexRoute: typeof AuthIndexRoute
+  GameIndexRoute: typeof GameIndexRoute
+  InfoIndexRoute: typeof InfoIndexRoute
   TestIndexRoute: typeof TestIndexRoute
   TestComponentIndexRoute: typeof TestComponentIndexRoute
 }
@@ -83,6 +135,27 @@ declare module '@tanstack/react-router' {
       path: '/test'
       fullPath: '/test/'
       preLoaderRoute: typeof TestIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info/': {
+      id: '/info/'
+      path: '/info'
+      fullPath: '/info/'
+      preLoaderRoute: typeof InfoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/game/': {
+      id: '/game/'
+      path: '/game'
+      fullPath: '/game/'
+      preLoaderRoute: typeof GameIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/': {
+      id: '/auth/'
+      path: '/auth'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/test/$id': {
@@ -105,6 +178,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TestIdRoute: TestIdRoute,
+  AuthIndexRoute: AuthIndexRoute,
+  GameIndexRoute: GameIndexRoute,
+  InfoIndexRoute: InfoIndexRoute,
   TestIndexRoute: TestIndexRoute,
   TestComponentIndexRoute: TestComponentIndexRoute,
 }

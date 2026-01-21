@@ -2,8 +2,8 @@ import { Link } from '@tanstack/react-router'
 
 export default function Header() {
   return (
-    <header>
-      <nav className="flex gap-4 bg-gray-200 p-4">
+    <header className="bg-gray-200 p-4">
+      <nav className="flex gap-4">
         <div className="nav-item">
           <Link to="/">Home</Link>
         </div>
