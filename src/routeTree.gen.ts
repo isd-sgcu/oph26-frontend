@@ -13,9 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as InfoIndexRouteImport } from './routes/info/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
-import { Route as AuthIndexRouteImport } from './routes/auth/index'
-import { Route as TestIdRouteImport } from './routes/test/$id'
+import { Route as TestNameRouteImport } from './routes/test/$name'
 import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
+import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,14 +37,9 @@ const GameIndexRoute = GameIndexRouteImport.update({
   path: '/game/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthIndexRoute = AuthIndexRouteImport.update({
-  id: '/auth/',
-  path: '/auth/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestIdRoute = TestIdRouteImport.update({
-  id: '/test/$id',
-  path: '/test/$id',
+const TestNameRoute = TestNameRouteImport.update({
+  id: '/test/$name',
+  path: '/test/$name',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestComponentIndexRoute = TestComponentIndexRouteImport.update({
@@ -52,72 +47,77 @@ const TestComponentIndexRoute = TestComponentIndexRouteImport.update({
   path: '/test/component/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
+  id: '/auth/login/',
+  path: '/auth/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/test/$id': typeof TestIdRoute
-  '/auth/': typeof AuthIndexRoute
+  '/test/$name': typeof TestNameRoute
   '/game/': typeof GameIndexRoute
   '/info/': typeof InfoIndexRoute
   '/test/': typeof TestIndexRoute
+  '/auth/login/': typeof AuthLoginIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/test/$id': typeof TestIdRoute
-  '/auth': typeof AuthIndexRoute
+  '/test/$name': typeof TestNameRoute
   '/game': typeof GameIndexRoute
   '/info': typeof InfoIndexRoute
   '/test': typeof TestIndexRoute
+  '/auth/login': typeof AuthLoginIndexRoute
   '/test/component': typeof TestComponentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/test/$id': typeof TestIdRoute
-  '/auth/': typeof AuthIndexRoute
+  '/test/$name': typeof TestNameRoute
   '/game/': typeof GameIndexRoute
   '/info/': typeof InfoIndexRoute
   '/test/': typeof TestIndexRoute
+  '/auth/login/': typeof AuthLoginIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/test/$id'
-    | '/auth/'
+    | '/test/$name'
     | '/game/'
     | '/info/'
     | '/test/'
+    | '/auth/login/'
     | '/test/component/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/test/$id'
-    | '/auth'
+    | '/test/$name'
     | '/game'
     | '/info'
     | '/test'
+    | '/auth/login'
     | '/test/component'
   id:
     | '__root__'
     | '/'
-    | '/test/$id'
-    | '/auth/'
+    | '/test/$name'
     | '/game/'
     | '/info/'
     | '/test/'
+    | '/auth/login/'
     | '/test/component/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  TestIdRoute: typeof TestIdRoute
-  AuthIndexRoute: typeof AuthIndexRoute
+  TestNameRoute: typeof TestNameRoute
   GameIndexRoute: typeof GameIndexRoute
   InfoIndexRoute: typeof InfoIndexRoute
   TestIndexRoute: typeof TestIndexRoute
+  AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   TestComponentIndexRoute: typeof TestComponentIndexRoute
 }
 
@@ -151,18 +151,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/': {
-      id: '/auth/'
-      path: '/auth'
-      fullPath: '/auth/'
-      preLoaderRoute: typeof AuthIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test/$id': {
-      id: '/test/$id'
-      path: '/test/$id'
-      fullPath: '/test/$id'
-      preLoaderRoute: typeof TestIdRouteImport
+    '/test/$name': {
+      id: '/test/$name'
+      path: '/test/$name'
+      fullPath: '/test/$name'
+      preLoaderRoute: typeof TestNameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/test/component/': {
@@ -172,16 +165,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestComponentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/login/': {
+      id: '/auth/login/'
+      path: '/auth/login'
+      fullPath: '/auth/login/'
+      preLoaderRoute: typeof AuthLoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  TestIdRoute: TestIdRoute,
-  AuthIndexRoute: AuthIndexRoute,
+  TestNameRoute: TestNameRoute,
   GameIndexRoute: GameIndexRoute,
   InfoIndexRoute: InfoIndexRoute,
   TestIndexRoute: TestIndexRoute,
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
   TestComponentIndexRoute: TestComponentIndexRoute,
 }
 export const routeTree = rootRouteImport

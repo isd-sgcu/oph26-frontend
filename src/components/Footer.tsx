@@ -13,21 +13,21 @@ export default function Footer() {
   return (
     <footer className="w-full bg-gray-200 p-4">
       <nav className="flex gap-4">
-        <div className="nav-item">
+        <div className="nav-item break-all">
           <Link to="/">Home</Link>
         </div>
 
-        <div className="px-2 font-bold">
+        <div className="font-bold break-all">
           <Link to="/test">Test Page</Link>
         </div>
 
-        <div className="px-2 font-bold">
-          <Link to="/test/$id" params={{ id: '1' }}>
-            Test Page 1
+        <div className="font-bold break-all">
+          <Link to="/test/$name" params={{ name: 'ditto' }}>
+            Test Page with Params
           </Link>
         </div>
 
-        <div className="px-2 font-bold">
+        <div className="font-bold break-all">
           <Link to="/test/component">Component Test</Link>
         </div>
       </nav>

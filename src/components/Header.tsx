@@ -25,12 +25,12 @@ export default function Header() {
       {/* Menu */}
       <div className="flex items-center gap-2">
         {/* Lang Switch */}
-        <div className="flex items-center overflow-hidden rounded-2xl shadow-sm">
+        <div className="flex items-center overflow-hidden rounded-lg shadow-sm">
           <button
             onClick={() => {
               if (i18n.language != 'th') toggleLanguage('th')
             }}
-            className={`px-4 py-2 text-sm font-bold transition-all ${
+            className={`px-3 py-2 text-sm font-bold transition-all duration-300 ${
               i18n.language === 'th'
                 ? 'bg-main-pink cursor-default text-white'
                 : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
@@ -42,7 +42,7 @@ export default function Header() {
             onClick={() => {
               if (i18n.language != 'en') toggleLanguage('en')
             }}
-            className={`px-4 py-2 text-sm font-bold transition-all ${
+            className={`px-3 py-2 text-sm font-bold transition-all duration-300 ${
               i18n.language === 'en'
                 ? 'bg-main-pink cursor-default text-white'
                 : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
