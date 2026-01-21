@@ -8,6 +8,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 import appCss from '@/styles/app.css?url'
+import i18n from '@/lib/i18n'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -27,11 +28,11 @@ export const Route = createRootRoute({
 
 function RootDocument() {
   return (
-    <html lang="en" className="bg-black">
+    <html lang={i18n.language} suppressHydrationWarning className="bg-black">
       <head>
         <HeadContent />
       </head>
-      <body className="flex w-98.25 flex-col justify-self-center">
+      <body className="flex w-full max-w-98.25 flex-col justify-self-center">
         <Header />
         <main className="min-h-screen bg-white px-4">
           <Outlet />

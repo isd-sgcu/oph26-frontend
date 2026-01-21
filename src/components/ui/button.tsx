@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center cursor-pointer gap-2 leading-none whitespace-nowrap font-bold transition-all disabled:opacity-50 disabled:pointer-events-none shadow-md/20',
+  'inline-flex items-center justify-center cursor-pointer gap-2 leading-none whitespace-nowrap font-bold transition-all disabled:opacity-50 disabled:cursor-default shadow-md/20',
   {
     variants: {
       size: {
@@ -81,7 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         ref={innerRef}
         className={cn(
-          'bg-gradient-pink text-white',
+          'bg-gradient-pink text-white disabled:cursor-default',
           buttonVariants({ size, expanded }),
           className
         )}
@@ -95,7 +95,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <div
         className={cn(
-          'inline-flex h-fit w-fit cursor-pointer rounded-full',
+          'inline-flex h-fit w-fit cursor-pointer rounded-full disabled:cursor-default',
           borderClassName
         )}
         style={{ padding: `${borderWidth}px` }}

@@ -13,8 +13,8 @@ export const FlatIcon = ({
 }: FlatIconProps) => {
   return (
     <i
-      className={`${name} ${className} flex items-center`}
-      style={{ width: size, height: size }}
+      className={`${name} ${className} flex items-center justify-center p-0`}
+      style={{ fontSize: size, width: size, height: size, lineHeight: 1 }}
       {...props}
     />
   )

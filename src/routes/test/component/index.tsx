@@ -1,17 +1,19 @@
 import { FlatIcon } from '@/components/FlatIcon'
 import { Button } from '@/components/ui/button'
 import { createFileRoute } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/test/component/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const { t } = useTranslation()
   return (
-    <div className="flex flex-col flex-wrap gap-8 overflow-auto px-8 py-16">
+    <div className="flex flex-col flex-wrap gap-8 overflow-auto px-8 pt-8 pb-16">
       {/* Color */}
       <div>
-        <h1 className="text-2xl font-semibold">Colors</h1>
+        <h1 className="text-2xl font-semibold">{t('test.color')}</h1>
         <div className="mt-2 flex flex-wrap">
           <div className="bg-main-pink h-16 w-16"></div>
           <div className="bg-main-light-pink h-16 w-16"></div>
@@ -70,7 +72,7 @@ function RouteComponent() {
 
       {/* Icons */}
       <div>
-        <h1 className="text-2xl font-semibold">Icons</h1>
+        <h1 className="text-2xl font-semibold">{t('test.icon')}</h1>
         <p className="mt-2">
           See more:{' '}
           <a
@@ -97,7 +99,7 @@ function RouteComponent() {
 
       {/* Buttons */}
       <div className="flex w-full flex-col">
-        <h1 className="text-2xl font-semibold">Buttons</h1>
+        <h1 className="text-2xl font-semibold">{t('test.button')}</h1>
         {/* Solid Background */}
         <div className="mt-2 flex flex-wrap gap-4">
           <Button size="sm" showBorder borderClassName="bg-main-pink">
