@@ -4,12 +4,19 @@
     "icon": "Icons",
     "button": "Buttons"
   },
-
-  "sidebar": {
-    "home": "Home",
-    "faculty": "Faculties",
-    "facultyWorkshop": "Faculty Workshops",
-    "mainEvent": "Main Events",
-    "map": "Map"
+  "header": {
+    "sidebar": {
+      "home": "Home",
+      "faculty": "Faculties",
+      "facultyWorkshop": "Faculty Workshops",
+      "mainEvent": "Main Events",
+      "map": "Map",
+      "missingPiece": "Missing Pieces",
+      "merchandise": "Merchandises",
+      "account": "My Account",
+      "register": "Register",
+      "login": "Login",
+      "logout": "Log out"
+    }
   }
 }

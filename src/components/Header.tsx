@@ -13,22 +13,36 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { title: 'home', to: '/', icon: 'fi-rr-home' },
-  { title: 'faculty', to: '/test', icon: 'fi-rr-graduation-cap' },
+  { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
     title: 'facultyWorkshop',
     icon: 'fi-rr-playing-cards',
-    to: '/test/$name',
-    params: { name: 'ditto' },
+    to: '/info/workshop',
   },
   {
     title: 'mainEvent',
     icon: 'fi-rr-balloons',
-    to: '/test/component',
+    to: '',
   },
   {
     title: 'map',
     icon: 'fi-rr-map-marker',
-    to: '/test/component',
+    to: '/info/map',
+  },
+  {
+    title: 'missingPiece',
+    icon: 'fi-rr-layout-fluid',
+    to: '/game/',
+  },
+  {
+    title: 'merchandise',
+    icon: 'fi-rr-gift',
+    to: '/info/merchandise',
+  },
+  {
+    title: 'account',
+    icon: 'fi-rr-user',
+    to: '/auth/profile',
   },
 ]
 
@@ -129,7 +143,7 @@ export default function Header() {
             </div>
 
             {/* Navigation */}
-            <nav className="flex flex-col gap-10">
+            <nav className="mb-10 flex flex-col gap-10">
               {navItems.map((item) => (
                 <Link
                   key={item.title}
@@ -138,7 +152,7 @@ export default function Header() {
                   onClick={() => {
                     setOpen(false)
                   }}
-                  className="flex gap-4"
+                  className="flex items-center gap-4"
                 >
                   <FlatIcon
                     name={item.icon}
@@ -146,7 +160,7 @@ export default function Header() {
                     className="text-main-pink"
                   />
                   <span className="text-xl font-bold">
-                    {t(`sidebar.${item.title}`)}
+                    {t(`header.sidebar.${item.title}`)}
                   </span>
                 </Link>
               ))}
@@ -161,7 +175,9 @@ export default function Header() {
                   window.location.href = '/auth/register'
                 }}
               >
-                <span className="text-main-pink">ลงทะเบียน</span>
+                <span className="text-main-pink">
+                  {t('header.sidebar.register')}
+                </span>
               </Button>
 
               <Button
@@ -170,7 +186,16 @@ export default function Header() {
                   window.location.href = '/auth/login'
                 }}
               >
-                เข้าสู่ระบบ
+                {t('header.sidebar.login')}
+              </Button>
+
+              <Button
+                size="sm"
+                onClick={() => {
+                  alert('Log out')
+                }}
+              >
+                {t('header.sidebar.logout')}
               </Button>
             </div>
           </div>
