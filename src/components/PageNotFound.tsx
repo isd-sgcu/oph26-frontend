@@ -1,8 +1,17 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from './ui/button'
+import { useEffect, useState } from 'react'
 
 const PageNotFound = () => {
   const { t } = useTranslation()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
   return (
     <div className="to-main-pink relative flex-1 overflow-hidden bg-linear-to-b from-transparent to-10%">
       {/* Oval background */}
