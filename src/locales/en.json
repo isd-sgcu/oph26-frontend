@@ -3,5 +3,13 @@
     "color": "Colors",
     "icon": "Icons",
     "button": "Buttons"
+  },
+
+  "sidebar": {
+    "home": "Home",
+    "faculty": "Faculties",
+    "facultyWorkshop": "Faculty Workshops",
+    "mainEvent": "Main Events",
+    "map": "Map"
   }
 }

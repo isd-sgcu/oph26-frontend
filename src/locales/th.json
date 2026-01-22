@@ -3,5 +3,12 @@
     "color": "สี",
     "icon": "ไอคอน",
     "button": "ปุ่ม"
+  },
+  "sidebar": {
+    "home": "หน้าหลัก",
+    "faculty": "คณะ",
+    "facultyWorkshop": "เวิร์คชอปคณะ",
+    "mainEvent": "กิจกรรมส่วนกลาง",
+    "map": "แผนที่"
   }
 }

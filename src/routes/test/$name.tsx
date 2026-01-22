@@ -7,7 +7,7 @@ export const Route = createFileRoute('/test/$name')({
 })
 
 function RouteComponent() {
-  const { name } = useParams({ from: '/test/$name' })
+  const { name } = Route.useParams()
 
   const { data, isLoading } = useQuery({
     queryKey: ['pokemon', name],

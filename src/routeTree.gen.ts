@@ -9,14 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as InfoIndexRouteImport } from './routes/info/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
 import { Route as TestNameRouteImport } from './routes/test/$name'
 import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
+import { Route as AuthRegisterIndexRouteImport } from './routes/auth/register/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
 
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -47,6 +54,11 @@ const TestComponentIndexRoute = TestComponentIndexRouteImport.update({
   path: '/test/component/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRegisterIndexRoute = AuthRegisterIndexRouteImport.update({
+  id: '/auth/register/',
+  path: '/auth/register/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   id: '/auth/login/',
   path: '/auth/login/',
@@ -55,74 +67,95 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
   '/test/$name': typeof TestNameRoute
   '/game/': typeof GameIndexRoute
   '/info/': typeof InfoIndexRoute
   '/test/': typeof TestIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
+  '/auth/register/': typeof AuthRegisterIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
   '/test/$name': typeof TestNameRoute
   '/game': typeof GameIndexRoute
   '/info': typeof InfoIndexRoute
   '/test': typeof TestIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
+  '/auth/register': typeof AuthRegisterIndexRoute
   '/test/component': typeof TestComponentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
   '/test/$name': typeof TestNameRoute
   '/game/': typeof GameIndexRoute
   '/info/': typeof InfoIndexRoute
   '/test/': typeof TestIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
+  '/auth/register/': typeof AuthRegisterIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/profile'
     | '/test/$name'
     | '/game/'
     | '/info/'
     | '/test/'
     | '/auth/login/'
+    | '/auth/register/'
     | '/test/component/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/profile'
     | '/test/$name'
     | '/game'
     | '/info'
     | '/test'
     | '/auth/login'
+    | '/auth/register'
     | '/test/component'
   id:
     | '__root__'
     | '/'
+    | '/profile'
     | '/test/$name'
     | '/game/'
     | '/info/'
     | '/test/'
     | '/auth/login/'
+    | '/auth/register/'
     | '/test/component/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProfileRoute: typeof ProfileRoute
   TestNameRoute: typeof TestNameRoute
   GameIndexRoute: typeof GameIndexRoute
   InfoIndexRoute: typeof InfoIndexRoute
   TestIndexRoute: typeof TestIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
+  AuthRegisterIndexRoute: typeof AuthRegisterIndexRoute
   TestComponentIndexRoute: typeof TestComponentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -165,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestComponentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/register/': {
+      id: '/auth/register/'
+      path: '/auth/register'
+      fullPath: '/auth/register/'
+      preLoaderRoute: typeof AuthRegisterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/login/': {
       id: '/auth/login/'
       path: '/auth/login'
@@ -177,11 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProfileRoute: ProfileRoute,
   TestNameRoute: TestNameRoute,
   GameIndexRoute: GameIndexRoute,
   InfoIndexRoute: InfoIndexRoute,
   TestIndexRoute: TestIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
+  AuthRegisterIndexRoute: AuthRegisterIndexRoute,
   TestComponentIndexRoute: TestComponentIndexRoute,
 }
 export const routeTree = rootRouteImport
