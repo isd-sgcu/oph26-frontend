@@ -80,7 +80,7 @@ export default function Header() {
   }
 
   return (
-    <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-[#ECECD2]/0 p-4">
+    <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-transparent p-4">
       {/* Logo */}
       <img src="/logo.svg" width={69} height={40} alt="Logo" />
 
@@ -160,7 +160,7 @@ export default function Header() {
                     className="text-main-pink"
                   />
                   <span className="text-xl font-bold">
-                    {t(`header.sidebar.${item.title}`)}
+                    {t(`components.header.sidebar.${item.title}`)}
                   </span>
                 </Link>
               ))}
@@ -176,7 +176,7 @@ export default function Header() {
                 }}
               >
                 <span className="text-main-pink">
-                  {t('header.sidebar.register')}
+                  {t('components.header.sidebar.register')}
                 </span>
               </Button>
 
@@ -186,7 +186,7 @@ export default function Header() {
                   window.location.href = '/auth/login'
                 }}
               >
-                {t('header.sidebar.login')}
+                {t('components.header.sidebar.login')}
               </Button>
 
               <Button
@@ -195,7 +195,7 @@ export default function Header() {
                   alert('Log out')
                 }}
               >
-                {t('header.sidebar.logout')}
+                {t('components.header.sidebar.logout')}
               </Button>
             </div>
           </div>

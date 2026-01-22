@@ -4,19 +4,45 @@
     "icon": "ไอคอน",
     "button": "ปุ่ม"
   },
-  "header": {
-    "sidebar": {
-      "home": "หน้าหลัก",
-      "faculty": "คณะ",
-      "facultyWorkshop": "เวิร์คชอปคณะ",
-      "mainEvent": "กิจกรรมส่วนกลาง",
-      "map": "แผนที่",
-      "missingPiece": "ชิ้นส่วนที่หายไป",
-      "merchandise": "สินค้าที่ระลึก",
-      "account": "บัญชีของฉัน",
-      "register": "ลงทะเบียน",
-      "login": "เข้าสู่ระบบ",
-      "logout": "ออกจากระบบ"
+  "components": {
+    "header": {
+      "sidebar": {
+        "home": "หน้าหลัก",
+        "faculty": "คณะ",
+        "facultyWorkshop": "เวิร์คชอปคณะ",
+        "mainEvent": "กิจกรรมส่วนกลาง",
+        "map": "แผนที่",
+        "missingPiece": "ชิ้นส่วนที่หายไป",
+        "merchandise": "สินค้าที่ระลึก",
+        "account": "บัญชีของฉัน",
+        "register": "ลงทะเบียน",
+        "login": "เข้าสู่ระบบ",
+        "logout": "ออกจากระบบ"
+      }
+    },
+    "pageNotFound": {
+      "title": "ไม่พบหน้านี้",
+      "back": "กลับสู่หน้าหลัก"
     }
+  },
+  "routes": {
+    "authGroup": {
+      "loginGroup": {},
+      "profileGroup": {},
+      "registerGroup": {}
+    },
+    "gameGroup": {
+      "achievementGroup": {},
+      "pieceGroup": {}
+    },
+    "infoGroup": {
+      "facultyGroup": {},
+      "mapGroup": {},
+      "merchandiseGroup": {},
+      "workshopGroup": {}
+    },
+    "questionaireGroup": {},
+
+    "title": "หัวข้อ"
   }
 }

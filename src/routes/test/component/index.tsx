@@ -27,6 +27,7 @@ function RouteComponent() {
           <div className="bg-grey h-16 w-16"></div>
           <div className="h-16 w-16 bg-white"></div>
           <div className="bg-gradient-pink h-16 w-16"></div>
+          <div className="bg-gradient-pink-oval h-16 w-16"></div>
           <div className="bg-gradient-beige h-16 w-16"></div>
           <div className="bg-gradient-purple h-16 w-16"></div>
           <div className="bg-gradient-green h-16 w-16"></div>

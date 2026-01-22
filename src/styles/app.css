@@ -27,6 +27,8 @@
     #f481b4
   );
 
+  --background-image-gradient-pink-oval: radial-gradient(#f6acd2, #f481b4);
+
   --background-image-gradient-beige: linear-gradient(
     to bottom,
     #fafae6,
