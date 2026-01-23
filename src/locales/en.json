@@ -1,0 +1,45 @@
+{
+  "test": {
+    "color": "Colors",
+    "icon": "Icons",
+    "button": "Buttons"
+  },
+  "components": {
+    "header": {
+      "sidebar": {
+        "home": "Home",
+        "faculty": "Faculties",
+        "facultyWorkshop": "Faculty Workshops",
+        "mainEvent": "Main Events",
+        "map": "Map",
+        "missingPiece": "Missing Pieces",
+        "merchandise": "Merchandises",
+        "account": "My Account",
+        "register": "Register",
+        "login": "Login",
+        "logout": "Log out"
+      }
+    },
+    "pageNotFound": { "title": "Page Not Found", "back": "Back to Main Page" }
+  },
+  "routes": {
+    "authGroup": {
+      "loginGroup": {},
+      "profileGroup": {},
+      "registerGroup": {}
+    },
+    "gameGroup": {
+      "achievementGroup": {},
+      "pieceGroup": {}
+    },
+    "infoGroup": {
+      "facultyGroup": {},
+      "mapGroup": {},
+      "merchandiseGroup": {},
+      "workshopGroup": {}
+    },
+    "questionaireGroup": {},
+
+    "title": "Title"
+  }
+}
