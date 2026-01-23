@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from './ui/button'
 import { useEffect, useState } from 'react'
+import { useRouter } from '@tanstack/react-router'
 
 const PageNotFound = () => {
   const { t } = useTranslation()
   const [mounted, setMounted] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setMounted(true)
@@ -68,7 +70,7 @@ const PageNotFound = () => {
           size="md"
           expanded
           onClick={() => {
-            window.location.href = '/'
+            router.navigate({ to: '/' })
           }}
         >
           <span className="text-main-pink">

@@ -1,4 +1,4 @@
-import { createFileRoute, useParams } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { fetchPokemonByName } from '@/services/test/pokemon'
 import { useQuery } from '@tanstack/react-query'
 
