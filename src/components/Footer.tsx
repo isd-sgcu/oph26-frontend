@@ -19,5 +19,7 @@ export default function Footer() {
 
   if (!shouldShowFooter) return null
 
-  return <footer className="w-full bg-gray-200 p-4">This is the footer.</footer>
+  return (
+    <footer className="w-full bg-gray-200 p-4">This is the new footer.</footer>
+  )
 }
