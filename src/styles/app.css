@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap');
-
-@plugin 'tailwindcss-animate';
 @import '@flaticon/flaticon-uicons/css/all/all';
 @import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -16,7 +17,6 @@
   --color-sub-purple: #a776b4;
   --color-sub-light-green: #40c3a3;
   --color-sub-green: #209975;
-
   --color-black: #2a2a2a;
   --color-grey: #afafaf;
   --color-white: #ffffff;
