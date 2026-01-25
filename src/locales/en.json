@@ -20,6 +20,12 @@
         "logout": "Log out"
       }
     },
+    "gameGroup": {
+      "gameFooter": {
+        "myPiece": "My Piece",
+        "redeemCode": "Redeem Code"
+      }
+    },
     "pageNotFound": { "title": "Page Not Found", "back": "Back to Main Page" }
   },
   "routes": {
