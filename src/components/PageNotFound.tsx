@@ -60,7 +60,7 @@ const PageNotFound = () => {
         <img src="/logo.svg" alt="Logo" width={288.38} height={167.17} />
 
         {/* Text */}
-        <h1 className="mb-10 text-center text-5xl font-bold text-white shadow-xs">
+        <h1 className="mb-10 text-center text-5xl font-bold text-white text-shadow-xs">
           {t('components.pageNotFound.title')}
         </h1>
 
