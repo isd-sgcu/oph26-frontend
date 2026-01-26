@@ -29,7 +29,14 @@
       "registerGroup": {}
     },
     "gameGroup": {
-      "achievementGroup": {},
+      "achievementGroup": { 
+        "titleGroup": "Achievements", 
+        "cardGroup": { 
+          "completeRankGroup": "Achievement Cards",
+          "mostFriendGroup": "Incomplete Achievement Cards",
+          "yourMajorGroup": "Your Major Achievement Cards"
+        }
+      },
       "pieceGroup": {}
     },
     "infoGroup": {
