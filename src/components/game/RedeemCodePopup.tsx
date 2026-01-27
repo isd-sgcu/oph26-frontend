@@ -106,7 +106,7 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="flex h-fit w-[90vw] max-w-90 flex-col items-center gap-3 rounded-2xl p-6 pb-4">
             <FlatIcon
-              name={'fi-rr-password'}
+              name={success ? 'fi-rr-check' : 'fi-rr-exclamation'}
               size={48}
               className="text-main-pink"
             />
