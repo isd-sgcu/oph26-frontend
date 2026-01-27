@@ -25,6 +25,19 @@
       "gameFooter": {
         "myPiece": "My Piece",
         "redeemCode": "กรอก Code"
+      },
+      "redeemCodePopup": {
+        "title1": "กรอก Code",
+        "body1": "กรอกรหัสที่ได้รับมาจากเพื่อน ๆ เลย!",
+        "title2Success": "กรอก Code สำเร็จ",
+        "title2InvalidCode": "Invalid Code",
+        "title2ExpiredCode": "Code หมดอายุ",
+        "body2Success": "คุณได้รับชิ้นจาก ",
+        "body2InvalidCode": "Code ไม่ถูกต้อง โปรดลองอีกครั้ง",
+        "body2ExpiredCode": "Code เกินระยะเวลาที่กำหนด",
+        "cancel": "ยกเลิก",
+        "submit": "ตกลง",
+        "confirm": "ตกลง"
       }
     },
     "pageNotFound": {

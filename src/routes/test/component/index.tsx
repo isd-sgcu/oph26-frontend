@@ -1,4 +1,5 @@
 import { FlatIcon } from '@/components/FlatIcon'
+import { Piece } from '@/components/game/Piece'
 import { Button } from '@/components/ui/button'
 import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
@@ -767,6 +768,24 @@ function RouteComponent() {
             <FlatIcon name="fi-rr-plus-small text-main-pink" size={16} />
           </Button>
         </div>
+      </div>
+
+      <div className="">
+        <h1 className="text-2xl font-semibold">{t('test.piece')}</h1>
+
+        <Piece variant={1} size={120} count={1} />
+        <Piece variant={2} size={120} count={1} />
+        <Piece variant={3} size={120} count={1} />
+        <Piece variant={4} size={120} count={1} />
+        <Piece variant={5} size={120} count={1} />
+        <Piece variant={6} size={120} count={1} />
+
+        <Piece variant={1} size={120} count={3} bgClassName="bg-red-500" />
+        <Piece variant={2} size={120} count={4} bgClassName="bg-orange-500" />
+        <Piece variant={3} size={120} count={5} bgClassName="bg-yellow-500" />
+        <Piece variant={4} size={120} count={6} bgClassName="bg-green-500" />
+        <Piece variant={5} size={120} count={7} bgClassName="bg-blue-500" />
+        <Piece variant={6} size={120} count={8} bgClassName="bg-purple-500" />
       </div>
     </div>
   )
