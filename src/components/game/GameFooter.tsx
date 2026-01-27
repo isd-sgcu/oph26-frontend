@@ -26,10 +26,10 @@ const GameFooter = () => {
 
   return (
     <>
-      <footer className="fixed bottom-8 left-1/2 z-50 flex max-w-[var(--page-width)] -translate-x-1/2 flex-col gap-2 px-6">
+      <footer className="fixed bottom-8 left-1/2 z-50 flex max-w-(--page-width) -translate-x-1/2 flex-col gap-2 px-6">
         {/* Share */}
         <Button
-          className={` ${location.pathname !== '/game' || isWrap ? 'hidden' : ''} bg-gradient-pink absolute right-6 bottom-20`}
+          className={`${isWrap ? 'hidden' : ''} ${location.pathname == '/game/share' ? 'bg-gradient-purple cursor-default' : 'bg-gradient-pink cursor-pointer'} absolute right-8 bottom-20`}
           size="icon"
           onClick={() => {
             router.navigate({ to: '/game/share' })
@@ -68,7 +68,7 @@ const GameFooter = () => {
               </p>
             </Button>
             <Button
-              className={` ${location.pathname !== '/game' || !isWrap ? 'hidden' : ''} bg-gradient-pink`}
+              className={`${!isWrap ? 'hidden' : ''} ${location.pathname == '/game/share' ? 'bg-gradient-purple cursor-default' : 'bg-gradient-pink cursor-pointer'}`}
               size="icon"
               onClick={() => {
                 router.navigate({ to: '/game/share' })
