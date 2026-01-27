@@ -33,7 +33,7 @@
     },
     "gameGroup": {
       "achievementGroup": { 
-        "titleGroup": "ความสำเร็จ", 
+        "titleGroup": "ภาพรวมความสำเร็จ", 
         "cardGroup": { 
           "completeRankGroup": "Achievement Cards",
           "mostFriendGroup": "Incomplete Achievement Cards",
