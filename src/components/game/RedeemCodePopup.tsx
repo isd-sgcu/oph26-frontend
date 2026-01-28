@@ -19,6 +19,7 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
   const [success, setSuccess] = useState(false)
   const [validCode, setValidCode] = useState(false)
   const [facultyPiece, setFacultyPiece] = useState<FacultyType>()
+  const [timesReceived, setTimesReceived] = useState(6767)
 
   useEffect(() => {
     if (code.length == 6) {
@@ -121,7 +122,7 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
             </DialogTitle>
 
             {/* Body */}
-            <p className="text-center text-sm text-black">
+            <p className="mb-4 text-center text-sm text-black">
               {success
                 ? `${t('components.gameGroup.redeemCodePopup.body2Success')} ${
                     selectedFaculty?.label[i18n.language as 'th' | 'en'] ?? ''
@@ -136,7 +137,7 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
               <Piece
                 faculty={selectedFaculty?.value}
                 variant={selectedFaculty?.variant}
-                count={1}
+                count={timesReceived}
                 size={120}
               />
             )}

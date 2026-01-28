@@ -76,16 +76,25 @@ export const Piece: React.FC<PieceProps> = ({
   return (
     <div
       className="inline-flex items-center justify-center drop-shadow-[4px_4px_4px_rgba(0,0,0,0.35)]"
-      style={{ maxWidth: size, maxHeight: size }}
+      style={{ width: size, height: size }}
     >
-      <svg viewBox="0 0 100 100" className="block h-full w-full">
+      <svg
+        viewBox="0 0 100 100"
+        className="block h-full w-full overflow-visible"
+      >
         <defs>
           <clipPath id={clipId}>
             <path d={path} />
           </clipPath>
-          <linearGradient id="gradient-beige" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient
+            id="gradient-beige-darker"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
             <stop offset="0%" stopColor="#fafae6" />
-            <stop offset="100%" stopColor="#ececd2" />
+            <stop offset="100%" stopColor="#ffd285" />
           </linearGradient>
         </defs>
 
@@ -106,19 +115,18 @@ export const Piece: React.FC<PieceProps> = ({
         )}
 
         {count > 1 && (
-          <>
-            <circle cx="85" cy="15" r="10" fill="url(#gradient-beige)" />
-
+          <g transform="translate(16 -16)">
+            <circle cx="75" cy="25" r="20" fill="url(#gradient-beige-darker)" />
             <text
-              x="85"
-              y="15"
+              x="75"
+              y="25"
               textAnchor="middle"
               dominantBaseline="middle"
-              className="fill-black text-[12px] font-bold"
+              className="fill-black text-base font-bold"
             >
-              {count}
+              {count > 99 ? '99+' : count}
             </text>
-          </>
+          </g>
         )}
       </svg>
     </div>
