@@ -8,7 +8,7 @@ export default function AchievementSlider({ children }: AchievementSliderProps) 
   return (
     <div className="w-full min-w-0 overflow-hidden">
       <div
-        className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar h-full"
+        className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory h-full"
       >
         {/* Left spacer */}
         <div className="shrink-0 w-1/2" />

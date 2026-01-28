@@ -35,9 +35,30 @@
       "achievementGroup": { 
         "titleGroup": "ภาพรวมความสำเร็จ", 
         "cardGroup": { 
-          "completeRankGroup": "Achievement Cards",
-          "mostFriendGroup": "Incomplete Achievement Cards",
-          "yourMajorGroup": "Your Major Achievement Cards"
+          "var1": {
+            "title": "คุณเป็นคนที่",
+            "description": "ที่เก็บจิ๊กซอว์มาประกอบ\nเป็นภาพครบ"
+          },
+          "var2": {
+            "title": "คุณมีเพื่อนคณะ",
+            "description": "สูงเป็น {{top}}% แรก\nจากทั้งหมด"
+          },
+          "var3": {
+            "title": "มีคนจำนวน",
+            "description": "กำลังตามหาเพื่อน\nคณะ{{faculty}}\nเช่นเดียวกับคุณ"
+          },
+          "overall": {
+            "title": "คุณเก็บชิ้นส่วนไป",
+            "statCount": "ชิ้น",
+            "miniCard1": {
+              "title": "คณะที่เก็บได้มากสุด",
+              "description": "จำนวน {{count}} ชิ้น"
+            },
+            "miniCard2": {
+              "title": "คุณเป็นคนที่",
+              "description": "ที่เก็บครบ"
+            }
+          }
         }
       },
       "pieceGroup": {}

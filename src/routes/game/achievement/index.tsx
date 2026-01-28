@@ -11,15 +11,28 @@ function RouteComponent() {
   const { t } = useTranslation()
 
   const achievements = [
-    { title: "wins", description: "winsDesc", stat: 12 },
-    { title: "streak", description: "streakDesc", stat: 7 },
-    { title: "overall", description: "Score", stat: 99, isOverall: true }
-  ]
+  {
+    variant: "var1",
+    stat: 12,
+  },
+  {
+    variant: "var2",
+    stat: "ENG",
+    top: 5,
+  },
+  {
+    variant: "overall",
+    stat: 99,
+    miniCard1Count: 42,
+    miniCard2Rank: 3,
+  },
+] as const
+
 
   return (
     <div className="flex-1 flex flex-col items-center bg-gradient-pink-oval py-6 overflow-x-hidden">
       {/* Header */}
-      <h2 className="mb-6 text-center text-xl font-bold">
+      <h2 className="mb-6 text-center text-3xl font-bold text-white text-shadow-[0px_1px_2px_#000000]">
         {t("routes.gameGroup.achievementGroup.titleGroup")}
       </h2>
 

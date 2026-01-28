@@ -32,9 +32,30 @@
       "achievementGroup": { 
         "titleGroup": "Achievements", 
         "cardGroup": { 
-          "completeRankGroup": "Achievement Cards",
-          "mostFriendGroup": "Incomplete Achievement Cards",
-          "yourMajorGroup": "Your Major Achievement Cards"
+          "var1": {
+            "title": "You are player number",
+            "description": "player to collect all pieces \nand complete the picture."
+          },
+          "var2": {
+            "title": "You have friends from",
+            "description": "placing you in the \ntop {{top}}% of players."
+          },
+          "var3": {
+            "title": "There are",
+            "description": "player finding \n{{faculty}} \nfriends like you."
+          },
+          "overall": {
+            "title": "You've collected",
+            "statCount": "pieces",
+            "miniCard1": {
+              "title": "Most collected faculty",
+              "description": "{{count}} pieces"
+            },
+            "miniCard2": {
+              "title": "You are the",
+              "description": "player to complete"
+            }
+          }
         }
       },
       "pieceGroup": {}
@@ -48,5 +69,6 @@
     "questionaireGroup": {},
 
     "title": "Title"
+  
   }
 }
