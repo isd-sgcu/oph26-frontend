@@ -50,6 +50,7 @@
     "gameGroup": {
       "achievementGroup": {},
       "pieceGroup": {
+        "codeCreate": "Create Code",
         "codeCopied": "Copy your code successfully",
         "codeExpired": "Code expires on"
       }

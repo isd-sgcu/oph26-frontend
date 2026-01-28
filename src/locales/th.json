@@ -54,6 +54,7 @@
     "gameGroup": {
       "achievementGroup": {},
       "pieceGroup": {
+        "codeCreate": "สร้าง Code",
         "codeCopied": "คัดลอก Code สำเร็จ",
         "codeExpired": "หมดอายุ"
       }

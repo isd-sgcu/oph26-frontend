@@ -1,6 +1,7 @@
 import { FACULTIES, FacultyType } from '@/components/const/faculty'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Piece } from '@/components/game/Piece'
+import { Button } from '@/components/ui/button'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,22 +17,10 @@ function RouteComponent() {
   const [myFaculty, setMyFaculty] = useState<FacultyType>('arch')
   const [myCode, setMyCode] = useState('MYBACK')
   const [openMyCode, setOpenMyCode] = useState(false)
-  const [isFooterWrap, setIsFooterWrap] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
   const [expiredDate, setExpiredDate] = useState<string>(
     new Date().toISOString()
   )
-
-  useEffect(() => {
-    const handleFooterResize = () => {
-      setIsFooterWrap(window.innerWidth < 375)
-    }
-
-    handleFooterResize()
-    window.addEventListener('resize', handleFooterResize)
-
-    return () => window.removeEventListener('resize', handleFooterResize)
-  }, [])
 
   useEffect(() => {
     return () => {
@@ -118,41 +107,55 @@ function RouteComponent() {
             size={245}
           />
 
-          {/* Code */}
-          <p className="text-main-pink mt-3 text-xl font-semibold">Code</p>
-          <button
-            className="my-1 flex h-16 w-full items-center rounded-full bg-white shadow-md"
-            onClick={() => {
-              navigator.clipboard.writeText(myCode)
-              setIsCopied(true)
-              if (copyTimeoutRef.current) {
-                clearTimeout(copyTimeoutRef.current)
-              }
+          {openMyCode ? (
+            <>
+              {/* Code */}
+              <p className="text-main-pink mt-3 text-xl font-semibold">Code</p>
+              <button
+                className="my-1 flex h-16 w-full items-center rounded-full bg-white shadow-md"
+                onClick={() => {
+                  navigator.clipboard.writeText(myCode)
+                  setIsCopied(true)
+                  if (copyTimeoutRef.current) {
+                    clearTimeout(copyTimeoutRef.current)
+                  }
 
-              copyTimeoutRef.current = window.setTimeout(() => {
-                setIsCopied(false)
-                copyTimeoutRef.current = null
-              }, 3000)
-            }}
-          >
-            <span className="text-main-pink flex-1 px-2 text-center text-2xl font-medium">
-              {myCode}
-            </span>
-            <span className="bg-gradient-purple flex h-full cursor-pointer items-center rounded-r-full px-5 py-2">
-              <FlatIcon
-                className="px-0 text-white"
-                name="fi-rr-copy"
-                size={20}
-              />
-            </span>
-          </button>
-          <p className="mt-2 text-center text-base font-medium text-black">
-            {isCopied
-              ? t('routes.gameGroup.pieceGroup.codeCopied')
-              : t('routes.gameGroup.pieceGroup.codeExpired') +
-                ' ' +
-                formatDateTime(expiredDate)}
-          </p>
+                  copyTimeoutRef.current = window.setTimeout(() => {
+                    setIsCopied(false)
+                    copyTimeoutRef.current = null
+                  }, 3000)
+                }}
+              >
+                <span className="text-main-pink flex-1 px-2 text-center text-2xl font-medium">
+                  {myCode}
+                </span>
+                <span className="bg-gradient-purple flex h-full cursor-pointer items-center rounded-r-full px-5 py-2">
+                  <FlatIcon
+                    className="px-0 text-white"
+                    name="fi-rr-copy"
+                    size={20}
+                  />
+                </span>
+              </button>
+              <p className="mt-2 text-center text-base font-medium text-black">
+                {isCopied
+                  ? t('routes.gameGroup.pieceGroup.codeCopied')
+                  : t('routes.gameGroup.pieceGroup.codeExpired') +
+                    ' ' +
+                    formatDateTime(expiredDate)}
+              </p>
+            </>
+          ) : (
+            <Button
+              className="bg-gradient-purple mt-3"
+              size={'lg'}
+              onClick={() => {
+                setOpenMyCode(true)
+              }}
+            >
+              {t('routes.gameGroup.pieceGroup.codeCreate')}
+            </Button>
+          )}
         </div>
       </div>
     </div>
