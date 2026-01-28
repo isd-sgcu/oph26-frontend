@@ -19,7 +19,6 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
   const [success, setSuccess] = useState(false)
   const [validCode, setValidCode] = useState(false)
   const [facultyPiece, setFacultyPiece] = useState<FacultyType>()
-  const [timesReceived, setTimesReceived] = useState(6767)
 
   useEffect(() => {
     if (code.length == 6) {
@@ -137,7 +136,7 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
               <Piece
                 faculty={selectedFaculty?.value}
                 variant={selectedFaculty?.variant}
-                count={timesReceived}
+                count={1}
                 size={120}
               />
             )}

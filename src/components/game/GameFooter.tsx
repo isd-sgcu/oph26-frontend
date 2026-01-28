@@ -26,10 +26,12 @@ const GameFooter = () => {
 
   return (
     <>
-      <footer className="fixed bottom-8 left-1/2 z-50 flex max-w-(--page-width) -translate-x-1/2 flex-col gap-2 px-6">
+      <footer
+        className={`fixed bottom-8 left-1/2 z-50 flex max-w-(--page-width) -translate-x-1/2 ${isWrap && 'scale-75'} flex-col gap-2 px-6`}
+      >
         {/* Share */}
         <Button
-          className={` ${location.pathname !== '/game' || isWrap ? 'hidden' : ''} bg-gradient-pink absolute right-6 bottom-20`}
+          className={` ${location.pathname !== '/game' ? 'hidden' : ''} bg-gradient-pink absolute right-6 bottom-20`}
           size="icon"
           onClick={() => {
             router.navigate({ to: '/game/share' })
@@ -40,7 +42,7 @@ const GameFooter = () => {
 
         {/* Navigation */}
         <div
-          className={`bg-gradient-beige flex ${isWrap ? 'flex-wrap' : 'flex-nowrap'} justify-center gap-2 rounded-full px-6 py-4`}
+          className={`bg-gradient-beige flex justify-center gap-2 rounded-full px-6 py-4`}
         >
           <div className="flex items-center justify-center gap-2">
             <Button
@@ -66,15 +68,6 @@ const GameFooter = () => {
               <p className="text-white">
                 {t('components.gameGroup.gameFooter.myPiece')}
               </p>
-            </Button>
-            <Button
-              className={` ${location.pathname !== '/game' || !isWrap ? 'hidden' : ''} bg-gradient-pink`}
-              size="icon"
-              onClick={() => {
-                router.navigate({ to: '/game/share' })
-              }}
-            >
-              <FlatIcon name="fi-rr-share" size={20} className="text-white" />
             </Button>
           </div>
 
