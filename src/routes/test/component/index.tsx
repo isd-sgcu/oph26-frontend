@@ -780,12 +780,20 @@ function RouteComponent() {
         <Piece variant={5} size={120} count={1} />
         <Piece variant={6} size={120} count={1} />
 
-        <Piece variant={1} size={120} count={3} bgClassName="bg-red-500" />
-        <Piece variant={2} size={120} count={4} bgClassName="bg-orange-500" />
-        <Piece variant={3} size={120} count={5} bgClassName="bg-yellow-500" />
-        <Piece variant={4} size={120} count={6} bgClassName="bg-green-500" />
-        <Piece variant={5} size={120} count={7} bgClassName="bg-blue-500" />
-        <Piece variant={6} size={120} count={8} bgClassName="bg-purple-500" />
+        <Piece
+          variant={4}
+          size={120}
+          count={6}
+          faculty={'test'}
+          bgClassName="bg-green-500"
+        />
+        <Piece
+          variant={5}
+          size={120}
+          count={7}
+          faculty={'test'}
+          bgClassName="bg-blue-500"
+        />
       </div>
     </div>
   )

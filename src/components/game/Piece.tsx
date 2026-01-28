@@ -32,6 +32,7 @@ const FACULTY_IMAGE: Record<FacultyType, string> = {
   arts: '/faculty/arts.png',
   scii: '/faculty/scii.png',
   cusar: '/faculty/cusar.png',
+  test: '/faculty/67.png',
 }
 
 const JIGSAW_PATH: Record<PieceVariant, string> = {
@@ -74,14 +75,18 @@ export const Piece: React.FC<PieceProps> = ({
 
   return (
     <div
-      className="inline-flex items-center justify-center"
-      style={{ width: size, height: size }}
+      className="inline-flex items-center justify-center drop-shadow-[4px_4px_4px_rgba(0,0,0,0.35)]"
+      style={{ maxWidth: size, maxHeight: size }}
     >
       <svg viewBox="0 0 100 100" className="block h-full w-full">
         <defs>
           <clipPath id={clipId}>
             <path d={path} />
           </clipPath>
+          <linearGradient id="gradient-beige" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#fafae6" />
+            <stop offset="100%" stopColor="#ececd2" />
+          </linearGradient>
         </defs>
 
         {!imageSrc && (
@@ -101,15 +106,19 @@ export const Piece: React.FC<PieceProps> = ({
         )}
 
         {count > 1 && (
-          <text
-            x="50"
-            y="54"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="fill-white text-3xl font-bold drop-shadow-md"
-          >
-            {count}
-          </text>
+          <>
+            <circle cx="85" cy="15" r="10" fill="url(#gradient-beige)" />
+
+            <text
+              x="85"
+              y="15"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="fill-black text-[12px] font-bold"
+            >
+              {count}
+            </text>
+          </>
         )}
       </svg>
     </div>

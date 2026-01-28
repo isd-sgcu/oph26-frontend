@@ -49,7 +49,10 @@
     },
     "gameGroup": {
       "achievementGroup": {},
-      "pieceGroup": {}
+      "pieceGroup": {
+        "codeCopied": "Copy your code successfully",
+        "codeExpired": "Code expires on"
+      }
     },
     "infoGroup": {
       "facultyGroup": {},

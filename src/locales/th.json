@@ -53,7 +53,10 @@
     },
     "gameGroup": {
       "achievementGroup": {},
-      "pieceGroup": {}
+      "pieceGroup": {
+        "codeCopied": "คัดลอก Code สำเร็จ",
+        "codeExpired": "หมดอายุ"
+      }
     },
     "infoGroup": {
       "facultyGroup": {},

@@ -133,7 +133,12 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
 
             {/* Piece */}
             {success && (
-              <Piece faculty={facultyPiece} variant={2} count={1} size={120} />
+              <Piece
+                faculty={selectedFaculty?.value}
+                variant={selectedFaculty?.variant}
+                count={1}
+                size={120}
+              />
             )}
 
             {/* Button */}
