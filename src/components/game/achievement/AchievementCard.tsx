@@ -35,15 +35,16 @@ export default function AchievementCard(props: AchievementCardProps) {
     const { variant, stat } = props
 
     return (
-        <div className="relative w-full h-full mx-auto max-w-5xl rounded-2xl bg-white p-8 shadow-sm flex flex-col items-center justify-center">
-            <div className="flex flex-col gap-6 text-center">
+        // !!!!!!!!!!!!!!!SET MAX WIDTH TO SYSTEM 80% MAX WIDTH !!!!!!!!!!!!!!!
+        <div className="relative w-[80vw] max-w-84 h-full mx-auto rounded-2xl bg-white p-8 shadow-sm flex flex-col items-center justify-center">
+            <div className="flex flex-col gap-[2vw] text-center justify-center items-center">
                 {/* title */}
                 <h3 className="text-2xl font-semibold">
                     {t(`routes.gameGroup.achievementGroup.cardGroup.${variant}.title`)}
                 </h3>
 
                 {/* Stat Circle */}
-                <div className="flex h-64 w-64 items-center justify-center rounded-full bg-gradient-pink">
+                <div className="flex w-full max-w-64 aspect-square items-center justify-center rounded-full bg-gradient-pink">
                     <span className="text-7xl font-bold text-white text-shadow-[2px_2px_8px_#CA2791]">
                         {stat}
                     </span>
@@ -71,6 +72,7 @@ export default function AchievementCard(props: AchievementCardProps) {
                 {/* overall view */}
                 {variant === "overall" && (
                 <div className="grid grid-cols-2 gap-4 mt-auto">
+                    {/* Most collected faculty */}
                     <div className="flex flex-col items-center">
                     <div className="flex h-26 w-26 items-center justify-center rounded-full bg-gradient-beige">
                         <span className="text-5xl text-main-pink">
@@ -90,6 +92,7 @@ export default function AchievementCard(props: AchievementCardProps) {
                     </span>
                     </div>
 
+                    {/* Completed rank */}
                     <div className="flex flex-col items-center">
                     <div className="flex h-26 w-26 items-center justify-center rounded-full bg-gradient-beige">
                         <span className="text-5xl text-main-pink">

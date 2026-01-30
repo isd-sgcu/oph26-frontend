@@ -34,15 +34,15 @@
         "cardGroup": { 
           "var1": {
             "title": "You are player number",
-            "description": "player to collect all pieces \nand complete the picture."
+            "description": "player to collect all pieces and complete the picture."
           },
           "var2": {
             "title": "You have friends from",
-            "description": "placing you in the \ntop {{top}}% of players."
+            "description": "placing you in the top {{top}}% of players."
           },
           "var3": {
             "title": "There are",
-            "description": "player finding \n{{faculty}} \nfriends like you."
+            "description": "player finding {{faculty}} friends like you."
           },
           "overall": {
             "title": "You've collected",
