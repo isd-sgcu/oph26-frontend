@@ -15,7 +15,7 @@ type Var2Props = BaseProps & {
 
 type Var3Props = BaseProps & {
   variant: "var3"
-  count: number
+  faculty: string
 }
 
 type OverallProps = BaseProps & {
@@ -31,13 +31,13 @@ type AchievementCardProps =
   | OverallProps
 
 export default function AchievementCard(props: AchievementCardProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
     const { variant, stat } = props
 
     return (
         // !!!!!!!!!!!!!!!SET MAX WIDTH TO SYSTEM 80% MAX WIDTH !!!!!!!!!!!!!!!
         <div className="relative w-[80vw] max-w-84 h-full mx-auto rounded-2xl bg-white p-8 shadow-sm flex flex-col items-center justify-center">
-            <div className="flex flex-col gap-[2vw] text-center justify-center items-center">
+            <div className="flex flex-col w-full gap-5 text-center justify-center items-center">
                 {/* title */}
                 <h3 className="text-2xl font-semibold">
                     {t(`routes.gameGroup.achievementGroup.cardGroup.${variant}.title`)}
@@ -47,6 +47,7 @@ export default function AchievementCard(props: AchievementCardProps) {
                 <div className="flex w-full max-w-64 aspect-square items-center justify-center rounded-full bg-gradient-pink">
                     <span className="text-7xl font-bold text-white text-shadow-[2px_2px_8px_#CA2791]">
                         {stat}
+                        {variant === "var3" && "%"}
                     </span>
                 </div>
 
@@ -61,7 +62,7 @@ export default function AchievementCard(props: AchievementCardProps) {
                     : variant === "var3"
                     ? t(
                         `routes.gameGroup.achievementGroup.cardGroup.${variant}.description`,
-                        { count: props.count }
+                        { faculty: props.faculty }
                         )
                     : t(
                         `routes.gameGroup.achievementGroup.cardGroup.${variant}.description`
@@ -71,40 +72,45 @@ export default function AchievementCard(props: AchievementCardProps) {
 
                 {/* overall view */}
                 {variant === "overall" && (
-                <div className="grid grid-cols-2 gap-4 mt-auto">
-                    {/* Most collected faculty */}
-                    <div className="flex flex-col items-center">
+                <div className="grid grid-cols-2 grid-rows-[auto_auto_auto] place-items-center gap-x-4 gap-y-2 mt-auto">
+                    
+                    <span className={i18n.language === "th" ? "whitespace-nowrap" : ""}>
+                        {t(
+                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard1.title"
+                        )}
+                    </span>
+
+                    <span className="">
+                        {t(
+                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard2.title"
+                        )}
+                    </span>
+
                     <div className="flex h-26 w-26 items-center justify-center rounded-full bg-gradient-beige">
                         <span className="text-5xl text-main-pink">
                         {props.miniCard1Count}
                         </span>
                     </div>
-                    <span className="text-gray-600">
-                        {t(
-                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard1.title"
-                        )}
-                    </span>
-                    <span className="text-sm text-gray-500">
-                        {t(
-                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard1.description",
-                        { count: props.miniCard1Count }
-                        )}
-                    </span>
-                    </div>
 
-                    {/* Completed rank */}
-                    <div className="flex flex-col items-center">
                     <div className="flex h-26 w-26 items-center justify-center rounded-full bg-gradient-beige">
                         <span className="text-5xl text-main-pink">
                         {props.miniCard2Rank}
                         </span>
                     </div>
-                    <span className="text-gray-600">
+
+                    <span className="">
                         {t(
-                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard2.title"
+                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard1.description",
+                        { count: props.miniCard1Count }
                         )}
                     </span>
-                    </div>
+                    
+                    <span className="">
+                        {t(
+                        "routes.gameGroup.achievementGroup.cardGroup.overall.miniCard2.description",
+                        )}
+                    </span>
+
                 </div>
                 )}
 

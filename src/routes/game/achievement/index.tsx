@@ -21,6 +21,11 @@ function RouteComponent() {
     top: 5,
   },
   {
+    variant: "var3",
+    stat: "23",
+    faculty: "Engineering",
+  },
+  {
     variant: "overall",
     stat: 99,
     miniCard1Count: 42,
