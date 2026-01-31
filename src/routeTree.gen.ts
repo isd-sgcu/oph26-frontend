@@ -19,6 +19,7 @@ import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/in
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
 import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
 import { Route as InfoFacultyIndexRouteImport } from './routes/info/faculty/index'
+import { Route as GameShareIndexRouteImport } from './routes/game/share/index'
 import { Route as GamePieceIndexRouteImport } from './routes/game/piece/index'
 import { Route as GameAchievementIndexRouteImport } from './routes/game/achievement/index'
 import { Route as AuthProfileIndexRouteImport } from './routes/auth/profile/index'
@@ -78,6 +79,11 @@ const InfoMapIndexRoute = InfoMapIndexRouteImport.update({
 const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
   id: '/info/faculty/',
   path: '/info/faculty/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GameShareIndexRoute = GameShareIndexRouteImport.update({
+  id: '/game/share/',
+  path: '/game/share/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/auth/profile/': typeof AuthProfileIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
+  '/game/share/': typeof GameShareIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
   '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/auth/profile': typeof AuthProfileIndexRoute
   '/game/achievement': typeof GameAchievementIndexRoute
   '/game/piece': typeof GamePieceIndexRoute
+  '/game/share': typeof GameShareIndexRoute
   '/info/faculty': typeof InfoFacultyIndexRoute
   '/info/map': typeof InfoMapIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
@@ -190,6 +198,7 @@ export interface FileRoutesById {
   '/auth/profile/': typeof AuthProfileIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
+  '/game/share/': typeof GameShareIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
   '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/auth/profile/'
     | '/game/achievement/'
     | '/game/piece/'
+    | '/game/share/'
     | '/info/faculty/'
     | '/info/map/'
     | '/info/merchandise/'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/auth/profile'
     | '/game/achievement'
     | '/game/piece'
+    | '/game/share'
     | '/info/faculty'
     | '/info/map'
     | '/info/merchandise'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/auth/profile/'
     | '/game/achievement/'
     | '/game/piece/'
+    | '/game/share/'
     | '/info/faculty/'
     | '/info/map/'
     | '/info/merchandise/'
@@ -281,6 +293,7 @@ export interface RootRouteChildren {
   AuthProfileIndexRoute: typeof AuthProfileIndexRoute
   GameAchievementIndexRoute: typeof GameAchievementIndexRoute
   GamePieceIndexRoute: typeof GamePieceIndexRoute
+  GameShareIndexRoute: typeof GameShareIndexRoute
   InfoFacultyIndexRoute: typeof InfoFacultyIndexRoute
   InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
@@ -363,6 +376,13 @@ declare module '@tanstack/react-router' {
       path: '/info/faculty'
       fullPath: '/info/faculty/'
       preLoaderRoute: typeof InfoFacultyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/game/share/': {
+      id: '/game/share/'
+      path: '/game/share'
+      fullPath: '/game/share/'
+      preLoaderRoute: typeof GameShareIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/game/piece/': {
@@ -449,6 +469,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthProfileIndexRoute: AuthProfileIndexRoute,
   GameAchievementIndexRoute: GameAchievementIndexRoute,
   GamePieceIndexRoute: GamePieceIndexRoute,
+  GameShareIndexRoute: GameShareIndexRoute,
   InfoFacultyIndexRoute: InfoFacultyIndexRoute,
   InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,

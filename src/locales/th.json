@@ -20,6 +20,13 @@
         "logout": "ออกจากระบบ"
       }
     },
+
+    "gameGroup": {
+      "gameFooter": {
+        "myPiece": "My Piece",
+        "redeemCode": "กรอก Code"
+      }
+    },
     "pageNotFound": {
       "title": "ไม่พบหน้านี้",
       "back": "กลับสู่หน้าหลัก"
