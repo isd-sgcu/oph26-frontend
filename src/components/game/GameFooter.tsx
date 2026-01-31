@@ -106,7 +106,7 @@ const GameFooter = () => {
       {openRedeemCodePopup && (
         <RedeemCodePopup
           open={openRedeemCodePopup}
-          onOpenChange={setOpenRedeemCodePopup}
+          setOpen={setOpenRedeemCodePopup}
         />
       )}
     </>
