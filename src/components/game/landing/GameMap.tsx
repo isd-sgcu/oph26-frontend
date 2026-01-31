@@ -3,7 +3,7 @@ import WavingTree from './deco/WavingTree'
 
 export default function GameMap() {
     return (
-        <div className="h-full w-full overflow-x-scroll overflow-y-hidden touch-pan-x">
+        <div className="h-full w-full overflow-x-scroll overflow-y-hidden touch-pan-x touch-pan-y">
           <svg
             viewBox="0 0 2000 2000"
             className="h-full w-auto bg-black"
