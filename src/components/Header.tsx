@@ -84,7 +84,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-transparent p-4">
+      <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-[#ECECD2] p-4">
         {/* Logo */}
         <img
           src="/logo.svg"

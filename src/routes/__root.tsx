@@ -3,7 +3,6 @@ import {
   Scripts,
   createRootRoute,
   Outlet,
-  useMatches,
 } from '@tanstack/react-router'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -13,7 +12,6 @@ import i18n from '@/lib/i18n'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/lib/queryClient'
 import PageNotFound from '@/components/PageNotFound'
-import GameFooter from '@/components/game/GameFooter'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -32,11 +30,6 @@ export const Route = createRootRoute({
 })
 
 function RootDocument() {
-  const matches = useMatches()
-  const showGameFooter = matches.some((match) =>
-    match.routeId.startsWith('/game')
-  )
-
   return (
     <html lang={i18n.language} suppressHydrationWarning className="bg-black">
       <head>
@@ -48,7 +41,6 @@ function RootDocument() {
           <main className="flex flex-1 bg-white">
             <Outlet />
           </main>
-          {showGameFooter && <GameFooter />}
           <Footer />
         </QueryClientProvider>
         <Scripts />

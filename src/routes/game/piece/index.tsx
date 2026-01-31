@@ -83,9 +83,9 @@ function RouteComponent() {
   const selectedFaculty = FACULTIES.find((f) => f.value == myFaculty)
 
   return (
-    <div className="to-main-pink/80 relative flex-1 overflow-hidden bg-linear-to-b from-transparent to-10%">
+    <div className="to-main-pink relative flex-1 overflow-hidden bg-linear-to-b from-[#ECECD2] to-10%">
       {/* Content  */}
-      <div className={`relative z-10 flex flex-col px-4 py-8`}>
+      <div className={`relative z-10 flex w-full flex-col px-4 py-8`}>
         <h1 className="text-center text-3xl font-bold text-white text-shadow-md">
           My Piece
         </h1>

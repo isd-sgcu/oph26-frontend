@@ -88,14 +88,9 @@ const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GameShareIndexRoute = GameShareIndexRouteImport.update({
-  id: '/game/share/',
-  path: '/game/share/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
-  id: '/game/piece/',
-  path: '/game/piece/',
-  getParentRoute: () => rootRouteImport,
+  id: '/share/',
+  path: '/share/',
+  getParentRoute: () => GameRouteRoute,
 } as any)
 const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
   id: '/piece/',
@@ -306,9 +301,6 @@ export interface RootRouteChildren {
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
   AuthProfileIndexRoute: typeof AuthProfileIndexRoute
-  GameAchievementIndexRoute: typeof GameAchievementIndexRoute
-  GamePieceIndexRoute: typeof GamePieceIndexRoute
-  GameShareIndexRoute: typeof GameShareIndexRoute
   InfoFacultyIndexRoute: typeof InfoFacultyIndexRoute
   InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
@@ -402,10 +394,10 @@ declare module '@tanstack/react-router' {
     }
     '/game/share/': {
       id: '/game/share/'
-      path: '/game/share'
+      path: '/share'
       fullPath: '/game/share/'
       preLoaderRoute: typeof GameShareIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof GameRouteRoute
     }
     '/game/piece/': {
       id: '/game/piece/'
@@ -507,9 +499,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
   AuthProfileIndexRoute: AuthProfileIndexRoute,
-  GameAchievementIndexRoute: GameAchievementIndexRoute,
-  GamePieceIndexRoute: GamePieceIndexRoute,
-  GameShareIndexRoute: GameShareIndexRoute,
   InfoFacultyIndexRoute: InfoFacultyIndexRoute,
   InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,
