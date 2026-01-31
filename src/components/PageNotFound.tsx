@@ -20,7 +20,7 @@ const PageNotFound = () => {
       <div
         className="bg-gradient-pink-oval pointer-events-none absolute z-0 rounded-full opacity-80 blur-xs"
         style={{
-          width: 'clamp(393px, 393px, 393px)',
+          width: 'clamp(425px, 425px, 425px)',
           aspectRatio: '1 / 1',
           top: '50%',
           left: '50%',

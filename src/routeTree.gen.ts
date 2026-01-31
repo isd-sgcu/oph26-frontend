@@ -93,6 +93,11 @@ const GameShareIndexRoute = GameShareIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
+  id: '/game/piece/',
+  path: '/game/piece/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
   id: '/piece/',
   path: '/piece/',
   getParentRoute: () => GameRouteRoute,

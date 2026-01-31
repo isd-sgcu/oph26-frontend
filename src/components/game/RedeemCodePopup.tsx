@@ -121,7 +121,7 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
             </DialogTitle>
 
             {/* Body */}
-            <p className="text-center text-sm text-black">
+            <p className="mb-4 text-center text-sm text-black">
               {success
                 ? `${t('components.gameGroup.redeemCodePopup.body2Success')} ${
                     selectedFaculty?.label[i18n.language as 'th' | 'en'] ?? ''
@@ -133,7 +133,12 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
 
             {/* Piece */}
             {success && (
-              <Piece faculty={facultyPiece} variant={2} count={1} size={120} />
+              <Piece
+                faculty={selectedFaculty?.value}
+                variant={selectedFaculty?.variant}
+                count={1}
+                size={120}
+              />
             )}
 
             {/* Button */}

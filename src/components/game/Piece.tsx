@@ -6,7 +6,7 @@ export type PieceVariant = 1 | 2 | 3 | 4 | 5 | 6
 interface PieceProps {
   faculty?: FacultyType
   variant?: PieceVariant
-  count: number
+  count?: number
   size?: number
   bgClassName?: string
 }
@@ -64,9 +64,9 @@ const JIGSAW_PATH: Record<PieceVariant, string> = {
 export const Piece: React.FC<PieceProps> = ({
   faculty,
   variant = 1,
-  count,
+  count = 0,
   size = 120,
-  bgClassName = 'bg-slate-300',
+  bgClassName = 'bg-gradient-pink-oval',
 }) => {
   const clipId = `piece-${faculty ?? 'none'}-${variant}`
   const imageSrc = faculty ? FACULTY_IMAGE[faculty] : undefined
@@ -74,23 +74,44 @@ export const Piece: React.FC<PieceProps> = ({
 
   return (
     <div
-      className="inline-flex items-center justify-center"
+      className={`inline-flex items-center justify-center ${count > 0 ? 'drop-shadow-[4px_4px_4px_rgba(0,0,0,0.35)]' : ''}`}
       style={{ width: size, height: size }}
     >
-      <svg viewBox="0 0 100 100" className="block h-full w-full">
+      <svg
+        viewBox="0 0 100 100"
+        className="block h-full w-full overflow-visible"
+      >
         <defs>
           <clipPath id={clipId}>
             <path d={path} />
           </clipPath>
+          <linearGradient
+            id="gradient-beige-darker"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
+            <stop offset="0%" stopColor="#fafae6" />
+            <stop offset="100%" stopColor="#ffd285" />
+          </linearGradient>
         </defs>
 
-        {!imageSrc && (
-          <foreignObject width="100" height="100" clipPath={`url(#${clipId})`}>
-            <div className={`h-full w-full ${bgClassName}`} />
-          </foreignObject>
+        {(!imageSrc || count == 0) && (
+          <>
+            <foreignObject
+              width="100"
+              height="100"
+              clipPath={`url(#${clipId})`}
+            >
+              <div
+                className={`h-full w-full ${bgClassName} inset-shadow-[16px_16px_4px_rgba(0,0,0,0.3)]`}
+              />
+            </foreignObject>
+          </>
         )}
 
-        {imageSrc && (
+        {imageSrc && count != 0 && (
           <image
             href={imageSrc}
             width="100"
@@ -101,15 +122,18 @@ export const Piece: React.FC<PieceProps> = ({
         )}
 
         {count > 1 && (
-          <text
-            x="50"
-            y="54"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="fill-white text-3xl font-bold drop-shadow-md"
-          >
-            {count}
-          </text>
+          <g transform="translate(16 -16)">
+            <circle cx="75" cy="25" r="20" fill="url(#gradient-beige-darker)" />
+            <text
+              x="75"
+              y="25"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="fill-black text-base font-bold"
+            >
+              {count > 99 ? '99+' : count}
+            </text>
+          </g>
         )}
       </svg>
     </div>
