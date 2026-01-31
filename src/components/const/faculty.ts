@@ -19,7 +19,6 @@ export type FacultyType =
   | 'arts'
   | 'scii'
   | 'cusar'
-  | 'test'
 
 export interface FacultyOption {
   value: FacultyType

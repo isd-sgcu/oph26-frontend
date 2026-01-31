@@ -6,7 +6,7 @@ export type PieceVariant = 1 | 2 | 3 | 4 | 5 | 6
 interface PieceProps {
   faculty?: FacultyType
   variant?: PieceVariant
-  count: number
+  count?: number
   size?: number
   bgClassName?: string
 }
@@ -32,7 +32,6 @@ const FACULTY_IMAGE: Record<FacultyType, string> = {
   arts: '/faculty/arts.png',
   scii: '/faculty/scii.png',
   cusar: '/faculty/cusar.png',
-  test: '/faculty/67.png',
 }
 
 const JIGSAW_PATH: Record<PieceVariant, string> = {
@@ -65,9 +64,9 @@ const JIGSAW_PATH: Record<PieceVariant, string> = {
 export const Piece: React.FC<PieceProps> = ({
   faculty,
   variant = 1,
-  count,
+  count = 0,
   size = 120,
-  bgClassName = 'bg-slate-300',
+  bgClassName = 'bg-gradient-pink-oval',
 }) => {
   const clipId = `piece-${faculty ?? 'none'}-${variant}`
   const imageSrc = faculty ? FACULTY_IMAGE[faculty] : undefined
@@ -75,7 +74,7 @@ export const Piece: React.FC<PieceProps> = ({
 
   return (
     <div
-      className="inline-flex items-center justify-center drop-shadow-[4px_4px_4px_rgba(0,0,0,0.35)]"
+      className={`inline-flex items-center justify-center ${count > 0 ? 'drop-shadow-[4px_4px_4px_rgba(0,0,0,0.35)]' : ''}`}
       style={{ width: size, height: size }}
     >
       <svg
@@ -98,13 +97,21 @@ export const Piece: React.FC<PieceProps> = ({
           </linearGradient>
         </defs>
 
-        {!imageSrc && (
-          <foreignObject width="100" height="100" clipPath={`url(#${clipId})`}>
-            <div className={`h-full w-full ${bgClassName}`} />
-          </foreignObject>
+        {(!imageSrc || count == 0) && (
+          <>
+            <foreignObject
+              width="100"
+              height="100"
+              clipPath={`url(#${clipId})`}
+            >
+              <div
+                className={`h-full w-full ${bgClassName} inset-shadow-[16px_16px_4px_rgba(0,0,0,0.3)]`}
+              />
+            </foreignObject>
+          </>
         )}
 
-        {imageSrc && (
+        {imageSrc && count != 0 && (
           <image
             href={imageSrc}
             width="100"
