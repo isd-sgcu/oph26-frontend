@@ -1,20 +1,50 @@
-import tree from '@/assets/game/deco/purple-tree.svg?url'
+import greenRound from '@/assets/game/deco/tree/green-round-tree.svg'
+import pinkCurly from '@/assets/game/deco/tree/pink-curly-tree.svg'
+import pinkPointy from '@/assets/game/deco/tree/pink-pointy-tree.svg'
+import pinkRound from '@/assets/game/deco/tree/pink-round-tree.svg'
+import purpleCurly from '@/assets/game/deco/tree/purple-curly-tree.svg'
+import purplePointy from '@/assets/game/deco/tree/purple-pointy-tree.svg'
+
+export type TreeVariant =
+  | 'green-round'
+  | 'pink-curly'
+  | 'pink-pointy'
+  | 'pink-round'
+  | 'purple-curly'
+  | 'purple-pointy'
 
 export default function WavingTree({
-  x,
-  y,
-  scale = 1,
+    x,
+    y,
+    scale = 1,
+    variant = "purple-pointy",
+    flip = false,
 }: {
-  x: number
-  y: number
-  scale?: number
+    x: number
+    y: number
+    scale?: number
+    variant?: TreeVariant
+    flip?: boolean
 }) {
     const delay = -(Math.random() * 5)
     const duration = 4 + Math.random() * 3
 
+    const TREE_MAP: Record<TreeVariant, string> = {
+      'green-round': greenRound,
+      'pink-curly': pinkCurly,
+      'pink-pointy': pinkPointy,
+      'pink-round': pinkRound,
+      'purple-curly': purpleCurly,
+      'purple-pointy': purplePointy,
+    }
+
+    const tree = TREE_MAP[variant]
+
+    const scaleX = flip ? -scale : scale
+
     return (
         <g transform={`translate(${x}, ${y})`}>
-        <g transform={`scale(${scale})`}>
+        <g transform={`scale(${scaleX}, ${scale})`}>
             <image
             href={tree}
             width={57}

@@ -1,5 +1,5 @@
 import UniMapBg from '@/assets/game/uni-map-bg.svg'
-import WavingTree from './deco/WavingTree'
+import DecorationLayer from './DecorationLayer'
 
 export default function GameMap() {
     return (
@@ -18,9 +18,10 @@ export default function GameMap() {
               height={2000}
             />
 
-            {/* Later: Trees, cars, puzzle holes */}
-            <WavingTree x={330} y={700} scale={1} />
-            <WavingTree x={400} y={700} scale={1.2} />
+            {/* Decoration layer */}
+            <DecorationLayer />
+
+            
           </svg>
         </div>
     )

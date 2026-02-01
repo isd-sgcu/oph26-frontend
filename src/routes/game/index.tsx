@@ -9,7 +9,7 @@ function RouteComponent() {
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
-      <div className="absolute inset-0 z-0 top-10">
+      <div className="absolute inset-0 z-0 top-15">
         <GameMap />
       </div>
 
