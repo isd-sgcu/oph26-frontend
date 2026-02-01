@@ -4,7 +4,6 @@
 
 @plugin 'tailwindcss-animate';
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -128,7 +127,7 @@
 }
 
 :root {
-  --width-page: 393px;
+  --width-page: 425px;
   --animation-time: 300;
 
   --radius: 0.625rem;
