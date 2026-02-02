@@ -112,51 +112,52 @@ const QuestionaireStep1 = ({
       <BreakLine />
 
       {(['q2', 'q3', 'q4', 'q5'] as const).map((key, index) => (
-        <div key={key} className="flex flex-col gap-2">
-          <p className="font-semibold">
-            {index + 2}. {t(`routes.questionaireGroup.part1.${key}.question`)}{' '}
-            <RedStar />
-          </p>
+        <>
+          <div key={key} className="flex flex-col gap-2">
+            <p className="font-semibold">
+              {index + 2}. {t(`routes.questionaireGroup.part1.${key}.question`)}{' '}
+              <RedStar />
+            </p>
 
-          <div className="flex items-center justify-between">
-            {/* Low */}
-            <span className="text-sm text-black">
-              {t('routes.questionaireGroup.part1.rating.low')}
-            </span>
+            <div className="flex items-center justify-between">
+              {/* Low */}
+              <span className="text-sm text-black">
+                {t('routes.questionaireGroup.part1.rating.low')}
+              </span>
 
-            {/* Rating Icons */}
-            <div className="flex w-full justify-between px-4">
-              {ratingValues.map((r) => {
-                const isActive = formData[key] === r
+              {/* Rating Icons */}
+              <div className="flex w-full justify-between px-4">
+                {ratingValues.map((r) => {
+                  const isActive = formData[key] === r
 
-                return (
-                  <button
-                    key={r}
-                    type="button"
-                    onClick={() => setRating(key, r)}
-                    className={`flex h-fit w-fit cursor-pointer items-center justify-center rounded-full transition ${
-                      isActive ? 'bg-main-pink' : 'bg-white'
-                    } `}
-                  >
-                    <FlatIcon
-                      name={ratingIcons[r]}
-                      size={24}
-                      className={isActive ? 'text-white' : 'text-main-pink'}
-                    />
-                  </button>
-                )
-              })}
+                  return (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => setRating(key, r)}
+                      className={`flex h-fit w-fit cursor-pointer items-center justify-center rounded-full transition ${
+                        isActive ? 'bg-main-pink' : 'bg-white'
+                      } `}
+                    >
+                      <FlatIcon
+                        name={ratingIcons[r]}
+                        size={24}
+                        className={isActive ? 'text-white' : 'text-main-pink'}
+                      />
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* High */}
+              <span className="text-sm text-black">
+                {t('routes.questionaireGroup.part1.rating.high')}
+              </span>
             </div>
-
-            {/* High */}
-            <span className="text-sm text-black">
-              {t('routes.questionaireGroup.part1.rating.high')}
-            </span>
           </div>
-        </div>
+          <BreakLine />
+        </>
       ))}
-
-      <BreakLine />
 
       <div className="flex flex-col gap-2">
         <p className="font-semibold">
@@ -174,8 +175,6 @@ const QuestionaireStep1 = ({
           }
         />
       </div>
-
-      <BreakLine />
     </div>
   )
 }
