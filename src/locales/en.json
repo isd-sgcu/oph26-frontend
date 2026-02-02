@@ -20,6 +20,25 @@
         "logout": "Log out"
       }
     },
+    "gameGroup": {
+      "gameFooter": {
+        "myPiece": "My Piece",
+        "redeemCode": "Redeem Code"
+      },
+      "redeemCodePopup": {
+        "title1": "Redeem Code",
+        "body1": "Use the code from your friends!",
+        "title2Success": "Success",
+        "title2InvalidCode": "Invalid Code",
+        "title2ExpiredCode": "Expired Code",
+        "body2Success": "You have received a piece from ",
+        "body2InvalidCode": "The code is not correct. Please try again.",
+        "body2ExpiredCode": "This code has expired.",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "confirm": "Confirm"
+      }
+    },
     "pageNotFound": { "title": "Page Not Found", "back": "Back to Main Page" }
   },
   "routes": {
@@ -36,7 +55,11 @@
     },
     "gameGroup": {
       "achievementGroup": {},
-      "pieceGroup": {}
+      "pieceGroup": {
+        "codeCreate": "Create Code",
+        "codeCopied": "Copy your code successfully",
+        "codeExpired": "Code expires on"
+      }
     },
     "infoGroup": {
       "facultyGroup": {},

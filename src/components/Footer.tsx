@@ -54,7 +54,9 @@ export default function Footer() {
   if (!shouldShowFooter) return null
 
   return (
-    <footer className={`flex h-fit max-h-80 w-full flex-col`}>
+    <footer
+      className={`flex h-fit max-h-80 w-full max-w-(--width-page) flex-col`}
+    >
       {/* Content */}
       <div
         className={`flex w-full flex-1 flex-col items-center gap-4 px-8 py-4 ${beBeigeFooter ? 'bg-gradient-beige' : 'bg-gradient-pink'}`}

@@ -15,12 +15,12 @@ const PageNotFound = () => {
   if (!mounted) return null
 
   return (
-    <div className="to-main-pink relative flex-1 overflow-hidden bg-linear-to-b from-transparent to-10%">
+    <div className="to-main-pink relative flex-1 overflow-hidden bg-linear-to-b from-[#ECECD2] to-10%">
       {/* Oval background */}
       <div
         className="bg-gradient-pink-oval pointer-events-none absolute z-0 rounded-full opacity-80 blur-xs"
         style={{
-          width: 'clamp(393px, 393px, 393px)',
+          width: 'clamp(425px, 425px, 425px)',
           aspectRatio: '1 / 1',
           top: '50%',
           left: '50%',
