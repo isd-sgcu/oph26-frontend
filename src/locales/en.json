@@ -61,7 +61,49 @@
       "merchandiseGroup": {},
       "workshopGroup": {}
     },
-    "questionaireGroup": {},
+    "questionaireGroup": {
+      "title": "Questionaire",
+      "part1": {
+        "header": "Part 1",
+        "title": "Satisfaction with the Activity",
+        "q1": {
+          "question": "How did you hear about CU Open House 2025?",
+          "options": {
+            "social": "Social Media",
+            "website": "Website",
+            "friends": "Friends",
+            "school": "School",
+            "other": "Other (Please specify)"
+          },
+          "placeholder": "Please specify"
+        },
+
+        "q2": {
+          "question": "Overall satisfaction with the activity"
+        },
+        "q3": {
+          "question": "The booths and activities were interesting and provided useful information"
+        },
+        "q4": {
+          "question": "The information about the faculties within the university was clear"
+        },
+        "q5": {
+          "question": "If given the opportunity, would you recommend CU Open House to others?"
+        },
+
+        "q6": {
+          "question": "Which booth did you find most satisfying? (e.g., faculty booths, club booths, activity booths)",
+          "placeholder": "Enter booth name"
+        },
+        "rating": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+      "back": "Back",
+      "next": "Next",
+      "submit": "Submit"
+    },
 
     "title": "Title"
   }
