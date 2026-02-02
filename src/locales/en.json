@@ -26,7 +26,13 @@
     "authGroup": {
       "loginGroup": {},
       "profileGroup": {},
-      "registerGroup": {}
+      "registerGroup": {},
+      "qrGroup": {
+        "greeting": "Welcome! Staff",
+        "openScanner": "Scan QR Code",
+        "back": "Back",
+        "home": "Home"
+      }
     },
     "gameGroup": {
       "achievementGroup": {},

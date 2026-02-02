@@ -7,10 +7,10 @@ interface CustomModalProps {
   onOpenChange: (open: boolean) => void
 
   iconName?: string // Note: fi-rr-*
-  title: string
-  subtitle?: string
-  body?: string
-  detail?: string
+  title: string | React.ReactNode
+  subtitle?: string | React.ReactNode
+  body?: string | React.ReactNode
+  detail?: string | React.ReactNode
 
   buttonText: string
   onClick: () => void
@@ -25,38 +25,38 @@ const CustomModal = ({
   body,
   detail,
   buttonText,
-  onClick = () => {},
+  onClick = () => { },
 }: CustomModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="flex h-fit w-[90vw] max-w-90 flex-col items-center gap-3 rounded-2xl p-6">
+      <DialogContent className="flex flex-col items-center gap-3 p-6 rounded-2xl w-[90vw] max-w-90 h-fit">
         {/* Icon */}
         {iconName && (
           <FlatIcon name={iconName} size={48} className="text-main-pink" />
         )}
 
         {/* Title */}
-        <DialogTitle className="mt-2 text-center text-2xl font-bold text-black">
+        <DialogTitle className="mt-2 font-bold text-black text-2xl text-center">
           {title}
         </DialogTitle>
 
         {/* Subtitle */}
         {subtitle && (
-          <p className="text-grey text-center text-sm font-normal">
+          <p className="font-normal text-grey text-sm text-center">
             {subtitle}
           </p>
         )}
 
         {/* Body */}
         {body && (
-          <p className="mt-2 text-center text-xl font-semibold text-black">
+          <p className="mt-2 font-semibold text-black text-xl text-center">
             {body}
           </p>
         )}
 
         {/* Detail */}
         {detail && (
-          <p className="text-center text-base font-medium text-black">
+          <p className="font-medium text-black text-base text-center">
             {detail}
           </p>
         )}

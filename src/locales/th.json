@@ -29,7 +29,16 @@
     "authGroup": {
       "loginGroup": {},
       "profileGroup": {},
-      "registerGroup": {}
+      "registerGroup": {},
+      "qrGroup": {
+        "greeting": "ยินดีต้อนรับ! สตาฟ",
+        "openScanner": "สแกน QR Code",
+        "back": "ออก",
+        "home": "หน้าหลัก",
+        "modal": {
+          "successTitle": ""
+        }
+      }
     },
     "gameGroup": {
       "achievementGroup": {},
