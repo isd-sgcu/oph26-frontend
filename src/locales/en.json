@@ -63,6 +63,10 @@
     },
     "questionaireGroup": {
       "title": "Questionaire",
+      "infoPopup": {
+        "title": "For high school students",
+        "detail": "Please complete the questionnaire before receiving your certificate."
+      },
       "part1": {
         "header": "Part 1",
         "title": "Satisfaction with the Activity",
@@ -102,6 +106,7 @@
       },
       "back": "Back",
       "next": "Next",
+      "accept": "Accept",
       "submit": "Submit"
     },
 
