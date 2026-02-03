@@ -4,8 +4,6 @@ import BreakLine from './Breakline'
 import { QuestionaireInterface } from '@/routes/questionaire'
 import { Input } from '../ui/input'
 import RedStar from './RedStar'
-import { useState } from 'react'
-import CustomModal from '../CustomModal'
 
 interface QuestionaireStep1Props {
   formData: QuestionaireInterface
@@ -19,7 +17,6 @@ const QuestionaireStep1 = ({
   setFormData,
 }: QuestionaireStep1Props) => {
   const { t } = useTranslation()
-  const [showInfoPopup, setShowInfoPopup] = useState(true)
 
   const ratingValues: RatingValue[] = [1, 2, 3, 4, 5]
 
@@ -68,6 +65,7 @@ const QuestionaireStep1 = ({
 
         <BreakLine />
 
+        {/* Q1 */}
         <div className="flex flex-col gap-3">
           <p className="font-semibold">
             1. {t('routes.questionaireGroup.part1.q1.question')} <RedStar />
@@ -115,6 +113,7 @@ const QuestionaireStep1 = ({
 
         <BreakLine />
 
+        {/* Q2 - Q5 */}
         {(['q2', 'q3', 'q4', 'q5'] as const).map((key, index) => (
           <>
             <div key={key} className="flex flex-col gap-2">
@@ -164,6 +163,7 @@ const QuestionaireStep1 = ({
           </>
         ))}
 
+        {/* Q6 */}
         <div className="flex flex-col gap-2">
           <p className="font-semibold">
             6. {t('routes.questionaireGroup.part1.q6.question')}
@@ -181,21 +181,6 @@ const QuestionaireStep1 = ({
           />
         </div>
       </div>
-
-      {/* Info Popup for High School Student */}
-      {showInfoPopup && (
-        <CustomModal
-          open={showInfoPopup}
-          onOpenChange={setShowInfoPopup}
-          iconName="fi-rr-info"
-          title={t('routes.questionaireGroup.infoPopup.title')}
-          detail={t('routes.questionaireGroup.infoPopup.detail')}
-          buttonText={t('routes.questionaireGroup.accept')}
-          onClick={() => {
-            setShowInfoPopup(false)
-          }}
-        />
-      )}
     </>
   )
 }
