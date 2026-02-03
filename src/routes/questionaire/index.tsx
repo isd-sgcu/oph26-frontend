@@ -27,7 +27,7 @@ function RouteComponent() {
 
   const { t } = useTranslation()
   const router = useRouter()
-  const [step, setStep] = useState(lastStep)
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<QuestionaireInterface>({
     q1: {
       selected: [],

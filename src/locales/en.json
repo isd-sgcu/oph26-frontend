@@ -114,6 +114,9 @@
       "accept": "Accept",
       "submit": "Submit"
     },
+    "certificateGroup": {
+      "title": "Questionaire"
+    },
 
     "title": "Title"
   }

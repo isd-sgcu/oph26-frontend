@@ -117,6 +117,9 @@
       "accept": "ตกลง",
       "submit": "ส่ง"
     },
+    "certificateGroup": {
+      "title": "แบบสอบถาม"
+    },
 
     "title": "หัวข้อ"
   }
