@@ -1,7 +1,8 @@
 import CustomModal from '@/components/CustomModal'
 import QuestionaireStep1 from '@/components/questionaire/QuestionaireStep1'
+import QuestionaireStepLast from '@/components/questionaire/QuestionaireStepLast'
 import { Button } from '@/components/ui/button'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -22,8 +23,11 @@ export const Route = createFileRoute('/questionaire/')({
 })
 
 function RouteComponent() {
+  const lastStep = 2
+
   const { t } = useTranslation()
-  const [step, setStep] = useState(1)
+  const router = useRouter()
+  const [step, setStep] = useState(lastStep)
   const [formData, setFormData] = useState<QuestionaireInterface>({
     q1: {
       selected: [],
@@ -42,6 +46,12 @@ function RouteComponent() {
   const [shouldNavigateToCertificate, setShouldNavigateToCertificate] =
     useState(false)
 
+  // Check User Information
+  useEffect(() => {
+    setShowInfoPopup(true)
+    setShouldNavigateToCertificate(false)
+  }, [])
+
   useEffect(() => {
     if (
       isQ1Valid(formData.q1) &&
@@ -56,8 +66,6 @@ function RouteComponent() {
     }
   }, [formData])
 
-  const lastStep = 1
-
   const isQ1Valid = (q1: QuestionaireInterface['q1']) => {
     if (q1.selected.length === 0) return false
 
@@ -70,31 +78,122 @@ function RouteComponent() {
 
   return (
     <>
-      <div className="to-main-light-pink relative flex min-h-screen flex-1 flex-col overflow-hidden bg-linear-to-b from-[#ECECD2] to-10%">
+      <div className="to-main-pink relative flex flex-col bg-linear-to-b from-[#ECECD2] to-10%">
         {/* Decorations */}
         <img
-          src="/questionaire/blue_flower.svg"
+          src="/questionaire/blue_flower.png"
           alt="Blue Flower"
-          width={50}
-          height={50}
+          style={{
+            width: 50,
+            height: 50,
+          }}
           className="absolute top-0 left-0"
         />
         <img
-          src="/questionaire/yellow_flower.svg"
+          src="/questionaire/yellow_flower.png"
           alt="Yellow Flower"
-          width={50}
-          height={50}
+          style={{
+            width: 50,
+            height: 50,
+          }}
           className="absolute top-0 right-0"
         />
 
+        {step == lastStep && (
+          <>
+            {/* Left Road */}
+            <img
+              src="/background/road2.svg"
+              alt="Left Road"
+              className="absolute"
+              style={{
+                width: 'clamp(250px, 60vw, 250px)',
+                left: 0,
+                bottom: 0,
+              }}
+            />
+
+            {/* Right Road */}
+            <img
+              src="/background/road2.svg"
+              alt="Right Road"
+              className="absolute"
+              style={{
+                width: 'clamp(250px, 60vw, 250px)',
+                right: 0,
+                bottom: 0,
+                transform: 'rotateY(180deg)',
+              }}
+            />
+
+            {/* Blue Flower */}
+            <img
+              src="/questionaire/blue_flower.png"
+              alt="Blue Flower"
+              style={{
+                width: 50,
+                height: 50,
+              }}
+              className="absolute bottom-4 left-[35%]"
+            />
+
+            {/* Yellow Flower */}
+            <img
+              src="/questionaire/yellow_flower.png"
+              alt="Yellow Flower"
+              style={{
+                width: 50,
+                height: 50,
+              }}
+              className="absolute right-[35%] bottom-4"
+            />
+
+            {/* Blue Tree */}
+            <img
+              src="/questionaire/blue_tree.png"
+              alt="Blue True"
+              style={{
+                width: 120,
+                height: 140,
+              }}
+              className="absolute right-0 bottom-0"
+            />
+
+            {/* Yellow Tree */}
+            <img
+              src="/questionaire/yellow_tree.png"
+              alt="Yellow Tree"
+              style={{
+                width: 40,
+                height: 100,
+              }}
+              className="absolute bottom-0 left-[10%]"
+            />
+
+            {/* Green Bush */}
+            <img
+              src="/questionaire/green_bush.png"
+              alt="Green Bush"
+              style={{
+                width: 64,
+                height: 32,
+              }}
+              className="absolute bottom-0 left-0"
+            />
+          </>
+        )}
+
         {/* Content */}
-        <div className="relative z-10 flex w-full flex-1 flex-col pt-16">
+        <div className="relative z-10 flex h-fit w-full flex-1 flex-col pt-16">
           <h1 className="mb-8 px-4 text-center text-2xl font-bold wrap-break-word text-white text-shadow-xs">
             <span className="block">{t('routes.questionaireGroup.title')}</span>
             <span className="block">Chula Openhouse 2026</span>
           </h1>
 
-          <div className="flex w-full flex-1 flex-col gap-4 overflow-y-auto rounded-t-xl bg-white px-6 py-6">
+          <div
+            className={`flex w-full flex-col gap-4 rounded-t-xl ${step != lastStep ? 'bg-white pt-6' : 'bg-transparent pt-0'} px-6 pb-6`}
+          >
+            {/* Form Step 1 */}
             {step === 1 && (
               <QuestionaireStep1
                 formData={formData}
@@ -102,46 +201,86 @@ function RouteComponent() {
               />
             )}
 
-            {/* ฺButtons */}
-            <div className="flex items-center justify-between gap-4">
-              <Button
-                onClick={() => {
-                  if (step != 1) {
-                    setStep((prev) => prev - 1)
-                  }
-                }}
-                disabled={step == 1}
-                size={'sm'}
-                className="bg-gradient-beige text-main-pink"
-              >
-                {t('routes.questionaireGroup.back')}
-              </Button>
-              <Button
-                onClick={() => {
-                  if (step != lastStep) {
-                    setStep((prev) => prev + 1)
-                  }
-                }}
-                disabled={step == lastStep}
-                size={'sm'}
-                className={`bg-gradient-purple text-white ${step != lastStep ? 'block' : 'hidden'}`}
-              >
-                {t('routes.questionaireGroup.next')}
-              </Button>
-              <Button
-                onClick={() => {
-                  if (step == lastStep && canSubmit) {
-                    // TODO: Send Information
-                    console.log(formData)
-                  }
-                }}
-                disabled={!canSubmit}
-                size={'sm'}
-                className={`bg-gradient-purple text-white ${step == lastStep ? 'block' : 'hidden'}`}
-              >
-                {t('routes.questionaireGroup.submit')}
-              </Button>
-            </div>
+            {/* Form Last Page */}
+            {step === lastStep && <QuestionaireStepLast />}
+
+            {/* ฺForm Buttons */}
+            {step < lastStep && (
+              <div className="flex items-center justify-between gap-4">
+                {/* Back */}
+                <Button
+                  onClick={() => {
+                    if (step != 1) {
+                      setStep((prev) => prev - 1)
+                    }
+                  }}
+                  disabled={step == 1}
+                  size={'sm'}
+                  className={`bg-gradient-beige text-main-pink ${step == lastStep ? 'hidden' : 'block'}`}
+                >
+                  {t('routes.questionaireGroup.back')}
+                </Button>
+
+                {/* Next */}
+                <Button
+                  onClick={() => {
+                    if (step < lastStep - 1) {
+                      setStep((prev) => prev + 1)
+                    }
+                  }}
+                  disabled={step == lastStep - 1}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step < lastStep - 1 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.next')}
+                </Button>
+
+                {/* Submit */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 1 && canSubmit) {
+                      // TODO: Send Information
+
+                      console.log(formData)
+                      if (step == lastStep - 1) {
+                        if (shouldNavigateToCertificate) {
+                          router.navigate({ to: '/certificate' })
+                        } else {
+                          setStep((prev) => prev + 1)
+                        }
+                        window.scrollTo({
+                          top: 0,
+                          behavior: 'smooth',
+                        })
+                      }
+                    }
+                  }}
+                  disabled={!canSubmit}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step == lastStep - 1 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.submit')}
+                </Button>
+              </div>
+            )}
+
+            {/* Form Last Page Button */}
+            {step == lastStep && (
+              <div className="flex items-center justify-center gap-4">
+                {/* Home */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep) {
+                      router.navigate({ to: '/' })
+                    }
+                  }}
+                  size={'sm'}
+                  className={`bg-gradient-purple justify-self-center text-white ${step == lastStep ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.home')}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

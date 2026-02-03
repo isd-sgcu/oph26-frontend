@@ -104,8 +104,13 @@
           "high": "High"
         }
       },
+      "partLast": {
+        "description": "Thank you for joining us on an adventurous journey aboard the train of dreams, racing through fields of flowers with us.\nBecause we believe that every flower has its own time to bloom,\nand that everyone is a beautiful flower in their own unique way.\nTherefore, please believe in yourself and do not hesitate to choose the path\nthat allows you to blossom and continue shining brightly."
+      },
+
       "back": "Back",
       "next": "Next",
+      "home": "Home",
       "accept": "Accept",
       "submit": "Submit"
     },
