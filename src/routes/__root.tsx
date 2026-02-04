@@ -35,10 +35,10 @@ function RootDocument() {
       <head>
         <HeadContent />
       </head>
-      <body className="flex min-h-screen w-full max-w-(--width-page) flex-col justify-self-center">
+      <body className="min-h-screen w-full max-w-(--width-page) bg-white">
         <QueryClientProvider client={queryClient}>
           <Header />
-          <main className="bg-white">
+          <main>
             <Outlet />
           </main>
           <Footer />

@@ -52,11 +52,21 @@
       "registerGroup": {},
       "qrGroup": {
         "greeting": "ยินดีต้อนรับ! สตาฟ",
-        "openScanner": "สแกน QR Code",
-        "back": "ออก",
         "home": "หน้าหลัก",
         "modal": {
-          "successTitle": ""
+          "success": {
+            "subtitle": "{{Name}} ได้เข้าร่วมกิจกรรม CU OPEN HOUSE 2026",
+            "body": "รับลงทะเบียนโดย {{StaffName}} จากคณะ {{FacultyName}} เมื่อวันที่ {{Date}} เวลา {{Time}}",
+            "detail": "แจ้งน้องรีเฟรชหน้า ticket ของตัวเอง ถ้ามีข้อความยืนยันว่าสแกนแล้วให้ถ่ายหน้าจอเก็บไว้เป็นหลักฐานเพื่อสำหรับรับเกียรติบัตร"
+          },
+          "error": {
+            "title": "เกิดข้อผิดพลาด!",
+            "subtitle": {
+              "error_01": "ไม่พบ ID ที่สแกน",
+              "error_02": "{{Name}} ได้รับการลงทะเบียนไปแล้ว"
+            }
+          },
+          "confirmBtn": "ตกลง"
         }
       }
     },

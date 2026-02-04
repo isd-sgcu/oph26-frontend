@@ -20,6 +20,8 @@
   --color-grey: #afafaf;
   --color-white: #ffffff;
 
+  --color-error-base: #e42a16;
+
   --background-image-gradient-pink: linear-gradient(
     to bottom,
     #f6acd2,
@@ -111,6 +113,7 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
@@ -120,6 +123,7 @@
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
@@ -202,6 +206,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -211,6 +216,7 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -220,6 +226,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -229,6 +236,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -238,6 +246,7 @@
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }

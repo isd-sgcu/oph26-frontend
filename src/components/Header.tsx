@@ -84,7 +84,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-[#ECECD2] p-4">
+      <header className="fixed top-0 left-0 z-49 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] from-40% to-transparent p-4">
         {/* Logo */}
         <img
           src="/logo.svg"
@@ -98,7 +98,7 @@ export default function Header() {
         />
 
         {/* Right menu */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {/* Lang */}
           <div className="flex overflow-hidden rounded-lg shadow-sm">
             {['th', 'en'].map((lng) => (
