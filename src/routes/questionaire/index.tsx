@@ -44,6 +44,9 @@ function RouteComponent() {
     certificate_firstname: '',
     certificate_lastname: '',
   })
+  const [canSubmitStep1, setCanSubmitStep1] = useState(false)
+  const [canSubmitStepCertificate, setCanSubmitStepCertificate] =
+    useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
 
   // TODO: Show and Navigate to /certificate when this user is high school student
@@ -52,27 +55,46 @@ function RouteComponent() {
 
   // Check User Information
   useEffect(() => {
-    setIsHighSchoolStudent(false)
+    setIsHighSchoolStudent(true)
     setShowInfoPopup(false)
   }, [])
 
+  // Check Step 1
   useEffect(() => {
     if (
       isQ1Valid(formData.q1) &&
       formData.q2 &&
       formData.q3 &&
       formData.q4 &&
-      formData.q5 &&
-      (!isHighSchoolStudent ||
-        (isHighSchoolStudent &&
-          formData.certificate_firstname &&
-          formData.certificate_lastname))
+      formData.q5
     ) {
+      setCanSubmitStep1(true)
+    } else {
+      setCanSubmitStep1(false)
+    }
+  }, [formData])
+
+  // Check Step Certificate
+  useEffect(() => {
+    if (
+      !isHighSchoolStudent ||
+      (isHighSchoolStudent &&
+        formData.certificate_firstname &&
+        formData.certificate_lastname)
+    ) {
+      setCanSubmitStepCertificate(true)
+    } else {
+      setCanSubmitStepCertificate(false)
+    }
+  }, [formData])
+
+  useEffect(() => {
+    if (canSubmitStep1 && canSubmitStepCertificate) {
       setCanSubmit(true)
     } else {
       setCanSubmit(false)
     }
-  }, [formData])
+  }, [canSubmitStep1, canSubmitStepCertificate])
 
   const isQ1Valid = (q1: QuestionaireInterface['q1']) => {
     if (q1.selected.length === 0) return false
@@ -240,11 +262,11 @@ function RouteComponent() {
                 {/* Next */}
                 <Button
                   onClick={() => {
-                    if (step < lastStep - 2) {
+                    if (step == 1 && canSubmitStep1) {
                       setStep((prev) => prev + 1)
                     }
                   }}
-                  disabled={step == lastStep - 2}
+                  disabled={step == 1 && !canSubmitStep1}
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step < lastStep - 2 ? 'block' : 'hidden'}`}
                 >
@@ -293,11 +315,11 @@ function RouteComponent() {
                 {/* Next */}
                 <Button
                   onClick={() => {
-                    if (step < lastStep - 1) {
+                    if (step == 1 && canSubmitStep1) {
                       setStep((prev) => prev + 1)
                     }
                   }}
-                  disabled={step == lastStep - 1}
+                  disabled={step == 1 && !canSubmitStep1}
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step < lastStep - 1 ? 'block' : 'hidden'}`}
                 >
