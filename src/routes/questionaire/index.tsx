@@ -29,6 +29,7 @@ export const Route = createFileRoute('/questionaire/')({
 
 function RouteComponent() {
   const lastStep = 3
+  const highSchool = true
 
   const { t } = useTranslation()
   const router = useRouter()
@@ -59,8 +60,8 @@ function RouteComponent() {
 
   // Check User Information
   useEffect(() => {
-    setIsHighSchoolStudent(true)
-    setOpenHighSchoolInformationPopup(false)
+    setIsHighSchoolStudent(highSchool)
+    setOpenHighSchoolInformationPopup(highSchool)
   }, [])
 
   // Check Step 1
