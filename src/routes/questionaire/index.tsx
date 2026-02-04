@@ -1,8 +1,10 @@
 import CustomModal from '@/components/CustomModal'
+import { FlatIcon } from '@/components/FlatIcon'
 import QuestionaireStep1 from '@/components/questionaire/QuestionaireStep1'
 import QuestionaireStepCertificate from '@/components/questionaire/QuestionaireStepCertificate'
 import QuestionaireStepLast from '@/components/questionaire/QuestionaireStepLast'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -49,14 +51,16 @@ function RouteComponent() {
     useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
 
-  // TODO: Show and Navigate to /certificate when this user is high school student
-  const [showInfoPopup, setShowInfoPopup] = useState(true)
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
+  const [openHighSchoolInformationPopup, setOpenHighSchoolInformationPopup] =
+    useState(true)
+  const [openHighSchoolConfirmationPopup, setOpenHighSchoolConfirmationPopup] =
+    useState(false)
 
   // Check User Information
   useEffect(() => {
     setIsHighSchoolStudent(true)
-    setShowInfoPopup(false)
+    setOpenHighSchoolInformationPopup(false)
   }, [])
 
   // Check Step 1
@@ -298,6 +302,7 @@ function RouteComponent() {
               </div>
             )}
 
+            {/* Form Buttons for High School Student */}
             {step < lastStep && isHighSchoolStudent && (
               <div className="flex items-center justify-between gap-4">
                 {/* Back */}
@@ -332,14 +337,7 @@ function RouteComponent() {
                 <Button
                   onClick={() => {
                     if (step == lastStep - 1 && canSubmit) {
-                      // TODO: Send Information
-
-                      console.log(formData)
-                      setStep((prev) => prev + 1)
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                      })
+                      setOpenHighSchoolConfirmationPopup(true)
                     }
                   }}
                   disabled={!canSubmit}
@@ -373,18 +371,87 @@ function RouteComponent() {
       </div>
 
       {/* Info Popup for High School Student */}
-      {showInfoPopup && (
+      {openHighSchoolInformationPopup && (
         <CustomModal
-          open={showInfoPopup}
-          onOpenChange={setShowInfoPopup}
+          open={openHighSchoolInformationPopup}
+          onOpenChange={setOpenHighSchoolInformationPopup}
           iconName="fi-rr-info"
           title={t('routes.questionaireGroup.infoPopup.title')}
           detail={t('routes.questionaireGroup.infoPopup.detail')}
           buttonText={t('routes.questionaireGroup.accept')}
           onClick={() => {
-            setShowInfoPopup(false)
+            setOpenHighSchoolInformationPopup(false)
           }}
         />
+      )}
+
+      {/* Confirmation Popup for High School Student */}
+      {openHighSchoolConfirmationPopup && (
+        <Dialog
+          open={openHighSchoolConfirmationPopup}
+          onOpenChange={setOpenHighSchoolConfirmationPopup}
+        >
+          <DialogContent className="flex h-fit w-[90vw] max-w-90 flex-col items-center gap-3 rounded-2xl p-6">
+            {/* Icon */}
+            <FlatIcon name="fi-rr-info" size={48} className="text-main-pink" />
+
+            {/* Title */}
+            <DialogTitle className="mt-2 text-center text-2xl font-bold text-red-500">
+              {t('routes.questionaireGroup.partCertificate.confirmation.title')}
+            </DialogTitle>
+
+            <p className="text-center text-lg font-medium text-black">
+              {t('routes.questionaireGroup.partCertificate.confirmation.body')}
+            </p>
+
+            {/* Name */}
+            <div className="border-main-pink text-main-pink h-fit min-h-9 w-full max-w-[80%] rounded-md border-2 px-3 py-1 text-center">
+              {formData.certificate_firstname +
+                ' ' +
+                formData.certificate_lastname}
+            </div>
+
+            <p className="text-center text-base font-normal text-red-500">
+              {t('routes.questionaireGroup.partCertificate.caution')}
+            </p>
+
+            {step < lastStep && isHighSchoolStudent && (
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
+                {/* Back */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 1) {
+                      setOpenHighSchoolConfirmationPopup(false)
+                    }
+                  }}
+                  disabled={step != lastStep - 1}
+                  size={'sm'}
+                  className={`bg-gradient-beige text-main-pink ${step != lastStep - 1 ? 'hidden' : 'block'}`}
+                >
+                  {t('routes.questionaireGroup.back')}
+                </Button>
+
+                {/* Submit */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 1 && canSubmit) {
+                      // TODO: Form Submission
+
+                      console.log(formData)
+                      setStep((prev) => prev + 1)
+                      setOpenHighSchoolConfirmationPopup(false)
+                    }
+                  }}
+                  disabled={step != lastStep - 1 || !canSubmit}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step == lastStep - 1 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.submit')}
+                </Button>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       )}
     </>
   )
