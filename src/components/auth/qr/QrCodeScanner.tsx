@@ -4,14 +4,14 @@ import CustomModal from '@/components/CustomModal'
 import { useTranslation } from 'react-i18next'
 
 export default function QrCodeScanner() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [scannedData, setScannedData] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [title, setTitle] = useState<string | React.ReactNode>('')
   const [subtitle, setSubtitle] = useState<string | React.ReactNode>('')
   const [body, setBody] = useState<string | React.ReactNode>('')
   const [detail, setDetail] = useState<string | React.ReactNode>('')
-  const isSuccess = false
+  const isSuccess = true
 
   const handleScanQrCode = (data: IDetectedBarcode[]) => {
     try {
@@ -20,6 +20,7 @@ export default function QrCodeScanner() {
       }
 
       const now = new Date()
+      const locale = i18n.language
       const scannedValue = data[0].rawValue
       const errorCode = 'error_02'
       // ** TODO ** Fetch data from backend using scannedValue
@@ -43,11 +44,14 @@ export default function QrCodeScanner() {
             {t('routes.authGroup.qrGroup.modal.success.body', {
               StaffName: 'น้องสตาฟ',
               FacultyName: 'คณะวิศวกรรมศาสตร์',
-              Date: now.toLocaleDateString('th-TH', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              }),
+              Date: now.toLocaleDateString(
+                locale === 'th' ? 'th-TH' : 'en-US',
+                {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                }
+              ),
               Time: now.toLocaleTimeString('th-TH', {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -67,11 +71,9 @@ export default function QrCodeScanner() {
           </p>
         )
 
-        const errorKey = errorCode === 'error_01' ? 'error_01' : 'error_02'
-
         setSubtitle(
           <p className="text-center text-xl font-semibold text-pretty">
-            {t(`routes.authGroup.qrGroup.modal.error.subtitle.${errorKey}`, {
+            {t(`routes.authGroup.qrGroup.modal.error.subtitle.${errorCode}`, {
               Name: 'John Doe',
             })}
           </p>
