@@ -30,6 +30,7 @@ import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/w
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
 import { Route as AuthStaffOnboardingIndexRouteImport } from './routes/auth/staff/onboarding/index'
 import { Route as AuthStaffLoginIndexRouteImport } from './routes/auth/staff/login/index'
+import { Route as AuthProfileTicketIndexRouteImport } from './routes/auth/profile/ticket/index'
 import { Route as AuthProfileEditIndexRouteImport } from './routes/auth/profile/edit/index'
 
 const GameRouteRoute = GameRouteRouteImport.update({
@@ -140,6 +141,11 @@ const AuthStaffLoginIndexRoute = AuthStaffLoginIndexRouteImport.update({
   path: '/auth/staff/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthProfileTicketIndexRoute = AuthProfileTicketIndexRouteImport.update({
+  id: '/auth/profile/ticket/',
+  path: '/auth/profile/ticket/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthProfileEditIndexRoute = AuthProfileEditIndexRouteImport.update({
   id: '/auth/profile/edit/',
   path: '/auth/profile/edit/',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
   '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
   '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/info/workshop': typeof InfoWorkshopIndexRoute
   '/test/component': typeof TestComponentIndexRoute
   '/auth/profile/edit': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login': typeof AuthStaffLoginIndexRoute
   '/auth/staff/onboarding': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId': typeof InfoFacultyFacultyIdIndexRoute
@@ -213,6 +221,7 @@ export interface FileRoutesById {
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
   '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
   '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
@@ -239,6 +248,7 @@ export interface FileRouteTypes {
     | '/info/workshop/'
     | '/test/component/'
     | '/auth/profile/edit/'
+    | '/auth/profile/ticket/'
     | '/auth/staff/login/'
     | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/info/workshop'
     | '/test/component'
     | '/auth/profile/edit'
+    | '/auth/profile/ticket'
     | '/auth/staff/login'
     | '/auth/staff/onboarding'
     | '/info/faculty/$facultyId'
@@ -286,6 +297,7 @@ export interface FileRouteTypes {
     | '/info/workshop/'
     | '/test/component/'
     | '/auth/profile/edit/'
+    | '/auth/profile/ticket/'
     | '/auth/staff/login/'
     | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
@@ -307,6 +319,7 @@ export interface RootRouteChildren {
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
   TestComponentIndexRoute: typeof TestComponentIndexRoute
   AuthProfileEditIndexRoute: typeof AuthProfileEditIndexRoute
+  AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
   AuthStaffLoginIndexRoute: typeof AuthStaffLoginIndexRoute
   AuthStaffOnboardingIndexRoute: typeof AuthStaffOnboardingIndexRoute
   InfoFacultyFacultyIdIndexRoute: typeof InfoFacultyFacultyIdIndexRoute
@@ -462,6 +475,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthStaffLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/profile/ticket/': {
+      id: '/auth/profile/ticket/'
+      path: '/auth/profile/ticket'
+      fullPath: '/auth/profile/ticket/'
+      preLoaderRoute: typeof AuthProfileTicketIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/profile/edit/': {
       id: '/auth/profile/edit/'
       path: '/auth/profile/edit'
@@ -505,6 +525,7 @@ const rootRouteChildren: RootRouteChildren = {
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
   TestComponentIndexRoute: TestComponentIndexRoute,
   AuthProfileEditIndexRoute: AuthProfileEditIndexRoute,
+  AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
   AuthStaffLoginIndexRoute: AuthStaffLoginIndexRoute,
   AuthStaffOnboardingIndexRoute: AuthStaffOnboardingIndexRoute,
   InfoFacultyFacultyIdIndexRoute: InfoFacultyFacultyIdIndexRoute,
