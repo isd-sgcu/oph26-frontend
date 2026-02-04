@@ -246,7 +246,9 @@ function RouteComponent() {
             )}
 
             {/* Form Last Page */}
-            {step === lastStep && <QuestionaireStepLast />}
+            {step === lastStep && (
+              <QuestionaireStepLast isHighSchoolStudent={isHighSchoolStudent} />
+            )}
 
             {/* ฺForm Buttons for Normal User */}
             {step < lastStep && !isHighSchoolStudent && (
