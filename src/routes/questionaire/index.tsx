@@ -129,7 +129,9 @@ function RouteComponent() {
           className="absolute top-0 right-0"
         />
 
-        {step == lastStep && (
+        {((!isHighSchoolStudent && step == lastStep) ||
+          (isHighSchoolStudent &&
+            (step == lastStep || step == lastStep - 1))) && (
           <>
             {/* Left Road */}
             <img
@@ -221,7 +223,7 @@ function RouteComponent() {
           </h1>
 
           <div
-            className={`flex w-full flex-col gap-4 rounded-t-xl ${step != lastStep ? 'bg-white pt-6' : 'bg-transparent pt-0'} px-6 pb-6`}
+            className={`flex w-full flex-col gap-4 rounded-t-xl ${(isHighSchoolStudent && (step == lastStep || step == lastStep - 1)) || (!isHighSchoolStudent && step == lastStep) ? 'bg-transparent pt-0' : 'bg-white pt-6'} px-6 pb-6`}
           >
             {/* Form Step 1 */}
             {step === 1 && (
