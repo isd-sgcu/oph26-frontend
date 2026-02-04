@@ -66,7 +66,7 @@
       "workshopGroup": {}
     },
     "questionaireGroup": {
-      "title": "แบบสอบถาม",
+      "title": "แบบประเมิน",
       "infoPopup": {
         "title": "สำหรับน้องๆ มัธยม",
         "detail": "ขอความร่วมมือกรอกแบบสอบถามก่อนรับเกียรติบัตร"
@@ -118,7 +118,7 @@
       "submit": "ส่ง"
     },
     "certificateGroup": {
-      "title": "แบบสอบถาม"
+      "title": "แบบประเมิน"
     },
 
     "title": "หัวข้อ"

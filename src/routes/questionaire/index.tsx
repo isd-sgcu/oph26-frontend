@@ -1,5 +1,6 @@
 import CustomModal from '@/components/CustomModal'
 import QuestionaireStep1 from '@/components/questionaire/QuestionaireStep1'
+import QuestionaireStepCertificate from '@/components/questionaire/QuestionaireStepCertificate'
 import QuestionaireStepLast from '@/components/questionaire/QuestionaireStepLast'
 import { Button } from '@/components/ui/button'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
@@ -16,6 +17,8 @@ export interface QuestionaireInterface {
   q4: number | null
   q5: number | null
   q6: string
+  certificate_firstname: string
+  certificate_lastname: string
 }
 
 export const Route = createFileRoute('/questionaire/')({
@@ -23,7 +26,7 @@ export const Route = createFileRoute('/questionaire/')({
 })
 
 function RouteComponent() {
-  const lastStep = 2
+  const lastStep = 3
 
   const { t } = useTranslation()
   const router = useRouter()
@@ -38,18 +41,19 @@ function RouteComponent() {
     q4: null,
     q5: null,
     q6: '',
+    certificate_firstname: '',
+    certificate_lastname: '',
   })
   const [canSubmit, setCanSubmit] = useState(false)
 
   // TODO: Show and Navigate to /certificate when this user is high school student
   const [showInfoPopup, setShowInfoPopup] = useState(true)
-  const [shouldNavigateToCertificate, setShouldNavigateToCertificate] =
-    useState(false)
+  const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
 
   // Check User Information
   useEffect(() => {
-    setShowInfoPopup(true)
-    setShouldNavigateToCertificate(false)
+    setIsHighSchoolStudent(false)
+    setShowInfoPopup(false)
   }, [])
 
   useEffect(() => {
@@ -58,7 +62,11 @@ function RouteComponent() {
       formData.q2 &&
       formData.q3 &&
       formData.q4 &&
-      formData.q5
+      formData.q5 &&
+      (!isHighSchoolStudent ||
+        (isHighSchoolStudent &&
+          formData.certificate_firstname &&
+          formData.certificate_lastname))
     ) {
       setCanSubmit(true)
     } else {
@@ -78,7 +86,7 @@ function RouteComponent() {
 
   return (
     <>
-      <div className="to-main-pink relative flex flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+      <div className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
         {/* Decorations */}
         <img
           src="/questionaire/blue_flower.png"
@@ -201,11 +209,72 @@ function RouteComponent() {
               />
             )}
 
+            {/* Form Step Certificate */}
+            {step == lastStep - 1 && isHighSchoolStudent && (
+              <QuestionaireStepCertificate
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
+
             {/* Form Last Page */}
             {step === lastStep && <QuestionaireStepLast />}
 
-            {/* ฺForm Buttons */}
-            {step < lastStep && (
+            {/* ฺForm Buttons for Normal User */}
+            {step < lastStep && !isHighSchoolStudent && (
+              <div className="flex items-center justify-between gap-4">
+                {/* Back */}
+                <Button
+                  onClick={() => {
+                    if (step != 1) {
+                      setStep((prev) => prev - 1)
+                    }
+                  }}
+                  disabled={step == 1}
+                  size={'sm'}
+                  className={`bg-gradient-beige text-main-pink ${step == lastStep ? 'hidden' : 'block'}`}
+                >
+                  {t('routes.questionaireGroup.back')}
+                </Button>
+
+                {/* Next */}
+                <Button
+                  onClick={() => {
+                    if (step < lastStep - 2) {
+                      setStep((prev) => prev + 1)
+                    }
+                  }}
+                  disabled={step == lastStep - 2}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step < lastStep - 2 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.next')}
+                </Button>
+
+                {/* Submit */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 2 && canSubmit) {
+                      // TODO: Send Information
+
+                      console.log(formData)
+                      setStep(lastStep)
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                      })
+                    }
+                  }}
+                  disabled={!canSubmit}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step == lastStep - 2 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.submit')}
+                </Button>
+              </div>
+            )}
+
+            {step < lastStep && isHighSchoolStudent && (
               <div className="flex items-center justify-between gap-4">
                 {/* Back */}
                 <Button
@@ -242,17 +311,11 @@ function RouteComponent() {
                       // TODO: Send Information
 
                       console.log(formData)
-                      if (step == lastStep - 1) {
-                        if (shouldNavigateToCertificate) {
-                          router.navigate({ to: '/certificate' })
-                        } else {
-                          setStep((prev) => prev + 1)
-                        }
-                        window.scrollTo({
-                          top: 0,
-                          behavior: 'smooth',
-                        })
-                      }
+                      setStep((prev) => prev + 1)
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                      })
                     }
                   }}
                   disabled={!canSubmit}

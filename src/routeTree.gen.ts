@@ -14,7 +14,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
-import { Route as CertificateIndexRouteImport } from './routes/certificate/index'
 import { Route as TestNameRouteImport } from './routes/test/$name'
 import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
@@ -57,11 +56,6 @@ const GameIndexRoute = GameIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => GameRouteRoute,
-} as any)
-const CertificateIndexRoute = CertificateIndexRouteImport.update({
-  id: '/certificate/',
-  path: '/certificate/',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const TestNameRoute = TestNameRouteImport.update({
   id: '/test/$name',
@@ -156,7 +150,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
   '/test/$name': typeof TestNameRoute
-  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/test/': typeof TestIndexRoute
@@ -180,7 +173,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/test/$name': typeof TestNameRoute
-  '/certificate': typeof CertificateIndexRoute
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
   '/test': typeof TestIndexRoute
@@ -206,7 +198,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
   '/test/$name': typeof TestNameRoute
-  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/test/': typeof TestIndexRoute
@@ -233,7 +224,6 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/test/$name'
-    | '/certificate/'
     | '/game/'
     | '/questionaire/'
     | '/test/'
@@ -257,7 +247,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/test/$name'
-    | '/certificate'
     | '/game'
     | '/questionaire'
     | '/test'
@@ -282,7 +271,6 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/test/$name'
-    | '/certificate/'
     | '/game/'
     | '/questionaire/'
     | '/test/'
@@ -308,7 +296,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
   TestNameRoute: typeof TestNameRoute
-  CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   TestIndexRoute: typeof TestIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
@@ -362,13 +349,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/game/'
       preLoaderRoute: typeof GameIndexRouteImport
       parentRoute: typeof GameRouteRoute
-    }
-    '/certificate/': {
-      id: '/certificate/'
-      path: '/certificate'
-      fullPath: '/certificate/'
-      preLoaderRoute: typeof CertificateIndexRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/test/$name': {
       id: '/test/$name'
@@ -514,7 +494,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
   TestNameRoute: TestNameRoute,
-  CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   TestIndexRoute: TestIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
