@@ -1,7 +1,10 @@
 import CustomModal from '@/components/CustomModal'
+import { FlatIcon } from '@/components/FlatIcon'
 import QuestionaireStep1 from '@/components/questionaire/QuestionaireStep1'
+import QuestionaireStepCertificate from '@/components/questionaire/QuestionaireStepCertificate'
 import QuestionaireStepLast from '@/components/questionaire/QuestionaireStepLast'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +19,8 @@ export interface QuestionaireInterface {
   q4: number | null
   q5: number | null
   q6: string
+  certificate_firstname: string
+  certificate_lastname: string
 }
 
 export const Route = createFileRoute('/questionaire/')({
@@ -23,11 +28,12 @@ export const Route = createFileRoute('/questionaire/')({
 })
 
 function RouteComponent() {
-  const lastStep = 2
+  const lastStep = 3
+  const highSchool = true
 
   const { t } = useTranslation()
   const router = useRouter()
-  const [step, setStep] = useState(lastStep)
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<QuestionaireInterface>({
     q1: {
       selected: [],
@@ -38,20 +44,27 @@ function RouteComponent() {
     q4: null,
     q5: null,
     q6: '',
+    certificate_firstname: '',
+    certificate_lastname: '',
   })
+  const [canSubmitStep1, setCanSubmitStep1] = useState(false)
+  const [canSubmitStepCertificate, setCanSubmitStepCertificate] =
+    useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
 
-  // TODO: Show and Navigate to /certificate when this user is high school student
-  const [showInfoPopup, setShowInfoPopup] = useState(true)
-  const [shouldNavigateToCertificate, setShouldNavigateToCertificate] =
+  const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
+  const [openHighSchoolInformationPopup, setOpenHighSchoolInformationPopup] =
+    useState(true)
+  const [openHighSchoolConfirmationPopup, setOpenHighSchoolConfirmationPopup] =
     useState(false)
 
   // Check User Information
   useEffect(() => {
-    setShowInfoPopup(true)
-    setShouldNavigateToCertificate(false)
+    setIsHighSchoolStudent(highSchool)
+    setOpenHighSchoolInformationPopup(highSchool)
   }, [])
 
+  // Check Step 1
   useEffect(() => {
     if (
       isQ1Valid(formData.q1) &&
@@ -60,11 +73,33 @@ function RouteComponent() {
       formData.q4 &&
       formData.q5
     ) {
+      setCanSubmitStep1(true)
+    } else {
+      setCanSubmitStep1(false)
+    }
+  }, [formData])
+
+  // Check Step Certificate
+  useEffect(() => {
+    if (
+      !isHighSchoolStudent ||
+      (isHighSchoolStudent &&
+        formData.certificate_firstname &&
+        formData.certificate_lastname)
+    ) {
+      setCanSubmitStepCertificate(true)
+    } else {
+      setCanSubmitStepCertificate(false)
+    }
+  }, [formData])
+
+  useEffect(() => {
+    if (canSubmitStep1 && canSubmitStepCertificate) {
       setCanSubmit(true)
     } else {
       setCanSubmit(false)
     }
-  }, [formData])
+  }, [canSubmitStep1, canSubmitStepCertificate])
 
   const isQ1Valid = (q1: QuestionaireInterface['q1']) => {
     if (q1.selected.length === 0) return false
@@ -78,7 +113,7 @@ function RouteComponent() {
 
   return (
     <>
-      <div className="to-main-pink relative flex flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+      <div className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
         {/* Decorations */}
         <img
           src="/questionaire/blue_flower.png"
@@ -99,7 +134,9 @@ function RouteComponent() {
           className="absolute top-0 right-0"
         />
 
-        {step == lastStep && (
+        {((!isHighSchoolStudent && step == lastStep) ||
+          (isHighSchoolStudent &&
+            (step == lastStep || step == lastStep - 1))) && (
           <>
             {/* Left Road */}
             <img
@@ -191,7 +228,7 @@ function RouteComponent() {
           </h1>
 
           <div
-            className={`flex w-full flex-col gap-4 rounded-t-xl ${step != lastStep ? 'bg-white pt-6' : 'bg-transparent pt-0'} px-6 pb-6`}
+            className={`flex w-full flex-col gap-4 rounded-t-xl ${(isHighSchoolStudent && (step == lastStep || step == lastStep - 1)) || (!isHighSchoolStudent && step == lastStep) ? 'bg-transparent pt-0' : 'bg-white pt-6'} px-6 pb-6`}
           >
             {/* Form Step 1 */}
             {step === 1 && (
@@ -201,11 +238,21 @@ function RouteComponent() {
               />
             )}
 
-            {/* Form Last Page */}
-            {step === lastStep && <QuestionaireStepLast />}
+            {/* Form Step Certificate */}
+            {step == lastStep - 1 && isHighSchoolStudent && (
+              <QuestionaireStepCertificate
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
 
-            {/* ฺForm Buttons */}
-            {step < lastStep && (
+            {/* Form Last Page */}
+            {step === lastStep && (
+              <QuestionaireStepLast isHighSchoolStudent={isHighSchoolStudent} />
+            )}
+
+            {/* ฺForm Buttons for Normal User */}
+            {step < lastStep && !isHighSchoolStudent && (
               <div className="flex items-center justify-between gap-4">
                 {/* Back */}
                 <Button
@@ -224,11 +271,65 @@ function RouteComponent() {
                 {/* Next */}
                 <Button
                   onClick={() => {
-                    if (step < lastStep - 1) {
+                    if (step == 1 && canSubmitStep1) {
                       setStep((prev) => prev + 1)
                     }
                   }}
-                  disabled={step == lastStep - 1}
+                  disabled={step == 1 && !canSubmitStep1}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step < lastStep - 2 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.next')}
+                </Button>
+
+                {/* Submit */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 2 && canSubmit) {
+                      // TODO: Send Information
+
+                      console.log(formData)
+                      setStep(lastStep)
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                      })
+                    }
+                  }}
+                  disabled={!canSubmit}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step == lastStep - 2 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.submit')}
+                </Button>
+              </div>
+            )}
+
+            {/* Form Buttons for High School Student */}
+            {step < lastStep && isHighSchoolStudent && (
+              <div className="flex items-center justify-between gap-4">
+                {/* Back */}
+                <Button
+                  onClick={() => {
+                    if (step != 1) {
+                      setStep((prev) => prev - 1)
+                    }
+                  }}
+                  disabled={step == 1}
+                  size={'sm'}
+                  className={`bg-gradient-beige text-main-pink ${step == lastStep ? 'hidden' : 'block'}`}
+                >
+                  {t('routes.questionaireGroup.back')}
+                </Button>
+
+                {/* Next */}
+                <Button
+                  onClick={() => {
+                    if (step == 1 && canSubmitStep1) {
+                      setStep((prev) => prev + 1)
+                    }
+                  }}
+                  disabled={step == 1 && !canSubmitStep1}
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step < lastStep - 1 ? 'block' : 'hidden'}`}
                 >
@@ -239,20 +340,7 @@ function RouteComponent() {
                 <Button
                   onClick={() => {
                     if (step == lastStep - 1 && canSubmit) {
-                      // TODO: Send Information
-
-                      console.log(formData)
-                      if (step == lastStep - 1) {
-                        if (shouldNavigateToCertificate) {
-                          router.navigate({ to: '/certificate' })
-                        } else {
-                          setStep((prev) => prev + 1)
-                        }
-                        window.scrollTo({
-                          top: 0,
-                          behavior: 'smooth',
-                        })
-                      }
+                      setOpenHighSchoolConfirmationPopup(true)
                     }
                   }}
                   disabled={!canSubmit}
@@ -286,18 +374,87 @@ function RouteComponent() {
       </div>
 
       {/* Info Popup for High School Student */}
-      {showInfoPopup && (
+      {openHighSchoolInformationPopup && (
         <CustomModal
-          open={showInfoPopup}
-          onOpenChange={setShowInfoPopup}
+          open={openHighSchoolInformationPopup}
+          onOpenChange={setOpenHighSchoolInformationPopup}
           iconName="fi-rr-info"
           title={t('routes.questionaireGroup.infoPopup.title')}
           detail={t('routes.questionaireGroup.infoPopup.detail')}
           buttonText={t('routes.questionaireGroup.accept')}
           onClick={() => {
-            setShowInfoPopup(false)
+            setOpenHighSchoolInformationPopup(false)
           }}
         />
+      )}
+
+      {/* Confirmation Popup for High School Student */}
+      {openHighSchoolConfirmationPopup && (
+        <Dialog
+          open={openHighSchoolConfirmationPopup}
+          onOpenChange={setOpenHighSchoolConfirmationPopup}
+        >
+          <DialogContent className="flex h-fit w-[90vw] max-w-90 flex-col items-center gap-3 rounded-2xl p-6">
+            {/* Icon */}
+            <FlatIcon name="fi-rr-info" size={48} className="text-main-pink" />
+
+            {/* Title */}
+            <DialogTitle className="mt-2 text-center text-2xl font-bold text-red-500">
+              {t('routes.questionaireGroup.partCertificate.confirmation.title')}
+            </DialogTitle>
+
+            <p className="text-center text-lg font-medium text-black">
+              {t('routes.questionaireGroup.partCertificate.confirmation.body')}
+            </p>
+
+            {/* Name */}
+            <div className="border-main-pink text-main-pink h-fit min-h-9 w-full max-w-[80%] rounded-md border-2 px-3 py-1 text-center">
+              {formData.certificate_firstname +
+                ' ' +
+                formData.certificate_lastname}
+            </div>
+
+            <p className="text-center text-base font-normal text-red-500">
+              {t('routes.questionaireGroup.partCertificate.caution')}
+            </p>
+
+            {step < lastStep && isHighSchoolStudent && (
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
+                {/* Back */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 1) {
+                      setOpenHighSchoolConfirmationPopup(false)
+                    }
+                  }}
+                  disabled={step != lastStep - 1}
+                  size={'sm'}
+                  className={`bg-gradient-beige text-main-pink ${step != lastStep - 1 ? 'hidden' : 'block'}`}
+                >
+                  {t('routes.questionaireGroup.back')}
+                </Button>
+
+                {/* Submit */}
+                <Button
+                  onClick={() => {
+                    if (step == lastStep - 1 && canSubmit) {
+                      // TODO: Form Submission
+
+                      console.log(formData)
+                      setStep((prev) => prev + 1)
+                      setOpenHighSchoolConfirmationPopup(false)
+                    }
+                  }}
+                  disabled={step != lastStep - 1 || !canSubmit}
+                  size={'sm'}
+                  className={`bg-gradient-purple text-white ${step == lastStep - 1 ? 'block' : 'hidden'}`}
+                >
+                  {t('routes.questionaireGroup.submit')}
+                </Button>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       )}
     </>
   )
