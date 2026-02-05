@@ -19,12 +19,13 @@ function RouteComponent() {
         <div className="relative p-5 text-center text-white font-bold ">
           {/* Background */}
           <div className="absolute inset-0">
-            <div className="h-3/4 bg-main-pink" />
-            <div className="h-2/4 bg-linear-to-b from-main-pink to-transparent" />
+            <div className="h-1/4 bg-linear-to-t from-main-pink to-[#ECECD2]" />
+            <div className="h-1/2 bg-main-pink" />
+            <div className="h-2/3 bg-linear-to-b from-main-pink to-transparent" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center justify-center drop-shadow-lg">
+          <div className="relative mt-5 z-10 flex flex-col items-center justify-center drop-shadow-lg">
             <span className='text-3xl'>Missing Pieces</span>
             <span className='text-xl'>of my Journey</span>
           </div>
