@@ -48,7 +48,18 @@
   "routes": {
     "authGroup": {
       "loginGroup": {},
-      "profileGroup": {},
+      "profileGroup": {
+        "ticketGroup": {
+          "month": "มีนาคม 2569",
+          "chulalongkorn": "จุฬาลงกรณ์",
+          "university": "มหาวิทยาลัย",
+          "student": "นักเรียน",
+          "dreamFaculties": "คณะที่ฝันไว้",
+          "button": {
+            "home": "หน้าหลัก"
+          }
+        }
+      },
       "registerGroup": {}
     },
     "gameGroup": {

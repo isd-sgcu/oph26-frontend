@@ -1,13 +1,16 @@
-import { Plane } from "lucide-react";
-import QRCode from "react-qr-code";
-import clsx from "clsx";
+import { Plane } from 'lucide-react'
+import QRCode from 'react-qr-code'
+import clsx from 'clsx'
+import { FACULTIES } from '@/components/const/faculty'
+import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
 
 interface Props {
-  id: string,
-  firstName: string,
-  lastName: string,
-  status: boolean,
-  dreamFaculties: string[],
+  id: string
+  firstName: string
+  lastName: string
+  status: boolean
+  dreamFaculties: string[]
 }
 
 export default function Ticket({
@@ -17,83 +20,154 @@ export default function Ticket({
   status,
   dreamFaculties,
 }: Props) {
-  const isHasDream = dreamFaculties.length > 0;
+  const { t, i18n } = useTranslation()
+  const locale = i18n.language
+
+  const isHasDream = useMemo(
+    () => dreamFaculties.length > 0,
+    [dreamFaculties.length]
+  )
+
+  const mappedDreamFaculties = useMemo(() => {
+    return dreamFaculties.map((facultyCode) => {
+      const faculty = FACULTIES.find((fac) => fac.value === facultyCode)
+      const prefix = locale === 'th' ? 'คณะ' : 'Faculty of '
+      return {
+        code: facultyCode,
+        label: faculty
+          ? locale === 'th'
+            ? faculty.label.th.replace(prefix, '')
+            : faculty.label.en.replace(prefix, '')
+          : facultyCode,
+      }
+    })
+  }, [dreamFaculties, locale])
 
   return (
-    <div className="relative px-5 w-full">
-      <div className="top-20 z-30 relative drop-shadow-lg w-full">
+    <div className="relative -mt-6 w-full px-5">
+      <div className="relative top-22 z-30 w-full drop-shadow-lg">
         <img src="/logo/cu-journey.svg" alt="CU Journey" className="mx-auto" />
       </div>
 
-      {/* Ticket Body */}
-      <div
-        className="relative bg-sub-beige shadow-lg px-8 pt-14 pb-8 rounded-[2.5rem] overflow-visible"
-        style={{
-          clipPath: 'polygon(0 0, 100% 0, 100% calc(50% - 20px), calc(100% - 1rem) calc(50% - 20px), calc(100% - 1rem) calc(50% + 20px), 100% calc(50% + 20px), 100% 100%, 0 100%, 0 calc(50% + 20px), 1rem calc(50% + 20px), 1rem calc(50% - 20px), 0 calc(50% - 20px))'
-        }}
-      >
-        <div className="flex flex-col gap-3">
-          <div className="inline-block px-2 py-1 border border-[#AEAEB2] rounded-full w-fit font-medium text-[#8E8E93] text-sm">
-            CU-TICKET
-          </div>
+      <div className="mx-auto flex max-w-80 flex-col items-center justify-start overflow-hidden rounded-xl shadow-lg">
+        {/* Ticket Body */}
+        <div className="bg-sub-beige -mb-2 w-full rounded-t-xl px-6 pt-14">
+          <div className="flex flex-col gap-3">
+            <div className="inline-block w-fit rounded-full border border-[#AEAEB2] px-2 py-1 text-sm font-medium text-[#8E8E93]">
+              CU-TICKET
+            </div>
 
-          <div className="flex justify-between items-center w-full">
+            <div className="flex w-full items-center justify-between gap-3">
+              <div className="">
+                <p className="text-sm font-semibold">28-29</p>
+                <p className="text-xs font-semibold text-[#8E8E93]">
+                  {t('routes.authGroup.profileGroup.ticketGroup.month')}
+                </p>
+              </div>
+              <Plane className="rotate-45" fill="currentColor" size={20} />
+              <div className="w-fit pl-2 text-right">
+                <p className="text-sm font-semibold">
+                  {t('routes.authGroup.profileGroup.ticketGroup.chulalongkorn')}
+                </p>
+                <p className="text-xs font-semibold text-[#8E8E93]">
+                  {t('routes.authGroup.profileGroup.ticketGroup.university')}
+                </p>
+              </div>
+            </div>
+
             <div>
-              <p className="font-semibold text-sm">28-29</p>
-              <p className="font-semibold text-[#8E8E93] text-xs">March 2026</p>
+              <p className="text-xs/loose font-medium text-[#8E8E93]">
+                {t('routes.authGroup.profileGroup.ticketGroup.student')}
+              </p>
+              <h1 className="text-xl leading-tight font-semibold">
+                {firstName}
+                <br />
+                {lastName}
+              </h1>
             </div>
-            <Plane className="rotate-45" fill="currentColor" size={20} />
-            <div className="text-right">
-              <p className="font-semibold text-sm">Chulalongkorn</p>
-              <p className="font-semibold text-[#8E8E93] text-xs">University</p>
+
+            <hr
+              className={clsx(
+                isHasDream ? 'border-[#AEAEB2]' : 'border-transparent'
+              )}
+            />
+
+            <div className="min-d-62 mb-6 flex w-full items-start justify-between">
+              <div className={clsx(!isHasDream && 'invisible min-h-30')}>
+                <p className="text-xs/loose font-medium text-[#8E8E93]">
+                  {t(
+                    'routes.authGroup.profileGroup.ticketGroup.dreamFaculties'
+                  )}
+                </p>
+                {mappedDreamFaculties.map((fac, index) => (
+                  <p
+                    key={`${fac.code}-${index}`}
+                    className="text-xs font-semibold"
+                  >
+                    {fac.label}
+                  </p>
+                ))}
+              </div>
+              {status && (
+                <img
+                  src="/auth/profile/ticket/landing/scanned.svg"
+                  alt=""
+                  className="absolute right-10 w-35"
+                  loading="lazy"
+                />
+              )}
             </div>
-          </div>
-
-          <div>
-            <p className="font-medium text-[#8E8E93] text-xs/loose">Student</p>
-            <h1 className="font-semibold text-xl leading-tight">
-              {firstName}<br />{lastName}
-            </h1>
-          </div>
-
-          <hr className={clsx(isHasDream ? "border-[#AEAEB2]" : "border-transparent")} />
-
-          <div className="flex justify-between items-start w-full">
-            <div className={clsx(!isHasDream && "invisible min-h-30")}>
-              <p className="font-medium text-[#8E8E93] text-xs/loose">Dream Faculties</p>
-              {
-                dreamFaculties.map((role) => {
-                  return (
-                    <p key={role} className="font-semibold text-xs">{role}</p>
-                  )
-                })
-              }
-            </div>
-            {
-              status && (<img src="/auth/profile/ticket/landing/scanned.svg" alt="" className="right-10 absolute w-35" />)
-            }
           </div>
         </div>
 
         {/* Perforated Divider */}
-        <div className="relative -mx-10 my-10">
-          <div className="border-[#B0B0B0] border-t-2 border-dashed w-full" />
-        </div>
+        <svg
+          width="100%"
+          height="50"
+          className="block"
+          viewBox="0 0 320 50"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <mask id="ticket-cutout">
+              <rect width="100%" height="100%" fill="white" />
+              <circle cx="0" cy="25" r="15" fill="black" />
+              <circle cx="320" cy="25" r="15" fill="black" />
+            </mask>
+          </defs>
+          <rect
+            width="100%"
+            height="100%"
+            fill="#fff8ef"
+            mask="url(#ticket-cutout)"
+          />
+          <line
+            x1="15"
+            y1="25"
+            x2="305"
+            y2="25"
+            stroke="#B0B0B0"
+            strokeWidth="2"
+            strokeDasharray="9,8"
+          />
+        </svg>
 
         {/* QR Code Section */}
-        <div className="flex flex-col items-center gap-2.5 pt-3">
-          <QRCode
-            size={256}
-            style={{ height: "auto", maxWidth: "300px", width: "90%" }}
-            value={id}
-            viewBox={`0 0 256 256`}
-            bgColor={"#fff8ef"}
-            fgColor={"#000"}
-            level={"H"}
-          />
-          <p className="font-medium text-sm">{'ID' + id}</p>
+        <div className="bg-sub-beige -mt-2 w-full rounded-b-xl px-6 pt-4 pb-6">
+          <div className="flex flex-col items-center gap-2.5 pt-3">
+            <QRCode
+              size={256}
+              style={{ height: 'auto', maxWidth: '300px', width: '90%' }}
+              value={id}
+              viewBox={`0 0 256 256`}
+              bgColor={'#fff8ef'}
+              fgColor={'#000'}
+              level={'H'}
+            />
+            <p className="text-sm font-medium">ID{id}</p>
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
