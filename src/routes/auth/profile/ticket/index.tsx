@@ -13,24 +13,24 @@ function RouteComponent() {
   const { t } = useTranslation()
 
   return (
-    <div className="relative h-full min-h-dvh w-full p-5">
+    <div className="relative p-5 w-full h-full min-h-dvh">
       <img
         src="/background/ticket-background.png"
         alt=""
-        className="absolute inset-0 z-0 h-full w-full object-cover"
+        className="z-0 absolute inset-0 w-full h-full object-cover"
       />
-      <div className="relative z-10 flex flex-col items-center justify-center gap-5">
+      <div className="z-10 relative flex flex-col justify-center items-center gap-5">
         {/* --- Ticket Container --- */}
         <Ticket
           id="1234567890"
           firstName="Phakpong"
           lastName="Thaveepanya"
           status={true}
-          dreamFaculties={[]}
+          dreamFaculties={['ENG', 'SCI', 'edu', 'MD']}
         />
 
         {/* --- Footer Buttons --- */}
-        <div className="flex w-full flex-wrap items-center justify-center gap-6">
+        <div className="flex flex-wrap justify-center items-center gap-6 w-full">
           <Button
             size={'lg'}
             className="bg-main-beige text-main-pink"
