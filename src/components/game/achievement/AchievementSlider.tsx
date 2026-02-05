@@ -59,7 +59,7 @@ export default function AchievementSlider({ children }: AchievementSliderProps) 
       </div>
 
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {Array.from({ length: childCount }).map((_, index) => (
           <span
             key={index}

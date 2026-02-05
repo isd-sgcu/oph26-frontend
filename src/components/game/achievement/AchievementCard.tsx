@@ -20,6 +20,7 @@ type Var3Props = BaseProps & {
 
 type OverallProps = BaseProps & {
   variant: "overall"
+  miniCard1Faculty: string
   miniCard1Count: number
   miniCard2Rank: number
 }
@@ -36,7 +37,7 @@ export default function AchievementCard(props: AchievementCardProps) {
 
     return (
         // !!!!!!!!!!!!!!!SET MAX WIDTH TO SYSTEM 80% MAX WIDTH !!!!!!!!!!!!!!!
-        <div className="relative w-[80vw] max-w-84 h-full mx-auto rounded-2xl bg-white p-8 shadow-sm flex flex-col items-center justify-center">
+        <div className="relative w-[80vw] max-w-84 h-[85%] mx-auto rounded-2xl bg-white p-8 shadow-sm flex flex-col items-center justify-center">
             <div className="flex flex-col w-full gap-5 text-center justify-center items-center">
                 {/* title */}
                 <h3 className="text-2xl font-semibold">
@@ -87,13 +88,13 @@ export default function AchievementCard(props: AchievementCardProps) {
                     </span>
 
                     <div className="flex h-26 w-26 items-center justify-center rounded-full bg-gradient-beige">
-                        <span className="text-5xl text-main-pink">
-                        {props.miniCard1Count}
+                        <span className="text-3xl text-main-pink">
+                        {props.miniCard1Faculty}
                         </span>
                     </div>
 
                     <div className="flex h-26 w-26 items-center justify-center rounded-full bg-gradient-beige">
-                        <span className="text-5xl text-main-pink">
+                        <span className="text-3xl text-main-pink">
                         {props.miniCard2Rank}
                         </span>
                     </div>

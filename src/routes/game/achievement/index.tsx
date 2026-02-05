@@ -28,6 +28,7 @@ function RouteComponent() {
   {
     variant: "overall",
     stat: 99,
+    miniCard1Faculty: "Sci",
     miniCard1Count: 42,
     miniCard2Rank: 3,
   },
