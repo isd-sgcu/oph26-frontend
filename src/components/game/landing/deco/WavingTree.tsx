@@ -4,6 +4,7 @@ import pinkPointy from '@/assets/game/deco/tree/pink-pointy-tree.svg'
 import pinkRound from '@/assets/game/deco/tree/pink-round-tree.svg'
 import purpleCurly from '@/assets/game/deco/tree/purple-curly-tree.svg'
 import purplePointy from '@/assets/game/deco/tree/purple-pointy-tree.svg'
+import { useEffect, useState } from 'react'
 
 export type TreeVariant =
   | 'green-round'
@@ -26,8 +27,17 @@ export default function WavingTree({
     variant?: TreeVariant
     flip?: boolean
 }) {
-    const delay = -(Math.random() * 5)
-    const duration = 4 + Math.random() * 3
+    const [style, setStyle] = useState<React.CSSProperties | undefined>(undefined)
+
+    useEffect(() => {
+        const delay = -(Math.random() * 5)
+        const duration = 4 + Math.random() * 3
+
+        setStyle({
+        animationDelay: `${delay}s`,
+        animationDuration: `${duration}s`,
+        })
+    }, [])
 
     const TREE_MAP: Record<TreeVariant, string> = {
       'green-round': greenRound,
@@ -52,10 +62,7 @@ export default function WavingTree({
             x={-28.5}
             y={-144}
             className="tree-sway"
-            style={{
-                animationDelay: `${delay}s`,
-                animationDuration: `${duration}s`,
-            }}
+            style={style}
             />
         </g>
         </g>

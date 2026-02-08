@@ -303,3 +303,24 @@
   60% { transform: translateY(0.5px); }
   100% { transform: translateY(0); }
 }
+
+.grass {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+/* sway left (user scrolls right) */
+@keyframes grass-sway-left {
+  0% { transform: rotate(0deg); }
+  40% { transform: rotate(-4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* sway right (user scrolls left) */
+@keyframes grass-sway-right {
+  0% { transform: rotate(0deg); }
+  40% { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+
