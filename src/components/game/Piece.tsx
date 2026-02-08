@@ -3,7 +3,7 @@ import { FacultyType } from '../const/faculty'
 
 export type PieceVariant = 1 | 2 | 3 | 4 | 5 | 6
 
-interface PieceProps {
+export interface PieceProps {
   faculty?: FacultyType
   variant?: PieceVariant
   count?: number
@@ -78,7 +78,7 @@ export const Piece: React.FC<PieceProps> = ({
       style={{ width: size, height: size }}
     >
       <svg
-        viewBox="0 0 100 100"
+        viewBox="-20 -20 140 140"
         className="block h-full w-full overflow-visible"
       >
         <defs>
