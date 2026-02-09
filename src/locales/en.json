@@ -44,7 +44,18 @@
   "routes": {
     "authGroup": {
       "loginGroup": {},
-      "profileGroup": {},
+      "profileGroup": {
+        "ticketGroup": {
+          "month": "March 2026",
+          "chulalongkorn": "Chulalongkorn",
+          "university": "University",
+          "student": "Student",
+          "dreamFaculties": "Dream Faculties",
+          "button": {
+            "home": "Home"
+          }
+        }
+      },
       "registerGroup": {}
     },
     "gameGroup": {
