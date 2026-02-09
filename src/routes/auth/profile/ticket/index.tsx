@@ -30,7 +30,7 @@ function RouteComponent() {
         />
 
         {/* --- Footer Buttons --- */}
-        <div className="flex flex-wrap justify-center items-center gap-6 w-full">
+        <div className="flex flex-wrap justify-center items-center gap-6 pb-5 w-full">
           <Button
             size={'lg'}
             className="bg-main-beige text-main-pink"
