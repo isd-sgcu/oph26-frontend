@@ -100,16 +100,15 @@ export default function Header() {
         {/* Right menu */}
         <div className="flex items-center gap-4">
           {/* Lang */}
-          <div className="flex overflow-hidden rounded-lg shadow-sm">
+          <div className="flex shadow-sm rounded-lg overflow-hidden">
             {['th', 'en'].map((lng) => (
               <button
                 key={lng}
                 onClick={() => i18n.changeLanguage(lng)}
-                className={`px-3 py-2 text-sm font-bold transition ${
-                  i18n.language === lng
-                    ? 'bg-main-pink cursor-default text-white'
-                    : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
-                }`}
+                className={`px-3 py-2 text-sm font-bold transition ${i18n.language === lng
+                  ? 'bg-main-pink cursor-default text-white'
+                  : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
+                  }`}
               >
                 {lng.toUpperCase()}
               </button>
@@ -159,7 +158,7 @@ export default function Header() {
               </div>
 
               {/* Navigation */}
-              <nav className="mb-10 flex flex-col gap-10">
+              <nav className="flex flex-col gap-10 mb-10">
                 {navItems.map((item) => (
                   <Link
                     key={item.title}
@@ -175,7 +174,7 @@ export default function Header() {
                       size={24}
                       className="text-main-pink"
                     />
-                    <span className="text-xl font-bold">
+                    <span className="font-bold text-xl">
                       {t(`components.header.sidebar.${item.title}`)}
                     </span>
                   </Link>
@@ -183,7 +182,7 @@ export default function Header() {
               </nav>
 
               {/* Buttons */}
-              <div className="mt-auto flex flex-col items-center justify-center gap-4">
+              <div className="flex flex-col justify-center items-center gap-4 mt-auto">
                 <Button
                   size="sm"
                   className="bg-main-beige"
