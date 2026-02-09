@@ -49,7 +49,7 @@ function RouteComponent() {
       </div>
       <img
         alt=""
-        src="/auth/qr/background.png"
+        src="/auth/qr/decoration.webp"
         className="bottom-0 left-0 absolute w-full pointer-events-none select-none"
       />
     </div>
