@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
+import { Route as CertificateIndexRouteImport } from './routes/certificate/index'
 import { Route as TestNameRouteImport } from './routes/test/$name'
 import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
@@ -30,6 +31,7 @@ import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/w
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
 import { Route as AuthStaffOnboardingIndexRouteImport } from './routes/auth/staff/onboarding/index'
 import { Route as AuthStaffLoginIndexRouteImport } from './routes/auth/staff/login/index'
+import { Route as AuthProfileTicketIndexRouteImport } from './routes/auth/profile/ticket/index'
 import { Route as AuthProfileEditIndexRouteImport } from './routes/auth/profile/edit/index'
 
 const GameRouteRoute = GameRouteRouteImport.update({
@@ -56,6 +58,11 @@ const GameIndexRoute = GameIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => GameRouteRoute,
+} as any)
+const CertificateIndexRoute = CertificateIndexRouteImport.update({
+  id: '/certificate/',
+  path: '/certificate/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const TestNameRoute = TestNameRouteImport.update({
   id: '/test/$name',
@@ -140,6 +147,11 @@ const AuthStaffLoginIndexRoute = AuthStaffLoginIndexRouteImport.update({
   path: '/auth/staff/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthProfileTicketIndexRoute = AuthProfileTicketIndexRouteImport.update({
+  id: '/auth/profile/ticket/',
+  path: '/auth/profile/ticket/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthProfileEditIndexRoute = AuthProfileEditIndexRouteImport.update({
   id: '/auth/profile/edit/',
   path: '/auth/profile/edit/',
@@ -150,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
   '/test/$name': typeof TestNameRoute
+  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/test/': typeof TestIndexRoute
@@ -165,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
   '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
   '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
@@ -173,6 +187,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/test/$name': typeof TestNameRoute
+  '/certificate': typeof CertificateIndexRoute
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
   '/test': typeof TestIndexRoute
@@ -188,6 +203,7 @@ export interface FileRoutesByTo {
   '/info/workshop': typeof InfoWorkshopIndexRoute
   '/test/component': typeof TestComponentIndexRoute
   '/auth/profile/edit': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login': typeof AuthStaffLoginIndexRoute
   '/auth/staff/onboarding': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId': typeof InfoFacultyFacultyIdIndexRoute
@@ -198,6 +214,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
   '/test/$name': typeof TestNameRoute
+  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/test/': typeof TestIndexRoute
@@ -213,6 +230,7 @@ export interface FileRoutesById {
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/test/component/': typeof TestComponentIndexRoute
   '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
   '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
@@ -224,6 +242,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/test/$name'
+    | '/certificate/'
     | '/game/'
     | '/questionaire/'
     | '/test/'
@@ -239,6 +258,7 @@ export interface FileRouteTypes {
     | '/info/workshop/'
     | '/test/component/'
     | '/auth/profile/edit/'
+    | '/auth/profile/ticket/'
     | '/auth/staff/login/'
     | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
@@ -247,6 +267,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/test/$name'
+    | '/certificate'
     | '/game'
     | '/questionaire'
     | '/test'
@@ -262,6 +283,7 @@ export interface FileRouteTypes {
     | '/info/workshop'
     | '/test/component'
     | '/auth/profile/edit'
+    | '/auth/profile/ticket'
     | '/auth/staff/login'
     | '/auth/staff/onboarding'
     | '/info/faculty/$facultyId'
@@ -271,6 +293,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/test/$name'
+    | '/certificate/'
     | '/game/'
     | '/questionaire/'
     | '/test/'
@@ -286,6 +309,7 @@ export interface FileRouteTypes {
     | '/info/workshop/'
     | '/test/component/'
     | '/auth/profile/edit/'
+    | '/auth/profile/ticket/'
     | '/auth/staff/login/'
     | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
@@ -296,6 +320,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
   TestNameRoute: typeof TestNameRoute
+  CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   TestIndexRoute: typeof TestIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
@@ -307,6 +332,7 @@ export interface RootRouteChildren {
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
   TestComponentIndexRoute: typeof TestComponentIndexRoute
   AuthProfileEditIndexRoute: typeof AuthProfileEditIndexRoute
+  AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
   AuthStaffLoginIndexRoute: typeof AuthStaffLoginIndexRoute
   AuthStaffOnboardingIndexRoute: typeof AuthStaffOnboardingIndexRoute
   InfoFacultyFacultyIdIndexRoute: typeof InfoFacultyFacultyIdIndexRoute
@@ -349,6 +375,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/game/'
       preLoaderRoute: typeof GameIndexRouteImport
       parentRoute: typeof GameRouteRoute
+    }
+    '/certificate/': {
+      id: '/certificate/'
+      path: '/certificate'
+      fullPath: '/certificate/'
+      preLoaderRoute: typeof CertificateIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/test/$name': {
       id: '/test/$name'
@@ -462,6 +495,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthStaffLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/profile/ticket/': {
+      id: '/auth/profile/ticket/'
+      path: '/auth/profile/ticket'
+      fullPath: '/auth/profile/ticket/'
+      preLoaderRoute: typeof AuthProfileTicketIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/profile/edit/': {
       id: '/auth/profile/edit/'
       path: '/auth/profile/edit'
@@ -494,6 +534,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
   TestNameRoute: TestNameRoute,
+  CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   TestIndexRoute: TestIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
@@ -505,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
   TestComponentIndexRoute: TestComponentIndexRoute,
   AuthProfileEditIndexRoute: AuthProfileEditIndexRoute,
+  AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
   AuthStaffLoginIndexRoute: AuthStaffLoginIndexRoute,
   AuthStaffOnboardingIndexRoute: AuthStaffOnboardingIndexRoute,
   InfoFacultyFacultyIdIndexRoute: InfoFacultyFacultyIdIndexRoute,

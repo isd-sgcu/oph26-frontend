@@ -16,49 +16,38 @@
   --color-sub-purple: #a776b4;
   --color-sub-light-green: #40c3a3;
   --color-sub-green: #209975;
+  --color-sub-beige: #fff8ef;
   --color-black: #2a2a2a;
   --color-grey: #afafaf;
   --color-white: #ffffff;
 
-  --background-image-gradient-pink: linear-gradient(
-    to bottom,
-    #f6acd2,
-    #f481b4
-  );
+  --background-image-gradient-pink: linear-gradient(to bottom,
+      #f6acd2,
+      #f481b4);
 
   --background-image-gradient-pink-oval: radial-gradient(#f6acd2, #f481b4);
 
-  --background-image-gradient-beige: linear-gradient(
-    to bottom,
-    #fafae6,
-    #ececd2
-  );
+  --background-image-gradient-beige: linear-gradient(to bottom,
+      #fafae6,
+      #ececd2);
 
-  --background-image-gradient-purple: linear-gradient(
-    to bottom,
-    #80a7da 0%,
-    #6c74ac 65%,
-    #985aa9 100%
-  );
+  --background-image-gradient-purple: linear-gradient(to bottom,
+      #80a7da 0%,
+      #6c74ac 65%,
+      #985aa9 100%);
 
-  --background-image-gradient-green: linear-gradient(
-    to bottom,
-    #fdeb79 0%,
-    #40c3a3 75%,
-    #209975 100%
-  );
+  --background-image-gradient-green: linear-gradient(to bottom,
+      #fdeb79 0%,
+      #40c3a3 75%,
+      #209975 100%);
 
-  --background-image-gradient-blue: linear-gradient(
-    to bottom,
-    #5faacd,
-    #5a7ead
-  );
+  --background-image-gradient-blue: linear-gradient(to bottom,
+      #5faacd,
+      #5a7ead);
 
-  --background-image-gradient-beige-darker: linear-gradient(
-    to bottom,
-    #fafae6,
-    #ffd285
-  );
+  --background-image-gradient-beige-darker: linear-gradient(to bottom,
+      #fafae6,
+      #ffd285);
 }
 
 * {
@@ -111,6 +100,7 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
@@ -120,6 +110,7 @@
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
@@ -202,6 +193,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -211,6 +203,7 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -220,6 +213,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -229,6 +223,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -238,6 +233,7 @@
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
