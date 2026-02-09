@@ -84,7 +84,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-transparent p-4">
+      <header className="fixed top-0 left-0 z-49 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] from-40% to-transparent p-4">
         {/* Logo */}
         <img
           src="/logo.svg"
@@ -98,18 +98,17 @@ export default function Header() {
         />
 
         {/* Right menu */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {/* Lang */}
-          <div className="flex overflow-hidden rounded-lg shadow-sm">
+          <div className="flex shadow-sm rounded-lg overflow-hidden">
             {['th', 'en'].map((lng) => (
               <button
                 key={lng}
                 onClick={() => i18n.changeLanguage(lng)}
-                className={`px-3 py-2 text-sm font-bold transition ${
-                  i18n.language === lng
-                    ? 'bg-main-pink cursor-default text-white'
-                    : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
-                }`}
+                className={`px-3 py-2 text-sm font-bold transition ${i18n.language === lng
+                  ? 'bg-main-pink cursor-default text-white'
+                  : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
+                  }`}
               >
                 {lng.toUpperCase()}
               </button>
@@ -140,7 +139,7 @@ export default function Header() {
 
             {/* Sidebar Panel */}
             <div
-              className={`fixed top-0 z-50 flex h-full min-h-screen w-full max-w-[var(--width-page)] -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
+              className={`fixed top-0 z-50 flex h-full min-h-screen w-full max-w-(--width-page) -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
             >
               {/* Header */}
               <div className="flex items-center">
@@ -159,7 +158,7 @@ export default function Header() {
               </div>
 
               {/* Navigation */}
-              <nav className="mb-10 flex flex-col gap-10">
+              <nav className="flex flex-col gap-10 mb-10">
                 {navItems.map((item) => (
                   <Link
                     key={item.title}
@@ -175,7 +174,7 @@ export default function Header() {
                       size={24}
                       className="text-main-pink"
                     />
-                    <span className="text-xl font-bold">
+                    <span className="font-bold text-xl">
                       {t(`components.header.sidebar.${item.title}`)}
                     </span>
                   </Link>
@@ -183,7 +182,7 @@ export default function Header() {
               </nav>
 
               {/* Buttons */}
-              <div className="mt-auto flex flex-col items-center justify-center gap-4">
+              <div className="flex flex-col justify-center items-center gap-4 mt-auto">
                 <Button
                   size="sm"
                   className="bg-main-beige"
