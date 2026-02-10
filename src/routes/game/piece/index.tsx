@@ -23,6 +23,10 @@ function RouteComponent() {
   )
 
   useEffect(() => {
+    setMyFaculty(FACULTIES[Math.floor(Math.random() * FACULTIES.length)].value)
+  }, [])
+
+  useEffect(() => {
     return () => {
       if (copyTimeoutRef.current) {
         clearTimeout(copyTimeoutRef.current)
