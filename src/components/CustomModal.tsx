@@ -7,10 +7,10 @@ interface CustomModalProps {
   onOpenChange: (open: boolean) => void
 
   iconName?: string // Note: fi-rr-*
-  title: string
-  subtitle?: string
-  body?: string
-  detail?: string
+  title: string | React.ReactNode
+  subtitle?: string | React.ReactNode
+  body?: string | React.ReactNode
+  detail?: string | React.ReactNode
 
   buttonText: string
   onClick: () => void
@@ -41,25 +41,34 @@ const CustomModal = ({
         </DialogTitle>
 
         {/* Subtitle */}
-        {subtitle && (
-          <p className="text-grey text-center text-sm font-normal">
-            {subtitle}
-          </p>
-        )}
+        {subtitle &&
+          (typeof subtitle === 'string' ? (
+            <p className="text-grey text-center text-sm font-normal">
+              {subtitle}
+            </p>
+          ) : (
+            subtitle
+          ))}
 
         {/* Body */}
-        {body && (
-          <p className="mt-2 text-center text-xl font-semibold text-black">
-            {body}
-          </p>
-        )}
+        {body &&
+          (typeof body === 'string' ? (
+            <p className="mt-2 text-center text-xl font-semibold text-black">
+              {body}
+            </p>
+          ) : (
+            body
+          ))}
 
         {/* Detail */}
-        {detail && (
-          <p className="text-center text-base font-medium text-black">
-            {detail}
-          </p>
-        )}
+        {detail &&
+          (typeof detail === 'string' ? (
+            <p className="text-center text-base font-medium text-black">
+              {detail}
+            </p>
+          ) : (
+            detail
+          ))}
 
         {/* Button */}
         <Button
