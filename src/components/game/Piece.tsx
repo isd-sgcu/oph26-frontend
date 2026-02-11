@@ -1,7 +1,7 @@
 import React from 'react'
 import { FacultyType } from '../const/faculty'
 
-export type PieceVariant = 1 | 2 | 3 | 4 | 5 | 6
+export type PieceVariant = 1 | 2 | 4 | 5 | 6
 
 export interface PieceProps {
   faculty?: FacultyType
@@ -43,10 +43,6 @@ const JIGSAW_PATH: Record<PieceVariant, string> = {
     V40 C100 42,100 58,90 60 V90 
     H10
     V60 C0 58,0 42,10 40 Z`,
-  3: `M10 10 H40 C42 0,58 0,60 10 H90
-    V40 C78 42,78 58,90 60 V90
-    H60 C58 78,42 78,40 90 H10 
-    V60 C22 58,22 42,10 40 Z`,
   4: `M10 10 H40 C42 20,58 20,60 10 H90
     V40 C100 42,100 58,90 60 V90  
     H60 C58 100,42 100,40 90 H10 
@@ -66,7 +62,6 @@ export const Piece: React.FC<PieceProps> = ({
   variant = 1,
   count = 0,
   size = 120,
-  bgClassName = 'bg-gradient-pink-oval',
 }) => {
   const clipId = `piece-${faculty ?? 'none'}-${variant}`
   const imageSrc = faculty ? FACULTY_IMAGE[faculty] : undefined
@@ -98,17 +93,12 @@ export const Piece: React.FC<PieceProps> = ({
         </defs>
 
         {(!imageSrc || count == 0) && (
-          <>
-            <foreignObject
-              width="100"
-              height="100"
-              clipPath={`url(#${clipId})`}
-            >
-              <div
-                className={`h-full w-full ${bgClassName} inset-shadow-[16px_16px_4px_rgba(0,0,0,0.3)]`}
-              />
-            </foreignObject>
-          </>
+          <image
+            href={`/game/piece/blank${variant}.png`}
+            width="100"
+            height="100"
+            preserveAspectRatio="xMidYMid"
+          />
         )}
 
         {imageSrc && count != 0 && (

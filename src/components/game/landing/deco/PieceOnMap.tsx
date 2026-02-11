@@ -1,4 +1,4 @@
-import { Piece, PieceProps } from "@/components/game/Piece"
+import { Piece, PieceProps } from '@/components/game/Piece'
 
 type PieceOnMapProps = PieceProps & {
   x: number
@@ -13,22 +13,18 @@ export default function PieceOnMap({
   ...pieceProps
 }: PieceOnMapProps) {
   const size = pieceProps.size ?? 120
-  
 
   return (
     <g transform={`translate(${x}, ${y}) scale(${scale})`}>
-        <foreignObject   
-        x={-size / 2}
-        y={-size / 2}
-        width={size}
-        height={size}
+      <foreignObject x={-size / 2} y={-size / 2} width={size} height={size}>
+        <div
+          {...({
+            xmlns: 'http://www.w3.org/1999/xhtml',
+          } as unknown as React.HTMLAttributes<HTMLDivElement>)}
         >
-            <div
-                {...({ xmlns: 'http://www.w3.org/1999/xhtml' } as unknown as React.HTMLAttributes<HTMLDivElement>)}
-            >
-                <Piece {...pieceProps} size={size} />
-            </div>
-        </foreignObject>
+          <Piece {...pieceProps} size={size} />
+        </div>
+      </foreignObject>
     </g>
   )
 }

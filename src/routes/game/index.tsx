@@ -10,25 +10,25 @@ function RouteComponent() {
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
-      <div className="absolute inset-0 z-0 top-15">
+      <div className="absolute inset-0 top-15 z-0">
         <GameMap />
       </div>
 
       {/* UI */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 z-10">
         {/* Header */}
-        <div className="relative p-5 text-center text-white font-bold ">
+        <div className="relative p-5 text-center font-bold text-white">
           {/* Background */}
           <div className="absolute inset-0">
-            <div className="h-1/4 bg-linear-to-t from-main-pink to-[#ECECD2]" />
-            <div className="h-1/2 bg-main-pink" />
-            <div className="h-2/3 bg-linear-to-b from-main-pink to-transparent" />
+            <div className="from-main-pink h-1/4 bg-linear-to-t to-[#ECECD2]" />
+            <div className="bg-main-pink h-1/2" />
+            <div className="from-main-pink h-2/3 bg-linear-to-b to-transparent" />
           </div>
 
           {/* Content */}
-          <div className="relative mt-5 z-10 flex flex-col items-center justify-center drop-shadow-lg">
-            <span className='text-3xl'>Missing Pieces</span>
-            <span className='text-xl'>of my Journey</span>
+          <div className="relative z-10 mt-5 flex flex-col items-center justify-center drop-shadow-lg">
+            <span className="text-3xl">Missing Pieces</span>
+            <span className="text-xl">of my Journey</span>
           </div>
         </div>
 
@@ -40,7 +40,7 @@ function RouteComponent() {
             img.src = dataUrl
             document.body.appendChild(img) // temporary!
           }}
-          className="absolute bottom-35 left-1/2 transform -translate-x-1/2 z-10 px-4 py-2 bg-white text-black rounded-md pointer-events-auto"
+          className="pointer-events-auto absolute bottom-35 left-1/2 z-10 -translate-x-1/2 transform rounded-md bg-white px-4 py-2 text-black"
         >
           TEST SNAPSHOT
         </button>
