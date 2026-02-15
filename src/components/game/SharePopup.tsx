@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { captureGameMap } from '@/utils/captureMap'
 import { Button } from '../ui/button'
 import { FlatIcon } from '../FlatIcon'
-import { processWatermarkTemplate } from '@/utils/shareTemplates'
+import { processWatermarkTemplate, processFramedTemplate } from '@/utils/shareTemplates'
 
 type Props = {
   open: boolean
@@ -29,7 +29,8 @@ const GameSharePopup = ({ open, onClose }: Props) => {
         img,
         '/logo.svg'
         )
-      setImage(watermark)
+      const framed = await processFramedTemplate(img, 'N\'Jaramed', '8', '/background/shareTemplate1.svg', '/logo.svg')
+      setImage(framed)
     } catch (err) {
       console.error(err)
     } finally {
