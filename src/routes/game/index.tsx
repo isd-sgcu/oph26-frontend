@@ -1,12 +1,12 @@
 import GameMap from '@/components/game/landing/GameMap'
 import { createFileRoute } from '@tanstack/react-router'
-import { captureGameMap } from '@/utils/captureMap'
 
 export const Route = createFileRoute('/game/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
@@ -32,18 +32,6 @@ function RouteComponent() {
           </div>
         </div>
 
-        <button
-          onClick={async () => {
-            const dataUrl = await captureGameMap()
-            console.log('SUCCESS', dataUrl)
-            const img = new Image()
-            img.src = dataUrl
-            document.body.appendChild(img) // temporary!
-          }}
-          className="pointer-events-auto absolute bottom-35 left-1/2 z-10 -translate-x-1/2 transform rounded-md bg-white px-4 py-2 text-black"
-        >
-          TEST SNAPSHOT
-        </button>
       </div>
     </div>
   )

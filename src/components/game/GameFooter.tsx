@@ -3,6 +3,7 @@ import { Button } from '../ui/button'
 import { FlatIcon } from '../FlatIcon'
 import { useEffect, useState } from 'react'
 import RedeemCodePopup from './RedeemCodePopup'
+import SharePopup from './SharePopup'
 import { useTranslation } from 'react-i18next'
 
 const GameFooter = () => {
@@ -11,6 +12,7 @@ const GameFooter = () => {
   const { t } = useTranslation()
 
   const [openRedeemCodePopup, setOpenRedeemCodePopup] = useState(false)
+  const [openSharePopup, setOpenSharePopup] = useState(false)
   const [isWrap, setIsWrap] = useState(false)
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const GameFooter = () => {
         className={` ${location.pathname !== '/game' ? 'hidden' : ''} ${isWrap ? 'bottom-25 scale-75' : 'bottom-30 scale-100'} bg-gradient-pink absolute right-6`}
         size="icon"
         onClick={() => {
-          router.navigate({ to: '/game/share' })
+          setOpenSharePopup(true)
         }}
       >
         <FlatIcon name="fi-rr-share" size={20} className="text-white" />
@@ -94,6 +96,13 @@ const GameFooter = () => {
           </div>
         </div>
       </footer>
+
+      {openSharePopup && (
+        <SharePopup 
+          open={openSharePopup} 
+          onClose={() => setOpenSharePopup(false)} 
+        />
+      )}
 
       {openRedeemCodePopup && (
         <RedeemCodePopup
