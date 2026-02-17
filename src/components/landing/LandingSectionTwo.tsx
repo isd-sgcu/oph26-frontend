@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "../ui/button"
+import { Button } from "../ui/button";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function LandingSectionTwo() {
   const { t } = useTranslation();
   const isRoleStudent = true;
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate({ to: path })
+  }
 
   return (
     <div className="flex flex-col w-full">
@@ -27,6 +33,7 @@ export default function LandingSectionTwo() {
             <button
               className="top-[6%] left-[2%] z-10 absolute flex flex-col justify-center items-center gap-1"
               aria-label="Faculties"
+              onClick={() => handleNavigation('/info/faculty')}
             >
               <img
                 src="/landing/trees.svg"
@@ -42,6 +49,7 @@ export default function LandingSectionTwo() {
             <button
               className="top-[11%] right-[10%] z-10 absolute flex flex-col justify-center items-center gap-1"
               aria-label="Flowers"
+              onClick={() => handleNavigation('/info/event')}
             >
               <img
                 src="/landing/flowers.svg"
@@ -57,6 +65,7 @@ export default function LandingSectionTwo() {
             <button
               className="top-[34%] left-[37%] z-10 absolute flex flex-col justify-center items-center -translate-x-1/2"
               aria-label="Workshop"
+              onClick={() => handleNavigation('/info/workshop')}
             >
               <img
                 src="/landing/rocks.svg"
@@ -72,6 +81,7 @@ export default function LandingSectionTwo() {
             <button
               className="top-[65%] left-[4%] z-10 absolute flex flex-col justify-center items-center"
               aria-label="Souvenir"
+              onClick={() => handleNavigation('/info/merchandise')}
             >
               <img
                 src="/landing/bush.svg"
@@ -89,6 +99,7 @@ export default function LandingSectionTwo() {
                 <button
                   className="top-[53%] left-[56%] z-10 absolute flex flex-col justify-center items-center gap-1"
                   aria-label="Missing Pieces"
+                  onClick={() => handleNavigation('/game/piece')}
                 >
                   <img
                     src="/landing/jigsaws.svg"
@@ -119,7 +130,10 @@ export default function LandingSectionTwo() {
       </div>
 
       <div className='flex justify-center items-center bg-main-pink bg-pink py-8 w-full'>
-        <Button className='bg-main-beige text-main-pink'>{t('routes.landingGroup.buttonGroup.agenda')}</Button>
+        <Button
+          className='bg-main-beige text-main-pink'
+          onClick={() => handleNavigation('/agenda')}
+        >{t('routes.landingGroup.buttonGroup.agenda')}</Button>
       </div>
     </div>
   )
