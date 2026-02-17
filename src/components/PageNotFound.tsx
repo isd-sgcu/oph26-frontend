@@ -15,12 +15,12 @@ const PageNotFound = () => {
   if (!mounted) return null
 
   return (
-    <div className="to-main-pink relative flex-1 overflow-hidden bg-linear-to-b from-[#ECECD2] to-10%">
+    <div className="relative flex-1 bg-linear-to-b from-[#ECECD2] to-10% to-main-pink overflow-hidden">
       {/* Oval background */}
       <div
-        className="bg-gradient-pink-oval pointer-events-none absolute z-0 rounded-full opacity-80 blur-xs"
+        className="z-0 absolute bg-gradient-pink-oval opacity-80 blur-xs rounded-full pointer-events-none"
         style={{
-          width: 'clamp(425px, 425px, 425px)',
+          width: 'clamp(var(--width-page), var(--width-page), var(--width-page))',
           aspectRatio: '1 / 1',
           top: '50%',
           left: '50%',
@@ -55,12 +55,12 @@ const PageNotFound = () => {
       />
 
       {/* Content  */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 py-6">
+      <div className="z-10 relative flex flex-col justify-center items-center px-4 py-6 h-full">
         {/* Logo */}
         <img src="/logo.svg" alt="Logo" width={288.38} height={167.17} />
 
         {/* Text */}
-        <h1 className="mb-10 text-center text-5xl font-bold text-white text-shadow-xs">
+        <h1 className="text-shadow-xs mb-10 font-bold text-white text-5xl text-center">
           {t('components.pageNotFound.title')}
         </h1>
 

@@ -40,8 +40,8 @@ export default function CountdownTimer() {
       {
         Object.entries(timeLeft).map(([unit, value]) => (
           <div key={unit} className="flex flex-col items-center gap-1">
-            <span className="bg-main-beige shadow-sm p-2 rounded-lg font-bold text-main-pink text-4xl">{value.toString().padStart(2, '0')}</span>
-            <span className="font-semibold text-base">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
+            <span className="bg-main-beige shadow-sm px-2 rounded-[10px] font-bold text-main-pink text-4xl leading-15">{value.toString().padStart(2, '0')}</span>
+            <span className="font-semibold text-base leading-6">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
           </div>
         ))
       }
