@@ -62,13 +62,13 @@ export default function CarouselLanding() {
             align: "center",
           }}
           setApi={setApi}
-          // plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]}
+          plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]}
           className="w-full"
         >
-          <CarouselContent className="ml-0! w-full">
+          <CarouselContent className="ml-2! w-full">
             {
               mock.map((item) => (
-                <CarouselItem key={item.id} className="pl-0! basis-full">
+                <CarouselItem key={item.id} className="pr-4 pl-0! basis-full">
                   <div className="bg-[#D9D9D9] p-3 rounded-2xl w-full aspect-video">
                     {item.title}
                   </div>
@@ -77,8 +77,8 @@ export default function CarouselLanding() {
             }
           </CarouselContent>
         </Carousel>
-        <button onClick={handlePrevious} className="top-1/2 left-2 absolute"><FlatIcon name="fi-rr-angle-left" size={16} /></button>
-        <button onClick={handleNext} className="top-1/2 right-2 absolute"><FlatIcon name="fi-rr-angle-right" size={16} /></button>
+        <button onClick={handlePrevious} className="top-1/2 left-4 absolute"><FlatIcon name="fi-rr-angle-left" size={16} /></button>
+        <button onClick={handleNext} className="top-1/2 right-4 absolute"><FlatIcon name="fi-rr-angle-right" size={16} /></button>
       </div>
       <div className="flex gap-2">
         {
