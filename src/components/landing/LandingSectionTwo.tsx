@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../ui/button"
 
 export default function LandingSectionTwo() {
+  const { t } = useTranslation();
   const isRoleStudent = true;
 
   return (
@@ -32,7 +34,7 @@ export default function LandingSectionTwo() {
                 className="w-15.25 h-auto"
               />
               <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
-                Faculties
+                {t('routes.landingGroup.event.faculty')}
               </span>
             </button>
 
@@ -47,7 +49,7 @@ export default function LandingSectionTwo() {
                 className="w-19.5 h-auto"
               />
               <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
-                Event
+                {t('routes.landingGroup.event.mainEvent')}
               </span>
             </button>
 
@@ -62,7 +64,7 @@ export default function LandingSectionTwo() {
                 className="w-24.5 h-auto"
               />
               <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
-                Workshop
+                {t('routes.landingGroup.event.facultyWorkshop')}
               </span>
             </button>
 
@@ -77,7 +79,7 @@ export default function LandingSectionTwo() {
                 className="w-24.25 h-auto"
               />
               <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
-                Souvenir
+                {t('routes.landingGroup.event.merchandise')}
               </span>
             </button>
 
@@ -94,7 +96,7 @@ export default function LandingSectionTwo() {
                     className="w-18 h-auto"
                   />
                   <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
-                    Missing Pieces
+                    {t('routes.landingGroup.event.missingPiece')}
                   </span>
                 </button>
               ) : (
@@ -117,7 +119,7 @@ export default function LandingSectionTwo() {
       </div>
 
       <div className='flex justify-center items-center bg-main-pink bg-pink py-8 w-full'>
-        <Button className='bg-main-beige text-main-pink'>สูจิบัตร</Button>
+        <Button className='bg-main-beige text-main-pink'>{t('routes.landingGroup.buttonGroup.agenda')}</Button>
       </div>
     </div>
   )

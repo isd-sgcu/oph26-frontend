@@ -5,8 +5,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
+import { useTranslation } from "react-i18next";
 
 export default function LandingSectionFour() {
+  const { t } = useTranslation();
   const faqs = [
     {
       index: "0",
@@ -31,7 +33,7 @@ export default function LandingSectionFour() {
   return (
     <div className="flex flex-col gap-4 px-5 pt-10 pb-20">
       <h1 className="text-shadow-xs font-bold text-white text-4xl text-center">
-        FAQs ?
+        {t('routes.landingGroup.faq.title')}
       </h1>
       <Accordion type="single" collapsible defaultValue={"1"} className="space-y-4">
         {

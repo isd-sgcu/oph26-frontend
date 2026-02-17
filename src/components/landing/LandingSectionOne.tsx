@@ -3,9 +3,11 @@ import { Button } from "../ui/button";
 import { useNavigate } from "@tanstack/react-router";
 import CountdownTimer from "./CountdownTimer";
 import CarouselLanding from "./CarouselLanding";
+import { useTranslation } from "react-i18next";
 
 export default function LandingSectionOne() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className='relative w-full h-screen max-h-fit'>
@@ -23,7 +25,7 @@ export default function LandingSectionOne() {
           <div className="relative drop-shadow-lg w-full">
             <img src="/logo/cu-journey.svg" alt="CU Journey" className="mx-auto" loading="eager" />
           </div>
-          <p className='bg-black/30 -mt-4 px-3 py-1 rounded-full font-semibold text-[15px] text-white'>28-29 March 2026</p>
+          <p className='bg-black/30 -mt-4 px-3 py-1 rounded-full font-semibold text-[15px] text-white'>{t('routes.landingGroup.date')}</p>
         </div>
 
         {/* Detail */}
@@ -32,10 +34,10 @@ export default function LandingSectionOne() {
             <Button size={'md'} className='bg-main-beige text-main-pink'
               onClick={() => {
                 navigate({ to: '/auth/login' })
-              }}>Register</Button>
+              }}>{t('routes.landingGroup.buttonGroup.register')}</Button>
             <Button onClick={() => {
               navigate({ to: '/auth/login' })
-            }}>Sign In</Button>
+            }}>{t('routes.landingGroup.buttonGroup.login')}</Button>
           </div>
 
           <div className='flex flex-col justify-center items-center gap-4 w-full'>
