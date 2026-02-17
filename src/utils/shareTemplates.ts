@@ -16,6 +16,29 @@ export async function processWatermarkTemplate(
       canvas.width = baseImg.width
       canvas.height = baseImg.height
 
+      // Clip to rounded rect so everything (image, gradient, logo)
+      // will have rounded corners
+      const radius = Math.min(40, canvas.width * 0.04, canvas.height * 0.04)
+
+      // Draw shadow shape behind the rounded image (so shadow renders
+      // outside the clipped area)
+      ctx.save()
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'
+      ctx.shadowBlur = 5
+      ctx.shadowOffsetX = 0
+      ctx.shadowOffsetY = 5
+      ctx.beginPath()
+      roundRect(ctx, 0, 0, canvas.width, canvas.height, radius)
+      ctx.fillStyle = 'white'
+      ctx.fill()
+      ctx.restore()
+
+      // Clip and draw image
+      ctx.save()
+      ctx.beginPath()
+      roundRect(ctx, 0, 0, canvas.width, canvas.height, radius)
+      ctx.clip()
+
       // 1️⃣ Draw original image
       ctx.drawImage(baseImg, 0, 0)
 
@@ -59,6 +82,7 @@ export async function processWatermarkTemplate(
         )
 
         // 4️⃣ Export
+        ctx.restore()
         resolve(canvas.toDataURL('image/png'))
       }
 
@@ -104,34 +128,69 @@ export async function processFramedTemplate(
   ctx.drawImage(bg, 0, 0, canvas.width, canvas.height)
 
   // 3️⃣ Draw rounded map
-  const mapWidth = 800
-  const mapHeight = 800
+  const mapWidth = 900
+  const mapHeight = 900
   const mapX = (canvas.width - mapWidth) / 2
   const mapY = 620
 
+  // Draw shadow shape first
+  ctx.save()
+
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'
+  ctx.shadowBlur = 5
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = 5
+
+  ctx.beginPath()
+  roundRect(ctx, mapX, mapY, mapWidth, mapHeight, 40)
+  ctx.fillStyle = 'white' // required to render shadow
+  ctx.fill()
+
+  ctx.restore()
+
+  //Clip and draw image (without shadow)
   ctx.save()
   ctx.beginPath()
   roundRect(ctx, mapX, mapY, mapWidth, mapHeight, 40)
   ctx.clip()
+
   ctx.drawImage(mapImg, mapX, mapY, mapWidth, mapHeight)
+
   ctx.restore()
 
   // 4️⃣ Wait for font
   await document.fonts.load('bold 60px "IBM Plex Sans Thai"')
   await document.fonts.load('40px "IBM Plex Sans Thai"')
+  await document.fonts.load('600 60px "IBM Plex Sans Thai"')
+  await document.fonts.load('500 65px "IBM Plex Sans Thai"')
+  await document.fonts.load('500 50px "IBM Plex Sans Thai"')
 
   ctx.fillStyle = '#f481b4'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
 
-  ctx.font = 'bold 60px "IBM Plex Sans Thai"'
-  ctx.fillText(username, canvas.width / 2, 300)
+  // Name
+  ctx.font = 'bold 80px "IBM Plex Sans Thai"'
+  ctx.fillText(username, canvas.width / 2, 370)
 
-  ctx.font = '60px "IBM Plex Sans Thai"'
-  ctx.fillText('Missing pieces', canvas.width / 2, 500)
+  // Count
+  ctx.fillText(userData, (canvas.width / 2) - 50, 1620)
 
-  ctx.font = '40px "IBM Plex Sans Thai"'
-  ctx.fillText(`collected ${userData} items`, canvas.width / 2, 1250)
+  // /20 text
+  ctx.font = '600 60px "IBM Plex Sans Thai"'
+  ctx.fillText('/20', (canvas.width / 2) + 50, 1625)
+
+  // Missing pieces text
+  ctx.fillStyle = '#000000'
+  ctx.font = '500 65px "IBM Plex Sans Thai"'
+  ctx.fillText('Missing pieces', canvas.width / 2, 550)
+
+  // collected
+  ctx.font = '500 50px "IBM Plex Sans Thai"'
+  ctx.fillText('เก็บได้', canvas.width * 0.25, 1620)
+
+  // faculty
+  ctx.fillText('คณะ', canvas.width * 0.75, 1620)
 
   // 5️⃣ Draw logo
   const logoWidth = logo.width * 1.2
