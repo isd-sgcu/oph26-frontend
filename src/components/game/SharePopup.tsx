@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { captureGameMap } from '@/utils/captureMap'
 import { Button } from '../ui/button'
 import { FlatIcon } from '../FlatIcon'
@@ -13,6 +13,9 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   const [image, setImage] = useState<string[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
+
+  const [activeIndex, setActiveIndex] = useState(0)
+  const scrollRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (open) {
@@ -37,6 +40,64 @@ const GameSharePopup = ({ open, onClose }: Props) => {
       setLoading(false)
     }
   }
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return
+
+    const container = scrollRef.current
+    const slides = Array.from(container.children)
+
+    const containerCenter = container.scrollLeft + container.offsetWidth / 2
+
+    let closestIndex = 0
+    let closestDistance = Infinity
+
+    slides.forEach((slide, index) => {
+      const el = slide as HTMLElement
+      const slideCenter = el.offsetLeft + el.offsetWidth / 2
+      const distance = Math.abs(containerCenter - slideCenter)
+
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestIndex = index
+      }
+    })
+
+    setActiveIndex(closestIndex)
+  }
+
+  const handleShare = async () => {
+    const selectedImage = image?.[activeIndex-1]
+    if (!selectedImage) return
+
+    try {
+      const response = await fetch(selectedImage)
+      const blob = await response.blob()
+
+      const file = new File([blob], 'game-share.png', {
+        type: 'image/png',
+      })
+
+      if (navigator.share && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'My Game Result',
+        })
+      } else {
+        downloadImage(selectedImage)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const downloadImage = (url: string) => {
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'game-share.png'
+    a.click()
+  }
+
 
   const handleClose = () => {
     setVisible(false)
@@ -78,7 +139,11 @@ const GameSharePopup = ({ open, onClose }: Props) => {
 
         {!loading && image && (
         <div className="flex h-[65dvh] w-full min-w-0 overflow-hidden relative">
-          <div className='flex flex-nowrap overflow-x-auto snap-x snap-mandatory h-full'>
+          <div 
+          className='flex flex-nowrap overflow-x-auto snap-x snap-mandatory h-full'
+          ref={scrollRef}
+          onScroll={handleScroll}
+          >
             {/* {image.map((img, i) => (
                 <img key={i} src={img} alt="preview" className="mb-4 rounded" />
             ))} */}
@@ -90,7 +155,7 @@ const GameSharePopup = ({ open, onClose }: Props) => {
             </div>
 
             <div className="snap-center px-3 flex justify-center items-center">
-              <div className="w-[80vw] aspect-square">
+              <div className="w-[80vw] max-w-85 aspect-square">
                 <img
                   src={image[1]}
                   alt="preview"
@@ -107,14 +172,14 @@ const GameSharePopup = ({ open, onClose }: Props) => {
 
         <Button 
         size="lg" className="bg-gradient-purple"
-        
+        onClick={handleShare}
         >
           <FlatIcon
           name="fi-rr-plus-small"
           className="text-white"
           size={16}
           />
-          <span className="text-white">เลือก</span>
+          <span className="text-white">เลือก {activeIndex}</span>
           <FlatIcon
           name="fi-rr-plus-small"
           className="text-white"
