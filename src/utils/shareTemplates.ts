@@ -98,8 +98,22 @@ export async function processFramedTemplate(
   username: string,
   userData: string,
   bgUrl: string,
-  logoUrl: string
+  logoUrl: string,
+  lang: number // 0 = th, 1 = en
 ): Promise<string> {
+  const localizedText = {
+    th: {
+      missingPieces: 'Missing pieces',
+      collected: 'เก็บได้',
+      faculty: 'คณะ',
+    },
+    en: {
+      missingPieces: 'Missing pieces',
+      collected: 'Collected',
+      faculty: 'Faculty',
+    },
+  }
+
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 
@@ -159,11 +173,8 @@ export async function processFramedTemplate(
   ctx.restore()
 
   // 4️⃣ Wait for font
-  await document.fonts.load('bold 60px "IBM Plex Sans Thai"')
-  await document.fonts.load('40px "IBM Plex Sans Thai"')
-  await document.fonts.load('600 60px "IBM Plex Sans Thai"')
-  await document.fonts.load('500 65px "IBM Plex Sans Thai"')
-  await document.fonts.load('500 50px "IBM Plex Sans Thai"')
+  await document.fonts.ready
+  await new Promise(requestAnimationFrame)
 
   ctx.fillStyle = '#f481b4'
   ctx.textAlign = 'center'
@@ -183,14 +194,14 @@ export async function processFramedTemplate(
   // Missing pieces text
   ctx.fillStyle = '#000000'
   ctx.font = '500 65px "IBM Plex Sans Thai"'
-  ctx.fillText('Missing pieces', canvas.width / 2, 550)
+  ctx.fillText(localizedText[lang === 0 ? 'th' : 'en'].missingPieces, canvas.width / 2, 550)
 
   // collected
   ctx.font = '500 50px "IBM Plex Sans Thai"'
-  ctx.fillText('เก็บได้', canvas.width * 0.25, 1620)
+  ctx.fillText(localizedText[lang === 0 ? 'th' : 'en'].collected, canvas.width * 0.25, 1620)
 
   // faculty
-  ctx.fillText('คณะ', canvas.width * 0.75, 1620)
+  ctx.fillText(localizedText[lang === 0 ? 'th' : 'en'].faculty, canvas.width * 0.75, 1620)
 
   // 5️⃣ Draw logo
   const logoWidth = logo.width * 1.2

@@ -16,7 +16,7 @@ const PIECES: PieceConfig[] = [
   { x: 720, y: 1546.8, scale: 1.2, variant: 5, faculty: 'law' },
   { x: 633.5, y: 1419, scale: 1.2, variant: 6, faculty: 'commarts' },
   { x: 973, y: 1591, scale: 1.2, variant: 1, faculty: 'cbs' },
-  { x: 1665, y: 1393, scale: 1.2, variant: 2, faculty: 'md' },
+  { x: 1659, y: 1393, scale: 1.2, variant: 2, faculty: 'md' },
   { x: 960, y: 558, scale: 1.2, variant: 4, faculty: 'pharm' },
   { x: 1248.5, y: 1434.5, scale: 1.2, variant: 5, faculty: 'polsci' },
   { x: 957.15, y: 1275.6, scale: 1.2, variant: 6, faculty: 'sci' },
@@ -39,17 +39,23 @@ export default function PieceLayer({
 }) {
   return (
     <>
-      {PIECES.map((config, index) => (
-        <PieceOnMap
-          key={index}
-          x={config.x}
-          y={config.y}
-          scale={config.scale}
-          variant={config.variant}
-          faculty={config.faculty}
-          count={pieceCount[config.faculty || ''] || 0}
-        />
-      ))}
+      {PIECES.map((config, index) => {
+        const facultyKey = config.faculty || ''
+        const count = pieceCount[facultyKey] ?? 0
+        if (count === -1) return null
+
+        return (
+          <PieceOnMap
+            key={index}
+            x={config.x}
+            y={config.y}
+            scale={config.scale}
+            variant={config.variant}
+            faculty={config.faculty}
+            count={count}
+          />
+        )
+      })}
     </>
   )
 }

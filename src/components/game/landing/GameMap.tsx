@@ -2,9 +2,13 @@ import UniMapBg from '@/assets/game/uni-map-bg.svg'
 import DecorationLayer from './DecorationLayer'
 import PieceLayer from './PieceLayer'
 import { useEffect, useRef, useState } from 'react'
+import { useCapture } from '@/contexts/CaptureContext'
+import CountLayer from './CountLayer'
 
 export default function GameMap() {
   const [pieceCount, setPieceCount] = useState<Record<string, number>>({})
+  const [binaryPieceCount, setBinaryPieceCount] = useState<Record<string, number>>({})
+  const { mode, setMode } = useCapture()
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -70,6 +74,32 @@ export default function GameMap() {
     el.scrollLeft = centerX
   }, [])
 
+  useEffect(() => {
+    setBinaryPieceCount(() => {
+      return Object.fromEntries(
+        Object.entries(pieceCount).map(([key, value]) => [
+          key,
+          value > 0 ? -1 : 0,
+        ])
+      )
+    })
+  }, [pieceCount])
+
+  // Temporary testing key: press 'b' to toggle between pieceCount and binaryPieceCount
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === 'b') {
+        setMode('capture')
+      }
+      if (e.key.toLowerCase() === 'n') {
+        setMode('normal')
+      }
+    }
+
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [])
+
   return (
     <div
       ref={containerRef}
@@ -81,9 +111,31 @@ export default function GameMap() {
         className="h-full w-auto bg-black"
         preserveAspectRatio="xMinYMid meet"
       >
+        <defs>
+          <filter
+            id="badge-shadow"
+            x="-50%"
+            y="-50%"
+            width="200%"
+            height="200%"
+          >
+            <feDropShadow
+              dx="3"
+              dy="3"
+              stdDeviation="3"
+              floodColor="black"
+              floodOpacity="0.4"
+            />
+          </filter>
+        </defs>
+
+
         <image href={UniMapBg} x={0} y={0} width={2000} height={2000} />
         <DecorationLayer />
-        <PieceLayer pieceCount={pieceCount} />
+        <PieceLayer pieceCount={mode === 'normal' ? pieceCount : binaryPieceCount} />
+        {
+          mode === 'show' && <CountLayer pieceCount={pieceCount} />
+        }
       </svg>
     </div>
   )

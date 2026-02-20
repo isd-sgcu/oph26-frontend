@@ -3,6 +3,8 @@ import { captureGameMap } from '@/utils/captureMap'
 import { Button } from '../ui/button'
 import { FlatIcon } from '../FlatIcon'
 import { processWatermarkTemplate, processFramedTemplate } from '@/utils/shareTemplates'
+import i18n from '@/lib/i18n'
+import { useCapture } from '@/contexts/CaptureContext'
 
 type Props = {
   open: boolean
@@ -17,6 +19,8 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
+  const { setMode } = useCapture()
+
   useEffect(() => {
     if (open) {
       setVisible(true)
@@ -27,20 +31,54 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   const generateImage = async () => {
     try {
       setLoading(true)
+
+      setMode('capture')
+      await new Promise((r) => requestAnimationFrame(r))
+      await new Promise((r) => requestAnimationFrame(r))
+
       const img = await captureGameMap()
+
+
       const watermark = await processWatermarkTemplate(
         img,
         '/logo.svg'
-        )
-      const framed = await processFramedTemplate(img, 'N\'Jaramed', '8', '/background/shareTemplate1.svg', '/logo.svg')
-      setImage([framed, watermark])
+      )
+
+      // Determine lang: 0 = th, 1 = en
+      const lang = i18n.language === 'th' ? 0 : 1
+
+      const framed = await processFramedTemplate(
+        img,
+        "N'Jaramed",
+        '8',
+        '/background/shareTemplate1.svg',
+        '/logo.svg',
+        lang
+      )
+
+      setMode('show')
+      await new Promise((r) => requestAnimationFrame(r))
+      await new Promise((r) => requestAnimationFrame(r))
+
+      const img2 = await captureGameMap()
+
+      const framed2 = await processFramedTemplate(
+        img2,
+        "N'Jaramed",
+        '8',
+        '/background/shareTemplate1.svg',
+        '/logo.svg',
+        lang
+      )
+
+      setImage([framed, framed2, watermark])
     } catch (err) {
       console.error(err)
     } finally {
+      setMode('normal')
       setLoading(false)
     }
   }
-
   const handleScroll = () => {
     if (!scrollRef.current) return
 
@@ -154,12 +192,16 @@ const GameSharePopup = ({ open, onClose }: Props) => {
               <img src={image[0]} alt="preview" className="mb-4 rounded" />
             </div>
 
+            <div className='snap-center shrink-0 px-3 flex justify-center'>
+              <img src={image[1]} alt="preview" className="mb-4 rounded" />
+            </div>
+
             <div className="snap-center px-3 flex justify-center items-center">
               <div className="w-[80vw] max-w-85 aspect-square">
                 <img
-                  src={image[1]}
+                  src={image[2]}
                   alt="preview"
-                  className="w-full h-auto object-cover rounded"
+                  className="w-full h-auto object-cover rounded shadow-[1px_5px_5px_rgba(0,0,0,0.3)]"
                 />
               </div>
             </div>
