@@ -47,7 +47,7 @@ export default function CountLayer({
           <g
             key={index}
             transform={`translate(${config.x}, ${config.y})`}
-            filter="url(#badge-shadow)"
+            // filter="url(#badge-shadow)"
           >
             {/* Yellow Circle */}
             <circle

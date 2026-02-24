@@ -15,7 +15,7 @@ function RouteComponent() {
       </div>
 
       {/* UI */}
-      <div className="pointer-events-none absolute inset-0 z-10">
+      <div className="pointer-events-none absolute inset-0 z-5">
         {/* Header */}
         <div className="relative py-2 text-center font-bold text-white">
           {/* Background */}
