@@ -6,6 +6,7 @@ import ZoomZoneLayer from './ZoomZoneLayer'
 import { useEffect, useRef, useState } from 'react'
 import { useCapture } from '@/contexts/CaptureContext'
 import { useCamera } from '@/hooks/useCamera'
+import Cloud from './deco/Cloud'
 
 export default function GameMap() {
   const [pieceCount, setPieceCount] = useState<Record<string, number>>({})
@@ -22,7 +23,8 @@ export default function GameMap() {
     zoomToZone,
     resetZoom,
     isZoomed,
-    velocityRef
+    velocityRef,
+    getWorldBounds,
   } = useCamera(containerRef, cameraWrapperRef, baseScale)
 
   // Compute base scale
@@ -125,10 +127,12 @@ export default function GameMap() {
           </defs> */}
 
           <image href={UniMapBg} x={0} y={0} width={2000} height={2000} />
-          <DecorationLayer velocityRef={velocityRef} />
+          <DecorationLayer velocityRef={velocityRef} getWorldBounds={getWorldBounds} />
           <PieceLayer pieceCount={mode === 'normal' ? pieceCount : binaryPieceCount} />
           {mode === 'show' && <CountLayer pieceCount={pieceCount} />}
           <ZoomZoneLayer onZoom={zoomToZone} />
+          
+          <Cloud x={500} y={500} />
         </svg>
       </div>
     </div>

@@ -40,6 +40,24 @@ export function useCamera(
     applyTransform()
   }, [baseScale])
 
+  const getWorldBounds = () => {
+    const container = containerRef.current
+    if (!container) return null
+
+    const { x, y, scale } = cameraRef.current
+    const effectiveScale = baseScale * scale
+
+    const containerWidth = container.clientWidth
+    const containerHeight = container.clientHeight
+
+    return {
+      left: (0 - x) / effectiveScale,
+      right: (containerWidth - x) / effectiveScale,
+      top: (0 - y) / effectiveScale,
+      bottom: (containerHeight - y) / effectiveScale,
+    }
+  }
+
   const onPointerDown = (e: React.PointerEvent) => {
     if (isZoomed) return
 
@@ -201,5 +219,6 @@ export function useCamera(
     resetZoom,
     isZoomed,
     velocityRef,
+    getWorldBounds,
   }
 }
