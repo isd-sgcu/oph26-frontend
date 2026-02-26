@@ -16,21 +16,21 @@ export default function Cloud({
   rotate?: number
   driftSpeed?: number
   direction?: 1 | -1
-  puffOnClick?: boolean
   worldWidth?: number
 }) {
-  const driftRef = useRef<SVGGElement | null>(null)
+  const [offset, setOffset] = useState(0)
   const position = useRef(x)
+  const frameRef = useRef<number | null>(null)
   const [puff, setPuff] = useState(false)
 
-  // 🌍 Infinite horizontal drift
+  // 🌍 Infinite horizontal drift (React-safe)
   useEffect(() => {
-    let frame: number
+    position.current = x
 
     const update = () => {
       position.current += driftSpeed * direction
 
-      // wrap logic
+      // Wrap logic
       if (direction === 1 && position.current > worldWidth + 200) {
         position.current = -200
       }
@@ -39,21 +39,19 @@ export default function Cloud({
         position.current = worldWidth + 200
       }
 
-      if (driftRef.current) {
-        driftRef.current.setAttribute(
-          'transform',
-          `translate(${position.current - x}, 0)`
-        )
-      }
+      setOffset(position.current - x)
 
-      frame = requestAnimationFrame(update)
+      frameRef.current = requestAnimationFrame(update)
     }
 
-    frame = requestAnimationFrame(update)
-    return () => cancelAnimationFrame(frame)
-  }, [driftSpeed, direction, worldWidth, x])
+    frameRef.current = requestAnimationFrame(update)
 
-  // 💨 Puff animation trigger
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current)
+    }
+  }, [x, driftSpeed, direction, worldWidth])
+
+  // 💨 Puff animation
   const handlePuff = () => {
     setPuff(true)
 
@@ -66,7 +64,7 @@ export default function Cloud({
     <g transform={`translate(${x}, ${y})`}>
       <g transform={`rotate(${rotate})`}>
         <g transform={`scale(${scale})`}>
-          <g ref={driftRef}>
+          <g transform={`translate(${offset}, 0)`}>
             <g
               onPointerDown={handlePuff}
               className={puff ? 'cloud-puff' : undefined}

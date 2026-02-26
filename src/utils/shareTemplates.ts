@@ -93,6 +93,21 @@ export async function processWatermarkTemplate(
   })
 }
 
+async function ensureFontsLoaded() {
+  const fonts = [
+    'bold 80px "IBM Plex Sans Thai"',
+    '600 60px "IBM Plex Sans Thai"',
+    '500 65px "IBM Plex Sans Thai"',
+    '500 50px "IBM Plex Sans Thai"',
+  ]
+
+  await Promise.all(fonts.map(f => document.fonts.load(f)))
+  await document.fonts.ready
+
+  // Small delay to ensure layout flush
+  await new Promise(resolve => requestAnimationFrame(() => resolve(null)))
+}
+
 export async function processFramedTemplate(
   capturedBase64: string,
   username: string,
@@ -173,8 +188,7 @@ export async function processFramedTemplate(
   ctx.restore()
 
   // 4️⃣ Wait for font
-  await document.fonts.ready
-  await new Promise(requestAnimationFrame)
+  await ensureFontsLoaded()
 
   ctx.fillStyle = '#f481b4'
   ctx.textAlign = 'center'

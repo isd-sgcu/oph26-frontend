@@ -1,4 +1,4 @@
-import UniMapBg from '@/assets/game/uni-map-bg.svg'
+import UniMapBg from '@/assets/game/uni-map-bg.png'
 import DecorationLayer from './DecorationLayer'
 import PieceLayer from './PieceLayer'
 import CountLayer from './CountLayer'
@@ -6,7 +6,7 @@ import ZoomZoneLayer from './ZoomZoneLayer'
 import { useEffect, useRef, useState } from 'react'
 import { useCapture } from '@/contexts/CaptureContext'
 import { useCamera } from '@/hooks/useCamera'
-import Cloud from './deco/Cloud'
+import CloudLayer from './CloudLayer'
 
 export default function GameMap() {
   const [pieceCount, setPieceCount] = useState<Record<string, number>>({})
@@ -132,7 +132,7 @@ export default function GameMap() {
           {mode === 'show' && <CountLayer pieceCount={pieceCount} />}
           <ZoomZoneLayer onZoom={zoomToZone} />
           
-          <Cloud x={500} y={500} />
+          <CloudLayer />
         </svg>
       </div>
     </div>
