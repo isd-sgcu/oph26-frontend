@@ -1,18 +1,43 @@
+import { GAME_ASSETS, PUBLIC_ASSETS } from '@/components/const/gameAssets'
 import GameMap from '@/components/game/landing/GameMap'
+import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
+import { preloadImages } from '@/utils/preloadAssets'
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/game/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    async function load() {
+      await preloadImages([
+        ...GAME_ASSETS,
+        ...PUBLIC_ASSETS,
+      ])
+
+      // wait 1 frame to ensure layout complete
+      await new Promise((r) => requestAnimationFrame(() => r(null)))
+
+      setReady(true)
+    }
+
+    load()
+  }, [])
   
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
-      <div className="absolute inset-0 top-15 z-0">
-        <GameMap />
-      </div>
+      {!ready && <LoadingOverlay />}
+
+      {ready && (
+        <div className="absolute inset-0 top-15 z-0">
+          <GameMap />
+        </div>
+      )}
 
       {/* UI */}
       <div className="pointer-events-none absolute inset-0 z-5">

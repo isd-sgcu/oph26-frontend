@@ -3,7 +3,7 @@ import DecorationLayer from './DecorationLayer'
 import PieceLayer from './PieceLayer'
 import CountLayer from './CountLayer'
 import ZoomZoneLayer from './ZoomZoneLayer'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useCapture } from '@/contexts/CaptureContext'
 import { useCamera } from '@/hooks/useCamera'
 import CloudLayer from './CloudLayer'
@@ -16,7 +16,10 @@ export default function GameMap() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const cameraWrapperRef = useRef<HTMLDivElement | null>(null)
 
-  const [baseScale, setBaseScale] = useState(1)
+  const [baseScale, setBaseScale] = useState(() => {
+    if (typeof window === 'undefined') return 1
+    return window.innerHeight / 2000
+  })
 
   const {
     bind,
@@ -28,16 +31,21 @@ export default function GameMap() {
   } = useCamera(containerRef, cameraWrapperRef, baseScale)
 
   // Compute base scale
-  useEffect(() => {
-    const updateScale = () => {
-      const container = containerRef.current
-      if (!container) return
-      setBaseScale(container.clientHeight / 2000)
+  useLayoutEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const scale = container.clientHeight / 2000
+    setBaseScale(scale)
+
+    const handleResize = () => {
+      const c = containerRef.current
+      if (!c) return
+      setBaseScale(c.clientHeight / 2000)
     }
 
-    updateScale()
-    window.addEventListener('resize', updateScale)
-    return () => window.removeEventListener('resize', updateScale)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   // Fake data
@@ -113,27 +121,29 @@ export default function GameMap() {
           willChange: 'transform',
         }}
       >
-        <svg id="game-map-svg" width={2000} height={2000}>
-          {/* <defs>
-            <filter id="badge-shadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feDropShadow
-                dx="3"
-                dy="3"
-                stdDeviation="3"
-                floodColor="black"
-                floodOpacity="0.4"
-              />
-            </filter>
-          </defs> */}
+        {baseScale !== null && (
+          <svg id="game-map-svg" width={2000} height={2000}>
+            {/* <defs>
+              <filter id="badge-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow
+                  dx="3"
+                  dy="3"
+                  stdDeviation="3"
+                  floodColor="black"
+                  floodOpacity="0.4"
+                />
+              </filter>
+            </defs> */}
 
-          <image href={UniMapBg} x={0} y={0} width={2000} height={2000} />
-          <DecorationLayer velocityRef={velocityRef} getWorldBounds={getWorldBounds} />
-          <PieceLayer pieceCount={mode === 'normal' ? pieceCount : binaryPieceCount} />
-          {mode === 'show' && <CountLayer pieceCount={pieceCount} />}
-          <ZoomZoneLayer onZoom={zoomToZone} />
-          
-          <CloudLayer />
-        </svg>
+            <image href={UniMapBg} x={0} y={0} width={2000} height={2000} />
+            <DecorationLayer velocityRef={velocityRef} getWorldBounds={getWorldBounds} />
+            <PieceLayer pieceCount={mode === 'normal' ? pieceCount : binaryPieceCount} />
+            {mode === 'show' && <CountLayer pieceCount={pieceCount} />}
+            <ZoomZoneLayer onZoom={zoomToZone} />
+            
+            <CloudLayer />
+          </svg>
+        )}
       </div>
     </div>
   )
