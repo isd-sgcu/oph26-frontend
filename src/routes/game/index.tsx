@@ -1,21 +1,46 @@
+import { GAME_ASSETS, PUBLIC_ASSETS } from '@/components/const/gameAssets'
 import GameMap from '@/components/game/landing/GameMap'
+import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
+import { preloadImages } from '@/utils/preloadAssets'
 import { createFileRoute } from '@tanstack/react-router'
-import { captureGameMap } from '@/utils/captureMap'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/game/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    async function load() {
+      await preloadImages([
+        ...GAME_ASSETS,
+        ...PUBLIC_ASSETS,
+      ])
+
+      // wait 1 frame to ensure layout complete
+      await new Promise((r) => requestAnimationFrame(() => r(null)))
+
+      setReady(true)
+    }
+
+    load()
+  }, [])
+  
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
-      <div className="absolute inset-0 top-15 z-0">
-        <GameMap />
-      </div>
+      {!ready && <LoadingOverlay />}
+
+      {ready && (
+        <div className="absolute inset-0 top-15 z-0">
+          <GameMap />
+        </div>
+      )}
 
       {/* UI */}
-      <div className="pointer-events-none absolute inset-0 z-10">
+      <div className="pointer-events-none absolute inset-0 z-5">
         {/* Header */}
         <div className="relative py-2 text-center font-bold text-white">
           {/* Background */}
@@ -32,18 +57,6 @@ function RouteComponent() {
           </div>
         </div>
 
-        <button
-          onClick={async () => {
-            const dataUrl = await captureGameMap()
-            console.log('SUCCESS', dataUrl)
-            const img = new Image()
-            img.src = dataUrl
-            document.body.appendChild(img) // temporary!
-          }}
-          className="pointer-events-auto absolute bottom-35 left-1/2 z-10 -translate-x-1/2 transform rounded-md bg-white px-4 py-2 text-black"
-        >
-          TEST SNAPSHOT
-        </button>
       </div>
     </div>
   )
