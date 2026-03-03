@@ -65,11 +65,6 @@ const CertificateIndexRoute = CertificateIndexRouteImport.update({
   path: '/certificate/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CertificateIndexRoute = CertificateIndexRouteImport.update({
-  id: '/certificate/',
-  path: '/certificate/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TestNameRoute = TestNameRouteImport.update({
   id: '/test/$name',
   path: '/test/$name',
@@ -338,10 +333,6 @@ export interface RootRouteChildren {
   GameRouteRoute: typeof GameRouteRouteWithChildren
   TestNameRoute: typeof TestNameRoute
   CertificateIndexRoute: typeof CertificateIndexRoute
-<<<<<<< HEAD
-  GameIndexRoute: typeof GameIndexRoute
-=======
->>>>>>> f2ee63edba62b7855626d6cce26fc47cfcbed282
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   TestIndexRoute: typeof TestIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
@@ -397,13 +388,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/game/'
       preLoaderRoute: typeof GameIndexRouteImport
       parentRoute: typeof GameRouteRoute
-    }
-    '/certificate/': {
-      id: '/certificate/'
-      path: '/certificate'
-      fullPath: '/certificate/'
-      preLoaderRoute: typeof CertificateIndexRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/certificate/': {
       id: '/certificate/'
@@ -571,10 +555,6 @@ const rootRouteChildren: RootRouteChildren = {
   GameRouteRoute: GameRouteRouteWithChildren,
   TestNameRoute: TestNameRoute,
   CertificateIndexRoute: CertificateIndexRoute,
-<<<<<<< HEAD
-  GameIndexRoute: GameIndexRoute,
-=======
->>>>>>> f2ee63edba62b7855626d6cce26fc47cfcbed282
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   TestIndexRoute: TestIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,

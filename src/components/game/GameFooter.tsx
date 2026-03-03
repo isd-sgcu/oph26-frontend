@@ -37,7 +37,7 @@ const GameFooter = () => {
         <FlatIcon name="fi-rr-share" size={20} className="text-white" />
       </Button>
       <footer
-        className={`fixed bottom-8 left-1/2 z-50 flex max-w-(--width-page) -translate-x-1/2 ${isWrap && 'scale-75'} flex-col gap-2 px-6`}
+        className={`fixed bottom-8 left-1/2 z-10 flex max-w-(--width-page) -translate-x-1/2 ${isWrap && 'scale-75'} flex-col gap-2 px-6`}
       >
         {/* Navigation */}
         <div

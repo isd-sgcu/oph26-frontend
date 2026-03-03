@@ -113,7 +113,7 @@ function RouteComponent() {
 
   return (
     <>
-      <div className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+      <div className="bg-main-light-pink relative flex w-full flex-col">
         {/* Decorations */}
         <img
           src="/questionaire/blue_flower.png"
