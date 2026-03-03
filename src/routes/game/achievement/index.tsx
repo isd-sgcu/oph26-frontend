@@ -36,18 +36,21 @@ function RouteComponent() {
 
   return (
     <div className="bg-main-pink relative flex-1 overflow-hidden">
-      {/* Header */}
-      <h2 className="mb-6 text-center text-3xl font-bold text-white text-shadow-[0px_1px_2px_#000000]">
-        {t('routes.gameGroup.achievementGroup.titleGroup')}
-      </h2>
+      {/* Content */}
+      <div className={`relative z-10 flex w-full flex-col gap-6 px-4 py-8`}>
+        {/* Header */}
+        <h2 className="text-center text-3xl font-bold text-white text-shadow-[0px_1px_2px_#000000]">
+          {t('routes.gameGroup.achievementGroup.titleGroup')}
+        </h2>
 
-      {/* Card */}
-      <div className="flex w-full min-w-0 flex-1 overflow-hidden">
-        <AchievementSlider>
-          {achievements.map((item, index) => (
-            <AchievementCard key={index} {...item} />
-          ))}
-        </AchievementSlider>
+        {/* Card */}
+        <div className="flex w-full min-w-0 flex-1 overflow-hidden">
+          <AchievementSlider>
+            {achievements.map((item, index) => (
+              <AchievementCard key={index} {...item} />
+            ))}
+          </AchievementSlider>
+        </div>
       </div>
     </div>
   )
