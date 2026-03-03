@@ -295,10 +295,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
-<<<<<<< HEAD
-  TestNameRoute: typeof TestNameRoute
-=======
->>>>>>> weerawitweem/isd68-150-game-landing-page
   CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
@@ -497,10 +493,6 @@ const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
-<<<<<<< HEAD
-  TestNameRoute: TestNameRoute,
-=======
->>>>>>> weerawitweem/isd68-150-game-landing-page
   CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
