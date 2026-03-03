@@ -22,7 +22,7 @@ export type FacultyType =
 
 export interface FacultyOption {
   value: FacultyType
-  variant: 1 | 2 | 3 | 4 | 5 | 6
+  variant: 1 | 2 | 4 | 5 | 6
   label: {
     th: string
     en: string
@@ -42,22 +42,22 @@ export const FACULTIES: FacultyOption[] = [
   },
   {
     value: 'dent',
-    variant: 3,
+    variant: 4,
     label: { th: 'คณะทันตแพทยศาสตร์', en: 'Faculty of Dentistry' },
   },
   {
     value: 'law',
-    variant: 4,
+    variant: 5,
     label: { th: 'คณะนิติศาสตร์', en: 'Faculty of Law' },
   },
   {
     value: 'commarts',
-    variant: 5,
+    variant: 6,
     label: { th: 'คณะนิเทศศาสตร์', en: 'Faculty of Communication Arts' },
   },
   {
     value: 'cbs',
-    variant: 6,
+    variant: 1,
     label: {
       th: 'คณะพาณิชยศาสตร์และการบัญชี',
       en: 'Faculty of Commerce and Accountancy',
@@ -65,67 +65,67 @@ export const FACULTIES: FacultyOption[] = [
   },
   {
     value: 'md',
-    variant: 1,
+    variant: 2,
     label: { th: 'คณะแพทยศาสตร์', en: 'Faculty of Medicine' },
   },
   {
     value: 'pharm',
-    variant: 2,
+    variant: 4,
     label: { th: 'คณะเภสัชศาสตร์', en: 'Faculty of Pharmacy' },
   },
   {
     value: 'polsci',
-    variant: 3,
+    variant: 5,
     label: { th: 'คณะรัฐศาสตร์', en: 'Faculty of Political Science' },
   },
   {
     value: 'sci',
-    variant: 4,
+    variant: 6,
     label: { th: 'คณะวิทยาศาสตร์', en: 'Faculty of Science' },
   },
   {
     value: 'spsc',
-    variant: 5,
+    variant: 1,
     label: { th: 'คณะวิทยาศาสตร์การกีฬา', en: 'Faculty of Sports Science' },
   },
   {
     value: 'eng',
-    variant: 6,
+    variant: 2,
     label: { th: 'คณะวิศวกรรมศาสตร์', en: 'Faculty of Engineering' },
   },
   {
     value: 'faa',
-    variant: 1,
+    variant: 4,
     label: { th: 'คณะศิลปกรรมศาสตร์', en: 'Faculty of Fine and Applied Arts' },
   },
   {
     value: 'econ',
-    variant: 2,
+    variant: 5,
     label: { th: 'คณะเศรษฐศาสตร์', en: 'Faculty of Economics' },
   },
   {
     value: 'arch',
-    variant: 3,
+    variant: 6,
     label: { th: 'คณะสถาปัตยกรรมศาสตร์', en: 'Faculty of Architecture' },
   },
   {
     value: 'ahs',
-    variant: 4,
+    variant: 1,
     label: { th: 'คณะสหเวชศาสตร์', en: 'Faculty of Allied Health Sciences' },
   },
   {
     value: 'vet',
-    variant: 5,
+    variant: 2,
     label: { th: 'คณะสัตวแพทยศาสตร์', en: 'Faculty of Veterinary Medicine' },
   },
   {
     value: 'arts',
-    variant: 6,
+    variant: 4,
     label: { th: 'คณะอักษรศาสตร์', en: 'Faculty of Arts' },
   },
   {
     value: 'scii',
-    variant: 1,
+    variant: 5,
     label: {
       th: 'สถาบันนวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย (BAScii)',
       en: 'School of Integrated Innovation (BAScii)',
@@ -133,7 +133,7 @@ export const FACULTIES: FacultyOption[] = [
   },
   {
     value: 'cusar',
-    variant: 2,
+    variant: 6,
     label: {
       th: 'สำนักวิชาทรัพยากรการเกษตร',
       en: 'School of Agricultural Resources',

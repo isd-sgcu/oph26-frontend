@@ -39,6 +39,7 @@ function RouteComponent() {
       {/* Header */}
       <h2 className="mb-6 text-center text-3xl font-bold text-white text-shadow-[0px_1px_2px_#000000]">
         {t('routes.gameGroup.achievementGroup.titleGroup')}
+        {t('routes.gameGroup.achievementGroup.titleGroup')}
       </h2>
 
       {/* Card */}
