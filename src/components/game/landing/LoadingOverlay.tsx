@@ -3,7 +3,7 @@ import cloudImg from '@/assets/game/deco/cloud.svg'
 
 export default function LoadingOverlay() {
   return (
-    <div className="absolute inset-0 z-50 flex items-center justify-center bg-linear-to-b from-[#FDE7F3] via-[#F6C1DE] to-[#F9B5D0]">
+    <div className="absolute inset-0 z-50 flex items-center justify-center bg-linear-to-b from-main-pink via-[#F6C1DE] to-[#F9B5D0]">
       
       <div className="flex flex-col items-center gap-6">
 

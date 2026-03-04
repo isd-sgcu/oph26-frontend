@@ -34,8 +34,8 @@ export default function ZoomZoneLayer(
             y={zone.y}
             width={zone.width}
             height={zone.height}
-            // fill="transparent"
-            fill="rgba(255, 0, 0, 0.25)"
+            fill="transparent"
+            // fill="rgba(255, 0, 0, 0.25)"
             onClick={() => onZoom(zone)}
             style={{ cursor: 'pointer' }}
         />

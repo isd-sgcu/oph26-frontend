@@ -45,7 +45,7 @@ function RouteComponent() {
         <div className="relative py-2 text-center font-bold text-white">
           {/* Background */}
           <div className="absolute inset-0">
-            <div className="to-main-pink h-1/4 bg-linear-to-b from-[#F6ACD2] from-0% to-100%" />
+            <div className="bg-main-pink h-1/4" />
             <div className="bg-main-pink h-1/2" />
             <div className="from-main-pink h-2/3 bg-linear-to-b to-transparent" />
           </div>
