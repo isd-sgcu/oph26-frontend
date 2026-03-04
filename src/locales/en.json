@@ -97,13 +97,16 @@
             "title": "You've collected",
             "statCount": "pieces",
             "miniCard1": {
-              "title": "Most collected faculty",
+              "title": "Most collected",
               "description": "{{count}} pieces"
             },
             "miniCard2": {
               "title": "You are the",
-              "description": "player to complete"
+              "description": "to complete"
             }
+          },
+          "collectedPieces": {
+            "title": "Collected Pieces"
           }
         }
       },

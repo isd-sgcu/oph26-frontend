@@ -36,7 +36,7 @@ export default function AchievementSlider({ children }: AchievementSliderProps) 
   }
 
   return (
-    <div className="w-full min-w-0 overflow-hidden relative">
+    <div className="w-full h-[calc(100%-100px)] min-w-0 overflow-hidden relative">
       <div
         ref={containerRef}
         onScroll={handleScroll}
