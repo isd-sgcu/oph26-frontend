@@ -38,18 +38,28 @@ export default function CarouselLanding() {
   const mock = [
     {
       id: 1,
-      title: "Slide 1",
-      description: "This is the first slide",
+      type: "video",
+      children: (
+        <iframe
+          className="rounded-2xl w-full aspect-video"
+          src="https://www.youtube.com/embed/KUd_aWty2cY?autoplay=1&mute=1&rel=0&loop=1&playlist=KUd_aWty2cY"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      )
     },
     {
       id: 2,
-      title: "Slide 2",
-      description: "This is the second slide",
+      type: "image",
+      imageSrc: "/background/background-2.png",
     },
     {
       id: 3,
-      title: "Slide 3",
-      description: "This is the third slide",
+      type: "image",
+      imageSrc: "/background/background-1.png",
     },
   ];
 
@@ -62,16 +72,22 @@ export default function CarouselLanding() {
             align: "center",
           }}
           setApi={setApi}
-          plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]}
+          plugins={[Autoplay({ delay: 15000, stopOnInteraction: false })]}
           className="w-full"
         >
           <CarouselContent className="ml-2! w-full">
             {
               mock.map((item) => (
                 <CarouselItem key={item.id} className="pr-4 pl-0! basis-full">
-                  <div className="bg-[#D9D9D9] p-3 rounded-2xl w-full aspect-video">
-                    {item.title}
-                  </div>
+                  {
+                    item.type === "video" ? item.children : (
+                      <img
+                        src={item.imageSrc}
+                        alt=""
+                        className="rounded-2xl w-full object-cover aspect-video"
+                      />
+                    )
+                  }
                 </CarouselItem>
               ))
             }

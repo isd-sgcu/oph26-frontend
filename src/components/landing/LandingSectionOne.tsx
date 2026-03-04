@@ -42,15 +42,7 @@ export default function LandingSectionOne() {
 
           <div className='flex flex-col justify-center items-center gap-4 px-5 w-full'>
             <CountdownTimer />
-            <iframe
-              className="rounded-2xl w-full aspect-video"
-              src="https://www.youtube.com/embed/KUd_aWty2cY?autoplay=1&mute=1&rel=0&loop=1&playlist=KUd_aWty2cY"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+            <CarouselLanding />
           </div>
         </div>
       </div>
