@@ -156,6 +156,30 @@
       "accept": "Accept",
       "submit": "Submit"
     },
+    "landingGroup": {
+      "date": "28-29 March 2026",
+      "time": {
+        "day": "Day",
+        "hour": "Hour",
+        "minute": "Min",
+        "second": "Sec"
+      },
+      "buttonGroup": {
+        "register": "Register",
+        "login": "Login",
+        "agenda": "Booklet"
+      },
+      "event": {
+        "faculty": "Faculties",
+        "facultyWorkshop": "Workshop",
+        "mainEvent": "Event",
+        "missingPiece": "Missing Pieces",
+        "merchandise": "Souvenir"
+      },
+      "faq": {
+        "title": "FAQs ?"
+      }
+    },
 
     "title": "Title"
   }

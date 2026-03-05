@@ -45,8 +45,8 @@ export default function Ticket({
 
   return (
     <div className="relative -mt-6 px-5 w-full">
-      <div className="top-22 z-30 relative drop-shadow-lg w-full">
-        <img src="/logo/cu-journey.svg" alt="CU Journey" className="mx-auto" />
+      <div className="top-20 z-30 relative drop-shadow-lg w-full">
+        <img src="/logo/cu-journey.webp" alt="CU Journey" className="mx-auto" />
       </div>
 
       <div className="flex flex-col justify-start items-center mx-auto rounded-xl max-w-80 overflow-visible">

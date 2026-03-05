@@ -9,7 +9,7 @@
       "sidebar": {
         "home": "หน้าหลัก",
         "faculty": "คณะ",
-        "facultyWorkshop": "เวิร์คชอปคณะ",
+        "facultyWorkshop": "เวิร์คช็อปคณะ",
         "mainEvent": "กิจกรรมส่วนกลาง",
         "map": "แผนที่",
         "missingPiece": "ชิ้นส่วนที่หายไป",
@@ -158,6 +158,30 @@
       "home": "หน้าหลัก",
       "accept": "ตกลง",
       "submit": "ส่ง"
+    },
+    "landingGroup": {
+      "date": "28-29 มีนาคม 2569",
+      "time": {
+        "day": "วัน",
+        "hour": "ชั่วโมง",
+        "minute": "นาที",
+        "second": "วินาที"
+      },
+      "buttonGroup": {
+        "register": "ลงทะเบียน",
+        "login": "เข้าสู่ระบบ",
+        "agenda": "สูจิบัตร"
+      },
+      "event": {
+        "faculty": "คณะ",
+        "facultyWorkshop": "เวิร์คช็อปคณะ",
+        "mainEvent": "กิจกรรมส่วนกลาง",
+        "missingPiece": "ชิ้นส่วนที่หายไป",
+        "merchandise": "สินค้าที่ระลึก"
+      },
+      "faq": {
+        "title": "คำถามที่พบบ่อย"
+      }
     },
 
     "title": "หัวข้อ"

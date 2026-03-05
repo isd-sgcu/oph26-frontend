@@ -10,17 +10,17 @@ const QuestionaireStepLast = ({
   const { t } = useTranslation()
 
   return (
-    <div className="flex h-fit w-full flex-col items-center gap-4 pb-8">
+    <div className="flex flex-col items-center gap-4 pb-8 w-full h-fit">
       {/* Logo */}
-      <img src="/logo.svg" alt="Logo" width={288.38} height={167.17} />
+      <img src="/logo/cu-journey.webp" alt="Logo" width={288.38} height={167.17} />
 
       {isHighSchoolStudent && (
-        <p className="bg-sub-yellow w-[80%] rounded-xl px-3 py-1 text-center text-base font-medium text-red-500">
+        <p className="bg-sub-yellow px-3 py-1 rounded-xl w-[80%] font-medium text-red-500 text-base text-center">
           {t('routes.questionaireGroup.partLast.highSchoolInformation')}
         </p>
       )}
 
-      <p className="w-[80%] text-center text-sm font-medium text-white">
+      <p className="w-[80%] font-medium text-white text-sm text-center">
         {t('routes.questionaireGroup.partLast.description')}
       </p>
     </div>

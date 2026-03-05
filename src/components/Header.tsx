@@ -84,12 +84,15 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 z-49 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] from-40% to-transparent p-4">
+      <header className="fixed top-0 left-0 z-49 mx-auto flex h-19 w-full max-w-(--width-page) items-center justify-between pt-4 pl-4 pr-5 pb-3">
+        {/* Overlay gradient */}
+        <div className='top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent w-full h-24'></div>
+
         {/* Logo */}
         <img
-          src="/logo.svg"
-          width={69}
-          height={40}
+          src="/logo/cu-journey.webp"
+          width={74}
+          height={48}
           alt="Logo"
           className="cursor-pointer"
           onClick={() => {
