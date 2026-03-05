@@ -140,3 +140,20 @@ export const FACULTIES: FacultyOption[] = [
     },
   },
 ]
+
+export interface Faculty {
+  id: string
+  name: string
+  majors: Major[]
+  imagePath?: string
+}
+
+export interface Major {
+  id: string
+  name: string
+  description: string
+  fieldDescription: string
+  location: string
+}
+
+export const FACULTY_DATA: Faculty[] = []
