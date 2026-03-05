@@ -15,7 +15,7 @@ function RouteComponent() {
   return (
     <div className="relative p-5 w-full h-full min-h-dvh">
       <img
-        src="/background/background-1.png"
+        src="/background/background-1.webp"
         alt=""
         className="z-0 absolute inset-0 w-full h-full object-cover"
       />

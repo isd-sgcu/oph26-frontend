@@ -12,7 +12,7 @@ export default function LandingSectionOne() {
   return (
     <div className='relative w-full h-screen max-h-fit'>
       <img
-        src="/background/background-2.png"
+        src="/background/background-2.webp"
         alt=""
         className='z-0 absolute inset-0 w-full h-full object-bottom object-cover'
         loading="eager"

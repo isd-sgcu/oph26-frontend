@@ -54,12 +54,12 @@ export default function CarouselLanding() {
     {
       id: 2,
       type: "image",
-      imageSrc: "/background/background-2.png",
+      imageSrc: "/background/background-2.webp",
     },
     {
       id: 3,
       type: "image",
-      imageSrc: "/background/background-1.png",
+      imageSrc: "/background/background-1.webp",
     },
   ];
 
