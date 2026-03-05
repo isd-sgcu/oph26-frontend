@@ -1138,3 +1138,17 @@ export const FACULTY_DATA: Faculty[] = [
     imagePath: '/info/faculty/dorm.webp',
   },
 ]
+
+export interface Workshop {
+  id: string
+  name: string
+  description: string
+  HasPreregistered: boolean
+  hasLimitParticipants: boolean
+  registerURL: string
+  timeSlot: string // separated by /
+  numRounds: string
+  owner: string
+  locationName: string
+  locationURL: string
+}
