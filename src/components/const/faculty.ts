@@ -1145,10 +1145,135 @@ export interface Workshop {
   description: string
   HasPreregistered: boolean
   hasLimitParticipants: boolean
-  registerURL: string
-  timeSlot: string // separated by /
-  numRounds: string
-  owner: string
-  locationName: string
-  locationURL: string
+  url: string
+  faculty: FacultyType
+  timeSlot?: string // separated by /
+  numRounds?: string
+  owner?: string
+  locationName?: string
+  locationURL?: string
 }
+
+export const WORKSHOP_DATA: Workshop[] = [
+  // คณะครุศาสตร์
+  {
+    id: 'eduw1',
+    name: 'การแข่งขันวิชาการและความเป็นเลิศทางวิทยาศาสตร์ ระดับมัธยมศึกษาตอนปลายv (คิดวิทย์ วิชาการ)',
+    description:
+      'การแข่งขันตอบปัญหาวิทยาศาสตร์ ประเภททีม 3 คน โดยมีขอบเขตของเนื้อหาในรายวิชาฟิสิกส์ เคมี และชีววิทยา ระดับชั้นมัธยมศึกษาตอนปลาย จาก หนังสือสถาบันส่งเสริมการสอนวิทยาศาสตร์และเทคโนโลยี (สสวท.) เป็นแหล่งอ้างอิง',
+    HasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/kitwiz.edu.cu/',
+    faculty: 'edu',
+  },
+  {
+    id: 'eduw2',
+    name: 'การแข่งขัน HIGH S-KRU DEBATE: The Second Competition การแข่งขันโต้วาที ระดับมัธยมศึกษาตอนปลาย ครั้งที่ 2',
+    description:
+      'การแข่งขันโต้วาที โดนรอบคัดเลือกเป็นการแสดงทรรศนะในหัวข้อ “สมควรสร้างสุขภาพใจทั่วหน้าให้กับนักเรียนในไทย” และในรอบ 8 ทีมสุดท้าย รอบ 4 ทีมสุดท้าย และรอบชิงชนะรองชนะเลิศอันดับ 2 และรอบชนะเลิศ เป็นการแข่งขันโต้วาที แสดงทรรศนะภายใต้ญัตติเกี่ยวกับการศึกษา',
+    HasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/edu_cooldebate/',
+    faculty: 'edu',
+  },
+  {
+    id: 'eduw3',
+    name: 'การแข่งขันการประกวดอ่านออกเสียงภาษาไทย เฉลิมพระเกียรติพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว เนื่องในวาระครบ 100 ปี วันสวรรคต พุทธศักราช 2568',
+    description:
+      'การแข่งขันประกวดอ่านออกเสียงภาษาไทยทั้งร้อยแก้วและร้อยกรอง (ทำนองเสนาะ) จากบทพระราชนิพนธ์ในพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว ซึ่งจะแบ่งรอบการแข่งขันเป็นรอบคัดเลือก และรอบชิงชนะเลิศ',
+    HasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/th_langandcult/',
+    faculty: 'edu',
+  },
+  {
+    id: 'eduw4',
+    name: 'ซุ้มวิชาเอก',
+    description:
+      'การนำเสนอข้อมูลพื้นฐานที่เกี่ยวข้องกับวิชาเอก โดยนำเสนอ 3 ประเด็น คือ การรับสมัครเข้าศึกษาต่อ ภาพรวมของการเรียนภายในวิชาเอก รายวิชาและกิจกรรมที่น่าสนใจ และในแต่ละวิชาเอกจะมีการจัดกิจกรรม หรือ workshop ที่เกี่ยวข้องกับสาขาวิชาเอก 20 ซุ้ม จัดแสดง ณ ห้องสุมน อมรวิวัฒน์ และห้องลีลาวดี',
+    HasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/educu.openhouse/',
+    faculty: 'edu',
+  },
+  {
+    id: 'eduw5',
+    name: 'นิทรรศการ',
+    description:
+      'นำเสนอนวัตกรรมทางการศึกษาที่พัฒนาโดยนิสิตและบุคลากรคณะครุศาสตร์ ซึ่งเป็นนวัตกรรมที่มุ่งพัฒนาและแก้ไขปัญหาที่เกิดขึ้นในกระบวนการเรียนรู้และระบบการศึกษาไทย และประชาสัมพันธ์ทุนการศึกษาภายในคณะ',
+    HasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/educu.openhouse/',
+    faculty: 'edu',
+  },
+  {
+    id: 'eduw6',
+    name: 'กิจกรรมกลาง',
+    description:
+      'กิจกรรม Workshop เกี่ยวกับการทำความรู้จักกับวิชาชีพครู หน้าที่ของครูเมื่อประกอบอาชีพครู รวมไปถึงกิจกรรมที่ออกแบบให้สอดคล้องกับวิชาครูที่ได้เรียนในคณะครุศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    HasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/educu.openhouse/',
+    faculty: 'edu',
+  },
+  {
+    id: 'eduw7',
+    name: 'เวทีกลาง',
+    description:
+      'การเสวนาวิชาการ และเป็นพื้นที่แสดงศักยภาพของนักเรียนโรงเรียนสาธิตจุฬาลงกรณ์มหาวิทยาลัย และนิสิตคณะครุศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ผ่านการแสดงต่าง ๆ ติดตามรายละเอียดเพิ่มเติมได้ที่ Instagram : educu.openhouse',
+    HasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/educu.openhouse/',
+    faculty: 'edu',
+  },
+  // คณะจิตวิทยา
+  {
+    id: 'psyw1',
+    name: 'The Psyche’s Symphony college (ซุ้มสอบเข้า)',
+    description:
+      'เป็นซุ้มแนะแนวข้อมูลการสอบเข้าของคณะจิตวิทยาทั้ง2ภาค ( ภาคไทยและภาคอินเตอร์ ) อย่างละเอียด ภายในซุ้มจะมีรายละเอียดของเกณฑ์การรับ ข้อมูลเอกสารที่ต้องยื่น ฯลฯ เพื่อให้ผู้เข้าร่วมได้เตรียมความพร้อมหากมีความสนใจจะเรียนต่อในคณะจิตวิทยา พร้อมทั้งยังแสดงเอกลักษณ์ของทั้งสองภาคเพื่อให้ผู้เข้าร่วมได้เข้าใจถึงความแตกต่างของแต่ละภาคและตัดสินใจเลือกภาควิชาที่เหมาะกับตนเองได้ดียิ่งขึ้น',
+    HasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/psychecu.openhouse',
+    faculty: 'psy',
+  },
+  {
+    id: 'psyw2',
+    name: 'Psyche’s Zenith Route (ซุ้มคณะ)',
+    description:
+      'เป็นซุ้มแนะนำคณะและสาขาวิชาจิตวิทยาที่เรียนเบื้องต้น ได้แก่ จิตวิทยาพัฒนาการ จิตวิทยาปริชาน จิตวิทยาคลินิก จิตวิทยาการปรึกษา จิตวิทยาสังคม จิตวิทยาอุตสาหกรรมและองค์กรณ์ เพื่อให้ผู้เข้าร่วมได้เห็นภาพของการเรียนจิตวิทยามากขึ้น แต่ละสาขาวิชาจะมีการแนะนำการเรียนและยกตัวอย่างเนื้อหาการเรียนผ่านกิจกรรมที่น่าสนใจ รวมถึงแนะนำการสาขาที่ทางคณะจิตวิทยาเปิดสอนในระดับชั้นป.โทและเอก',
+    HasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/psychecu.openhouse',
+    faculty: 'psy',
+  },
+  {
+    id: 'psyw3',
+    name: 'The Lunar Mindscape (ซุ้ม Workshop)',
+    description:
+      'Workshop บูรณาการความรู้ทางจิตวิทยาสาขาต่าง ๆ ให้ผู้เข้าร่วมได้ลงมือทำจริง ผ่านกิจกรรมจำลองสถานการณ์และการสะท้อนคิด เพื่อเห็นภาพคณะจิตวิทยา และสามารถนำไปประยุกต์ใช้ในชีวิตประจำวันได้',
+    HasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/psychecu.openhouse',
+    faculty: 'psy',
+  },
+  // คณะทันตแพทยศาสตร์
+  // คณะนิติศาสตร์
+  // คณะนิเทศศาสตร์
+  // คณะพาณิชยศาสตร์และการบัญชี
+  // คณะแพทย์ศาสตร์
+  // คณะเภสัชศาสตร์
+  // คณะรัฐศาสตร์
+  // คณะวิทยาศาสตร์
+  // คณะวิทยาศาสตร์การกีฬา
+  // คณะวิศวกรรมศาสตร์
+  // คณะศิลปกรรมศาสตร์
+  // คณะเศรษฐศาสตร์
+  // คณะสถาปัตยกรรมศาสตร์
+  // คณะสหเวชศาสตร์
+  // คณะสัตวแพทยศาสตร์
+  // คณะอักษรศาสตร์
+  // สถาบันนวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย
+  // คณะเกษตรศาสตร์บูรณาการ
+  // หอพักนิสิตจุฬาลงกรณ์มหาวิทยาลัย
+]
