@@ -1,0 +1,144 @@
+import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { FlatIcon } from '@/components/FlatIcon'
+import i18n from '@/lib/i18n'
+import { Achievement } from '@/types/achievement'
+import { achievementShare1, achievementShare2, achievementShare3, achievementShareOverall } from '@/utils/achievementShareTemplate'
+
+type Props = {
+  open: boolean
+  onClose: () => void
+  achievement: Achievement | null
+  name: string
+}
+
+const SharePopup = ({ open, onClose, achievement, name }: Props) => {
+  const [image, setImage] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if (open) {
+      setVisible(true)
+      generateImage()
+    }
+  }, [open])
+
+  const generateImage = async () => {
+    try {
+      setLoading(true)
+
+      const lang = i18n.language === 'th' ? 0 : 1
+      if (achievement?.variant === 'var1') {
+        const result = await achievementShare1(name, achievement.stat, lang)
+        setImage(result)
+      } else if (achievement?.variant === 'var2') {
+        const result = await achievementShare2(name, achievement.stat, achievement.top, lang)
+        setImage(result)
+      } else if (achievement?.variant === 'var3') {
+        const result = await achievementShare3(name, achievement.stat, achievement.faculty, lang)
+        setImage(result)
+      } else if (achievement?.variant === 'overall') {
+        const result = await achievementShareOverall(name, achievement.stat, achievement.miniCard1Faculty, achievement.miniCard1Count, achievement.miniCard2Rank, lang)
+        setImage(result)
+      } else if (achievement?.variant === 'collectedPieces') {
+        // generate image for collectedPieces
+      }
+
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleShare = async () => {
+
+    // try {
+    //   const response = await fetch(image)
+    //   const blob = await response.blob()
+
+    //   const file = new File([blob], 'game-share.png', {
+    //     type: 'image/png',
+    //   })
+
+    //   if (navigator.share && navigator.canShare({ files: [file] })) {
+    //     await navigator.share({
+    //       files: [file],
+    //       title: 'My Game Result',
+    //     })
+    //   } else {
+    //     downloadImage(image)
+    //   }
+    // } catch (err) {
+    //   console.error(err)
+    // }
+  }
+
+  const downloadImage = (url: string) => {
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'game-share.png'
+    a.click()
+  }
+
+
+  const handleClose = () => {
+    setVisible(false)
+    setTimeout(() => {
+      setImage(null)
+      onClose()
+    }, 300) // match animation duration
+  }
+
+  if (!open) return null
+
+  return (
+    <div className="absolute inset-0 z-50 flex flex-col justify-end">
+      <div
+        className={`relative w-full rounded-t-2xl bg-main-beige py-8
+        flex flex-col items-center gap-6
+        [box-shadow:inset_1px_1px_5px_0_rgba(0,0,0,0.3)]
+        transform transition-transform duration-300 ease-out
+        ${visible ? 'translate-y-0' : 'translate-y-full'}`}
+      >
+        <div className="relative w-full mb-4 flex items-center justify-center">
+            <h2 className="text-4xl font-bold text-main-pink">
+                Share
+            </h2>
+
+            <button
+                onClick={handleClose}
+                className="absolute right-[10%] font-bold text-lg text-main-pink"
+            >
+                ✕
+            </button>
+        </div>
+
+        {loading && (
+        <div className="flex h-[65dvh] items-center justify-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-pink-400 border-t-transparent" />
+        </div>
+        )}
+
+        {!loading && image && (
+            <img src={image} alt="Achievement Share" className="w-[80%] h-auto rounded-lg shadow-md" />
+        )}
+
+        <Button 
+        size="lg" className="bg-gradient-purple"
+        onClick={handleShare}
+        >
+          <span className="text-white">เลือก {}</span>
+          <FlatIcon
+          name="fi-rr-download"
+          className="text-white"
+          size={16}
+          />
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+export default SharePopup

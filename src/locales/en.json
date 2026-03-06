@@ -82,16 +82,16 @@
         "titleGroup": "Achievements", 
         "cardGroup": { 
           "var1": {
-            "title": "You are player number",
-            "description": "player to collect all pieces and complete the picture."
+            "title": "You are the",
+            "description": "to collect all pieces and complete the picture."
           },
           "var2": {
-            "title": "You have so many friends from",
-            "description": "placing you in the top {{top}}% of players."
+            "title": "You have friends from",
+            "description": "in the top {{top}}% with the most friends from this faculty."
           },
           "var3": {
             "title": "There are",
-            "description": "player finding {{faculty}} friends like you."
+            "description": "others finding {{faculty}} friends like you."
           },
           "overall": {
             "title": "You've collected",

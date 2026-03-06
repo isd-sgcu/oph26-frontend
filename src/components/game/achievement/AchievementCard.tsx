@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Piece } from '../Piece'
+import { Button } from '@/components/ui/button'
+import { FlatIcon } from '@/components/FlatIcon'
 
 type BaseProps = {
   stat: string | number
@@ -53,7 +55,7 @@ type CollectedPiecesProps = {
 
 type AchievementCardProps = Var1Props | Var2Props | Var3Props | OverallProps | CollectedPiecesProps
 
-export default function AchievementCard(props: AchievementCardProps) {
+export default function AchievementCard({props, onShare}:{props: AchievementCardProps, onShare?: () => void}) {
   const { i18n, t } = useTranslation()
   const { variant, stat } = props
 
@@ -64,7 +66,7 @@ export default function AchievementCard(props: AchievementCardProps) {
     const s = ["th", "st", "nd", "rd"]
     const v = n % 100
     return n + (s[(v - 20) % 10] || s[v] || s[0])
-    }
+  }
 
   return (
     // !!!!!!!!!!!!!!!SET MAX WIDTH TO SYSTEM 80% MAX WIDTH !!!!!!!!!!!!!!!
@@ -79,13 +81,18 @@ export default function AchievementCard(props: AchievementCardProps) {
 
         {/* Stat Circle */}
         { variant !== 'collectedPieces' ? (
-            <div className="bg-gradient-pink flex aspect-square w-full max-w-64 items-center justify-center rounded-full">
+            <div className="bg-gradient-pink flex flex-col aspect-square w-full max-w-64 items-center justify-center rounded-full">
                 <span className="text-7xl font-bold text-white text-shadow-[2px_2px_8px_#CA2791]">
                     {variant === 'var1' && isEnglish && typeof stat === 'number'
                         ? getOrdinal(stat)
                         : stat}
                     {variant === 'var3' && '%'}
                 </span>
+                {variant === 'overall' && (
+                    <span className="text-xl font-normal text-white">
+                        {isEnglish ? ((stat as number) > 1 ? 'pieces' : 'piece') : 'ชิ้น'}
+                    </span>
+                )}
             </div>
         ) : null}
 
@@ -130,11 +137,17 @@ export default function AchievementCard(props: AchievementCardProps) {
             </div>
 
             <div className="bg-gradient-beige flex h-26 w-26 items-center justify-center rounded-full">
-              <span className="text-main-pink text-3xl">
-                {isEnglish
-                    ? getOrdinal(props.miniCard2Rank)
-                    : props.miniCard2Rank}
-              </span>
+              { props.miniCard2Rank > 0 ? (
+                <span className="text-main-pink text-3xl">
+                  {isEnglish
+                      ? getOrdinal(props.miniCard2Rank)
+                      : props.miniCard2Rank
+                  }
+                </span>
+                ) : (
+                <img src="/game/locked.svg" alt="locked" />
+                )
+              }
             </div>
 
             <span className="">
@@ -174,8 +187,8 @@ export default function AchievementCard(props: AchievementCardProps) {
               { key: 'polsci', label: i18n.language === 'th' ? 'รัฐศาสตร์' : 'Political Science' , count: props.polsci, variant: 1 },
               { key: 'cbs', label: i18n.language === 'th' ? 'พาณิชยศาสตร์\nและการบัญชี' : 'Commerce and Accountancy' , count: props.cbs, variant: 6 },
               { key: 'spsc', label: i18n.language === 'th' ? 'วิทยาศาสตร์\nการกีฬา' : 'Sports\nScience' , count: props.spsc, variant: 2 },
-              { key: 'cusar', label: i18n.language === 'th' ? 'สำนักวิชาทรัพยากร\nการเกษตร' : 'Agricultural Resources' , count: props.cusar, variant: 5 },
-              { key: 'scii', label: i18n.language === 'th' ? 'สถาบันนวัตกรรม\nบูรณาการ' : 'Integrated Innovation' , count: props.scii, variant: 1 },
+              { key: 'cusar', label: i18n.language === 'th' ? 'สำนักวิชาทรัพยากร\nการเกษตร' : 'Agricultural\nResources' , count: props.cusar, variant: 5 },
+              { key: 'scii', label: i18n.language === 'th' ? 'สถาบันนวัตกรรม\nบูรณาการ' : 'Integrated\nInnovation' , count: props.scii, variant: 1 },
             ].map(({ key, label, count, variant }) => {
               const isLocked = count === 0
               const displayCount = isLocked ? 1 : count
@@ -198,7 +211,15 @@ export default function AchievementCard(props: AchievementCardProps) {
         )}
 
         {/* Share button */}
-        <div className="absolute right-4 bottom-4 flex h-8 w-8 items-center justify-center"></div>
+        <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center">
+          <Button
+            className='scale-75 bg-gradient-purple absolute'
+            size="icon"
+            onClick={onShare}
+          >
+            <FlatIcon name="fi-rr-share" size={20} className="text-white" />
+          </Button>
+        </div>
       </div>
     </div>
   )
