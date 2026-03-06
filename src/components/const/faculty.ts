@@ -1635,7 +1635,180 @@ export const WORKSHOP_DATA: Workshop[] = [
     locationName: 'อาคารไชยยศสมบัติ',
   },
   // คณะแพทย์ศาสตร์
+
   // คณะเภสัชศาสตร์
+  {
+    id: 'pharmw1',
+    name: 'ฐานแนะแนวการเรียน',
+    description:
+      'ฐานแนะแนวการเรียนของเราพร้อมให้คำแนะนำและตอบคำถามน้อง ๆ ทุกคนตั้งแต่หลักสูตร การเตรียมตัวสอบเข้า การเรียนและสังคมภายในคณะจากประสบการณ์ตรงของรุ่นพี่ตัวจริง กิจกรรมสุด EXCLUSIVE แบบนี้ จะพลาดไม่ได้แล้วนะ!',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 12:00 / 12:30 - 16:15',
+    locationName: 'ใต้อาคาร 80 ปี หน้าโรงอาหาร ',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw2',
+    name: 'การแนะแนววิชาชีพ',
+    description:
+      'เภสัชที่ไม่ได้อยู่แค่ในร้านยา และบทบาทในยุคเอไอเฟื่องฟู พบกับวิทยากรสุด exclusive ที่จะเปิดมุมมองชาวเภสัชในทุก ๆ ด้าน กับการบรรยายหัวข้อ “บทบาทของเภสัชกรในยุคโลกาภิวัตน์” พิเศษสุด ๆ ในช่วงถาม-ตอบ ที่พร้อมตอบคำถามที่ทุกคนอยากรู้จากผู้เชี่ยวชาญที่หาจากที่ไหนไม่ได้!!!',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '9:00 - 11:00 / 13:00 - 15:00',
+    locationName: 'อาคาร 80 ปี ห้อง 702',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw3',
+    name: 'ฐานวิชาการ Manufacturing',
+    description:
+      'เภสัชกรสายการผลิตคืออะไร? ต้องมามุงกันที่ฐาน MANUFACTURING! เราสามารถควบคุมเครื่องจักรและเครื่องมือที่หลากหลาย เรียนรู้ตั้งแต่เริ่มว่ายาเม็ด เกิดขึ้นมาได้อย่างไร รวมถึงขั้นตอนการทดสอบคุณภาพยา และได้ลองใช้เครื่องมือที่ใช้อุตสาหกรรมจริง',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot:
+      '8:15-9:00 / 9:15-10:00 / 10:15-11:00 / 11:15-11:45 / 12:45-13:30 / 13:45-14:30 / 14:45-15:30 / 15:45-16:15',
+    locationName: 'อาคารเภสัชศาสตร์ ห้องตอกเม็ดยา',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw4',
+    name: 'ฐานวิชาการ Medical Chemistry',
+    description:
+      "MED CHEM ไม่ได้มีดีแค่หลอดทดลอง แต่ยังมี 'เครื่องมือวิเคราะห์สุดไฮเทค' มาโชว์น้อง ๆ อีกด้วย!  มาดูกันว่า QC ยาเขาทำกันยังไง มาเจอกันได้ที่ฐาน MED CHEM เลยจ้า!",
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'อาคาร 80 ปี ห้อง 301',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw5',
+    name: 'ฐานวิชาการ Pharmaceutics',
+    description:
+      'มาเปิดเบื้องหลังอีกมิติของยา ที่ฐาน PHARMACEUTICS มารู้จักกับยารูปแบบอื่น ๆ ที่ไม่ได้มีแค่ยาเม็ดหรือแคปซูล พร้อมเชื่อมโยงความรู้จากยาไปสู่ผลิตภัณฑ์ดูแลผิวที่ใช้ในชีวิตประจำวัน ใครอยากรู้ว่าออกแบบและพัฒนากันยังไง ฐาน PHARMACEUTICS ห้ามพลาด!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'อาคาร 80 ปี ห้อง 303',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw6',
+    name: 'ฐานวิชาการ Pharmacognosy',
+    description:
+      'ฐาน PHARMACOGNOSY จะพาน้อง ๆ ไปดู "สมุนไพร" ผ่านการทัวร์ MUSEUM  มาหาคำตอบกันว่า จากใบไม้หนึ่งใบกลายมาเป็นยาช่วยชีวิตคนได้ยังไง? ฐานนี้มีคำตอบ!',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot:
+      '8:15-8:45 / 8:50-9:20 / 9:25-9:55 / 10:00-10:30 / 10:35-11:05 / 11:10-11:40 / 12:45-13:15 / 13:20-13:50 / 13:55-14:25 / 14:30-15:00 / 15:05-15:35 / 15:40-16:10',
+    locationName: 'พิพิธภัณฑ์สมุนไพร ชั้น 3 โอสถศาลา',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw7',
+    name: 'ฐานวิชาการ Drug Discovery & Development (DDD)',
+    description:
+      'เคยสงสัยไหมว่า ยารู้ได้ไงว่าต้องวิ่งไปรักษาตรงไหน? แล้วระหว่างการเดินทางยาจะต้องเจออะไรในร่างกายบ้าง? ฐาน DRUG DISCOVERY & DEVELOPMENT จะพาน้อง ๆ ไปสนุกกับ 2 MISSION ภายในฐาน ห้ามพลาด!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 401',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw8',
+    name: 'ฐานวิชาการ Social and Administrative Pharmacy (SAP)',
+    description:
+      'อยากรู้ไหมว่าเภสัชกรมีบทบาทใน “ระบบสุขภาพทั้งประเทศ” อย่างไร ฐานนี้จะพาไปรู้จักเส้นทางอาชีพที่อยู่เบื้องหลังความปลอดภัยของประชาชน ไม่ว่าจะเป็นงานคุ้มครองผู้บริโภคด้านยา งานส่งเสริมสุขภาวะ ไปจนถึง ผู้ดูแลการขออนุมัติและขึ้นทะเบียนผลิตภัณฑ์สุขภาพ มาค้นพบว่าเภสัชกรสามารถขับเคลื่อนระบบสุขภาพได้มากกว่าที่คิด!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 503',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw9',
+    name: 'ฐานวิชาการ เภสัชกรรมร้านยา',
+    description:
+      'มาลองเป็นเภสัชกรร้านยาตัวจริง เรียนรู้บทบาทการจัดเตรียมยาให้ผู้ป่วย ฝึกนับเม็ดยาด้วยถาดนับยา และทดลองเขียนฉลากยาแบบเภสัชกรตัวน้อย ให้ถูกต้อง ครบถ้วน และปลอดภัย แล้วจะเข้าใจว่าทุกขั้นตอนเล็ก ๆ ล้วนส่งผลต่อความปลอดภัยของคนไข้',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 402',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw10',
+    name: 'ฐานวิชาการ เภสัชกรรมชุมชน',
+    description:
+      'มาลองเป็นเภสัชกรร้านยาตัวจริง เรียนรู้บทบาทการจัดเตรียมยาให้ผู้ป่วย ฝึกนับเม็ดยาด้วยถาดนับยา และทดลองเขียนฉลากยาแบบเภสัชกรตัวน้อย ให้ถูกต้อง ครบถ้วน และปลอดภัย แล้วจะเข้าใจว่าทุกขั้นตอนเล็ก ๆ ล้วนส่งผลต่อความปลอดภัยของคนไข้',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 402',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw11',
+    name: 'ฐานวิชาการ เภสัชกรรมโรงพยาบาล',
+    description:
+      'เภสัชกรในโรงพยาบาลมีหน้าที่แค่จ่ายยาเท่านั้นไหมนะ? มารู้จักหลักการสื่อสาร ISBAR ผ่านสถานการณ์จำลองและกิจกรรมภายในฐาน พร้อมโอกาสสวมบทบาทเป็นเภสัชกรตัวน้อยในทีมรักษา ที่ฐานเภสัชกรโรงพยาบาล!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 402',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw12',
+    name: 'ฐานวิชาการ Pharmaceutical Microbiology',
+    description:
+      'กว่ายาจะถึงมือคนไข้ ต้องผ่าน “ด่านจุลชีวะ” ก่อนเสมอ! เพราะโลกของเภสัชฯ ไม่ได้มีแค่เม็ดยา แต่ยังมีโลกของจุลินทรีย์ที่มองไม่เห็น  อยากรู้ไหมว่าจุลชีวะเกี่ยวข้องกับงานเภสัชยังไง? มาเจอกันที่ฐาน Microbiology ได้เลย!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 501',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+  {
+    id: 'pharmw13',
+    name: 'ฐานวิชาการ Pharmaceutical Nutrition',
+    description:
+      'ใครบอกว่าเภสัชมีแต่เรื่องยา? เรื่อง “กิน” ก็สำคัญไม่แพ้กันนะ! มารู้จักโลกของโภชนาการในมุมเภสัชกร กับกิจกรรมสนุก ๆ ที่ได้ทั้งความรู้และความมันส์  อยากอัปสกิลเรื่องปากท้องแบบโปร ๆ มาเจอกันที่ฐาน Nutrition เลย!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rxcu_openhouse?igsh=NjUxam5yZGh0YzBu',
+    faculty: 'pharm',
+    timeSlot: '8:15 - 9:55 / 10:05 - 11:45 / 12:45 - 14:25 / 14:35 - 16:15',
+    locationName: 'ตึก 80 ปี ห้อง 502',
+    locationURL: 'https://maps.app.goo.gl/NafCdUmNp18ACybb7',
+  },
+
   // คณะรัฐศาสตร์
   // คณะวิทยาศาสตร์
   // คณะวิทยาศาสตร์การกีฬา
