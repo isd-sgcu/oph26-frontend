@@ -1143,12 +1143,11 @@ export interface Workshop {
   id: string
   name: string
   description: string
-  HasPreregistered: boolean
+  hasPreregistered: boolean
   hasLimitParticipants: boolean
   url: string
   faculty: FacultyType
   timeSlot?: string // separated by /
-  numRounds?: string
   owner?: string
   locationName?: string
   locationURL?: string
@@ -1161,7 +1160,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'การแข่งขันวิชาการและความเป็นเลิศทางวิทยาศาสตร์ ระดับมัธยมศึกษาตอนปลายv (คิดวิทย์ วิชาการ)',
     description:
       'การแข่งขันตอบปัญหาวิทยาศาสตร์ ประเภททีม 3 คน โดยมีขอบเขตของเนื้อหาในรายวิชาฟิสิกส์ เคมี และชีววิทยา ระดับชั้นมัธยมศึกษาตอนปลาย จาก หนังสือสถาบันส่งเสริมการสอนวิทยาศาสตร์และเทคโนโลยี (สสวท.) เป็นแหล่งอ้างอิง',
-    HasPreregistered: true,
+    hasPreregistered: true,
     hasLimitParticipants: true,
     url: 'https://www.instagram.com/kitwiz.edu.cu/',
     faculty: 'edu',
@@ -1171,7 +1170,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'การแข่งขัน HIGH S-KRU DEBATE: The Second Competition การแข่งขันโต้วาที ระดับมัธยมศึกษาตอนปลาย ครั้งที่ 2',
     description:
       'การแข่งขันโต้วาที โดนรอบคัดเลือกเป็นการแสดงทรรศนะในหัวข้อ “สมควรสร้างสุขภาพใจทั่วหน้าให้กับนักเรียนในไทย” และในรอบ 8 ทีมสุดท้าย รอบ 4 ทีมสุดท้าย และรอบชิงชนะรองชนะเลิศอันดับ 2 และรอบชนะเลิศ เป็นการแข่งขันโต้วาที แสดงทรรศนะภายใต้ญัตติเกี่ยวกับการศึกษา',
-    HasPreregistered: true,
+    hasPreregistered: true,
     hasLimitParticipants: true,
     url: 'https://www.instagram.com/edu_cooldebate/',
     faculty: 'edu',
@@ -1181,7 +1180,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'การแข่งขันการประกวดอ่านออกเสียงภาษาไทย เฉลิมพระเกียรติพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว เนื่องในวาระครบ 100 ปี วันสวรรคต พุทธศักราช 2568',
     description:
       'การแข่งขันประกวดอ่านออกเสียงภาษาไทยทั้งร้อยแก้วและร้อยกรอง (ทำนองเสนาะ) จากบทพระราชนิพนธ์ในพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว ซึ่งจะแบ่งรอบการแข่งขันเป็นรอบคัดเลือก และรอบชิงชนะเลิศ',
-    HasPreregistered: true,
+    hasPreregistered: true,
     hasLimitParticipants: true,
     url: 'https://www.instagram.com/th_langandcult/',
     faculty: 'edu',
@@ -1191,7 +1190,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'ซุ้มวิชาเอก',
     description:
       'การนำเสนอข้อมูลพื้นฐานที่เกี่ยวข้องกับวิชาเอก โดยนำเสนอ 3 ประเด็น คือ การรับสมัครเข้าศึกษาต่อ ภาพรวมของการเรียนภายในวิชาเอก รายวิชาและกิจกรรมที่น่าสนใจ และในแต่ละวิชาเอกจะมีการจัดกิจกรรม หรือ workshop ที่เกี่ยวข้องกับสาขาวิชาเอก 20 ซุ้ม จัดแสดง ณ ห้องสุมน อมรวิวัฒน์ และห้องลีลาวดี',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/educu.openhouse/',
     faculty: 'edu',
@@ -1201,7 +1200,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'นิทรรศการ',
     description:
       'นำเสนอนวัตกรรมทางการศึกษาที่พัฒนาโดยนิสิตและบุคลากรคณะครุศาสตร์ ซึ่งเป็นนวัตกรรมที่มุ่งพัฒนาและแก้ไขปัญหาที่เกิดขึ้นในกระบวนการเรียนรู้และระบบการศึกษาไทย และประชาสัมพันธ์ทุนการศึกษาภายในคณะ',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/educu.openhouse/',
     faculty: 'edu',
@@ -1211,7 +1210,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'กิจกรรมกลาง',
     description:
       'กิจกรรม Workshop เกี่ยวกับการทำความรู้จักกับวิชาชีพครู หน้าที่ของครูเมื่อประกอบอาชีพครู รวมไปถึงกิจกรรมที่ออกแบบให้สอดคล้องกับวิชาครูที่ได้เรียนในคณะครุศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/educu.openhouse/',
     faculty: 'edu',
@@ -1221,7 +1220,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'เวทีกลาง',
     description:
       'การเสวนาวิชาการ และเป็นพื้นที่แสดงศักยภาพของนักเรียนโรงเรียนสาธิตจุฬาลงกรณ์มหาวิทยาลัย และนิสิตคณะครุศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ผ่านการแสดงต่าง ๆ ติดตามรายละเอียดเพิ่มเติมได้ที่ Instagram : educu.openhouse',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/educu.openhouse/',
     faculty: 'edu',
@@ -1232,7 +1231,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'The Psyche’s Symphony college (ซุ้มสอบเข้า)',
     description:
       'เป็นซุ้มแนะแนวข้อมูลการสอบเข้าของคณะจิตวิทยาทั้ง2ภาค ( ภาคไทยและภาคอินเตอร์ ) อย่างละเอียด ภายในซุ้มจะมีรายละเอียดของเกณฑ์การรับ ข้อมูลเอกสารที่ต้องยื่น ฯลฯ เพื่อให้ผู้เข้าร่วมได้เตรียมความพร้อมหากมีความสนใจจะเรียนต่อในคณะจิตวิทยา พร้อมทั้งยังแสดงเอกลักษณ์ของทั้งสองภาคเพื่อให้ผู้เข้าร่วมได้เข้าใจถึงความแตกต่างของแต่ละภาคและตัดสินใจเลือกภาควิชาที่เหมาะกับตนเองได้ดียิ่งขึ้น',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/psychecu.openhouse',
     faculty: 'psy',
@@ -1242,7 +1241,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'Psyche’s Zenith Route (ซุ้มคณะ)',
     description:
       'เป็นซุ้มแนะนำคณะและสาขาวิชาจิตวิทยาที่เรียนเบื้องต้น ได้แก่ จิตวิทยาพัฒนาการ จิตวิทยาปริชาน จิตวิทยาคลินิก จิตวิทยาการปรึกษา จิตวิทยาสังคม จิตวิทยาอุตสาหกรรมและองค์กรณ์ เพื่อให้ผู้เข้าร่วมได้เห็นภาพของการเรียนจิตวิทยามากขึ้น แต่ละสาขาวิชาจะมีการแนะนำการเรียนและยกตัวอย่างเนื้อหาการเรียนผ่านกิจกรรมที่น่าสนใจ รวมถึงแนะนำการสาขาที่ทางคณะจิตวิทยาเปิดสอนในระดับชั้นป.โทและเอก',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/psychecu.openhouse',
     faculty: 'psy',
@@ -1252,13 +1251,221 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'The Lunar Mindscape (ซุ้ม Workshop)',
     description:
       'Workshop บูรณาการความรู้ทางจิตวิทยาสาขาต่าง ๆ ให้ผู้เข้าร่วมได้ลงมือทำจริง ผ่านกิจกรรมจำลองสถานการณ์และการสะท้อนคิด เพื่อเห็นภาพคณะจิตวิทยา และสามารถนำไปประยุกต์ใช้ในชีวิตประจำวันได้',
-    HasPreregistered: false,
+    hasPreregistered: false,
     hasLimitParticipants: true,
     url: 'https://www.instagram.com/psychecu.openhouse',
     faculty: 'psy',
   },
   // คณะทันตแพทยศาสตร์
+  {
+    id: 'dentw1',
+    name: 'ฐานแล็บดัดลวด (Orthodontics Lab)',
+    description:
+      'หลายคนอาจจะไม่รู้ว่าลวดกับงานทันตกรรมเป็นอีกอย่างที่เป็นของคู่กัน โดยเฉพาะในงานจัดฟัน และงานทันตกรรมประดิษฐ์ มาลองฝึกดัดลวด ตั้งแต่แบบรูปพื้นฐาน ไปจนถึงชิ้นงานที่หมอฟันใช้กันจริง ๆ ได้แล้วที่แล็บดัดลวด!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.ticketmelon.com/dentcuopenhouse2026/lab-registration',
+    faculty: 'dent',
+    timeSlot:
+      '08:50 - 09:30 / 09:40 - 10:20 / 10:30 - 11:10 / 11:20 - 12:00 / 12:50 - 13:30 / 13:40 - 14.20 / 14:30 - 15:10 / 15:20 - 16:00',
+  },
+  {
+    id: 'dentw2',
+    name: 'ฐานแล็บกรอฟัน-อุดฟัน',
+    description:
+      'หากเรานึกถึงงานของทันตแพทย์ สิ่งแรก ๆ ที่เรามักจะนึกถึงคือการอุดฟัน เพื่อรักษาฟันผุใช่มั้ยล่ะ! ในแล็บนี้จะให้น้อง ๆ ทุกคนจำลองตนเองเป็นทันตแพทย์  โดยจะได้ฝึกกรอฟันเอาฟันผุออกด้วยหัวกรอของทันตแพทย์ตัวจริง และได้อุดฟันด้วยวัสดุอุดจำลองด้วยนะ!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.ticketmelon.com/dentcuopenhouse2026/lab-registration',
+    faculty: 'dent',
+    timeSlot:
+      '08:50 - 09:30 / 09:40 - 10:20 / 10:30 - 11:10 / 11:20 - 12:00 / 12:50 - 13:30 / 13:40 - 14.20 / 14:30 - 15:10 / 15:20 - 16:00',
+  },
+  {
+    id: 'dentw3',
+    name: 'ฐานแล็บตรวจฟัน (Indirect Vision &Ergonomics Lab)',
+    description:
+      'เคยสงสัยกันไหมว่า..หมอฟันตรวจฟันในมุมที่มองไม่เห็นของช่องปากคนไข้ได้ยังไง? หมอฟันจำเป็นต้องมีกระจกหรือ “mouth mirror” ไว้ช่วย! แล็บตรวจฟันจะสอนน้อง ๆ ใช้อุปกรณ์ตรวจฟันในหุ่นคนไข้จำลอง พร้อมด้วยวิธีนั่งที่เหมาะสมกับการทำงานของหมอฟันด้วย!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.ticketmelon.com/dentcuopenhouse2026/lab-registration',
+    faculty: 'dent',
+    timeSlot:
+      '08:50 - 09:30 / 09:40 - 10:20 / 10:30 - 11:10 / 11:20 - 12:00 / 12:50 - 13:30 / 13:40 - 14.20 / 14:30 - 15:10 / 15:20 - 16:00',
+  },
+  {
+    id: 'dentw4',
+    name: 'ฐานแล็บเย็บแผล (Oral Surgery Lab)',
+    description:
+      'อีกหนึ่งการรักษาของหมอฟันที่แทบทุกคนต้องเจอสักครั้งในชีวิตอย่างการผ่าฟันคุด หมอฟันต้องทำการผ่าเหงือกเข้าไปเอาฟันออกมา สุดท้ายก็ต้องเย็บแผลที่ผ่าเหงือกเข้าไป เพราะฉะนั้นหมอฟันก็ต้องฝึกเย็บแผลด้วยนั่นเอง แล็บนี้เราจะพาน้อง ๆ มาฝึกเย็บแผล และได้เห็นว่าหมอฟันใช้อุปกรณ์อะไรและทำกันยังไงบ้าง!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.ticketmelon.com/dentcuopenhouse2026/lab-registration',
+    faculty: 'dent',
+    timeSlot:
+      '08:50 - 09:30 / 09:40 - 10:20 / 10:30 - 11:10 / 11:20 - 12:00 / 12:50 - 13:30 / 13:40 - 14.20 / 14:30 - 15:10 / 15:20 - 16:00',
+  },
+  {
+    id: 'dentw5',
+    name: 'Tour Gross',
+    description:
+      'ทำไมทันตแพทย์ถึงต้องเรียนร่างกายมนุษย์กันนะ? มาศึกษา Histology ในกล้องจุลทรรศน์ และ Gross Anatomy ในร่างอาจารย์ใหญ่ และความสำคัญของการศึกษาร่างกายมนุษย์กับอาชีพทันตแพทย์',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 12:00 / 12:50 - 16:00',
+  },
+  {
+    id: 'dentw6',
+    name: 'Tour Clinic',
+    description:
+      'พี่ ๆ ชั้นปีคลินิกจะพาน้อง ๆ ไปดู "ยูนิต" หรือเก้าอี้ทำฟันที่ใช้รักษาคนไข้จริงแบบกลุ่มเล็ก ได้เห็นสภาพแวดล้อมการเรียนชั้นปี 4-6 ของนิสิตทันตะ รวมไปถึงเครื่องมือที่ใช้ในเคสรักษาที่ต่างกันออกไป และยังได้ลองปรับเก้าอี้ทำฟันด้วยตัวเองอีกด้วยนะ!',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 12:00 / 12:50 - 16:00',
+  },
+  {
+    id: 'dentw7',
+    name: 'นิทรรศการ',
+    description:
+      'จัดแสดงชีวิตนิสิตทันตะ จุฬาฯ 6 ชั้นปี ทั้งปีพรีคลินิกและปีคลินิก ทั้งเรื่องเรียน กิจกรรม และอื่น ๆ อีกมากมาย',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 16:00',
+  },
+  {
+    id: 'dentw8',
+    name: 'Dent Talk',
+    description:
+      'Talk Show แชร์ประสบการณ์และคำแนะนำในหัวข้อต่าง ๆ โดยนิสิตปัจจุบันและนิสิตเก่าทันตะ จุฬาฯ ได้แก่ "ทันตะติดได้ ทำไงดีเอ่ย", "เรียนจบทั้งที ไปไหนต่อดีน้า", "วัน ๆ ของเด็กทันตะ", และ "ใต้เตียงทันตะ จุฬาฯ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot:
+      'Sat 10:30 - 11:30 / 12:50 - 14:20 / Sun 9:40 - 11:10 / 12:50 - 14:20',
+  },
+  {
+    id: 'dentw9',
+    name: 'Consult',
+    description:
+      'ปรึกษาพี่ ๆ ทันตะ จุฬาฯ แบบ 1:1 หรือแบบกลุ่มเล็ก ทั้งเรื่องการสอบเข้า ประสบการณ์ต่าง ๆ และการเรียนในคณะทันตะ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 12:00 / 12:50 - 16:00',
+  },
+  {
+    id: 'dentw10',
+    name: 'พิพิธภัณฑ์ร่างกายมนุษย์',
+    description:
+      '1 ใน 11 พิพิธภัณฑ์ของโลกและพิพิธภัณฑ์แห่งแรกของเอเชียตะวันออกเฉียงใต้ ที่จัดแสดงร่างกายมนุษย์ด้วยเทคนิคพลาสติเนชัน จัดแสดงร่างกายและชิ้นส่วนมนุษย์แบบ 3 มิติ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 16:00',
+  },
+  {
+    id: 'dentw11',
+    name: 'พิพิธภัณฑสถานวาจวิทยาวัฑฒน์',
+    description:
+      'แหล่งรวบรวมสิ่งอ้างอิงทางประวัติศาสตร์ วิวัฒนาการที่หลากหลายทางทันตกรรมของไทย เป็นศูนย์รวมความรู้แก่ผู้ศึกษาทางทันตแพทย์ได้ใช้ประโยชน์ในการเรียนรู้และศึกษาค้นคว้า พิพิธภัณฑสถานแห่งนี้มีประวัติความเป็นมาที่ยาวนาน นับเป็นความภูมิใจของชาวทันตแพทศาสตร์ จุฬาฯ เป็นอย่างยิ่ง',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 16:00',
+  },
+  {
+    id: 'dentw12',
+    name: 'เพนต์ฟัน (Paint Fun)',
+    description:
+      'กิจกรรมเพนต์ฟันปูนที่เปิดให้น้อง ๆ ได้นั่งพักผ่อนหย่อนใจ วาดลวดลาย และระบายสีปูนปลาสเตอร์รูปฟันซึ่งสามารถนำกลับบ้านเป็นของที่ระลึกจาก DentCU Open House 2026 ได้อีกด้วยยย',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/dentcuopenhouse',
+    faculty: 'dent',
+    timeSlot: '8:50 - 12:00 / 12:50 - 16:00',
+  },
   // คณะนิติศาสตร์
+  {
+    id: 'laww1',
+    name: 'นิทรรศการ',
+    description:
+      'มีการให้ความรู้ทางกฎหมาย ความหลากหลายทางอาชีพในสายนิติศาสตร์ และแนะนำชมรมภายในคณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/lawchulaopenhouse?igsh=MWE0b3cyOTd5MW1r',
+    faculty: 'law',
+    timeSlot: '09:00 - 17:00',
+    locationName:
+      'Learning Space อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
+  },
+  {
+    id: 'laww2',
+    name: 'แนะแนวการศึกษา',
+    description:
+      'กิจกรรมแนะแนวการศึกษาทั้งในหลักสูตรนิติศาสตรบัณฑิตและหลักสูตร Bachelor of Laws, experiential learning in Business and Tech Law (LLBel) เพื่อค้นหาว่าตนเองเหมาะกับการเรียนในสาขาวิชา นิติศาสตร์หรือไม่ และเตรียมความพร้อมในการสอบเข้าศึกษาต่อในมหาวิทยาลัย',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/lawchulaopenhouse?igsh=MWE0b3cyOTd5MW1r',
+    faculty: 'law',
+    timeSlot: '09:00 - 16:00',
+    locationName:
+      'ห้องอุกฤษฏ์ ชั้น 5, ห้องสุรเกียรติและห้องประชุมตรงข้ามห้องสุรเกียรติ ชั้น 4 อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
+  },
+  {
+    id: 'laww3',
+    name: 'Workshop',
+    description:
+      'กิจกรรม Workshop เพื่อเปิดโอกาสให้ผู้เข้าร่วมงานได้ลองฝึกทักษะการเรียนรู้ และการคิดวิเคราะห์ในทางกฎหมาย แบ่งเป็นสายการเรียน ได้แก่ สายกฎหมายธุรกิจและภาษีอากร สายกฎหมายแพ่งและอาญา สายกฎหมายมหาชน และ สายกฎหมายระหว่างประเทศ',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://docs.google.com/forms/d/1W2OqaYGGN1G5XRHWcYiFlmdnFYgdDjCgxlIqqVp0gWo/edit',
+    faculty: 'law',
+    timeSlot:
+      '09:00 - 10:00 / 10:00 - 11:00 / 11:00 - 12:00 / 13:00 - 14:00 / 14:00 - 15:00 / 15:00 - 16:00',
+    locationName:
+      'ห้อง 605, 606, 904, 905 อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
+  },
+  {
+    id: 'laww4',
+    name: 'เวทีกลาง',
+    description:
+      'ในบริเวณเวทีกลาง มีการจัดกิจกรรมตลอดทั้งช่วงเช้าและช่วงบ่าย โดยกิจกรรมในช่วงเช้าเป็นการจัดทอล์คโชว์ตลอดระยะเวลา 2 วัน โดยมีนิสิตคณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัยร่วมเป็นวิทยากร นำเสนอประเด็นและหัวข้อที่แตกต่างกันในแต่ละวัน และกิจกรรมช่วงบ่ายเป็นกิจกรรมการแสดงจากหลากหลายชมรมภายในคณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เพื่อแสดงถึงความวามหลากหลายของกิจกรรมที่จะเกิดขึ้นในรั้วคณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/lawchulaopenhouse?igsh=MWE0b3cyOTd5MW1r',
+    faculty: 'law',
+    timeSlot: '08:00 - 16:00',
+    locationName:
+      'ลานอเนกประสงค์ อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
+  },
+  {
+    id: 'laww5',
+    name: 'ศาลจำลอง',
+    description:
+      'กิจกรรมศาลจำลองเพื่อให้ผู้ร่วมงาน ได้รู้จักและเห็นถึงกระบวนการในการประสาทความยุติธรรมของไทย แบ่งเป็น 2 รอบ รอบละ 60 คน และจะมีการถ่ายทอดสด ณ เวทีกลางร่วมด้วย',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://docs.google.com/forms/d/1W2OqaYGGN1G5XRHWcYiFlmdnFYgdDjCgxlIqqVp0gWo/edit',
+    faculty: 'law',
+    timeSlot: '10:00 - 12:00 / 13:00 - 15:00',
+    locationName:
+      'ห้อง 1205, 1005 อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
+    locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
+  },
   // คณะนิเทศศาสตร์
   // คณะพาณิชยศาสตร์และการบัญชี
   // คณะแพทย์ศาสตร์
