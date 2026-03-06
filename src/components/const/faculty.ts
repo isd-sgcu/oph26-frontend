@@ -1467,7 +1467,173 @@ export const WORKSHOP_DATA: Workshop[] = [
     locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
   },
   // คณะนิเทศศาสตร์
+  {
+    id: 'commartsw1',
+    name: 'Chitchat',
+    description:
+      'กิจกรรมที่ผู้เข้าร่วมงานสามารถพูดคุยสอบถามข้อมูลต่างๆกับนิสิตปัจจุบันได้อย่างใกล้ชิด ไม่ว่าจะเป็นเรื่องการสอบเข้า การเรียน กิจกรรม เเละการใช้ชีวิต',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/nitadecuopenhouse?igsh=ZzE0MjN3cDl3N2Vr',
+    faculty: 'commarts',
+    locationName: 'อาคารมงกุฎสมมติวงศ์',
+    locationURL: 'https://share.google/TAFTVpd3DXusV7K7l',
+  },
+  {
+    id: 'commartsw2',
+    name: 'Exhibition',
+    description:
+      'เนื้อหาภายในนิทรรศการจะมีการให้ข้อมูลเกี่ยวกับทุกภาควิชารวมถึงจุดถ่ายรูปน่ารักๆ ให้มาเช็คอิน นอกจากนิทรรศการหลักเเล้วจะมีการเเสดงผลงานจากนิสิตจากแต่ละภาควิชา (ไม่ทุกภาค) ให้เดินชมเช่นกัน',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/nitadecuopenhouse?igsh=ZzE0MjN3cDl3N2Vr',
+    faculty: 'commarts',
+    timeSlot: '9:00 - 16:00',
+    locationName: 'อาคารมงกุฎสมมติวงศ์',
+    locationURL: 'https://share.google/TAFTVpd3DXusV7K7l',
+  },
+  {
+    id: 'commartsw3',
+    name: 'Showcase',
+    description:
+      'ผู้เข้าร่วมงานสามารถรับชมภาพยนตร์สั้นเเละผลงานในรูปแบบวิดิโอต่างๆที่สร้างโดยนิสิตคณะนิเทศศาสตร์ที่ห้อง screening room ของคณะ',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/nitadecuopenhouse?igsh=ZzE0MjN3cDl3N2Vr',
+    faculty: 'commarts',
+    timeSlot: '9:00 - 16:00',
+    locationName: 'อาคารมงกุฎสมมติวงศ์ ',
+    locationURL: 'https://share.google/TAFTVpd3DXusV7K7l',
+  },
+  {
+    id: 'commartsw4',
+    name: 'Studio Room Tour',
+    description:
+      'กิจกรรมที่ทีมงานนิสิตคณะนิเทศศาสตร์จะพาผู้เข้าร่วมงานเดินชมห้อง studio ขนาดใหญ่รวมถึงห้อง control room ของคณะ โดยกิจกรรมนี้จะเปิดให้ผู้เข้าร่วมงานเดินชมเป็นรอบๆ',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/nitadecuopenhouse?igsh=ZzE0MjN3cDl3N2Vr',
+    faculty: 'commarts',
+    locationName: 'อาคารมงกุฎสมมติวงศ์ ชั้น 1M ห้อง CART1 CDM2B',
+    locationURL: 'https://share.google/TAFTVpd3DXusV7K7l',
+  },
+  {
+    id: 'commartsw5',
+    name: 'Workshop Film',
+    description:
+      'ผู้เข้าร่วมงานจะได้ลองลงมือทำกิจกรรมที่มีเนื้อหาเกี่ยวกับภาควิชาศิลปะภาพยนตร์ ตัวอย่างเช่น ฐานกิจกรรมอุปกรณ์กล้องเเละเสียง รายละเอียดโปรดติดตามเพิ่มเติม',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/nitadecuopenhouse?igsh=ZzE0MjN3cDl3N2Vr',
+    faculty: 'commarts',
+    owner: 'ภาควิชาศิลปะภาพยนตร์',
+    locationName: 'อาคารมงกุฎสมมติวงศ์',
+    locationURL: 'https://share.google/TAFTVpd3DXusV7K7l',
+  },
+  {
+    id: 'commartsw6',
+    name: 'Workshop PA',
+    description:
+      'ผู้เข้าร่วมงานจะได้ลองลงมือทำกิจกรรมที่มีเนื้อหาเกี่ยวกับภาควิชาศิลปะการแสดง รายละเอียดโปรดติดตามเพิ่มเติม',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/nitadecuopenhouse?igsh=ZzE0MjN3cDl3N2Vr',
+    faculty: 'commarts',
+    owner: 'ภาควิชาการสื่อสารการเเสดง',
+    locationName: 'อาคารมงกุฎสมมติวงศ์',
+    locationURL: 'https://share.google/TAFTVpd3DXusV7K7l',
+  },
   // คณะพาณิชยศาสตร์และการบัญชี
+  {
+    id: 'cbsw1',
+    name: 'ห้องหลักสูตร',
+    description:
+      'เป็นพื้นที่กิจกรรมที่แต่ละหลักสูตรจัดเตรียมกิจกรรมเชิงวิชาการแบบเจาะลึก โดยหมุนเวียนไปตามแต่ละหลักสูตร ใช้เวลาประมาณ 1 ชั่วโมง น้อง ๆ จะได้รับประสบการณ์เชิงปฏิบัติการเกี่ยวกับเนื้อหาวิชาเฉพาะทาง ซึ่งรายละเอียดเพิ่มเติมจะนำเสนอในหัวข้อห้องหลักสูตร รวมถึงเชิญศิษย์เก่าที่ประสบความสำเร็จ มาเล่าประสบการณ์ตรงในการทำงาน สถานการณ์ตลาดแรงงาน ทักษะที่จำเป็นในโลกการทำงานปัจจุบัน เพื่อช่วยในการตัดสินใจเลือกสายการศึกษาที่เหมาะสม',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://forms.gle/kjhZ23mANPczkmFY6',
+    faculty: 'cbs',
+    timeSlot: '8.40 - 10.10 / 10.25 - 11.55 / 12.40 - 14.10 / 14.25 - 15.55',
+    locationName: 'อาคารไชยยศสมบัติ',
+  },
+  {
+    id: 'cbsw2',
+    name: 'Campus Tour',
+    description:
+      'กิจกรรม Campus Tour พาผู้เข้าร่วมชมสิ่งอำนวยความสะดวกและห้องปฏิบัติการที่สำคัญ ได้แก่ CBS Lounge ที่เปิดพื้นที่อิสระสำหรับการทำกิจกรรมกลุ่ม และ Financial Laboratory ซึ่งมีเทคโนโลยีและฐานข้อมูลสำหรับงานวิจัยและการวิเคราะห์ทางการเงินชั้นนำระดับโลก เพื่อให้น้อง ๆ ได้เห็นสภาพแวดล้อมการเรียนรู้อย่างแท้จริง',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://forms.gle/GsArkyGEQHhfRJV58',
+    faculty: 'cbs',
+    timeSlot: '8.40 - 10.10 / 10.25 - 11.55 / 12.40 - 14.10 / 14.25 - 15.55',
+    locationName: 'อาคารไชยยศสมบัติ',
+  },
+  {
+    id: 'cbsw3',
+    name: 'บูธกลางให้คำแนะนำ',
+    description:
+      'ห้องแนะแนวกลางเป็นพื้นที่ที่นิสิตจากหลักสูตรต่าง ๆ ได้แก่ หลักสูตรบัญชี หลักสูตรบริหาร หลักสูตรสถิติ และหลักสูตร BBA มาให้คำแนะนำแก่น้อง ๆ โดยตรงเกี่ยวกับการเลือกหลักสูตร แนวทางการเรียน และภาพรวมชีวิตในรั้วมหาวิทยาลัย',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://forms.gle/BN2XWEV3Xr2g482M6',
+    faculty: 'cbs',
+    locationName: 'อาคารไชยยศสมบัติ',
+  },
+  {
+    id: 'cbsw4',
+    name: 'one-on-one',
+    description:
+      'เป็นพื้นที่สำหรับน้อง ๆ ที่มีข้อสงสัยและอยากรู้เพิ่มเติมเกี่ยวกับคณะบัญชีจุฬาได้มาพูดคุยกับพี่แนะแนวจากแต่ละสาขา มาคอยให้คำปรึกษาน้องแบบ 1:1',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://forms.gle/BN2XWEV3Xr2g482M6',
+    faculty: 'cbs',
+    locationName: 'คณะ',
+  },
+  {
+    id: 'cbsw5',
+    name: 'เวทีกลาง',
+    description:
+      'พื้นที่จัดแสดงความสามารถและศักยภาพของนิสิต ผ่านการแสดงดนตรีสากลและดนตรีไทย เพื่อสร้างแรงบันดาลใจและเพิ่มบรรยากาศแห่งความสนุกสนานตลอดกิจกรรม อีกทัเงยังมีทอล์คโชว์จากรุ่นพีที่กำลังศึกษามาให้ข้อมูลและเล่าประสบการณ์เกี่ยวกับชีวิตในรั้วบัญชีจุฬา',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://forms.gle/BN2XWEV3Xr2g482M6',
+    faculty: 'cbs',
+    locationName: 'คณะ',
+  },
+  {
+    id: 'cbsw6',
+    name: 'workshop',
+    description:
+      'พื้นที่ที่มุ่งเน้นการจัดกิจกรรมนันทนาการเพื่อเพิ่มความสนุกสนาน สร้างบรรยากาศที่ผ่อนคลายและเป็นกันเอง พร้อมกิจกรรมและของที่ระลึกให้น้อง ๆ ได้รับประสบการณ์และความประทับใจกลับไป',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://forms.gle/BN2XWEV3Xr2g482M6',
+    faculty: 'cbs',
+    locationName: 'คณะ',
+  },
+  {
+    id: 'cbsw7',
+    name: 'Sife MasterClass',
+    description:
+      'SIFE Master Class เป็นกิจกรรมที่เน้นการลงมือปฏิบัติจริงเกี่ยวกับธุรกิจเพื่อสังคมผ่านการเรียนรู้แบบ Activity-based Learning ผู้เข้าร่วมจะได้ฝึกทักษะการเป็นที่ปรึกษาธุรกิจ การวางกลยุทธ์ และการทำงานเป็นทีม เพื่อแก้ไขปัญหาธุรกิจอย่างเป็นรูปธรรม พร้อมรับประกาศนียบัตรจากคณะพาณิชยศาสตร์และการบัญชี',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cbs.openhouse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'cbs',
+    locationName: 'อาคาร 50 ปี',
+  },
+  {
+    id: 'cbsw8',
+    name: 'CBS Brunch & Buddy',
+    description:
+      '“อยากรู้จัก CBS ต้องคุยกับที่สุดของ CBS” CBS Brunch & Buddy จะพาทุกคนไปค้นหาคำตอบ “Why CBS?” เพราะชีวิตในมหาวิทยาลัย “ไม่ใช่เพียงแต่เลือกคณะที่ชอบ แต่ต้องเป็นคณะที่ใช่” ผ่าน Life-Changing Conversation บนโต๊ะอาหารกับรุ่นพี่คณะบัญชี จุฬาฯ และเพื่อนต่างโรงเรียนแบบสุด Exclusive เกี่ยวกับเรื่องราวและประสบการณ์จากคณะบัญชีในด้าน การเรียน กิจกรรม และการทำงาน ของรุ่นพี่มากกว่า 20 คน จากทุกภาควิชา)',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cbs.openhouse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'cbs',
+    locationName: 'อาคารไชยยศสมบัติ',
+  },
   // คณะแพทย์ศาสตร์
   // คณะเภสัชศาสตร์
   // คณะรัฐศาสตร์
