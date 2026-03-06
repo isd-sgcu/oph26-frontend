@@ -2283,5 +2283,44 @@ export const WORKSHOP_DATA: Workshop[] = [
   // คณะอักษรศาสตร์
   // สถาบันนวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย
   // คณะเกษตรศาสตร์บูรณาการ
+  {
+    id: 'cusarw1',
+    name: 'สวนขวดในใจเธอ',
+    description:
+      'Workshop ที่อยากให้ทุกคนได้ลองจัดสวนขวดของคุณเอง จำลองสวนขนาดเล็กที่ดูแลไม่ยาก เหมาะสำหรับคนที่อยากทดลองการปลูกต้นไม้ แต่ไม่รู้จะเริ่มยังไง ใช่ทางที่คุณชอบหรือเปล่า ?',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSeuU8_iUK8A1uOYWVQiannHkyb2oyUki43-tMLvZDUbwIglSg/viewform',
+    faculty: 'cusar',
+    timeSlot: '9.00 - 12.00 / 13.00 - 16.00',
+    locationName: 'ใต้โถงอาคารจุฬาพัฒน์ 13',
+    locationURL: 'https://maps.app.goo.gl/nNuRFHVKEbq7gwur5?g_st=ic',
+  },
+  {
+    id: 'cusarw2',
+    name: 'กลิ่นนำทาง',
+    description:
+      'Workshop ธุรกิจกลางน้ำ ที่นำสารสกัดการพืช สมุนไพร ดอกไม้ มาปรุงกลิ่นที่มีเอกลักษณ์และทำให้กับตัวเองสุดจะมีคุณค่า พบได้แค่งานนี้งานเดียวเท่านั้น',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSeuU8_iUK8A1uOYWVQiannHkyb2oyUki43-tMLvZDUbwIglSg/viewform',
+    faculty: 'cusar',
+    timeSlot: '9.00 - 12.00 / 13.00 - 16.00',
+    locationName: 'ใต้โถงอาคารจุฬาพัฒน์ 13',
+    locationURL: 'https://maps.app.goo.gl/nNuRFHVKEbq7gwur5?g_st=ic',
+  },
   // หอพักนิสิตจุฬาลงกรณ์มหาวิทยาลัย
+  {
+    id: 'dormw1',
+    name: 'พาทัวร์หอใน',
+    description:
+      'พาน้อง ๆ ที่สนใจหอพักนิสิตไปเยี่ยมชมบริเวณหอพักนิสิต และให้ข้อมูลต่าง ๆ เกี่ยวกับหอพักแต่ละหอ',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/rcusc.chula?igsh=MXZzdWt0eWZtNTRweA==',
+    faculty: 'dorm',
+    timeSlot: '11:00-12:00 / 14:00-15:00',
+    locationName: 'เริ่มเดินตั้งแต่ทางเข้าฝั่งพญาไท ถึง ทางเข้าฝั่งป้ายรถปอ.พ.',
+    locationURL: 'https://maps.app.goo.gl/92dN5pM5WBuPH5gq8?g_st=ac',
+  },
 ]
