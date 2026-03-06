@@ -1348,7 +1348,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://www.instagram.com/dentcuopenhouse',
     faculty: 'dent',
     timeSlot:
-      'Sat 10:30 - 11:30 / 12:50 - 14:20 / Sun 9:40 - 11:10 / 12:50 - 14:20',
+      'Sat: 10:30 - 11:30 / Sat: 12:50 - 14:20 / Sun: 9:40 - 11:10 / Sun: 12:50 - 14:20',
   },
   {
     id: 'dentw9',
@@ -2091,8 +2091,192 @@ export const WORKSHOP_DATA: Workshop[] = [
   // คณะวิทยาศาสตร์การกีฬา
 
   // คณะวิศวกรรมศาสตร์
+  {
+    id: 'engw1',
+    name: 'โซน Booth ภาควิชา',
+    description:
+      'กิจกรรม ให้แต่ละภาควิชามา present ในรูปของบูธกิจกรรม ให้น้อง ๆ เข้ามาสอบถาม',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+    locationName: 'ลาน intania',
+    locationURL: 'https://maps.app.goo.gl/tCxBd5GxDi3QvL6B8',
+  },
+  {
+    id: 'engw2',
+    name: 'โซน Booth ชมรม',
+    description:
+      'กิจกรรม ให้แต่ละชมรมมา present ในรูปของบูธกิจกรรม ให้น้อง ๆ เข้ามาสอบถาม',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+    locationName: 'บริเวณถนน หน้าอาคารวิศวกรรม 1 และ 2',
+  },
+  {
+    id: 'engw3',
+    name: 'Workshop ภาควิชา',
+    description:
+      'กิจกรรมให้แต่ละภาค workshop ให้ผู้เข้าร่วมมีส่วนร่วมได้ โดยแต่ละภาคจะมีกิจกรรม ที่แตกต่างออกไปในสายนั้น ๆ',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+    timeSlot:
+      '9:00 - 10:00 / 10:15 - 11:15 / 11:30 - 12:30 / 13:15 - 14:15 / 14:30 - 15:30',
+  },
+  {
+    id: 'engw4',
+    name: 'โซน Workshop innovation ของคณะ และทางอาจารย์',
+    description: 'มีการนำ innovation มาให้น้องๆรับชม และลงมือ workshop',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+  },
+  {
+    id: 'engw5',
+    name: 'เวทีกลางจัดแสดง',
+    description: 'มีการแสดงของชมรมและกิจกรรมทั่วไป ในการประชาสัมพันธื',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+  },
+  {
+    id: 'engw6',
+    name: 'กิจกรรมแนะแนวภายในหอประชุม Hall of intania',
+    description:
+      'เป็นกิจกรรมทีจะนำ รุ่นพี่ คณะอาจารย์มาพูดถึง คณะวิศวะ ภายในหอประชุม',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+    locationName: 'หอประชุม Hall of intania',
+    locationURL: 'https://maps.app.goo.gl/75v8d4iGP2DQHBKX9',
+  },
+  {
+    id: 'engw7',
+    name: 'การแข่งขันตอบปัญหาคณิตศาสตร์เชิงวิศวกรรม (Integation Bee challenge)',
+    description:
+      'กิจกรรม แข่งขัน อินทิเกรตเชิงคณิตศาสตร์ ผู้เข้าร่วมเป็นน้อง ๆ มปลาย ',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+    locationName: 'หอประชุมอาคาร 4 ชั้น 2',
+    locationURL: 'https://maps.app.goo.gl/bsZ6nesbJcqWXbHt8',
+  },
+  {
+    id: 'engw8',
+    name: 'โซนจัดแสดงนวัตกรรมที่เกี่ยวข้องกับวิศวกรรม',
+    description: 'มีการนำ innovation มาให้น้องๆรับชม',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/cuintaniaopenhouse?igsh=YmF1bmJvc3ZqcDB3',
+    faculty: 'eng',
+  },
   // คณะศิลปกรรมศาสตร์
+  {
+    id: 'faaw1',
+    name: 'เวทีกลาง',
+    description:
+      'ตั้งเวทียกสูงสำหรับจัดแสดงความสามารถของนิสิตคณะศิลปกรรมศาสตร์',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/smo.singum?igsh=MTg4YnYwbmt5bmZvNw==',
+    faculty: 'faa',
+    timeSlot: '09.00-15.00',
+    locationName: 'บริเวณหน้าอาคารศิลปกรรมศาสตร์',
+  },
+  {
+    id: 'faaw2',
+    name: 'นิทรรศการ',
+    description:
+      'จัดแสดงตัวอย่างผลงาน ข้อมูลคณะ รวมถึงรายละเอียดเกี่ยวกับแต่ละภาควิชาสำหรับผู้ที่สนใจ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/smo.singum?igsh=MTg4YnYwbmt5bmZvNw==',
+    faculty: 'faa',
+    timeSlot: '09.00-15.00',
+    locationName: 'บริเวณหน้าอาคารศิลปกรรมศาสตร์',
+  },
+  {
+    id: 'faaw3',
+    name: 'พื้นที่ ถาม-ตอบ',
+    description:
+      'พื้นที่สำหรับให้น้อง ๆ ที่สนใจคณะศิลปกรรมศาสตร์เข้ามาแลกเปลี่ยน สอบถามข้อมูลจากรุ่นพี่ในคณะ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/smo.singum?igsh=MTg4YnYwbmt5bmZvNw==',
+    faculty: 'faa',
+    timeSlot: '09.00-15.00',
+    locationName: 'ห้องฟ้าใหม่ อาคารศิลปกรรมศาสตร์',
+  },
   // คณะเศรษฐศาสตร์
+  {
+    id: 'econ1',
+    name: 'Exhibition',
+    description:
+      'จัดนิทรรศการให้ความรู้เบื้องต้นเกี่ยวกับการเรียนในสาขาเศรษฐศาสตร์ โดยเนื้อหาครอบคลุมการอธิบายหลักสูตรที่คณะเศรษฐศาสตร์มี สายการทำงานเบื้องต้น วิธีการรับเข้า รวมไปถึงมีการจัดกิจกรรมเกมที่มีการประยุกต์เนื้อหาทางเศรษฐศาสตร์เพื่อให้ผู้เข้าชมมีความเข้าใจในหลักวิธีคิดทางเศรษฐศาสตร์มากขึ้น',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/econlab_cu?igsh=cWFuMjkwOWZtY3Ay',
+    faculty: 'econ',
+    timeSlot: '09:00 - 12:00 / 13:00 - 16:00',
+    locationName: 'บริเวณโถงใต้อาคารคณะเศรษฐศาสตร์',
+  },
+  {
+    id: 'econ2',
+    name: 'รุ่นพี่ Talk',
+    description:
+      'จัดกิจกรรมให้ผู้เข้าร่วมได้มีโอกาสพูดคุย ปรึกษา และสอบถามข้อมูลเบื้องต้นเกี่ยวกับการเข้าเรียนในสาขาเศรษฐศาสตร์ รวมไปถึงประสบการณ์ และบรรยากาศในการเรียนจากรุ่นพี่นิสิตคณะเศรษฐศาสตร์โดยตรง',
+    hasPreregistered: false,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/econlab_cu?igsh=cWFuMjkwOWZtY3Ay',
+    faculty: 'econ',
+    timeSlot:
+      '28 March: 09:00 - 12:00 / 28 March: 13:00 - 13:30 / 28 March: 15:30 - 16:00 / 29 March: 09:00 - 12:00 / 29 March: 13:00 - 16:00',
+    locationName: 'ห้องสมุด คณะเศรษฐศาสตร์',
+  },
+  {
+    id: 'econ3',
+    name: 'ศิษย์เก่า Talk',
+    description:
+      'จัดกิจกรรมเสวนา โดยศิษย์เก่าจากคณะเศรษฐศาสตร์ 3 ท่าน มาร่วมเสวนาเกี่ยวประสบการณ์ชีวิตในตอนเป็นนิสิตและตอนทำงาน โดยเป็นการแลกเปลี่ยนมุมมองและประสบการณ์ในการทำงานหลังจบการศึกษาจากคณะเศรษฐศาสตร์ในสายงานที่หลากหลายในยุคปัจจุบัน เพื่อเป็นการให้ความรู้ และแนะแนวทางแก่ผู้เข้าร่วม',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/econlab_cu?igsh=cWFuMjkwOWZtY3Ay',
+    faculty: 'econ',
+    timeSlot: '28 March: 14:00 - 15:30',
+    locationName: 'ห้องสมุด คณะเศรษฐศาสตร์',
+  },
+  {
+    id: 'econ4',
+    name: 'เปิดทรรศน์คณะเศรษฐศาสตร์',
+    description:
+      'จัดกิจกรรมเปิดทรรศน์ของชมรมต่างๆในคณะเศรษฐศาสตร์ อาทิ ชมรมโต้วาที ชมรมยิงปืน ฯลฯ แต่ละชมรมจะมีการจัดกิจรรมเพื่อให้ผู้เข้าร่วมงานได้มีโอกาสเปิดมุมมองต่อคณะ ได้สัมผัสกับกรรมนอกเหนือจากการเรียนที่หลายหลาย',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/econlab_cu?igsh=cWFuMjkwOWZtY3Ay',
+    faculty: 'econ',
+    timeSlot: '09:00 - 12:00 / 13:00 - 16:00',
+    locationName: 'บริเวณโถงใต้อาคารคณะเศรษฐศาสตร์',
+  },
+  {
+    id: 'econ5',
+    name: 'ห้องเรียนจำลอง',
+    description:
+      'จัดการจำลองการเรียนในคณะเศรษฐศาสตร์ เพื่อให้ผู้เข้าร่วมกิจกรรมได้รับความรู้และมีความเข้าใจในพื้นฐานหลักวิธีคิดทางเศรษฐศาสตร์มากยิ่งขึ้น รวมถึงเป็นการได้ลองสัมผัสบรรยากาศการเรียนการสอนในคณะเศรษฐศาสตร์',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/econlab_cu?igsh=cWFuMjkwOWZtY3Ay',
+    faculty: 'econ',
+    timeSlot: '29 March: 09:00 - 09:45 / 29 March: 10:15 - 11:00',
+    locationName: 'อาคารคณะเศรษฐศาสตร์ ห้อง 209',
+  },
+
   // คณะสถาปัตยกรรมศาสตร์
   // คณะสหเวชศาสตร์
   // คณะสัตวแพทยศาสตร์
