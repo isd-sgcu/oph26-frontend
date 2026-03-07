@@ -223,12 +223,12 @@ export async function achievementShare3(
     const localizedText = {
         th: {
         start: 'มีคนจำนวน',
-        description: 'กำลังตามหาเพื่อนคณะ{{}}',
+        description: 'กำลังตามหาเพื่อนคณะ',
         description2: 'เช่นเดียวกับฉัน',
         },
         en: {
         start: 'There are',
-        description: 'others finding {{}}',
+        description: 'others finding',
         description2: 'friends like me.',
         },
     }
@@ -269,15 +269,19 @@ export async function achievementShare3(
     // description
     ctx.font = '500 60px "IBM Plex Sans Thai"'
     const descriptionText = lang === 0
-        ? localizedText.th.description.replace('{{}}', String(faculty))
-        : localizedText.en.description.replace('{{}}', String(faculty))
+        ? localizedText.th.description
+        : localizedText.en.description
     ctx.fillText(descriptionText, canvas.width / 2, 1500)
+
+    // faculty
+    ctx.font = '500 60px "IBM Plex Sans Thai"'
+    ctx.fillText(faculty, canvas.width / 2, 1600)
 
     // description2
     const description2Text = lang === 0
         ? `${localizedText.th.description2}`
         : `${localizedText.en.description2}`
-    ctx.fillText(description2Text, canvas.width / 2, 1600)
+    ctx.fillText(description2Text, canvas.width / 2, 1700)
 
     // rank number
     ctx.fillStyle = '#FFFFFF' // text color
