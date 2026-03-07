@@ -71,34 +71,37 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
   return (
     // !!!!!!!!!!!!!!!SET MAX WIDTH TO SYSTEM 80% MAX WIDTH !!!!!!!!!!!!!!!
     <div className={`relative mx-auto flex h-full w-[80vw] max-w-84 flex-col 
-      tems-center justify-center rounded-2xl bg-white shadow-sm
-      ${isCollected ? 'p-4' : 'p-8'}`}>
-      <div className="flex w-full flex-col items-center justify-center gap-5 text-center">
+    tems-center justify-center rounded-2xl bg-white shadow-sm
+    ${isCollected ? 'px-4 pt-8' : 'p-8'}`}>
+      <div className="flex w-full flex-1 flex-col items-center justify-center gap-5 text-center">
         {/* title */}
         <h3 className="text-2xl font-semibold">
           {t(`routes.gameGroup.achievementGroup.cardGroup.${variant}.title`)}
         </h3>
 
         {/* Stat Circle */}
-        { variant !== 'collectedPieces' ? (
-            <div className="bg-gradient-pink flex flex-col aspect-square w-full max-w-64 items-center justify-center rounded-full">
-                <span className="text-7xl font-bold text-white text-shadow-[2px_2px_8px_#CA2791]">
-                    {variant === 'var1' && isEnglish && typeof stat === 'number'
-                        ? getOrdinal(stat)
-                        : stat}
-                    {variant === 'var3' && '%'}
+        {variant !== 'collectedPieces' && (
+          <div className="w-full max-w-56 flex items-center justify-center shrink">
+            <div className="bg-gradient-pink flex flex-col aspect-square w-full items-center justify-center rounded-full">
+              <span className={`${isEnglish && stat as number > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}>
+                {variant === 'var1' && isEnglish && typeof stat === 'number'
+                  ? getOrdinal(stat)
+                  : stat}
+                {variant === 'var3' && '%'}
+              </span>
+
+              {variant === 'overall' && (
+                <span className="text-xl font-normal text-white">
+                  {isEnglish ? ((stat as number) > 1 ? 'pieces' : 'piece') : 'ชิ้น'}
                 </span>
-                {variant === 'overall' && (
-                    <span className="text-xl font-normal text-white">
-                        {isEnglish ? ((stat as number) > 1 ? 'pieces' : 'piece') : 'ชิ้น'}
-                    </span>
-                )}
+              )}
             </div>
-        ) : null}
+          </div>
+        )}
 
         {/* description */}
         {variant !== 'overall' && variant !== 'collectedPieces' && (
-          <p className="mt-auto text-2xl font-medium whitespace-pre-line">
+          <p className="text-2xl font-medium whitespace-pre-line">
             {variant === 'var2'
               ? t(
                   `routes.gameGroup.achievementGroup.cardGroup.${variant}.description`,
@@ -117,8 +120,8 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
 
         {/* overall view */}
         {variant === 'overall' && (
-          <div className="mt-auto grid grid-cols-2 grid-rows-[auto_auto_auto] place-items-center gap-x-4 gap-y-2">
-            <span className={i18n.language === 'th' ? 'whitespace-nowrap' : ''}>
+          <div className="grid grid-cols-2 grid-rows-[auto_auto_auto] place-items-center gap-x-4 gap-y-2">
+            <span className='whitespace-nowrap'>
               {t(
                 'routes.gameGroup.achievementGroup.cardGroup.overall.miniCard1.title'
               )}
