@@ -3,6 +3,9 @@ import shareTemplate3 from '/background/shareTemplate3.svg'
 import shareTemplate4 from '/background/shareTemplate4.svg'
 import shareTemplate5 from '/background/shareTemplate5.svg'
 import lockedUrl from '/game/locked.svg'
+import { CollectedPiecesProps } from '@/components/game/achievement/AchievementCard'
+import { renderComponentToPng } from './renderComponentToPng'
+import PiecesShareGrid from '@/components/game/achievement/PiecesShareGrid'
 
 function getOrdinal(n: number) {
     const s = ["th", "st", "nd", "rd"]
@@ -437,8 +440,81 @@ export async function achievementShareOverall(
 
 export async function achievementShareCollectedPieces(
     name: string,
-    facultyCounts: Record<string, number>,
+    facultyCounts: CollectedPiecesProps,
     lang: 0 | 1 // 0 = th, 1 = en
 ) {
+    const localizedText = {
+        th: {
+        start: 'บันทึกการเก็บชิ้นส่วน',
+        },
+        en: {
+        start: 'Pieces Collection',
+        },
+    }
 
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+
+    if (!ctx) throw new Error('Canvas not supported')
+
+    canvas.width = 1080
+    canvas.height = 1920
+
+    const [bg, logo] = await Promise.all([
+        loadImage(shareTemplate4),
+        loadImage(logoUrl),
+    ])
+
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height)
+
+    // 4️⃣ Wait for font
+    await ensureFontsLoaded()
+
+    ctx.fillStyle = '#f481b4'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+
+    // Name
+    ctx.font = 'bold 80px "IBM Plex Sans Thai"'
+    ctx.fillText(name, canvas.width / 2, 370)
+
+    ctx.fillStyle = '#000000'
+    // Start
+    ctx.font = '500 60px "IBM Plex Sans Thai"'
+    const rankText = lang === 0
+        ? `${localizedText.th.start}`
+        : `${localizedText.en.start}`
+    ctx.fillText(rankText, canvas.width / 2, 470)
+
+    const piecesPng = await renderComponentToPng(
+    <PiecesShareGrid props={facultyCounts} lang={lang} />,
+    1080,
+    1500
+    )
+
+    // const piecesPng = await renderComponentToPng(
+    // <div style={{width:900,height:900,background:"red"}}>
+    //     TEST
+    // </div>,
+    // 900,
+    // 900
+    // )
+
+    const piecesImage = await loadImage(piecesPng)
+
+    ctx.drawImage(piecesImage, 0, 500, 1080, 1500)
+
+    // Logo
+    const logoWidth = logo.width * 1.2
+    const logoHeight = (logo.height / logo.width) * logoWidth
+
+    ctx.drawImage(
+        logo,
+        (canvas.width - logoWidth) / 2,
+        90,
+        logoWidth,
+        logoHeight
+    )
+
+    return canvas.toDataURL('image/png')
 }

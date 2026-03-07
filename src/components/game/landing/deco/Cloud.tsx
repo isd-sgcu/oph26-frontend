@@ -1,4 +1,4 @@
-import cloudImg from '@/assets/game/deco/cloud.svg'
+import cloudImg from '@/assets/game/deco/cloud.png'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Cloud({

@@ -1,7 +1,7 @@
-import greenGrass from '@/assets/game/deco/grass/green-grass.svg'
-import tinyGreenGrass from '@/assets/game/deco/grass/thin-green-grass.svg'
-import yellowGrass from '@/assets/game/deco/grass/yellow-grass.svg'
-import tinyYellowGrass from '@/assets/game/deco/grass/thin-yellow-grass.svg'
+import greenGrass from '@/assets/game/deco/grass/green-grass.png'
+import tinyGreenGrass from '@/assets/game/deco/grass/thin-green-grass.png'
+import yellowGrass from '@/assets/game/deco/grass/yellow-grass.png'
+import tinyYellowGrass from '@/assets/game/deco/grass/thin-yellow-grass.png'
 
 export type GrassVariant =
   | 'gg'

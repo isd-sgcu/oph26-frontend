@@ -28,7 +28,7 @@ type OverallProps = BaseProps & {
   miniCard2Rank: number
 }
 
-type CollectedPiecesProps = {
+export type CollectedPiecesProps = {
   variant: 'collectedPieces'
   stat: number
   edu: number
@@ -173,10 +173,10 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
               { key: 'psy', label: i18n.language === 'th' ? 'จิตวิทยา' : 'Psychology' , count: props.psy, variant: 2 },
               { key: 'pharm', label: i18n.language === 'th' ? 'เภสัชศาสตร์' : 'Pharmacy' , count: props.pharm, variant: 1 },
               { key: 'dent', label: i18n.language === 'th' ? 'ทันตแพทยศาสตร์' : 'Dentistry' , count: props.dent, variant: 5 },
-              { key: 'commarts', label: i18n.language === 'th' ? 'นิเทศศาสตร์' : 'Communication \nArts' , count: props.commarts, variant: 4 },
-              { key: 'ahs', label: i18n.language === 'th' ? 'สหเวชศาสตร์' : 'Applied Health Sciences' , count: props.ahs, variant: 6 },
-              { key: 'faa', label: i18n.language === 'th' ? 'ศิลปกรรมศาสตร์' : 'Fine and \nApplied Arts' , count: props.faa, variant: 2 },
-              { key: 'vet', label: i18n.language === 'th' ? 'สัตวแพทยศาสตร์' : 'Veterinary \nMedicine' , count: props.vet, variant: 1 },
+              { key: 'commarts', label: i18n.language === 'th' ? 'นิเทศศาสตร์' : 'Communication\nArts' , count: props.commarts, variant: 4 },
+              { key: 'ahs', label: i18n.language === 'th' ? 'สหเวชศาสตร์' : 'Applied Health\nSciences' , count: props.ahs, variant: 6 },
+              { key: 'faa', label: i18n.language === 'th' ? 'ศิลปกรรมศาสตร์' : 'Fine and\nApplied Arts' , count: props.faa, variant: 2 },
+              { key: 'vet', label: i18n.language === 'th' ? 'สัตวแพทยศาสตร์' : 'Veterinary\nMedicine' , count: props.vet, variant: 1 },
               { key: 'law', label: i18n.language === 'th' ? 'นิติศาสตร์' : 'Law' , count: props.law, variant: 5 },
               { key: 'arch', label: i18n.language === 'th' ? 'สถาปัตยกรรมศาสตร์' : 'Architecture' , count: props.arch, variant: 2 },
               { key: 'eng', label: i18n.language === 'th' ? 'วิศวกรรมศาสตร์' : 'Engineering' , count: props.eng, variant: 4 },
@@ -185,7 +185,7 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
               { key: 'sci', label: i18n.language === 'th' ? 'วิทยาศาสตร์' : 'Science' , count: props.sci, variant: 2 },
               { key: 'econ', label: i18n.language === 'th' ? 'เศรษฐศาสตร์' : 'Economics' , count: props.econ, variant: 4 },
               { key: 'polsci', label: i18n.language === 'th' ? 'รัฐศาสตร์' : 'Political Science' , count: props.polsci, variant: 1 },
-              { key: 'cbs', label: i18n.language === 'th' ? 'พาณิชยศาสตร์\nและการบัญชี' : 'Commerce and Accountancy' , count: props.cbs, variant: 6 },
+              { key: 'cbs', label: i18n.language === 'th' ? 'พาณิชยศาสตร์\nและการบัญชี' : 'Commerce and\nAccountancy' , count: props.cbs, variant: 6 },
               { key: 'spsc', label: i18n.language === 'th' ? 'วิทยาศาสตร์\nการกีฬา' : 'Sports\nScience' , count: props.spsc, variant: 2 },
               { key: 'cusar', label: i18n.language === 'th' ? 'สำนักวิชาทรัพยากร\nการเกษตร' : 'Agricultural\nResources' , count: props.cusar, variant: 5 },
               { key: 'scii', label: i18n.language === 'th' ? 'สถาบันนวัตกรรม\nบูรณาการ' : 'Integrated\nInnovation' , count: props.scii, variant: 1 },
@@ -202,7 +202,7 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
                 >
                 <Piece faculty={key as any} count={displayCount} variant={variant as any} size={70} />
                 </div>
-                <span className="-mt-2 mb-2 text-[8px] font-semibold text-black text-center whitespace-pre-line leading-tight">
+                <span className="-mt-2 mb-2 text-[8px] font-semibold text-black text-center whitespace-pre leading-tight">
                   {label}
                 </span>
               </div>

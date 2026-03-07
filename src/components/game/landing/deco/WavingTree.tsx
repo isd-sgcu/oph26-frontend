@@ -1,9 +1,9 @@
-import greenRound from '@/assets/game/deco/tree/green-round-tree.svg'
-import pinkCurly from '@/assets/game/deco/tree/pink-curly-tree.svg'
-import pinkPointy from '@/assets/game/deco/tree/pink-pointy-tree.svg'
-import pinkRound from '@/assets/game/deco/tree/pink-round-tree.svg'
-import purpleCurly from '@/assets/game/deco/tree/purple-curly-tree.svg'
-import purplePointy from '@/assets/game/deco/tree/purple-pointy-tree.svg'
+import greenRound from '@/assets/game/deco/tree/green-round-tree.png'
+import pinkCurly from '@/assets/game/deco/tree/pink-curly-tree.png'
+import pinkPointy from '@/assets/game/deco/tree/pink-pointy-tree.png'
+import pinkRound from '@/assets/game/deco/tree/pink-round-tree.png'
+import purpleCurly from '@/assets/game/deco/tree/purple-curly-tree.png'
+import purplePointy from '@/assets/game/deco/tree/purple-pointy-tree.png'
 import { useEffect, useState } from 'react'
 
 export type TreeVariant =

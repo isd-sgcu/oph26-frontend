@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { FlatIcon } from '@/components/FlatIcon'
 import i18n from '@/lib/i18n'
 import { Achievement } from '@/types/achievement'
-import { achievementShare1, achievementShare2, achievementShare3, achievementShareOverall } from '@/utils/achievementShareTemplate'
+import { achievementShare1, achievementShare2, achievementShare3, achievementShareCollectedPieces, achievementShareOverall } from '@/utils/achievementShareTemplate.tsx'
 
 type Props = {
   open: boolean
@@ -17,63 +17,94 @@ const SharePopup = ({ open, onClose, achievement, name }: Props) => {
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
 
+  const generatingRef = useRef(false)
+  const hasGenerated = useRef(false)
+
   useEffect(() => {
-    if (open) {
-      setVisible(true)
-      generateImage()
-    }
+    if (!open || hasGenerated.current) return
+
+    hasGenerated.current = true
+    setVisible(true)
+    generateImage()
+
   }, [open])
 
   const generateImage = async () => {
-    try {
-      setLoading(true)
+  if (generatingRef.current) return
+  generatingRef.current = true
 
-      const lang = i18n.language === 'th' ? 0 : 1
-      if (achievement?.variant === 'var1') {
-        const result = await achievementShare1(name, achievement.stat, lang)
-        setImage(result)
-      } else if (achievement?.variant === 'var2') {
-        const result = await achievementShare2(name, achievement.stat, achievement.top, lang)
-        setImage(result)
-      } else if (achievement?.variant === 'var3') {
-        const result = await achievementShare3(name, achievement.stat, achievement.faculty, lang)
-        setImage(result)
-      } else if (achievement?.variant === 'overall') {
-        const result = await achievementShareOverall(name, achievement.stat, achievement.miniCard1Faculty, achievement.miniCard1Count, achievement.miniCard2Rank, lang)
-        setImage(result)
-      } else if (achievement?.variant === 'collectedPieces') {
-        // generate image for collectedPieces
-      }
+  try {
+    setLoading(true)
+
+    const lang = i18n.language === 'th' ? 0 : 1
+
+    if (achievement?.variant === 'var1') {
+      const result = await achievementShare1(name, achievement.stat, lang)
+      setImage(result)
+    }
+    else if (achievement?.variant === 'var2') {
+      const result = await achievementShare2(name, achievement.stat, achievement.top, lang)
+      setImage(result)
+    }
+    else if (achievement?.variant === 'var3') {
+      const result = await achievementShare3(name, achievement.stat, achievement.faculty, lang)
+      setImage(result)
+    }
+    else if (achievement?.variant === 'overall') {
+      const result = await achievementShareOverall(
+        name,
+        achievement.stat,
+        achievement.miniCard1Faculty,
+        achievement.miniCard1Count,
+        achievement.miniCard2Rank,
+        lang
+      )
+      setImage(result)
+    }
+    else if (achievement?.variant === 'collectedPieces') {
+      const result = await achievementShareCollectedPieces(name, achievement, lang)
+      setImage(result)
+    }
 
     } catch (err) {
       console.error(err)
     } finally {
       setLoading(false)
+      generatingRef.current = false
     }
   }
 
   const handleShare = async () => {
+    if (!image) return
 
-    // try {
-    //   const response = await fetch(image)
-    //   const blob = await response.blob()
+    try {
+      const blob = await (await fetch(image)).blob()
 
-    //   const file = new File([blob], 'game-share.png', {
-    //     type: 'image/png',
-    //   })
+      const file = new File([blob], "game-share.png", {
+        type: "image/png",
+      })
 
-    //   if (navigator.share && navigator.canShare({ files: [file] })) {
-    //     await navigator.share({
-    //       files: [file],
-    //       title: 'My Game Result',
-    //     })
-    //   } else {
-    //     downloadImage(image)
-    //   }
-    // } catch (err) {
-    //   console.error(err)
-    // }
-  }
+      // Try native share
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        await navigator.share({
+          files: [file],
+          title: "My Game Result",
+        })
+        return
+      }
+
+      // fallback
+      downloadImage(image)
+
+    } catch (err) {
+      console.error("Share failed:", err)
+      downloadImage(image)
+    }
+}
 
   const downloadImage = (url: string) => {
     const a = document.createElement('a')
@@ -84,20 +115,23 @@ const SharePopup = ({ open, onClose, achievement, name }: Props) => {
 
 
   const handleClose = () => {
+    hasGenerated.current = false
     setVisible(false)
+
     setTimeout(() => {
       setImage(null)
       onClose()
-    }, 300) // match animation duration
+    }, 300)
   }
 
   if (!open) return null
 
   return (
-    <div className="absolute inset-0 z-50 flex flex-col justify-end">
+    <div className="fixed inset-0 z-50 flex flex-col justify-end">
       <div
         className={`relative w-full rounded-t-2xl bg-main-beige py-8
-        flex flex-col items-center gap-6
+        flex flex-col items-center
+        h-[calc(100dvh-64px)]
         [box-shadow:inset_1px_1px_5px_0_rgba(0,0,0,0.3)]
         transform transition-transform duration-300 ease-out
         ${visible ? 'translate-y-0' : 'translate-y-full'}`}
@@ -115,27 +149,38 @@ const SharePopup = ({ open, onClose, achievement, name }: Props) => {
             </button>
         </div>
 
-        {loading && (
-        <div className="flex h-[65dvh] items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-pink-400 border-t-transparent" />
+        <div className="flex-1 w-full flex items-center justify-center overflow-hidden">
+
+          {loading && (
+            <div className="flex items-center justify-center">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-pink-400 border-t-transparent" />
+            </div>
+          )}
+
+          {!loading && image && (
+            <img
+              src={image}
+              alt="Achievement Share"
+              className="max-h-full max-w-full object-contain rounded-lg shadow-md"
+            />
+          )}
+
         </div>
-        )}
 
-        {!loading && image && (
-            <img src={image} alt="Achievement Share" className="w-[80%] h-auto rounded-lg shadow-md" />
-        )}
-
-        <Button 
-        size="lg" className="bg-gradient-purple"
-        onClick={handleShare}
-        >
-          <span className="text-white">เลือก {}</span>
-          <FlatIcon
-          name="fi-rr-download"
-          className="text-white"
-          size={16}
-          />
-        </Button>
+        <div className="mt-5">
+          <Button
+            size="lg"
+            className="bg-gradient-purple"
+            onClick={handleShare}
+          >
+            <span className="text-white">{i18n.language === 'th' ? 'บันทึกภาพ' : 'Save Image'}</span>
+            <FlatIcon
+              name="fi-rr-download"
+              className="text-white"
+              size={16}
+            />
+          </Button>
+        </div>
       </div>
     </div>
   )

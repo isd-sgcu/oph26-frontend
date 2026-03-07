@@ -148,10 +148,11 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   if (!open) return null
 
   return (
-    <div className="absolute inset-0 z-50 flex flex-col justify-end">
+    <div className="fixed inset-0 z-50 flex flex-col justify-end">
       <div
         className={`relative w-full rounded-t-2xl bg-main-beige py-8
         flex flex-col items-center gap-6
+        h-[calc(100dvh-64px)]
         [box-shadow:inset_1px_1px_5px_0_rgba(0,0,0,0.3)]
         transform transition-transform duration-300 ease-out
         ${visible ? 'translate-y-0' : 'translate-y-full'}`}
@@ -212,20 +213,16 @@ const GameSharePopup = ({ open, onClose }: Props) => {
         </div>
         )}
 
-        <Button 
-        size="lg" className="bg-gradient-purple"
-        onClick={handleShare}
+        <Button
+          size="lg"
+          className="bg-gradient-purple"
+          onClick={handleShare}
         >
+          <span className="text-white">{i18n.language === 'th' ? 'บันทึกภาพ' : 'Save Image'}</span>
           <FlatIcon
-          name="fi-rr-plus-small"
-          className="text-white"
-          size={16}
-          />
-          <span className="text-white">เลือก {activeIndex}</span>
-          <FlatIcon
-          name="fi-rr-plus-small"
-          className="text-white"
-          size={16}
+            name="fi-rr-download"
+            className="text-white"
+            size={16}
           />
         </Button>
       </div>
