@@ -6,7 +6,7 @@ export interface Workshop {
   description: string
   hasPreregistered: boolean
   hasLimitParticipants: boolean
-  url: string
+  url?: string
   faculty: FacultyType
   timeSlot?: string // separated by /
   owner?: string
@@ -1139,8 +1139,193 @@ export const WORKSHOP_DATA: Workshop[] = [
   },
 
   // คณะสถาปัตยกรรมศาสตร์
+  {
+    id: 'archw1',
+    name: 'Talk Session โดยอาจารย์',
+    description:
+      'การบรรยายเกี่ยวกับหลักสูตรการเรียนการสอน  การรับสมัคร career path บรรยากาศในการเรียนของแต่ละภาควิชา จำนวน 8 ภาควิชา ภาคละ 30 นาที โดยวันที่ 28 มีนาคม บรรยายโดยอาจารย์ วันที่ 29 มีนาคม บรรยายโดยรุ่นพี่',
+    hasPreregistered: true,
+    hasLimitParticipants: false,
+    url: 'https://forms.gle/75GqSheDABvK35UL8',
+    faculty: 'arch',
+    timeSlot:
+      '10.00 - 10.30 ภาควิชา สถาปัตยกรรมศาสตร์ สาขา สถาปัตยกรรม (AR) / 10.45 - 11.15 ภาควิชา สถาปัตยกรรมศาสตร์ สาขา สถาปัตยกรรมไทย (TR) / 11.30 - 12.00 ภาควิชา สถาปัตยกรรมศาสตร์ภายใน (IA) / 13.00 - 13.30 ภาควิชา ภูมิสถาปัตยกรรม (LA) / 13.45 - 14.15 ภาควิชา การวางแผนภาคและเมือง (UA) / 14.30 - 15.00 ภาควิชา การออกแบบอุตสาหกรรม (ID) / 15.15 - 15.45 หลักสูตร การออกแบบสถาปัตยกรรม นานาชาติ (INDA) / 16.00 - 16.30 หลักสูตร การออกแบบนิเทศศิลป์ นานาชาติ (CommDe)',
+    locationName: 'ห้องสมุด ชั้นออดิทอเรียม คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw2',
+    name: 'Talk Session โดยรุ่นพี่',
+    description:
+      'การบรรยายเกี่ยวกับหลักสูตรการเรียนการสอน  การรับสมัคร career path บรรยากาศในการเรียนของแต่ละภาควิชา จำนวน 8 ภาควิชา ภาคละ 30 นาที โดยวันที่ 28 มีนาคม บรรยายโดยอาจารย์ วันที่ 29 มีนาคม บรรยายโดยรุ่นพี่',
+    hasPreregistered: true,
+    hasLimitParticipants: false,
+    url: 'https://forms.gle/75GqSheDABvK35UL8',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'ห้องสมุด ชั้นออดิทอเรียม คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw3',
+    name: 'จัดแสดงโมเดล เพลต ประจำแต่ละภาควิชา',
+    description:
+      'ผลงานแต่ละภาควิชา มีโดล เพลตทีสิส และสามารถปรึกษากับพี่ในภาคได้โดยตรง',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'ห้องสมุดชั้น 2-3 คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw4',
+    name: 'ฐานที่ 1 stereotypes',
+    description:
+      'Stereotypes สไตล์แบบไหนจะใช่เรา ภาพจำของแต่ละภาควิชา ไม่ว่าจะเป็นเนื้อหา หลักสูตร ลักษณะผู้เรียน มาใช้ในการนิยามความเข้าใจเพื่อให้ผู้ที่สนใจได้เข้าใจและเห็นภาพความแตกต่างของแต่ละภาควิชา',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'ถ้ำเสือ หลังโต๊ะลงทะเบียน คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw5',
+    name: 'ฐานที่ 2 Bingo',
+    description:
+      'Bingo ยกมือขึ้น แล้วพูดว่า บิงโก! เข้าใจเนื้อหา และหลักสูตรพื้นฐานในการเรียนคณะสถาปัตย์ ผ่านคำศัพท์ 24 คำที่คัดมาแล้วว่าสุด!',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'คอร์ทไผ่ คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw6',
+    name: 'ฐานที่ 3 Dream',
+    description:
+      'Dream เมื่อคุณดันหลุดเข้าไปในห้อง… แล้วเจอเข้ากับอะไรแปลก ๆ ที่ไม่ควรมีอยู๋ในนั้น มาจำลอง จินตนาการ ผ่านแนวคิดของที่ควรมีและของแปลก ๆ ที่ไม่ควรมีในห้องและสถานที่ต่าง ๆ ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'ห้องสมาคมศิษย์เก่า คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw7',
+    name: 'ฐานที่ 4 The line',
+    description:
+      'the Line ขีดเพียง 1 เส้น ให้กาลครั้งหนึ่งนั้นยาวนานขึ้น พื้นที่ปลดปล่อยจินตนาการ การสร้างสรรค์ และภาพจำในวัตถุทรงจำที่ต่างกันไปของแต่ละคน ผ่านการขึดและเขียนลงบนผืนผ้าใบ ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'คอร์ทไผ่ คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw8',
+    name: 'ฐานที่ 5 Heartrate',
+    description:
+      'Heart Rates ตึกตักตึกตัก ดันถูกใจเข้าแล้วซี ประเมินและวิพากษ์เมืองในแง่ของการเสนอความเป็นไปได้ใหม่ ในการมีพื้นที่สาธารณะที่ทุกคนเข้าถึงได้',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'คอร์ทไผ่ คณะสถาปัตยกรรมศาสตร์',
+    locationURL: 'https://maps.app.goo.gl/mcVQqhWU4okDy3Ae8',
+  },
+  {
+    id: 'archw9',
+    name: 'Arch Craft @ศาลาพระเกี๊ยว',
+    description:
+      'กิจกรรมพิเศษ แล้วมาสร้างบ้านไปด้วยกันนะ! ได้ของติดมือกลับไปกันทุกคนแน่นอน โดยนิสิตชั้นปีที่ 2-3 จากหลักสูตรนานาชาติ CommDe และ INDA',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/arsc.chula?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'arch',
+    timeSlot: '09.00 - 16:00',
+    locationName: 'ศาสาพระเกี้ยว',
+  },
 
   // คณะสหเวชศาสตร์
+  {
+    id: 'ahsw1',
+    name: 'Workshop MT',
+    description:
+      'ใครสงสัยยกมือขึ้น! 🙋‍♀️🙋‍♂️ \n❓ นักเทคนิคการแพทย์ คือใคร?\n❓ ทำงานยังไง? ตรวจอะไรบ้าง? \n❓ แล้วที่สำคัญ... เรียนจบไปมีงานทำจริงไหม? \nงาน Open House ปีนี้ เปิดโอกาสให้น้อง ๆ มาทำความรู้จักกับ “เทคนิคการแพทย์” หรือบางคนเรียกว่า ""หมอแล็บ"" ที่ใช้ผลแล็บช่วยคุณหมอวินิจฉัยโรค ไม่ว่าจะเป็นการตรวจเลือด สารคัดหลั่งต่าง ๆ การเพาะเชื้อทางจุลชีววิทยา เช่นแบคทีเรีย เชื้อรา ไวรัสก่อโรค และการตรวจไปจนถึงระดับ DNA และยีนได้อีกด้วย',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/ahscuopenhouse/',
+    faculty: 'ahs',
+    timeSlot: '09.00-11.00 / 12.00-14.00 / 15.00-17.00',
+    owner: 'เทคนิคการแพทย์',
+    locationName: 'โถงอาคารจุฬาพัฒน์ 14',
+    locationURL: 'https://maps.app.goo.gl/cJjoXmxtCzLerzQT9',
+  },
+  {
+    id: 'ahsw2',
+    name: 'Workshop PT',
+    description:
+      'เปิดมาด้วย อะไรคือ PT คือศาสตร์ที่ช่วยให้เราสามารถเคลื่อนไหวได้อย่างมีประสิทธิภาพและไม่บาดเจ็บ เราจะเริ่มจากการเรียนรู้ด้าน Motor control รู้หรือไม่ร่างกายเราควบคุมและทำงานประสานด้วยกันได้อย่างไรถ้าคนเราเคลื่อนไหวผิดแปลกไปร่างกายเราจะตอบสนองอย่างไรบ้าง  เมื่อเราใช้ร่างกายหนักๆ เราก็อาจจะมีอาการปวด เมื่อยหรือ บวมได้ เรามาต่อกันเลยดีกว่าที่ Electrical Stimulation (ES) เป็นการใช้กระแสไฟฟ้าเพื่อลดอาการแล้วกระตุ้นกล้ามเนื้อให้ทำงานได้ดีขึ้น ถ้าอยากรู้มากกว่านี้มาลองเข้า Workshop กายภาพกันดูสิ ห้ามพลาด!!',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/ahscuopenhouse/',
+    faculty: 'ahs',
+    timeSlot: '09.00-11.00 / 12.00-14.00 / 15.00-17.00',
+    owner: 'กายภาพบำบัด',
+    locationName: 'โถงอาคารจุฬาพัฒน์ 14',
+    locationURL: 'https://maps.app.goo.gl/cJjoXmxtCzLerzQT9',
+  },
+  {
+    id: 'ahsw3',
+    name: 'Workshop ND',
+    description:
+      'สุขภาพดีไม่ได้มาเพราะโชคช่วย แต่มาจากการเลือกกินอย่างมีศาสตร์! โภชนาการและการกำหนดอาหาร  (Nutrition & Dietetics - ND) เป็นศาสตร์ที่ศึกษาความสัมพันธ์ระหว่างอาหารกับสุขภาพ ไม่ใช่แค่เรื่องกินให้อิ่ม แต่คือการกินให้ ""เป๊ะ"" และ ""ปัง"" ต่อสุขภาพ! มาสำรวจบทบาทของนักกำหนดอาหารและเรียนรู้ว่าทำไม ND ถึงเป็นสาขาที่ขาดไม่ได้ ผ่าน 3 ฐานกิจกรรมสุดมันส์',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/ahscuopenhouse/',
+    faculty: 'ahs',
+    timeSlot: '09.00-11.00 / 12.00-14.00 / 15.00-17.00',
+    owner: 'โภชนาการและการกำหนดอาหาร',
+    locationName: 'โถงอาคารจุฬาพัฒน์ 14',
+    locationURL: 'https://maps.app.goo.gl/cJjoXmxtCzLerzQT9',
+  },
+  {
+    id: 'ahsw4',
+    name: 'Workshop RT',
+    description:
+      "เคยสงสัยไหมว่ากว่าจะได้ภาพเอกซเรย์สักใบ ต้องผ่านกระบวนการอะไรบ้าง? มาเปิดโลกสายวิทย์สุขภาพกับสาขา รังสีเทคนิค (RT) ที่จะพาน้อง ๆ ไปสัมผัสบรรยากาศการเรียนแบบเจาะลึก! เริ่มตั้งแต่อุ่นเครื่องพาไปส่องไอเทมลับของนักรังสี ก่อนจะพาดำดิ่งไปทำความเข้าใจว่า 'รังสี' ที่เราได้ยินกันบ่อย ๆ คืออะไรกันแน่ พร้อมไขข้อข้องใจสารพัดความเชื่อเรื่องรังสี... อันไหนเรื่องจริง อันไหนแค่ข่าวลือ เดี๋ยวรู้กัน!",
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/ahscuopenhouse/',
+    faculty: 'ahs',
+    timeSlot: '09.00-11.00 / 12.00-14.00 / 15.00-17.00',
+    owner: 'รังสีเทคนิค',
+    locationName: 'โถงอาคารจุฬาพัฒน์ 14',
+    locationURL: 'https://maps.app.goo.gl/cJjoXmxtCzLerzQT9',
+  },
+  {
+    id: 'ahsw5',
+    name: 'นิทรรศการแต่ละสาขาของสหเวชฯ',
+    description:
+      '🔬 MT (เทคนิคการแพทย์) – โลกของห้องแล็บที่เต็มไปด้วยการตรวจวิเคราะห์ทางการแพทย์ ตั้งแต่เลือด ปัสสาวะ ไปจนถึงจุลชีววิทยา \n🦴 PT (กายภาพบำบัด) – ศาสตร์แห่งการฟื้นฟูร่างกาย เรียนรู้เกี่ยวกับโครงสร้างร่างกาย การเคลื่อนไหว และเทคนิคบำบัดต่างๆ \n🥗 ND (โภชนาการและการกำหนดอาหาร) – เข้าใจโภชนาการที่เหมาะสม บทบาทของนักกำหนดอาหาร และผลของอาหารต่อสุขภาพ \n☢️ RT (รังสีเทคนิค) – เปิดโลกของรังสีทางการแพทย์ การสร้างภาพเอกซเรย์ และความปลอดภัยทางรังสี \n✨ แล้วมาดูกันว่าสาขาไหนใช่สำหรับน้อง ๆ! 🎉🔥',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    faculty: 'ahs',
+    timeSlot: '08:30 - 16:30',
+    locationName: 'โถงอาคารจุฬาพัฒน์ 14',
+    locationURL: 'https://maps.app.goo.gl/cJjoXmxtCzLerzQT9',
+  },
 
   // คณะสัตวแพทยศาสตร์
   {
@@ -1192,7 +1377,6 @@ export const WORKSHOP_DATA: Workshop[] = [
       'น้องๆสามารถเดินดูตามห้องที่มีการจัดนิทรรศการได้ เช่นที่คอกสัตว์ หรือห้องแลปวิชาปรสิตที่มีตัวอย่างตั้งไว้ให้ดู',
     hasPreregistered: false,
     hasLimitParticipants: false,
-    url: '-',
     faculty: 'vet',
   },
   {
@@ -1202,7 +1386,6 @@ export const WORKSHOP_DATA: Workshop[] = [
       'น้องๆจะได้รับฟังการบรรยายหัวข้อต่างๆโดนวิทยากรรับเชิญ ไม่ว่าจะเป็นเกี่ยวกับสายอาชีพต่างๆหรือกิจกรรมภายในคณะ',
     hasPreregistered: false,
     hasLimitParticipants: false,
-    url: '-',
     faculty: 'vet',
   },
   {
@@ -1212,7 +1395,6 @@ export const WORKSHOP_DATA: Workshop[] = [
       'น้องๆจะได้รับกระดาษเพื่อไปวนฐาน walk rally ซึ่งจะจัดโดยค่าย/ชมรมต่างๆภายในคณะ เพื่อให้น้องๆได้รู้ว่ามีกิจกรรมและชมรมใดบ้าง',
     hasPreregistered: false,
     hasLimitParticipants: false,
-    url: '-',
     faculty: 'vet',
   },
 
