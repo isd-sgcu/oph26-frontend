@@ -1139,20 +1139,252 @@ export const WORKSHOP_DATA: Workshop[] = [
   },
 
   // คณะสถาปัตยกรรมศาสตร์
+
   // คณะสหเวชศาสตร์
+
   // คณะสัตวแพทยศาสตร์
+  {
+    id: 'vetw1',
+    name: 'แนะแนว by รุ่นพี่ cuvet',
+    description:
+      'กิจกรรมแนะแนวสุดพิเศษ เจาะลึกวิธีการเข้าแต่ละรอบไม่ว่าจะเป็น portfolio, quota หรือ admission  รวมไปถึงแนะแนวการเรียนการสอนภายในคณะโดยรุ่นพี่สัตวแพทย์จุฬา',
+    hasPreregistered: true,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/cuvetopenhouse?igsh=MThuNzljcGNwemU0bg==',
+    faculty: 'vet',
+    timeSlot: '8:30 - 12:00 / 13:00 - 16:00',
+  },
+  {
+    id: 'vetw2',
+    name: 'workshop เจาะเลือด/ฉีดวัคซีน',
+    description:
+      'สอนวิธีการเจาะเลือด/ฉีดวัคซีนที่ถูกต้อง ซึ่งเป็นหัตถการหลักในวิชาชีพสัตวแพทย์',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuvetopenhouse?igsh=MThuNzljcGNwemU0bg==',
+    faculty: 'vet',
+  },
+  {
+    id: 'vetw3',
+    name: 'workshop demon anatomy',
+    description:
+      'demon ร่างอาจารย์ใหญ่ให้ดูแบบ exclusive น้องๆจะได้เห็นวิธีการผ่าร่างอาจารย์ใหญ่ รวมไปถึงศึกษาอนาโตมีเบื้องต้น',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuvetopenhouse?igsh=MThuNzljcGNwemU0bg==',
+    faculty: 'vet',
+    timeSlot: '8.30-9.00 / 13.00-13.30',
+  },
+  {
+    id: 'vetw4',
+    name: 'workshop aseptic techniques/เย็บแผล',
+    description:
+      'น้องๆจะได้ฝึกล้างมือแบบศัลยแพทย์ และได้ลองฝึกเย็บแผลจากแป้นเย็บ โดยมีพี่ๆคอยสอน',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/cuvetopenhouse?igsh=MThuNzljcGNwemU0bg==',
+    faculty: 'vet',
+  },
+  {
+    id: 'vetw5',
+    name: 'ทัวร์คณะ',
+    description:
+      'น้องๆสามารถเดินดูตามห้องที่มีการจัดนิทรรศการได้ เช่นที่คอกสัตว์ หรือห้องแลปวิชาปรสิตที่มีตัวอย่างตั้งไว้ให้ดู',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: '-',
+    faculty: 'vet',
+  },
+  {
+    id: 'vetw6',
+    name: 'บรรยายพิเศษโดยวิทยากร',
+    description:
+      'น้องๆจะได้รับฟังการบรรยายหัวข้อต่างๆโดนวิทยากรรับเชิญ ไม่ว่าจะเป็นเกี่ยวกับสายอาชีพต่างๆหรือกิจกรรมภายในคณะ',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: '-',
+    faculty: 'vet',
+  },
+  {
+    id: 'vetw7',
+    name: 'walk rally',
+    description:
+      'น้องๆจะได้รับกระดาษเพื่อไปวนฐาน walk rally ซึ่งจะจัดโดยค่าย/ชมรมต่างๆภายในคณะ เพื่อให้น้องๆได้รู้ว่ามีกิจกรรมและชมรมใดบ้าง',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: '-',
+    faculty: 'vet',
+  },
+
   // คณะอักษรศาสตร์
+  {
+    id: 'artsw1',
+    name: 'นิทรรศการกลางและห้องแนะแนว',
+    description:
+      'กิจกรรมสุดคุ้มที่รวมนิทรรศการกลาง พื้นที่แห่งการค้นหาความเป็นอักษรผ่านกิจกรรมร่วมสนุกมากมาย และห้องแนะแนว พื้นที่นำเสนอข้อมูลทางวิชาการเบื้องต้นและได้พูดคุยกับนิสิตคณะอักษรศาสตร์โดยตรง',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/artsopenhouse?igsh=Y2xqNGVrOHg4Nmg3',
+    faculty: 'arts',
+    timeSlot: '10:00-16:00',
+    locationName: 'ห้อง 303-304 อาคารมหาจักรีสิรินธร',
+    locationURL: 'https://maps.app.goo.gl/LA1CoWkhnfnjKExj7',
+  },
+  {
+    id: 'artsw2',
+    name: 'Walk Rally',
+    description:
+      'รับพาสปอร์ตแล้วออกเดินทางไปพร้อมกัน กับกิจกรรมที่เปิดโอกาสให้ผู้เข้าร่วมสำรวจพื้นที่ภายในงาน ผ่านการร่วมกิจกรรมตามจุดต่าง ๆ สะสมตราประทับประจำแต่ละจุดให้ครบ แล้วลุ้นรับของรางวัลพิเศษไปเลย !',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/artsopenhouse?igsh=Y2xqNGVrOHg4Nmg3',
+    faculty: 'arts',
+    timeSlot: '10:00-16:00',
+    locationURL: 'https://maps.app.goo.gl/LA1CoWkhnfnjKExj7',
+  },
+  {
+    id: 'artsw3',
+    name: 'ห้องเรียนจำลอง',
+    description:
+      'เปิดให้น้อง ๆ ได้ทดลองมานั่งเรียนวิชาต่าง ๆ ที่จัดสอนจริงในคณะอักษรศาสตร์ โดยอาจารย์ผู้สอนจริงตามสาขาวิชานั้น เป็นเวลา 90 นาที',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.ticketmelon.com/AksornCUopenhouse/HongRienJamLong',
+    faculty: 'arts',
+    timeSlot: '10:15-11:45 / 12:15-13:45 / 14:15-15:45',
+    locationName: 'ห้อง 301-302 อาคารมหาจักรีสิรินธร',
+    locationURL: 'https://maps.app.goo.gl/LA1CoWkhnfnjKExj7',
+  },
+  {
+    id: 'artsw4',
+    name: 'เวทีกลาง',
+    description:
+      'เป็นเวทีที่ให้ชมรมต่าง ๆ จากคณะอักษรศาสตร์มาแสดงความสามารถ ไม่ว่าจะเป็นทางด้านดนตรี ร้อง เล่น เต้น รำ และ โต้วาทีเพื่อให้น้อง ๆ ได้รับชม',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/artsopenhouse?igsh=Y2xqNGVrOHg4Nmg3',
+    faculty: 'arts',
+    timeSlot: '10:00-16:00',
+    locationName: 'โถงอาคารมหาจักรีสิรินธร',
+    locationURL: 'https://maps.app.goo.gl/LA1CoWkhnfnjKExj7',
+  },
+  {
+    id: 'artsw5',
+    name: 'ห้องเอก-โท',
+    description:
+      'กิจกรรมห้องเอก-โทจะพาน้อง ๆ ไปทำความรู้จักกับวิชาเอกและวิชาโทในคณะอักษรศาสตร์อย่างครบถ้วน ด้วยบรรยากาศเป็นกันเองจากพี่ ๆ แต่ละเอก-โท',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/artsopenhouse?igsh=Y2xqNGVrOHg4Nmg3',
+    faculty: 'arts',
+    timeSlot: '10:00-16:00',
+    locationName: 'อาคารมหาจักรีสิรินธร',
+    locationURL: 'https://maps.app.goo.gl/LA1CoWkhnfnjKExj7',
+  },
+
   // สถาบันนวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย
   {
     id: 'sciiw1',
-    name: '-',
-    description: '-',
+    name: 'Workshop 1 - The Power of Prototyping: From Idea to Reality',
+    description:
+      'Discover how innovators turn ideas into reality through rapid prototyping. In this hands-on workshop, you will build, test, and improve a solution to a real-world challenge.',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '28 March: 11:00 - 11:45 / 28 March: 13:00 - 13:45',
+    locationName: 'Fablab, Fl. 4, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw2',
+    name: 'Workshop 2 - How to Beat the System',
+    description:
+      'Can your team turn chaos into flow? Compete to make a system faster, smoother, and smarter, then learn the simple “why” behind what worked.',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '28 March: 11:00 - 11:45 / 28 March: 13:00 - 13:45',
+    locationName: 'Room 409, Fl. 4, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw3',
+    name: 'Workshop 3 - How to Run a Service like Shinkansen',
+    description:
+      "Want customers to trust your business? Learn the rules of operational transparency, then discover the behind-the-scenes system that keeps Japan's Shinkansen clean and always on time.",
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '29 March: 11:00 - 11:45 / 29 March: 13:00 - 13:45',
+    locationName: 'Room 409, Fl. 4, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw4',
+    name: 'Workshop 4 - Thai Herbal Mosquito Repellent Spray',
+    description:
+      'Create a Thai herbal mosquito repellent spray using ingredients like citronella and lemongrass. Through hands-on activities, they learn basic extraction, formulation, and product design, connecting science, innovation, and Thai wisdom.',
+    hasPreregistered: true,
+    hasLimitParticipants: true,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '29 March: 11:00 - 11:45 / 29 March: 13:00 - 13:45',
+    locationName: 'Fablab, Fl. 4, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw5',
+    name: "Parents' Session",
+    description:
+      'A comfortable space for parents to relax while their children explore the Open House independently. Faculty members are available for casual conversations to share insights on BAScii’s curriculum, student life, and admissions.',
+    hasPreregistered: true,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '11:00 - 11:45 / 13:00 - 13:45',
+    locationName: 'Auditorium, Fl. 3, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw6',
+    name: 'Showcase',
+    description:
+      'An open display of student-led projects, startups, clubs, and houses that showcases the vibrant BAScii community. Visitors can meet students behind the initiatives and explore the diverse pathways BAScii offers.',
     hasPreregistered: false,
     hasLimitParticipants: false,
     url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
     faculty: 'scii',
-    timeSlot: '',
-    locationName: '',
+    timeSlot: '09:00 - 16:00',
+    locationName: 'Fl. 1, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw7',
+    name: 'Tour Guide',
+    description:
+      'A personalized Q&A space where participants can speak directly with BAScii students and tour guides for honest, first-hand insights on academics and student life, helping them understand whether BAScii fits their goals.',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '09:00 - 16:00',
+    locationName: 'Fl. 1, Chaloem Rajakumari 60',
+    locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
+  },
+  {
+    id: 'sciiw8',
+    name: 'Exhibition',
+    description:
+      'A curated walk-through experience introducing BAScii’s culture, curriculum, and innovation ecosystem through interactive displays and storytelling, helping students visualize their future academic journey.',
+    hasPreregistered: false,
+    hasLimitParticipants: false,
+    url: 'https://www.instagram.com/basciiscofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+    faculty: 'scii',
+    timeSlot: '09:00 - 16:00',
+    locationName: 'Room 301-302, Fl. 3, Chaloem Rajakumari 60',
     locationURL: 'https://share.google/T2iSSvPKtpo3RhKL3',
   },
   // คณะเกษตรศาสตร์บูรณาการ
