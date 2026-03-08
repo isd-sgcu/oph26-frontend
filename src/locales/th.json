@@ -92,7 +92,8 @@
     "infoGroup": {
       "facultyGroup": {
         "title": "คณะ",
-        "searchPlaceholder": "ค้นหาคณะ..."
+        "inputPlaceholder": "ค้นหาคณะ...",
+        "noData": "ไม่พบคณะที่กำลังค้นหา..."
       },
       "mapGroup": {},
       "merchandiseGroup": {},

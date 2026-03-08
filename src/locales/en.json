@@ -88,7 +88,8 @@
     "infoGroup": {
       "facultyGroup": {
         "title": "Faculties",
-        "searchPlaceholder": "Search for faculties..."
+        "inputPlaceholder": "Search for faculties...",
+        "noData": "No faculties found..."
       },
       "mapGroup": {},
       "merchandiseGroup": {},
