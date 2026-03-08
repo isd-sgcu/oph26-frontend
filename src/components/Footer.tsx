@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useRouterState } from '@tanstack/react-router'
 
-const BEIGE_FOOTER_PATHS = [
+const SHOW_FOOTER_PATHS = [
+  '/',
   '/info',
   '/info/workshop',
   '/info/workshop/*',
@@ -10,8 +11,6 @@ const BEIGE_FOOTER_PATHS = [
   '/info/map',
   '/info/merchandise',
 ]
-
-const SHOW_FOOTER_PATHS = ['/', ...BEIGE_FOOTER_PATHS]
 
 function matchPath(pathname: string, rule: string) {
   if (rule.endsWith('/*')) {
@@ -47,10 +46,6 @@ export default function Footer() {
     matchPath(pathname, rule)
   )
 
-  const beBeigeFooter = BEIGE_FOOTER_PATHS.some((rule) =>
-    matchPath(pathname, rule)
-  )
-
   if (!shouldShowFooter) return null
 
   return (
@@ -59,10 +54,10 @@ export default function Footer() {
     >
       {/* Content */}
       <div
-        className={`flex w-full flex-1 flex-col items-center gap-4 px-8 py-4 ${beBeigeFooter ? 'bg-gradient-beige' : 'bg-gradient-pink'}`}
+        className={`bg-gradient-pink flex w-full flex-1 flex-col items-center gap-4 px-8 py-4`}
       >
         <h1
-          className={`${beBeigeFooter ? 'text-main-pink' : 'text-main-beige'} text-center text-2xl font-bold text-shadow-xs`}
+          className={`text-main-beige text-center text-2xl font-bold text-shadow-xs`}
         >
           CU OPEN HOUSE 2026
         </h1>

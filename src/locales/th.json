@@ -93,7 +93,12 @@
       "facultyGroup": {},
       "mapGroup": {},
       "merchandiseGroup": {},
-      "workshopGroup": {}
+      "workshopGroup": {
+        "title": "ข้อมูลเวิร์คชอป",
+        "inputPlaceholder" : "กรอกชื่อเวิร์คชอป...",
+        "all": "ทุกคณะ",
+        "noData": "ไม่พบเวิร์คชอปที่กำลังค้นหา..."
+      }
     },
     "questionaireGroup": {
       "title": "แบบประเมิน",

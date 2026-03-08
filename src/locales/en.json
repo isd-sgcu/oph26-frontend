@@ -89,7 +89,12 @@
       "facultyGroup": {},
       "mapGroup": {},
       "merchandiseGroup": {},
-      "workshopGroup": {}
+      "workshopGroup": {
+        "title": "Workshops",
+        "inputPlaceholder": "Enter workshop name...",
+        "all": "All Faculties",
+        "noData": "No workshops found..."
+      }
     },
     "questionaireGroup": {
       "title": "Questionaire",
