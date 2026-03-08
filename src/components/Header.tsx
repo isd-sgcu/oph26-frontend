@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FlatIcon } from './FlatIcon'
 import { useTranslation } from 'react-i18next'
-import { Link, useLocation, useRouter } from '@tanstack/react-router'
+import { useLocation, useRouter } from '@tanstack/react-router'
 import { Button } from './ui/button'
 import CustomModal from './CustomModal'
 
@@ -9,7 +9,6 @@ type NavItem = {
   title: string // Note: Don't forget to concern about i18n
   to: string
   icon: string // Note: fi-rr-*
-  params?: Record<string, string>
 }
 
 export enum BackgroundColorHeader {
@@ -18,6 +17,11 @@ export enum BackgroundColorHeader {
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
+
+const headerColorClass: Record<BackgroundColorHeader, string> = {
+  [BackgroundColorHeader.MAINPINK]: 'to-main-pink',
+  [BackgroundColorHeader.MAINLIGHTPINK]: 'to-main-light-pink',
+}
 
 const navItems: NavItem[] = [
   { title: 'home', to: '/', icon: 'fi-rr-home' },
@@ -30,7 +34,7 @@ const navItems: NavItem[] = [
   {
     title: 'mainEvent',
     icon: 'fi-rr-balloons',
-    to: '',
+    to: '/info/event',
   },
   {
     title: 'map',
@@ -40,7 +44,7 @@ const navItems: NavItem[] = [
   {
     title: 'missingPiece',
     icon: 'fi-rr-layout-fluid',
-    to: '/game/',
+    to: '/game',
   },
   {
     title: 'merchandise',
@@ -103,7 +107,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`from-main-beige from-30% to-90% to-${toColor} relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b p-4`}
+        className={`from-main-beige from-30% to-90% ${headerColorClass[toColor]} relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b p-4`}
       >
         {/* Logo */}
         <img
@@ -181,14 +185,13 @@ export default function Header() {
               {/* Navigation */}
               <nav className="mb-10 flex flex-col gap-10">
                 {navItems.map((item) => (
-                  <Link
+                  <div
                     key={item.title}
-                    to={item.to}
-                    params={item.params}
                     onClick={() => {
+                      router.navigate({ to: item.to })
                       setOpenSidebar(false)
                     }}
-                    className="flex items-center gap-4"
+                    className="flex w-fit cursor-pointer items-center gap-4"
                   >
                     <FlatIcon
                       name={item.icon}
@@ -198,7 +201,7 @@ export default function Header() {
                     <span className="text-xl font-bold">
                       {t(`components.header.sidebar.${item.title}`)}
                     </span>
-                  </Link>
+                  </div>
                 ))}
               </nav>
 
