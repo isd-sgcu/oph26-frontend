@@ -107,9 +107,9 @@ export default function Header() {
       >
         {/* Logo */}
         <img
-          src="/logo.svg"
-          width={69}
-          height={40}
+          src="/logo/cu-journey.webp"
+          width={74}
+          height={48}
           alt="Logo"
           className="cursor-pointer"
           onClick={() => {
