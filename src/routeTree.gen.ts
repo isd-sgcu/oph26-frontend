@@ -15,8 +15,6 @@ import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
 import { Route as CertificateIndexRouteImport } from './routes/certificate/index'
-import { Route as TestNameRouteImport } from './routes/test/$name'
-import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
 import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
@@ -64,16 +62,6 @@ const GameIndexRoute = GameIndexRouteImport.update({
 const CertificateIndexRoute = CertificateIndexRouteImport.update({
   id: '/certificate/',
   path: '/certificate/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestNameRoute = TestNameRouteImport.update({
-  id: '/test/$name',
-  path: '/test/$name',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestComponentIndexRoute = TestComponentIndexRouteImport.update({
-  id: '/test/component/',
-  path: '/test/component/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InfoWorkshopIndexRoute = InfoWorkshopIndexRouteImport.update({
@@ -173,7 +161,6 @@ const AuthProfileEditIndexRoute = AuthProfileEditIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
-  '/test/$name': typeof TestNameRoute
   '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
@@ -190,7 +177,6 @@ export interface FileRoutesByFullPath {
   '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
-  '/test/component/': typeof TestComponentIndexRoute
   '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
@@ -200,7 +186,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/test/$name': typeof TestNameRoute
   '/certificate': typeof CertificateIndexRoute
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
@@ -217,7 +202,6 @@ export interface FileRoutesByTo {
   '/info/map': typeof InfoMapIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
   '/info/workshop': typeof InfoWorkshopIndexRoute
-  '/test/component': typeof TestComponentIndexRoute
   '/auth/profile/edit': typeof AuthProfileEditIndexRoute
   '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login': typeof AuthStaffLoginIndexRoute
@@ -229,7 +213,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
-  '/test/$name': typeof TestNameRoute
   '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
@@ -246,7 +229,6 @@ export interface FileRoutesById {
   '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
-  '/test/component/': typeof TestComponentIndexRoute
   '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
@@ -259,7 +241,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/game'
-    | '/test/$name'
     | '/certificate/'
     | '/game/'
     | '/questionaire/'
@@ -276,7 +257,6 @@ export interface FileRouteTypes {
     | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
-    | '/test/component/'
     | '/auth/profile/edit/'
     | '/auth/profile/ticket/'
     | '/auth/staff/login/'
@@ -286,7 +266,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/test/$name'
     | '/certificate'
     | '/game'
     | '/questionaire'
@@ -303,7 +282,6 @@ export interface FileRouteTypes {
     | '/info/map'
     | '/info/merchandise'
     | '/info/workshop'
-    | '/test/component'
     | '/auth/profile/edit'
     | '/auth/profile/ticket'
     | '/auth/staff/login'
@@ -314,7 +292,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/game'
-    | '/test/$name'
     | '/certificate/'
     | '/game/'
     | '/questionaire/'
@@ -331,7 +308,6 @@ export interface FileRouteTypes {
     | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
-    | '/test/component/'
     | '/auth/profile/edit/'
     | '/auth/profile/ticket/'
     | '/auth/staff/login/'
@@ -343,7 +319,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
-  TestNameRoute: typeof TestNameRoute
   CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   TestIndexRoute: typeof TestIndexRoute
@@ -356,7 +331,6 @@ export interface RootRouteChildren {
   InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
-  TestComponentIndexRoute: typeof TestComponentIndexRoute
   AuthProfileEditIndexRoute: typeof AuthProfileEditIndexRoute
   AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
   AuthStaffLoginIndexRoute: typeof AuthStaffLoginIndexRoute
@@ -407,20 +381,6 @@ declare module '@tanstack/react-router' {
       path: '/certificate'
       fullPath: '/certificate/'
       preLoaderRoute: typeof CertificateIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test/$name': {
-      id: '/test/$name'
-      path: '/test/$name'
-      fullPath: '/test/$name'
-      preLoaderRoute: typeof TestNameRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test/component/': {
-      id: '/test/component/'
-      path: '/test/component'
-      fullPath: '/test/component/'
-      preLoaderRoute: typeof TestComponentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/info/workshop/': {
@@ -573,7 +533,6 @@ const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
-  TestNameRoute: TestNameRoute,
   CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   TestIndexRoute: TestIndexRoute,
@@ -586,7 +545,6 @@ const rootRouteChildren: RootRouteChildren = {
   InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
-  TestComponentIndexRoute: TestComponentIndexRoute,
   AuthProfileEditIndexRoute: AuthProfileEditIndexRoute,
   AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
   AuthStaffLoginIndexRoute: AuthStaffLoginIndexRoute,

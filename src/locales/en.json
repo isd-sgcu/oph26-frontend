@@ -78,7 +78,38 @@
       }
     },
     "gameGroup": {
-      "achievementGroup": {},
+      "achievementGroup": { 
+        "titleGroup": "Achievements", 
+        "cardGroup": { 
+          "var1": {
+            "title": "You are the",
+            "description": "to collect all pieces and complete the picture."
+          },
+          "var2": {
+            "title": "You have friends from",
+            "description": "in the top {{top}}% with the most friends from this faculty."
+          },
+          "var3": {
+            "title": "There are",
+            "description": "others finding {{faculty}} friends like you."
+          },
+          "overall": {
+            "title": "You've collected",
+            "statCount": "pieces",
+            "miniCard1": {
+              "title": "Most collected",
+              "description": "{{count}} pieces"
+            },
+            "miniCard2": {
+              "title": "You are the",
+              "description": "to complete"
+            }
+          },
+          "collectedPieces": {
+            "title": "Pieces Collection"
+          }
+        }
+      },
       "pieceGroup": {
         "codeCreate": "Create Code",
         "codeCopied": "Copy your code successfully",
@@ -186,5 +217,6 @@
     },
 
     "title": "Title"
+  
   }
 }

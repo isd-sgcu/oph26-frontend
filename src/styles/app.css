@@ -23,33 +23,45 @@
 
   --color-error-base: #e42a16;
 
-  --background-image-gradient-pink: linear-gradient(to bottom,
-      #f6acd2,
-      #f481b4);
+  --background-image-gradient-pink: linear-gradient(
+    to bottom,
+    #f6acd2,
+    #f481b4
+  );
 
   --background-image-gradient-pink-oval: radial-gradient(#f6acd2, #f481b4);
 
-  --background-image-gradient-beige: linear-gradient(to bottom,
-      #fafae6,
-      #ececd2);
+  --background-image-gradient-beige: linear-gradient(
+    to bottom,
+    #fafae6,
+    #ececd2
+  );
 
-  --background-image-gradient-purple: linear-gradient(to bottom,
-      #80a7da 0%,
-      #6c74ac 65%,
-      #985aa9 100%);
+  --background-image-gradient-purple: linear-gradient(
+    to bottom,
+    #80a7da 0%,
+    #6c74ac 65%,
+    #985aa9 100%
+  );
 
-  --background-image-gradient-green: linear-gradient(to bottom,
-      #fdeb79 0%,
-      #40c3a3 75%,
-      #209975 100%);
+  --background-image-gradient-green: linear-gradient(
+    to bottom,
+    #fdeb79 0%,
+    #40c3a3 75%,
+    #209975 100%
+  );
 
-  --background-image-gradient-blue: linear-gradient(to bottom,
-      #5faacd,
-      #5a7ead);
+  --background-image-gradient-blue: linear-gradient(
+    to bottom,
+    #5faacd,
+    #5a7ead
+  );
 
-  --background-image-gradient-beige-darker: linear-gradient(to bottom,
-      #fafae6,
-      #ffd285);
+  --background-image-gradient-beige-darker: linear-gradient(
+    to bottom,
+    #fafae6,
+    #ffd285
+  );
 }
 
 * {
@@ -257,4 +269,207 @@
   .animate-fade-out {
     animation: fadeOut 0.3s ease-in forwards;
   }
+}
+
+.tree-sway {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: sway 4.5s linear infinite;
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(1.5deg);
+  }
+  40% {
+    transform: rotate(-2deg);
+  }
+  65% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.bush {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+/* gentle breathe */
+@keyframes bush-breathe {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* tiny wind nudge */
+@keyframes bush-nudge {
+  0% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(1px);
+  }
+  70% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* quick rustle */
+@keyframes bush-rustle {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-1px);
+  }
+  60% {
+    transform: translateY(0.5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.grass {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+/* sway left (user scrolls right) */
+@keyframes grass-sway-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* sway right (user scrolls left) */
+@keyframes grass-sway-right {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.flower {
+  transform-origin: 0 0;
+  transform-box: fill-box; /* VERY IMPORTANT */
+  will-change: transform, opacity;
+}
+
+.flower-in {
+  animation: flowerPopIn 0.4s cubic-bezier(.2,1.5,.5,1) forwards;
+}
+
+.flower-out {
+  animation: flowerPopOut 0.25s ease-in forwards;
+}
+
+@keyframes flowerPopIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes flowerPopOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.cloud-puff {
+  animation: cloudPuff 2.5s ease forwards;
+}
+
+@keyframes cloudPuff {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Floating cloud */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Dots */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: white;
+  opacity: 0.7;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot.delay-150 {
+  animation-delay: 0.15s;
+}
+
+.dot.delay-300 {
+  animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
 }
