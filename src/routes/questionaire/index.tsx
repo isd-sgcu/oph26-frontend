@@ -113,11 +113,7 @@ function RouteComponent() {
 
   return (
     <>
-<<<<<<< HEAD
-      <div className="bg-main-pink relative flex w-full flex-col">
-=======
       <div className="bg-main-light-pink relative flex w-full flex-col">
->>>>>>> bst-weakend/isd68-159-info-faculty
         {/* Decorations */}
         <img
           src="/questionaire/blue_flower.png"
