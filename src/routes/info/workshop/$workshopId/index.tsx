@@ -1,11 +1,8 @@
-import {
-  getFacultyLabel,
-  Workshop,
-  WORKSHOP_DATA,
-} from '@/components/const/workshop'
+import { Workshop, WORKSHOP_DATA } from '@/components/const/workshop'
 import { FlatIcon } from '@/components/FlatIcon'
 import BreakLine from '@/components/questionaire/Breakline'
 import { Button } from '@/components/ui/button'
+import { getFacultyLabel } from '@/utils/function'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'

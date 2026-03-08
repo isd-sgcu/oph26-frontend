@@ -1,5 +1,5 @@
 import { ALL_FACULTIES } from '@/components/const/faculty'
-import { getFacultyLabel, WORKSHOP_DATA } from '@/components/const/workshop'
+import { WORKSHOP_DATA } from '@/components/const/workshop'
 import { FlatIcon } from '@/components/FlatIcon'
 import WorkshopCard from '@/components/info/workshop/WorkshopCard'
 import { Input } from '@/components/ui/input'
@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { getFacultyLabel } from '@/utils/function'
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -88,16 +89,17 @@ function RouteComponent() {
         </div>
 
         {/* Workshops */}
-        <div className="flex h-full max-h-120 flex-col gap-2 overflow-y-auto">
-          {filteredWorkshops && filteredWorkshops.length === 0 && (
-            <div className="text-center text-base font-medium text-white">
-              {t('routes.infoGroup.workshopGroup.noData')}
-            </div>
-          )}
-          {filteredWorkshops.map((workshop) => {
-            return <WorkshopCard key={workshop.id} workshop={workshop} />
-          })}
-        </div>
+        {filteredWorkshops && filteredWorkshops.length === 0 ? (
+          <div className="text-center text-base font-medium text-white">
+            {t('routes.infoGroup.workshopGroup.noData')}
+          </div>
+        ) : (
+          <div className="flex h-full max-h-120 flex-col gap-2 overflow-y-auto">
+            {filteredWorkshops.map((workshop) => {
+              return <WorkshopCard key={workshop.id} workshop={workshop} />
+            })}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
-import { getFacultyLabel, Workshop } from '@/components/const/workshop'
+import { Workshop } from '@/components/const/workshop'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Button } from '@/components/ui/button'
+import { getFacultyLabel } from '@/utils/function'
 import { useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
