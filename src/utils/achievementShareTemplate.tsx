@@ -226,13 +226,13 @@ export async function achievementShare3(
     const localizedText = {
         th: {
         start: 'มีคนจำนวน',
-        description: 'กำลังตามหาเพื่อนคณะ',
+        description: 'กำลังตามหาเพื่อน',
         description2: 'เช่นเดียวกับฉัน',
         },
         en: {
         start: 'There are',
-        description: 'others finding',
-        description2: 'friends like me.',
+        description: 'others finding friends from',
+        description2: 'like me.',
         },
     }
 
@@ -269,22 +269,51 @@ export async function achievementShare3(
         : `${localizedText.en.start}`
     ctx.fillText(rankText, canvas.width / 2, 550)
 
-    // description
-    ctx.font = '500 60px "IBM Plex Sans Thai"'
-    const descriptionText = lang === 0
-        ? localizedText.th.description
-        : localizedText.en.description
-    ctx.fillText(descriptionText, canvas.width / 2, 1500)
+    // // description
+    // ctx.font = '500 60px "IBM Plex Sans Thai"'
+    // const descriptionText = lang === 0
+    //     ? localizedText.th.description
+    //     : localizedText.en.description
+    // ctx.fillText(descriptionText, canvas.width / 2, 1500)
 
     // faculty
     ctx.font = '500 60px "IBM Plex Sans Thai"'
-    ctx.fillText(faculty, canvas.width / 2, 1600)
+    if (faculty === 'นวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย (BAScii)') {
+        // description
+        ctx.font = '500 60px "IBM Plex Sans Thai"'
+        const descriptionText = lang === 0
+            ? localizedText.th.description
+            : localizedText.en.description
+        ctx.fillText(descriptionText, canvas.width / 2, 1450)
 
-    // description2
-    const description2Text = lang === 0
-        ? `${localizedText.th.description2}`
-        : `${localizedText.en.description2}`
-    ctx.fillText(description2Text, canvas.width / 2, 1700)
+        const faculty1 = 'สถาบันนวัตกรรมบูรณาการ'
+        const faculty2 = 'แห่งจุฬาลงกรณ์มหาวิทยาลัย'
+        ctx.fillText(faculty1, canvas.width / 2, 1550)
+        ctx.fillText(faculty2, canvas.width / 2, 1650)
+
+        // description2
+        const description2Text = lang === 0
+            ? `${localizedText.th.description2}`
+            : `${localizedText.en.description2}`
+        ctx.fillText(description2Text, canvas.width / 2, 1750)
+    } else {
+        // description
+        ctx.font = '500 60px "IBM Plex Sans Thai"'
+        const descriptionText = lang === 0
+            ? localizedText.th.description
+            : localizedText.en.description
+        ctx.fillText(descriptionText, canvas.width / 2, 1500)
+        
+        if (faculty === 'School of Integrated Innovation (BAScii)') faculty = 'School of Integrated Innovation'
+        if (!lang) faculty = "คณะ"+faculty
+        ctx.fillText(faculty, canvas.width / 2, 1600)
+    
+        // description2
+        const description2Text = lang === 0
+            ? `${localizedText.th.description2}`
+            : `${localizedText.en.description2}`
+        ctx.fillText(description2Text, canvas.width / 2, 1700)
+    }
 
     // rank number
     ctx.fillStyle = '#FFFFFF' // text color
