@@ -1,5 +1,6 @@
-import { FACULTIES } from '@/components/const/faculty'
-import { WORKSHOP_DATA } from '@/components/const/workshop'
+import { ALL_FACULTIES } from '@/components/const/faculty'
+import { getFacultyLabel, WORKSHOP_DATA } from '@/components/const/workshop'
+import { FlatIcon } from '@/components/FlatIcon'
 import WorkshopCard from '@/components/info/workshop/WorkshopCard'
 import { Input } from '@/components/ui/input'
 import {
@@ -52,12 +53,19 @@ function RouteComponent() {
 
         {/* Filter */}
         <div className="flex flex-col gap-3">
-          <Input
-            placeholder={t('routes.infoGroup.workshopGroup.inputPlaceholder')}
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            className="bg-white"
-          />
+          <div className="relative">
+            <FlatIcon
+              name="fi-rr-search"
+              size={14}
+              className="text-main-pink absolute top-1/2 left-3 -translate-y-1/2"
+            />
+            <Input
+              placeholder={t('routes.infoGroup.workshopGroup.inputPlaceholder')}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="bg-white pl-9"
+            />
+          </div>
           <Select value={selectedFaculty} onValueChange={setSelectedFaculty}>
             <SelectTrigger className="bg-white">
               <SelectValue
@@ -68,9 +76,11 @@ function RouteComponent() {
               <SelectItem value="all">
                 {t('routes.infoGroup.workshopGroup.all')}
               </SelectItem>
-              {FACULTIES.map((faculty) => (
-                <SelectItem key={faculty.value} value={faculty.value}>
-                  {i18n.language === 'th' ? faculty.label.th : faculty.label.en}
+              {ALL_FACULTIES().map((faculty) => (
+                <SelectItem key={faculty} value={faculty}>
+                  {i18n.language === 'th'
+                    ? getFacultyLabel(faculty).th
+                    : getFacultyLabel(faculty).en}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -78,7 +88,7 @@ function RouteComponent() {
         </div>
 
         {/* Workshops */}
-        <div className="flex h-full max-h-60 flex-col gap-2 overflow-y-auto">
+        <div className="flex h-full max-h-80 flex-col gap-2 overflow-y-auto">
           {filteredWorkshops && filteredWorkshops.length === 0 && (
             <div className="text-center text-base font-medium text-white">
               {t('routes.infoGroup.workshopGroup.noData')}

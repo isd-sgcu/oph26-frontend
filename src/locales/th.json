@@ -95,9 +95,13 @@
       "merchandiseGroup": {},
       "workshopGroup": {
         "title": "ข้อมูลเวิร์คชอป",
-        "inputPlaceholder" : "กรอกชื่อเวิร์คชอป...",
+        "inputPlaceholder": "กรอกชื่อเวิร์คชอป...",
         "all": "ทุกคณะ",
-        "noData": "ไม่พบเวิร์คชอปที่กำลังค้นหา..."
+        "noData": "ไม่พบเวิร์คชอปที่กำลังค้นหา...",
+        "viewDetails": "ดูรายละเอียดเพิ่มเติม",
+        "faculty": "คณะ",
+        "location": "สถานที่",
+        "time": "เวลา"
       }
     },
     "questionaireGroup": {

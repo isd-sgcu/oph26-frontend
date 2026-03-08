@@ -93,7 +93,11 @@
         "title": "Workshops",
         "inputPlaceholder": "Enter workshop name...",
         "all": "All Faculties",
-        "noData": "No workshops found..."
+        "noData": "No workshops found...",
+        "viewDetails": "View Details",
+        "faculty": "Faculty",
+        "location": "Location",
+        "time": "Time"
       }
     },
     "questionaireGroup": {

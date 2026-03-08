@@ -21,6 +21,32 @@ export type FacultyType =
   | 'cusar'
   | 'dorm'
 
+export const ALL_FACULTIES = (): FacultyType[] => {
+  return [
+    'edu',
+    'psy',
+    'dent',
+    'law',
+    'commarts',
+    'cbs',
+    'md',
+    'pharm',
+    'polsci',
+    'sci',
+    'spsc',
+    'eng',
+    'faa',
+    'econ',
+    'arch',
+    'ahs',
+    'vet',
+    'arts',
+    'scii',
+    'cusar',
+    'dorm',
+  ]
+}
+
 export interface FacultyOption {
   value: FacultyType
   variant: 1 | 2 | 3 | 4 | 5 | 6
