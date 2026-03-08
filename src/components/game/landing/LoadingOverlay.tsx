@@ -1,7 +1,7 @@
 // LoadingOverlay.tsx
 import cloudImg from '@/assets/game/deco/cloud.svg'
 
-export default function LoadingOverlay() {
+export default function LoadingOverlay({text}:{text: string}) {
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-linear-to-b from-main-pink via-[#F6C1DE] to-[#F9B5D0]">
       
@@ -22,7 +22,7 @@ export default function LoadingOverlay() {
             Missing Pieces
           </p>
           <p className="text-sm opacity-90">
-            Loading your journey...
+            {text}
           </p>
         </div>
 

@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Piece } from '../Piece'
 import { Button } from '@/components/ui/button'
 import { FlatIcon } from '@/components/FlatIcon'
+import { getAbbrNameSize, getAbbrNameSizeOverall } from '@/utils/achievementSizeHelper'
 
 type BaseProps = {
   stat: string | number
@@ -83,17 +84,31 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
         {variant !== 'collectedPieces' && (
           <div className="w-full max-w-56 flex items-center justify-center shrink">
             <div className="bg-gradient-pink flex flex-col aspect-square w-full items-center justify-center rounded-full">
-              <span className={`${isEnglish && stat as number > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}>
-                {variant === 'var1' && isEnglish && typeof stat === 'number'
+              {/* Var1 */}
+              {variant === 'var1' && <span className={`${isEnglish && stat as number > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}>
+                {isEnglish && typeof stat === 'number'
                   ? getOrdinal(stat)
                   : stat}
-                {variant === 'var3' && '%'}
-              </span>
+              </span>}
 
-              {variant === 'overall' && (
+              {/* var2 */}
+              {variant === 'var2' && <span className={`${getAbbrNameSize(String(stat))} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}>
+                {stat}
+              </span>}
+
+              {/* var3 */}
+              {variant === 'var3' && <span className={`${isEnglish && stat as number > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}>
+                {stat + '%'}
+              </span>}
+
+              {variant === 'overall' && (<>
+                <span className={`${isEnglish && stat as number > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}>
+                  {stat}
+                </span>
                 <span className="text-xl font-normal text-white">
                   {isEnglish ? ((stat as number) > 1 ? 'pieces' : 'piece') : 'ชิ้น'}
                 </span>
+              </>
               )}
             </div>
           </div>
@@ -134,7 +149,7 @@ export default function AchievementCard({props, onShare}:{props: AchievementCard
             </span>
 
             <div className="bg-gradient-beige flex h-26 w-26 items-center justify-center rounded-full">
-              <span className="text-main-pink text-3xl">
+              <span className={`${getAbbrNameSizeOverall(props.miniCard1Faculty)} text-main-pink`}>
                 {props.miniCard1Faculty}
               </span>
             </div>

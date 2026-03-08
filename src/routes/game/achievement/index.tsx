@@ -1,6 +1,7 @@
 import AchievementCard from '@/components/game/achievement/AchievementCard'
 import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
+import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { Achievement } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
@@ -33,7 +34,7 @@ function RouteComponent() {
         },
         {
           variant: "var2",
-          stat: "arch",
+          stat: "cusar",
           top: 5,
         },
         {
@@ -44,7 +45,7 @@ function RouteComponent() {
         {
           variant: "overall",
           stat: 99,
-          miniCard1Faculty: "vet",
+          miniCard1Faculty: "cusar",
           miniCard1Count: 42,
           miniCard2Rank: -1,
         },
@@ -94,7 +95,7 @@ function RouteComponent() {
   }
 
   if (loading) return (
-    <div>Loading...</div>
+    <LoadingOverlay text='Loading your achievement...' />
   )
 
   return (

@@ -31,7 +31,7 @@ function RouteComponent() {
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
-      {!ready && <LoadingOverlay />}
+      {!ready && <LoadingOverlay text='Loading your journey...'/>}
 
       {ready && (
         <div className="absolute inset-0 top-15 z-0">

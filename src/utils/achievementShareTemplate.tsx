@@ -6,6 +6,7 @@ import lockedUrl from '/game/locked.svg'
 import { CollectedPiecesProps } from '@/components/game/achievement/AchievementCard'
 import { renderComponentToPng } from './renderComponentToPng'
 import PiecesShareGrid from '@/components/game/achievement/PiecesShareGrid'
+import { getCanvasAbbrFontSize, getMiniCardFacultyFontSize } from './achievementSizeHelper'
 
 function getOrdinal(n: number) {
     const s = ["th", "st", "nd", "rd"]
@@ -177,12 +178,12 @@ export async function achievementShare2(
     ctx.fillText(name, canvas.width / 2, 370)
 
     ctx.fillStyle = '#000000'
-    // Rank
+    // Start
     ctx.font = '500 65px "IBM Plex Sans Thai"'
-    const rankText = lang === 0
+    const startText = lang === 0
         ? `${localizedText.th.start}`
         : `${localizedText.en.start}`
-    ctx.fillText(rankText, canvas.width / 2, 550)
+    ctx.fillText(startText, canvas.width / 2, 550)
 
     // description
     ctx.font = '500 60px "IBM Plex Sans Thai"'
@@ -197,9 +198,11 @@ export async function achievementShare2(
         : `${localizedText.en.description2}`
     ctx.fillText(description2Text, canvas.width / 2, 1600)
 
-    // rank number
+    // faculty
+    const fontSize = getCanvasAbbrFontSize(faculty)
+
     ctx.fillStyle = '#FFFFFF' // text color
-    ctx.font = '600 250px "IBM Plex Sans Thai"' // weight + size + family
+    ctx.font = `600 ${fontSize}px "IBM Plex Sans Thai"`
     ctx.textAlign = 'center' // optional depending on layout
     ctx.textBaseline = 'middle'
 
@@ -388,9 +391,11 @@ export async function achievementShareOverall(
     ctx.fillText(minicard2endText, 3 * canvas.width / 4, 1730)
 
     // minicard1 faculty
+    const fontSize = getMiniCardFacultyFontSize(miniCard1Faculty)
+
     ctx.fillStyle = '#F481B4'
-    ctx.font = '400 120px "IBM Plex Sans Thai"'
-    ctx.fillText(miniCard1Faculty, canvas.width / 4, 1500)
+    ctx.font = `400 ${fontSize}px "IBM Plex Sans Thai"`
+    ctx.fillText(miniCard1Faculty, canvas.width / 4 + 10, 1500)
 
     // minicard2 rank    ctx.fillStyle = '#F481B4'
     if (miniCard2Rank > 0 && miniCard2Rank <= 999) {

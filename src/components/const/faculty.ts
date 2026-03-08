@@ -44,7 +44,7 @@ export const FACULTIES: FacultyOption[] = [
     value: 'psy',
     variant: 2,
     label: { th: 'คณะจิตวิทยา', en: 'Faculty of Psychology' },
-    abbrLabel: { th: 'จิต', en: 'PSY' }
+    abbrLabel: { th: 'จิตวิทยา', en: 'PSY' }
   },
   {
     value: 'dent',
@@ -71,7 +71,7 @@ export const FACULTIES: FacultyOption[] = [
       th: 'คณะพาณิชยศาสตร์และการบัญชี',
       en: 'Faculty of Commerce and Accountancy',
     },
-    abbrLabel: { th: 'บัญชี', en: 'CBS' }
+    abbrLabel: { th: 'บัญชี/บริหาร', en: 'CBS' }
   },
   {
     value: 'md',
@@ -89,19 +89,19 @@ export const FACULTIES: FacultyOption[] = [
     value: 'polsci',
     variant: 5,
     label: { th: 'คณะรัฐศาสตร์', en: 'Faculty of Political Science' },
-    abbrLabel: { th: 'รัฐ', en: 'POLSCI' }
+    abbrLabel: { th: 'รัฐศาสตร์', en: 'POLSCI' }
   },
   {
     value: 'sci',
     variant: 6,
     label: { th: 'คณะวิทยาศาสตร์', en: 'Faculty of Science' },
-    abbrLabel: { th: 'วิทยา', en: 'SCI' }
+    abbrLabel: { th: 'วิทย์', en: 'SCI' }
   },
   {
     value: 'spsc',
     variant: 1,
     label: { th: 'คณะวิทยาศาสตร์การกีฬา', en: 'Faculty of Sports Science' },
-    abbrLabel: { th: 'กีฬา', en: 'SPSC' }
+    abbrLabel: { th: 'วิทย์กีฬา', en: 'SPSC' }
   },
   {
     value: 'eng',
@@ -119,7 +119,7 @@ export const FACULTIES: FacultyOption[] = [
     value: 'econ',
     variant: 5,
     label: { th: 'คณะเศรษฐศาสตร์', en: 'Faculty of Economics' },
-    abbrLabel: { th: 'เศรษฐ', en: 'ECON' }
+    abbrLabel: { th: 'เศรษฐศาสตร์', en: 'ECON' }
   },
   {
     value: 'arch',
