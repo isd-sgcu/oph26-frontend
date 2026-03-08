@@ -101,7 +101,9 @@
         "viewDetails": "ดูรายละเอียดเพิ่มเติม",
         "faculty": "คณะ",
         "location": "สถานที่",
-        "time": "เวลา"
+        "time": "เวลา",
+        "back": "ย้อนกลับ",
+        "notFound": "ไม่พบเวิร์คชอป"
       }
     },
     "questionaireGroup": {

@@ -17,7 +17,7 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
   const facultyLabel = getFacultyLabel(workshop.faculty)
 
   return (
-    <div className="flex-center flex w-full flex-col items-center justify-center gap-6 rounded-md bg-white p-4 shadow-md">
+    <div className="flex-center flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-white p-4">
       {/* Content */}
       <div className="flex w-full flex-col gap-1">
         {/* Header */}
@@ -29,7 +29,7 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
           <FlatIcon
             name={isFavourite ? 'fi-sr-heart' : 'fi-rr-heart'}
             size={16}
-            className="text-main-pink"
+            className="text-main-pink cursor-pointer"
             onClick={(e) => {
               e.stopPropagation()
               setIsFavourite((prev) => !prev)

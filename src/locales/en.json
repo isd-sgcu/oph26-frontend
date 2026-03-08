@@ -97,7 +97,9 @@
         "viewDetails": "View Details",
         "faculty": "Faculty",
         "location": "Location",
-        "time": "Time"
+        "time": "Time",
+        "back": "ฺBack",
+        "notFound": "Workshop Not Found"
       }
     },
     "questionaireGroup": {
