@@ -88,7 +88,7 @@ function RouteComponent() {
         </div>
 
         {/* Workshops */}
-        <div className="flex h-full max-h-80 flex-col gap-2 overflow-y-auto">
+        <div className="flex h-full max-h-120 flex-col gap-2 overflow-y-auto">
           {filteredWorkshops && filteredWorkshops.length === 0 && (
             <div className="text-center text-base font-medium text-white">
               {t('routes.infoGroup.workshopGroup.noData')}

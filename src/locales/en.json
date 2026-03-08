@@ -99,7 +99,12 @@
         "location": "Location",
         "time": "Time",
         "back": "ฺBack",
-        "notFound": "Workshop Not Found"
+        "notFound": "Workshop Not Found",
+        "details": "Details",
+        "owner": "Owner",
+        "howToParticipate": "How to Participate",
+        "preregistered": "Pre-registered",
+        "walkin": "Walk-in Available"
       }
     },
     "questionaireGroup": {

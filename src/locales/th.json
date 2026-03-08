@@ -103,7 +103,12 @@
         "location": "สถานที่",
         "time": "เวลา",
         "back": "ย้อนกลับ",
-        "notFound": "ไม่พบเวิร์คชอป"
+        "notFound": "ไม่พบเวิร์คชอป",
+        "details": "รายละเอียดกิจกรรม",
+        "owner": "ผู้จัดกิจกรรม",
+        "howToParticipate": "วิธีการเข้าร่วม",
+        "preregistered": "จำเป็นต้องลงทะเบียนล่วงหน้า",
+        "walkin": "สามารถ walk-in ที่หน้างานได้เลย"
       }
     },
     "questionaireGroup": {
