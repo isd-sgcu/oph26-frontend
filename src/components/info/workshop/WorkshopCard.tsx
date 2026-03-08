@@ -38,23 +38,27 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
         </div>
 
         {/* Information */}
-        <div className="flex w-full gap-8">
-          {/* Left */}
-          <div className="flex flex-col gap-1">
-            {/* Faculty */}
-            <div className="flex items-center gap-1">
+        <div className="flex flex-col gap-1">
+          {/* Faculty */}
+          <div className="flex items-start gap-4">
+            <div className="flex min-w-18 shrink-0 items-center gap-1">
               <FlatIcon
                 name="fi-rr-graduation-cap"
                 size={12}
                 className="text-main-pink"
               />
-              <span className="text-sm font-semibold">
+              <p className="text-sm font-semibold text-black">
                 {t('routes.infoGroup.workshopGroup.faculty')}
-              </span>
+              </p>
             </div>
+            <p className="text-sm text-black">
+              {i18n.language == 'th' ? facultyLabel.th : facultyLabel.en}
+            </p>
+          </div>
 
-            {/* Location */}
-            <div className="flex items-center gap-1">
+          {/* Location */}
+          <div className="flex items-start gap-4">
+            <div className="flex min-w-18 shrink-0 items-center gap-1">
               <FlatIcon
                 name="fi-rr-map-marker"
                 size={12}
@@ -64,36 +68,30 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
                 {t('routes.infoGroup.workshopGroup.location')}
               </span>
             </div>
+            <p className="text-sm text-black">{workshop.locationName ?? '-'}</p>
+          </div>
 
-            {/* Time */}
-            <div className="flex items-center gap-1">
+          {/* Time */}
+          <div className="flex items-start gap-4">
+            <div className="flex min-w-18 shrink-0 items-center gap-1">
               <FlatIcon
                 name="fi-rr-clock"
                 size={12}
                 className="text-main-pink"
               />
-              <span className="text-sm font-semibold">
+              <p className="text-sm font-semibold text-black">
                 {t('routes.infoGroup.workshopGroup.time')}
-              </span>
+              </p>
             </div>
-          </div>
-
-          {/* Right */}
-          <div className="flex min-w-0 flex-1 flex-col gap-1">
-            {/* Faculty */}
-            <p className="overflow-hidden text-sm text-ellipsis whitespace-nowrap text-gray-500">
-              {i18n.language == 'th' ? facultyLabel.th : facultyLabel.en}
-            </p>
-
-            {/* Location */}
-            <p className="overflow-hidden text-sm text-ellipsis whitespace-nowrap text-gray-500">
-              {workshop.locationName ? workshop.locationName : '-'}
-            </p>
-
-            {/* Time */}
-            <p className="overflow-hidden text-sm text-ellipsis whitespace-nowrap text-gray-500">
-              {workshop.timeSlot ? workshop.timeSlot.split('/')[0] : '-'}
-            </p>
+            <ul className="text-sm text-black">
+              {workshop.timeSlot ? (
+                workshop.timeSlot
+                  ?.split(' / ')
+                  .map((time, index) => <li key={index}>{time}</li>)
+              ) : (
+                <li>-</li>
+              )}
+            </ul>
           </div>
         </div>
       </div>
