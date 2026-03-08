@@ -90,7 +90,10 @@
       }
     },
     "infoGroup": {
-      "facultyGroup": {},
+      "facultyGroup": {
+        "title": "คณะ",
+        "searchPlaceholder": "ค้นหาคณะ..."
+      },
       "mapGroup": {},
       "merchandiseGroup": {},
       "workshopGroup": {}

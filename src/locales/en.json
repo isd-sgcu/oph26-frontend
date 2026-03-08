@@ -86,7 +86,10 @@
       }
     },
     "infoGroup": {
-      "facultyGroup": {},
+      "facultyGroup": {
+        "title": "Faculties",
+        "searchPlaceholder": "Search for faculties..."
+      },
       "mapGroup": {},
       "merchandiseGroup": {},
       "workshopGroup": {}
