@@ -1,6 +1,7 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 import GameFooter from '@/components/game/GameFooter'
 import PageNotFound from '@/components/PageNotFound'
+import { CaptureProvider } from '@/contexts/CaptureContext'
 
 export const Route = createFileRoute('/game')({
   component: GameLayout,
@@ -10,11 +11,13 @@ export const Route = createFileRoute('/game')({
 function GameLayout() {
   return (
     <div className="flex w-full flex-col">
-      <div className="flex flex-1">
-        <Outlet />
-      </div>
+      <CaptureProvider>
+        <div className="flex flex-1">
+          <Outlet />
+        </div>
 
-      <GameFooter />
+        <GameFooter />
+      </CaptureProvider>
     </div>
   )
 }

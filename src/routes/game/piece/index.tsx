@@ -23,6 +23,10 @@ function RouteComponent() {
   )
 
   useEffect(() => {
+    setMyFaculty(FACULTIES[Math.floor(Math.random() * FACULTIES.length)].value)
+  }, [])
+
+  useEffect(() => {
     return () => {
       if (copyTimeoutRef.current) {
         clearTimeout(copyTimeoutRef.current)
@@ -83,7 +87,7 @@ function RouteComponent() {
   const selectedFaculty = FACULTIES.find((f) => f.value == myFaculty)
 
   return (
-    <div className="to-main-pink relative flex-1 overflow-hidden bg-linear-to-b from-[#ECECD2] to-10%">
+    <div className="bg-main-light-pink relative flex-1 overflow-hidden">
       {/* Content  */}
       <div className={`relative z-10 flex w-full flex-col px-4 py-8`}>
         <h1 className="text-center text-3xl font-bold text-white text-shadow-md">
