@@ -108,7 +108,13 @@
         "owner": "ผู้จัดกิจกรรม",
         "howToParticipate": "วิธีการเข้าร่วม",
         "preregistered": "จำเป็นต้องลงทะเบียนล่วงหน้า",
-        "walkin": "สามารถ walk-in ที่หน้างานได้เลย"
+        "walkin": "สามารถ walk-in ที่หน้างานได้เลย",
+        "participantLimit": "จำกัดจำนวนผู้เข้าร่วมหรือไม่?",
+        "hasLimitParticipants": "ใช่",
+        "noLimitParticipants": "ไม่",
+        "numRoundsPerDay": "จำนวนรอบต่อวัน",
+        "contact": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
+        "register": "ลงทะเบียน"
       }
     },
     "questionaireGroup": {

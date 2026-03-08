@@ -134,6 +134,7 @@ function RouteComponent() {
           </div>
 
           <BreakLine variant="pink" />
+
           {/* How To Participate */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
@@ -154,7 +155,119 @@ function RouteComponent() {
           </div>
 
           <BreakLine variant="pink" />
+
+          {/* Time */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <FlatIcon
+                name="fi-rr-clock"
+                size={20}
+                className="text-main-pink"
+              />
+              <h3 className="text-base font-semibold text-black">
+                {t('routes.infoGroup.workshopGroup.time')}
+              </h3>
+            </div>
+            <ul className="pl-7 text-sm">
+              {workshop.timeSlot ? (
+                workshop.timeSlot
+                  ?.split(' / ')
+                  .map((time, index) => <li key={index}>{time}</li>)
+              ) : (
+                <li>-</li>
+              )}
+            </ul>
+          </div>
+
+          {/* Participant Limit */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <FlatIcon
+                name="fi-rr-user"
+                size={20}
+                className="text-main-pink"
+              />
+              <h3 className="text-base font-semibold text-black">
+                {t('routes.infoGroup.workshopGroup.participantLimit')}
+              </h3>
+            </div>
+            <p className="pl-7 text-sm">
+              {workshop.hasLimitParticipants
+                ? t('routes.infoGroup.workshopGroup.hasLimitParticipants')
+                : t('routes.infoGroup.workshopGroup.noLimitParticipants')}
+            </p>
+          </div>
+
+          {/* Number of Rounds */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <FlatIcon
+                name="fi-rr-calendar"
+                size={20}
+                className="text-main-pink"
+              />
+              <h3 className="text-base font-semibold text-black">
+                {t('routes.infoGroup.workshopGroup.numRoundsPerDay')}
+              </h3>
+            </div>
+            <p className="pl-7 text-sm">
+              {workshop.timeSlot ? workshop.timeSlot?.split(' / ').length : '-'}
+            </p>
+          </div>
+
           <BreakLine variant="pink" />
+
+          {/* Location */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <FlatIcon name="fi-rr-map" size={20} className="text-main-pink" />
+              <h3 className="text-base font-semibold text-black">
+                {t('routes.infoGroup.workshopGroup.location')}
+              </h3>
+            </div>
+            <p className="pl-7 text-sm">{workshop.locationName ?? '-'}</p>
+          </div>
+
+          {/* Location Button */}
+          {workshop.locationURL && (
+            <Button
+              size="lg"
+              className="mx-auto text-white"
+              onClick={() => {
+                window.open(workshop.locationURL, '_blank')
+              }}
+            >
+              <span className="text-white">Google Map</span>
+              <FlatIcon name="fi-rr-map" size={16} />
+            </Button>
+          )}
+
+          <BreakLine variant="pink" />
+
+          {/* Contact */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <FlatIcon
+                name="fi-rr-edit"
+                size={20}
+                className="text-main-pink"
+              />
+              <h3 className="text-base font-semibold text-black">
+                {t('routes.infoGroup.workshopGroup.contact')}
+              </h3>
+            </div>
+            <Button
+              size="lg"
+              className="bg-gradient-purple mx-auto"
+              onClick={() => {
+                window.open(workshop.url, '_blank')
+              }}
+            >
+              <span className="text-white">
+                {t('routes.infoGroup.workshopGroup.register')}
+              </span>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

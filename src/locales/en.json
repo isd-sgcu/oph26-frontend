@@ -104,7 +104,13 @@
         "owner": "Owner",
         "howToParticipate": "How to Participate",
         "preregistered": "Pre-registered",
-        "walkin": "Walk-in Available"
+        "walkin": "Walk-in Available",
+        "participantLimit": "Has limit of participants?",
+        "hasLimitParticipants": "Yes ",
+        "noLimitParticipants": "No",
+        "numRoundsPerDay": "Number of rounds per day",
+        "contact": "Contact for registration",
+        "register": "Register"
       }
     },
     "questionaireGroup": {
