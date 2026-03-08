@@ -269,13 +269,6 @@ export async function achievementShare3(
         : `${localizedText.en.start}`
     ctx.fillText(rankText, canvas.width / 2, 550)
 
-    // // description
-    // ctx.font = '500 60px "IBM Plex Sans Thai"'
-    // const descriptionText = lang === 0
-    //     ? localizedText.th.description
-    //     : localizedText.en.description
-    // ctx.fillText(descriptionText, canvas.width / 2, 1500)
-
     // faculty
     ctx.font = '500 60px "IBM Plex Sans Thai"'
     if (faculty === 'นวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย (BAScii)') {
@@ -426,7 +419,7 @@ export async function achievementShareOverall(
     ctx.font = `400 ${fontSize}px "IBM Plex Sans Thai"`
     ctx.fillText(miniCard1Faculty, canvas.width / 4 + 10, 1500)
 
-    // minicard2 rank    ctx.fillStyle = '#F481B4'
+    // minicard2 rank
     if (miniCard2Rank > 0 && miniCard2Rank <= 999) {
         ctx.font = '400 120px "IBM Plex Sans Thai"'
         const rankTextWithOrdinal = lang === 0
@@ -461,6 +454,8 @@ export async function achievementShareOverall(
     ctx.shadowOffsetY = 10
 
     ctx.fillText(String(collected), canvas.width / 2, 850)
+
+    ctx.shadowColor = 'transparent'
 
     const logoWidth = logo.width * 1.2
     const logoHeight = (logo.height / logo.width) * logoWidth
@@ -529,14 +524,6 @@ export async function achievementShareCollectedPieces(
     1080,
     1500
     )
-
-    // const piecesPng = await renderComponentToPng(
-    // <div style={{width:900,height:900,background:"red"}}>
-    //     TEST
-    // </div>,
-    // 900,
-    // 900
-    // )
 
     const piecesImage = await loadImage(piecesPng)
 

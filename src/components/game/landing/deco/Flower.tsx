@@ -1,6 +1,6 @@
 import pinkFlower from '@/assets/game/deco/flower/pink-flower.svg'
 import purpleFlower from '@/assets/game/deco/flower/purple-flower.svg'
-import yelloFlower from '@/assets/game/deco/flower/yellow-flower.svg'
+import yellowFlower from '@/assets/game/deco/flower/yellow-flower.svg'
 import { useEffect, useState } from 'react'
 
 export type FlowerVariant = 'pink' | 'purple' | 'yellow'
@@ -8,7 +8,7 @@ export type FlowerVariant = 'pink' | 'purple' | 'yellow'
 const flowerMap: Record<FlowerVariant, string> = {
   pink: pinkFlower,
   purple: purpleFlower,
-  yellow: yelloFlower,
+  yellow: yellowFlower,
 }
 
 export default function Flower({
