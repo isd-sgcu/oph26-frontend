@@ -69,7 +69,10 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
                 {t('routes.infoGroup.workshopGroup.location')}
               </span>
             </div>
-            <p className="text-sm text-black">{workshop.locationName ?? '-'}</p>
+            <p className="text-sm text-black">
+              {workshop.locationName ??
+                (i18n.language == 'th' ? facultyLabel.th : facultyLabel.en)}
+            </p>
           </div>
 
           {/* Time */}

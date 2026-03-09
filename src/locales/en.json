@@ -78,9 +78,9 @@
       }
     },
     "gameGroup": {
-      "achievementGroup": { 
-        "titleGroup": "Achievements", 
-        "cardGroup": { 
+      "achievementGroup": {
+        "titleGroup": "Achievements",
+        "cardGroup": {
           "var1": {
             "title": "You are the",
             "description": "to collect all pieces and complete the picture."
@@ -140,8 +140,8 @@
         "howToParticipate": "How to Participate",
         "preregistered": "Pre-registered",
         "walkin": "Walk-in Available",
-        "participantLimit": "Has limit of participants?",
-        "hasLimitParticipants": "Yes ",
+        "participantLimit": "Has limit of participants per round",
+        "hasLimitParticipants": "Yes",
         "noLimitParticipants": "No",
         "numRoundsPerDay": "Number of rounds per day",
         "contact": "Contact for registration",
@@ -239,6 +239,5 @@
     },
 
     "title": "Title"
-  
   }
 }

@@ -82,9 +82,9 @@
       }
     },
     "gameGroup": {
-      "achievementGroup": { 
-        "titleGroup": "ภาพรวมความสำเร็จ", 
-        "cardGroup": { 
+      "achievementGroup": {
+        "titleGroup": "ภาพรวมความสำเร็จ",
+        "cardGroup": {
           "var1": {
             "title": "คุณเป็นคนที่",
             "description": "ที่เก็บจิ๊กซอว์มาประกอบเป็นภาพครบ"
@@ -144,7 +144,7 @@
         "howToParticipate": "วิธีการเข้าร่วม",
         "preregistered": "จำเป็นต้องลงทะเบียนล่วงหน้า",
         "walkin": "สามารถ walk-in ที่หน้างานได้เลย",
-        "participantLimit": "จำกัดจำนวนผู้เข้าร่วมหรือไม่?",
+        "participantLimit": "จำกัดจำนวนผู้เข้าร่วม/รอบ",
         "hasLimitParticipants": "ใช่",
         "noLimitParticipants": "ไม่",
         "numRoundsPerDay": "จำนวนรอบต่อวัน",

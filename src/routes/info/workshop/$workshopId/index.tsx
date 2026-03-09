@@ -62,7 +62,6 @@ function RouteComponent() {
   return (
     <div className="from-main-light-pink to-main-pink flex w-full flex-col bg-linear-to-b">
       {/* Content */}
-
       <div className="relative z-10 flex h-full w-full flex-col gap-6 px-4 py-8">
         <h1 className="relative text-center text-3xl font-bold text-white text-shadow-md">
           <span
@@ -196,21 +195,23 @@ function RouteComponent() {
           </div>
 
           {/* Number of Rounds */}
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <FlatIcon
-                name="fi-rr-calendar"
-                size={20}
-                className="text-main-pink"
-              />
-              <h3 className="text-base font-semibold text-black">
-                {t('routes.infoGroup.workshopGroup.numRoundsPerDay')}
-              </h3>
+          {workshop.timeSlot && (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <FlatIcon
+                  name="fi-rr-calendar"
+                  size={20}
+                  className="text-main-pink"
+                />
+                <h3 className="text-base font-semibold text-black">
+                  {t('routes.infoGroup.workshopGroup.numRoundsPerDay')}
+                </h3>
+              </div>
+              <p className="pl-7 text-sm">
+                {workshop.timeSlot.split(' / ').length}
+              </p>
             </div>
-            <p className="pl-7 text-sm">
-              {workshop.timeSlot ? workshop.timeSlot?.split(' / ').length : '-'}
-            </p>
-          </div>
+          )}
 
           <BreakLine variant="pink" />
 
@@ -222,13 +223,17 @@ function RouteComponent() {
                 {t('routes.infoGroup.workshopGroup.location')}
               </h3>
             </div>
-            <p className="pl-7 text-sm">{workshop.locationName ?? '-'}</p>
+            <p className="pl-7 text-sm">
+              {workshop.locationName ??
+                (i18n.language == 'th' ? facultyLabel?.th : facultyLabel?.en)}
+            </p>
           </div>
 
           {/* Location Button */}
           {workshop.locationURL && (
             <Button
-              size="lg"
+              size="sm"
+              expanded
               className="mx-auto text-white"
               onClick={() => {
                 window.open(workshop.locationURL, '_blank')
@@ -254,7 +259,8 @@ function RouteComponent() {
               </h3>
             </div>
             <Button
-              size="lg"
+              size="sm"
+              expanded
               className="bg-gradient-purple mx-auto"
               onClick={() => {
                 window.open(workshop.url, '_blank')
