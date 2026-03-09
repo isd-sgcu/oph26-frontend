@@ -123,7 +123,14 @@
     "infoGroup": {
       "facultyGroup": {},
       "mapGroup": {},
-      "merchandiseGroup": {},
+      "merchandiseGroup": {
+        "title": "สินค้าที่ระลึก",
+        "itemTitle": "รายละเอียด",
+        "freeShipping": "ส่งฟรีไม่มีขั้นต่ำ",
+        "variantSelect": "เลือกรูปแบบ",
+        "store": "ติดต่อร้านค้า: ",
+        "buy": "สั่งซื้อสินค้า"
+      },
       "workshopGroup": {}
     },
     "questionaireGroup": {

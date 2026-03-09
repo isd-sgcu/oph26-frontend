@@ -27,6 +27,7 @@ import { Route as AuthQrIndexRouteImport } from './routes/auth/qr/index'
 import { Route as AuthProfileIndexRouteImport } from './routes/auth/profile/index'
 import { Route as AuthOnboardingIndexRouteImport } from './routes/auth/onboarding/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
+import { Route as InfoMerchandiseItemIdRouteImport } from './routes/info/merchandise/$itemId'
 import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/workshop/$workshopId/index'
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
 import { Route as AuthStaffOnboardingIndexRouteImport } from './routes/auth/staff/onboarding/index'
@@ -124,6 +125,11 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   path: '/auth/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InfoMerchandiseItemIdRoute = InfoMerchandiseItemIdRouteImport.update({
+  id: '/info/merchandise/$itemId',
+  path: '/info/merchandise/$itemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InfoWorkshopWorkshopIdIndexRoute =
   InfoWorkshopWorkshopIdIndexRouteImport.update({
     id: '/info/workshop/$workshopId/',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/test/': typeof TestIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
   '/auth/profile/': typeof AuthProfileIndexRoute
@@ -190,6 +197,7 @@ export interface FileRoutesByTo {
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
   '/test': typeof TestIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/onboarding': typeof AuthOnboardingIndexRoute
   '/auth/profile': typeof AuthProfileIndexRoute
@@ -217,6 +225,7 @@ export interface FileRoutesById {
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/test/': typeof TestIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
   '/auth/profile/': typeof AuthProfileIndexRoute
@@ -245,6 +254,7 @@ export interface FileRouteTypes {
     | '/game/'
     | '/questionaire/'
     | '/test/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
     | '/auth/profile/'
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/game'
     | '/questionaire'
     | '/test'
+    | '/info/merchandise/$itemId'
     | '/auth/login'
     | '/auth/onboarding'
     | '/auth/profile'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/game/'
     | '/questionaire/'
     | '/test/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
     | '/auth/profile/'
@@ -322,6 +334,7 @@ export interface RootRouteChildren {
   CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   TestIndexRoute: typeof TestIndexRoute
+  InfoMerchandiseItemIdRoute: typeof InfoMerchandiseItemIdRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
   AuthProfileIndexRoute: typeof AuthProfileIndexRoute
@@ -467,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/info/merchandise/$itemId': {
+      id: '/info/merchandise/$itemId'
+      path: '/info/merchandise/$itemId'
+      fullPath: '/info/merchandise/$itemId'
+      preLoaderRoute: typeof InfoMerchandiseItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/info/workshop/$workshopId/': {
       id: '/info/workshop/$workshopId/'
       path: '/info/workshop/$workshopId'
@@ -536,6 +556,7 @@ const rootRouteChildren: RootRouteChildren = {
   CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   TestIndexRoute: TestIndexRoute,
+  InfoMerchandiseItemIdRoute: InfoMerchandiseItemIdRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
   AuthProfileIndexRoute: AuthProfileIndexRoute,

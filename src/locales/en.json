@@ -119,7 +119,14 @@
     "infoGroup": {
       "facultyGroup": {},
       "mapGroup": {},
-      "merchandiseGroup": {},
+      "merchandiseGroup": {
+        "title": "Merchandise",
+        "itemTitle": "Details",
+        "freeShipping": "Free shipping",
+        "variantSelect": "Select a style",
+        "store": "Contact store: ",
+        "buy": "Buy Now"
+      },
       "workshopGroup": {}
     },
     "questionaireGroup": {
