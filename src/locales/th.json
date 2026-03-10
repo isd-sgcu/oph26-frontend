@@ -144,11 +144,11 @@
         "howToParticipate": "วิธีการเข้าร่วม",
         "preregistered": "จำเป็นต้องลงทะเบียนล่วงหน้า",
         "walkin": "สามารถ walk-in ที่หน้างานได้เลย",
-        "participantLimit": "จำกัดจำนวนผู้เข้าร่วม/รอบ",
-        "hasLimitParticipants": "ใช่",
-        "noLimitParticipants": "ไม่",
+        "hasLimitParticipants": "จำกัดจำนวนผู้เข้าร่วม/รอบ",
+        "noLimitParticipants": "ไม่จำกัดจำนวนผู้เข้าร่วม/รอบ",
         "numRoundsPerDay": "จำนวนรอบต่อวัน",
-        "contact": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
+        "contactTitle": "ติดตามรายละเอียดเพิ่มเติมได้ที่",
+        "registerTitle": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
         "register": "ลงทะเบียน"
       }
     },

@@ -11,6 +11,8 @@ export const Route = createFileRoute('/info/workshop/$workshopId/')({
   component: RouteComponent,
 })
 
+const INSTAGRAM_SYNTAX = 'https://www.instagram.com/'
+
 function RouteComponent() {
   const router = useRouter()
   const { i18n, t } = useTranslation()
@@ -26,6 +28,8 @@ function RouteComponent() {
   }, [workshopId])
 
   const facultyLabel = workshop ? getFacultyLabel(workshop.faculty) : null
+
+  const isInstagramLink = workshop?.url?.includes('instagram.com') ?? false
 
   if (!workshop) {
     return (
@@ -184,14 +188,11 @@ function RouteComponent() {
                 className="text-main-pink"
               />
               <h3 className="text-base font-semibold text-black">
-                {t('routes.infoGroup.workshopGroup.participantLimit')}
+                {workshop.hasLimitParticipants
+                  ? t('routes.infoGroup.workshopGroup.hasLimitParticipants')
+                  : t('routes.infoGroup.workshopGroup.noLimitParticipants')}
               </h3>
             </div>
-            <p className="pl-7 text-sm">
-              {workshop.hasLimitParticipants
-                ? t('routes.infoGroup.workshopGroup.hasLimitParticipants')
-                : t('routes.infoGroup.workshopGroup.noLimitParticipants')}
-            </p>
           </div>
 
           {/* Number of Rounds */}
@@ -255,7 +256,9 @@ function RouteComponent() {
                 className="text-main-pink"
               />
               <h3 className="text-base font-semibold text-black">
-                {t('routes.infoGroup.workshopGroup.contact')}
+                {!isInstagramLink
+                  ? t('routes.infoGroup.workshopGroup.registerTitle')
+                  : t('routes.infoGroup.workshopGroup.contactTitle')}
               </h3>
             </div>
             <Button
@@ -266,8 +269,21 @@ function RouteComponent() {
                 window.open(workshop.url, '_blank')
               }}
             >
+              {isInstagramLink && (
+                <FlatIcon
+                  name="fi-brands-instagram"
+                  size={16}
+                  className="text-white"
+                />
+              )}
               <span className="text-white">
-                {t('routes.infoGroup.workshopGroup.register')}
+                {!isInstagramLink
+                  ? t('routes.infoGroup.workshopGroup.register')
+                  : workshop.url?.slice(
+                      workshop.url.indexOf(INSTAGRAM_SYNTAX) +
+                        INSTAGRAM_SYNTAX.length,
+                      workshop.url.length - 1
+                    )}
               </span>
             </Button>
           </div>
