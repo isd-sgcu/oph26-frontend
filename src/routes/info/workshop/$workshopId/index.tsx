@@ -245,48 +245,52 @@ function RouteComponent() {
             </Button>
           )}
 
-          <BreakLine variant="pink" />
+          {workshop.url && (
+            <>
+              <BreakLine variant="pink" />
 
-          {/* Contact */}
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <FlatIcon
-                name="fi-rr-edit"
-                size={20}
-                className="text-main-pink"
-              />
-              <h3 className="text-base font-semibold text-black">
-                {!isInstagramLink
-                  ? t('routes.infoGroup.workshopGroup.registerTitle')
-                  : t('routes.infoGroup.workshopGroup.contactTitle')}
-              </h3>
-            </div>
-            <Button
-              size="sm"
-              expanded
-              className="bg-gradient-purple mx-auto"
-              onClick={() => {
-                window.open(workshop.url, '_blank')
-              }}
-            >
-              {isInstagramLink && (
-                <FlatIcon
-                  name="fi-brands-instagram"
-                  size={16}
-                  className="text-white"
-                />
-              )}
-              <span className="text-white">
-                {!isInstagramLink
-                  ? t('routes.infoGroup.workshopGroup.register')
-                  : workshop.url?.slice(
-                      workshop.url.indexOf(INSTAGRAM_SYNTAX) +
-                        INSTAGRAM_SYNTAX.length,
-                      workshop.url.length - 1
-                    )}
-              </span>
-            </Button>
-          </div>
+              {/* Contact */}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <FlatIcon
+                    name="fi-rr-edit"
+                    size={20}
+                    className="text-main-pink"
+                  />
+                  <h3 className="text-base font-semibold text-black">
+                    {!isInstagramLink
+                      ? t('routes.infoGroup.workshopGroup.registerTitle')
+                      : t('routes.infoGroup.workshopGroup.contactTitle')}
+                  </h3>
+                </div>
+                <Button
+                  size="sm"
+                  expanded
+                  className="bg-gradient-purple mx-auto"
+                  onClick={() => {
+                    window.open(workshop.url, '_blank')
+                  }}
+                >
+                  {isInstagramLink && (
+                    <FlatIcon
+                      name="fi-brands-instagram"
+                      size={16}
+                      className="text-white"
+                    />
+                  )}
+                  <span className="text-white">
+                    {!isInstagramLink
+                      ? t('routes.infoGroup.workshopGroup.register')
+                      : workshop.url?.slice(
+                          workshop.url.indexOf(INSTAGRAM_SYNTAX) +
+                            INSTAGRAM_SYNTAX.length,
+                          workshop.url.length
+                        )}
+                  </span>
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
