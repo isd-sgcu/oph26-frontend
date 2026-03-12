@@ -122,7 +122,22 @@
     },
     "infoGroup": {
       "facultyGroup": {},
-      "mapGroup": {},
+      "mapGroup": {
+        "title": "แผนที่",
+        "Location": {
+          "title": "สถานที่",
+          "overview": "ภาพรวม",
+          "place1": "สยาม MBK",
+          "place2": "สามย่าน",
+          "place3": "ฝั่งใหญ่"
+        },
+        "PoI": {
+          "title": "สิ่งอำนวยความสะดวก",
+          "restroom": "ห้องน้ำ",
+          "food": "โรงอาหาร",
+          "park": "ที่จอดรถ"
+        }
+      },
       "merchandiseGroup": {},
       "workshopGroup": {}
     },

@@ -118,7 +118,22 @@
     },
     "infoGroup": {
       "facultyGroup": {},
-      "mapGroup": {},
+      "mapGroup": {
+        "title": "Map",
+        "Location": {
+          "title": "Location",
+          "overview": "overview",
+          "place1": "Siam MBK",
+          "place2": "Samyan",
+          "place3": "????"
+        },
+        "PoI": {
+          "title": "Facilities",
+          "restroom": "Restrooms",
+          "food": "Food Court",
+          "park": "Parking"
+        }
+      },
       "merchandiseGroup": {},
       "workshopGroup": {}
     },
