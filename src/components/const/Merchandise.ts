@@ -17,14 +17,14 @@ type Merchandise = {
 export const MERCHANDISE: Merchandise[] = [
     {
         itemId: '1',
-        thumbnail: '',
+        thumbnail: '/info/merchandise/image1.png',
         name: 'item1',
         price: 0,
         detail: 'detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail ',
         variant: [
             {
             title: 'var1',
-            imgPath: ['','','','','']
+            imgPath: ['/info/merchandise/image1.png','/info/merchandise/image2.png','/info/merchandise/image3.png','/info/merchandise/image4.png','/info/merchandise/image5.png']
             }
         ],
         shopName: '',

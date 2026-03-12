@@ -24,8 +24,12 @@ function RouteComponent() {
           params={{ itemId: item.itemId }}
         >
           <div key={item.itemId} className='flex flex-col w-full gap-2'>
-            <div className='w-full aspect-4/5 rounded-2xl bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.5)] mb-2'>
-              <img src="" alt="" />
+            <div className="w-full aspect-4/5 rounded-2xl bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.5)] mb-2 overflow-hidden">
+              <img
+                src={item.thumbnail}
+                alt={item.name}
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className='text-main-beige font-bold text-xl leading-6'>
               {item.name}
