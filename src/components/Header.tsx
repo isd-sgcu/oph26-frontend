@@ -114,6 +114,11 @@ export default function Header() {
       <header
         className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
       >
+        {/* Clouds */}
+        {toColor === HeaderEnum.TRANSPARENT && (
+          <div className='top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-white/95 from-35% to-transparent w-full h-24'></div>
+        )}
+
         {/* Logo */}
         <img
           src="/logo/cu-journey.webp"
