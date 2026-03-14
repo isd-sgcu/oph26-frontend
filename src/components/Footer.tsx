@@ -55,7 +55,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`flex h-fit max-h-80 w-full max-w-(--width-page) flex-col`}
+      className={`flex h-fit w-full max-w-(--width-page) flex-col`}
     >
       {/* Content */}
       <div
@@ -110,70 +110,76 @@ export default function Footer() {
         </div>
 
         {/* Sponsors */}
-        <div className="flex flex-wrap justify-center items-center gap-6 w-full">
-          <img
-            src='/logo/sponsor/1_centralretail.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-md w-23 object-contain"
-          />
-          <img
-            src='/logo/sponsor/2_Gulf.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-md w-auto h-4.5 object-contain"
-          />
-          <img
-            src='/logo/sponsor/3_major.webp'
-            alt='Central Retail'
-            width={100}
-            height={200}
-            className="rounded-sm w-auto h-10 object-contain"
-          />
-          <img
-            src='/logo/sponsor/4_CUNEX.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-sm w-auto h-5 object-contain"
-          />
-          <img
-            src='/logo/sponsor/5_camphub.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-sm w-auto h-5 object-contain"
-          />
-          <img
-            src='/logo/sponsor/6_เต่าเหยียบโลก.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-sm w-13 h-13 object-contain aspect-square"
-          />
-          <img
-            src='/logo/sponsor/7_cher.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-sm w-12 h-12 object-contain aspect-square"
-          />
-          <img
-            src='/logo/sponsor/8_lineman.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-sm w-13 h-13 object-contain aspect-square"
-          />
-          <img
-            src='/logo/sponsor/9_bright_hair.webp'
-            alt='Central Retail'
-            width={100}
-            height={40}
-            className="rounded-sm w-auto h-10 object-contain"
-          />
+        <div className="flex flex-wrap justify-center items-center gap-3 w-full">
+          <div className='flex justify-center items-center gap-6 w-full'>
+            <img
+              src='/logo/sponsor/1_centralretail.webp'
+              alt='Central Retail'
+              width={100}
+              height={40}
+              className="rounded-md w-18 object-contain"
+            />
+            <img
+              src='/logo/sponsor/2_Gulf.webp'
+              alt='Gulf'
+              width={100}
+              height={40}
+              className="rounded-md w-auto h-4 object-contain"
+            />
+            <img
+              src='/logo/sponsor/3_major.webp'
+              alt='Major'
+              width={100}
+              height={200}
+              className="rounded-sm w-auto h-8 object-contain"
+            />
+          </div>
+          <div className='flex justify-center items-center gap-6 w-full'>
+            <img
+              src='/logo/sponsor/4_CUNEX.webp'
+              alt='CUNex'
+              width={100}
+              height={40}
+              className="rounded-sm w-auto h-4 object-contain"
+            />
+            <img
+              src='/logo/sponsor/5_camphub.webp'
+              alt='Camphub'
+              width={100}
+              height={40}
+              className="rounded-sm w-auto h-4 object-contain"
+            />
+            <img
+              src='/logo/sponsor/6_เต่าเหยียบโลก.webp'
+              alt='เต่าเหยียบโลก'
+              width={100}
+              height={40}
+              className="rounded-sm w-11 h-11 object-contain aspect-square"
+            />
+          </div>
+          <div className='flex justify-center items-center gap-6 w-full'>
+            <img
+              src='/logo/sponsor/7_cher.webp'
+              alt='Cher'
+              width={100}
+              height={40}
+              className="rounded-sm w-10 h-10 object-contain aspect-square"
+            />
+            <img
+              src='/logo/sponsor/8_lineman.webp'
+              alt='Lineman'
+              width={100}
+              height={40}
+              className="rounded-sm w-12 h-12 object-contain aspect-square"
+            />
+            <img
+              src='/logo/sponsor/9_bright_hair.webp'
+              alt='Bright Hair'
+              width={100}
+              height={40}
+              className="rounded-sm w-auto h-8 object-contain"
+            />
+          </div>
         </div>
       </div>
 

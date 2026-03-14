@@ -35,31 +35,65 @@ export default function CarouselLanding() {
     }
   }
 
-  const mock = [
+  const data = [
     {
       id: 1,
-      type: "video",
-      children: (
-        <iframe
-          className="rounded-2xl w-full aspect-video"
-          src="https://www.youtube.com/embed/KUd_aWty2cY?autoplay=1&mute=1&rel=0&loop=1&playlist=KUd_aWty2cY"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
-      )
+      link: "https://www.tiktok.com/@gulfspark?is_from_webapp=1&sender_device=pc",
+      type: "image",
+      path: "gulfPic.webp"
     },
     {
       id: 2,
-      type: "image",
-      imageSrc: "/background/background-2.webp",
+      type: "video",
+      path: "gulfVideo.webm",
     },
     {
       id: 3,
+      link: "https://linkbio.co/G-beat",
       type: "image",
-      imageSrc: "/background/background-1.webp",
+      path: "gbeat.webp"
+    },
+    {
+      id: 4,
+      link: "https://apps.apple.com/th/app/cu-nex/id1360971254",
+      type: "image",
+      path: "cunex.webp"
+    },
+    {
+      id: 5,
+      link: "https://go.camphub.in.th/cuoph2026",
+      type: "image",
+      path: "camphub.webp"
+    },
+    {
+      id: 6,
+      link: "https://shopee.co.th/taoyeablokofficial",
+      type: "image",
+      path: "เต่าเหยียบโลก.webp"
+    },
+    {
+      id: 7,
+      link: "https://www.tiktok.com/@cherskincare.th?lang=th-TH",
+      type: "image",
+      path: "cher.webp"
+    },
+    {
+      id: 8,
+      link: "https://www.centralretail.com/th/home",
+      type: "image",
+      path: "central.webp"
+    },
+    {
+      id: 9,
+      link: "com.linecorp.linemanth://app/browse?url=https%3A%2F%2Flm-extension.line-website.com%2Flm-store%2Fsubscriptions%2FFOOD-LMVIP-PARTNERSHIP-20250801-GROUP%3FcampaignId%3DLMVIP-EXTERNAL%26locale%3D%257Blocale%257D%26lat%3D%257BdeliveryLat%257D%26lng%3D%257BdeliveryLng%257D&autoCloseWebview=true",
+      type: "image",
+      path: "lineman.webp"
+    },
+    {
+      id: 10,
+      link: "https://lin.ee/k3zoBJb",
+      type: "image",
+      path: "bright.webp"
     },
   ];
 
@@ -72,22 +106,36 @@ export default function CarouselLanding() {
             align: "center",
           }}
           setApi={setApi}
-          plugins={[Autoplay({ delay: 15000, stopOnInteraction: false })]}
+          plugins={[Autoplay({ delay: data[current - 1]?.type === "video" ? 15000 : 3000, stopOnInteraction: false })]}
           className="w-full"
         >
           <CarouselContent className="ml-2! w-full">
             {
-              mock.map((item) => (
+              data.map((item) => (
                 <CarouselItem key={item.id} className="pr-4 pl-0! basis-full">
-                  {
-                    item.type === "video" ? item.children : (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-2xl w-full aspect-video overflow-hidden"
+                  >
+                    {item.type === "video" ? (
+                      <video
+                        src={`landing/banner/${item.path}`}
+                        className="rounded-2xl w-full object-cover aspect-video"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    ) : (
                       <img
-                        src={item.imageSrc}
+                        src={`landing/banner/${item.path}`}
                         alt=""
                         className="rounded-2xl w-full object-cover aspect-video"
                       />
-                    )
-                  }
+                    )}
+                  </a>
                 </CarouselItem>
               ))
             }
@@ -98,7 +146,7 @@ export default function CarouselLanding() {
       </div>
       <div className="flex gap-2">
         {
-          mock.map((item) => (
+          data.map((item) => (
             <div key={item.id} className={clsx('flex flex-col justify-center items-center rounded-full w-2 h-2',
               current === item.id ? 'bg-main-pink' : 'bg-[#D9D9D9]'
             )}></div>
