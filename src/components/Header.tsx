@@ -116,7 +116,7 @@ export default function Header() {
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
-          <div className='top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-white/95 from-35% to-transparent w-full h-24'></div>
+          <div className='top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent w-full h-24'></div>
         )}
 
         {/* Logo */}
