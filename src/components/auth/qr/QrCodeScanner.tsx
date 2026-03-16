@@ -40,12 +40,12 @@ export default function QrCodeScanner() {
       if (mockSuccess) {
         setTitle(
           <div className="flex flex-col gap-1">
-            <p className="font-bold text-2xl">{'John Doe'}</p>
-            <p className="font-normal text-grey text-sm">ID : {'12345678'}</p>
+            <p className="text-2xl font-bold">{'John Doe'}</p>
+            <p className="text-grey text-sm font-normal">ID : {'12345678'}</p>
           </div>
         )
         setSubtitle(
-          <div className="font-semibold text-xl text-center text-pretty">
+          <div className="text-center text-xl font-semibold text-pretty">
             <p>{'John Doe'}</p>
             <p>{t('routes.authGroup.qrGroup.modal.success.subtitle')}</p>
             <p>CU OPEN HOUSE 2026</p>
@@ -57,7 +57,7 @@ export default function QrCodeScanner() {
             : FACULTIES.find((fac) => fac.value === 'eng')?.label?.en || ''
         setBody(
           <div
-            className="text-sm text-center text-pretty"
+            className="text-center text-sm text-pretty"
             dangerouslySetInnerHTML={{
               __html: t('routes.authGroup.qrGroup.modal.success.body', {
                 StaffName: 'น้องสตาฟ ใครเอ่ย',
@@ -79,18 +79,18 @@ export default function QrCodeScanner() {
           ></div>
         )
         setDetail(
-          <div className="px-3 py-2 border-2 border-main-pink rounded-2xl text-main-pink text-sm text-center text-pretty">
+          <div className="border-main-pink text-main-pink rounded-2xl border-2 px-3 py-2 text-center text-sm text-pretty">
             {t('routes.authGroup.qrGroup.modal.success.detail')}
           </div>
         )
       } else {
         setTitle(
-          <p className="font-bold text-error-base text-2xl">
+          <p className="text-error-base text-2xl font-bold">
             {t('routes.authGroup.qrGroup.modal.error.title')}
           </p>
         )
         setSubtitle(
-          <div className="font-semibold text-xl text-center text-pretty">
+          <div className="text-center text-xl font-semibold text-pretty">
             {errorCode === 'error_02' && <p>John Doe</p>}
             <p>
               {t(`routes.authGroup.qrGroup.modal.error.subtitle.${errorCode}`)}
@@ -105,12 +105,12 @@ export default function QrCodeScanner() {
     } catch (error: any) {
       setIsSuccess(false)
       setTitle(
-        <p className="font-bold text-error-base text-3xl">
+        <p className="text-error-base text-3xl font-bold">
           {t('routes.authGroup.qrGroup.modal.error.title')}
         </p>
       )
       setSubtitle(
-        <p className="font-semibold text-xl text-center text-pretty">
+        <p className="text-center text-xl font-semibold text-pretty">
           {t('routes.authGroup.qrGroup.modal.error.subtitle.error_01')}
         </p>
       )
@@ -143,7 +143,7 @@ export default function QrCodeScanner() {
 
   return (
     <>
-      <div className="relative flex flex-col justify-center items-center bg-primary-bg rounded-2xl w-full md:w-120 max-w-full aspect-square! overflow-hidden">
+      <div className="bg-primary-bg relative flex aspect-square! w-full max-w-full flex-col items-center justify-center overflow-hidden rounded-2xl md:w-120">
         <Scanner
           onScan={handleScanQrCode}
           onError={() => console.log('Error')}
@@ -175,11 +175,11 @@ export default function QrCodeScanner() {
           allowMultiple={true}
           sound={false}
         >
-          <div className="absolute inset-0 p-4 pointer-events-none">
-            <div className="top-12 left-12 absolute border-5 border-white border-r-0 border-b-0 rounded-xs w-10 h-10" />
-            <div className="top-12 right-12 absolute border-5 border-white border-b-0 border-l-0 rounded-xs w-10 h-10" />
-            <div className="bottom-12 left-12 absolute border-5 border-white border-t-0 border-r-0 rounded-xs w-10 h-10" />
-            <div className="right-12 bottom-12 absolute border-5 border-white border-t-0 border-l-0 rounded-xs w-10 h-10" />
+          <div className="pointer-events-none absolute inset-0 p-4">
+            <div className="absolute top-12 left-12 h-10 w-10 rounded-xs border-5 border-r-0 border-b-0 border-white" />
+            <div className="absolute top-12 right-12 h-10 w-10 rounded-xs border-5 border-b-0 border-l-0 border-white" />
+            <div className="absolute bottom-12 left-12 h-10 w-10 rounded-xs border-5 border-t-0 border-r-0 border-white" />
+            <div className="absolute right-12 bottom-12 h-10 w-10 rounded-xs border-5 border-t-0 border-l-0 border-white" />
           </div>
         </Scanner>
       </div>

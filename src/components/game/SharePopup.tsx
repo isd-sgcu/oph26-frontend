@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { captureGameMap } from '@/utils/captureMap'
 import { Button } from '../ui/button'
 import { FlatIcon } from '../FlatIcon'
-import { processWatermarkTemplate, processFramedTemplate } from '@/utils/shareTemplates'
+import {
+  processWatermarkTemplate,
+  processFramedTemplate,
+} from '@/utils/shareTemplates'
 import i18n from '@/lib/i18n'
 import { useCapture } from '@/contexts/CaptureContext'
 
@@ -38,11 +41,7 @@ const GameSharePopup = ({ open, onClose }: Props) => {
 
       const img = await captureGameMap()
 
-
-      const watermark = await processWatermarkTemplate(
-        img,
-        '/logo.svg'
-      )
+      const watermark = await processWatermarkTemplate(img, '/logo.svg')
 
       // Determine lang: 0 = th, 1 = en
       const lang = i18n.language === 'th' ? 0 : 1
@@ -105,7 +104,7 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   }
 
   const handleShare = async () => {
-    const selectedImage = image?.[activeIndex-1]
+    const selectedImage = image?.[activeIndex - 1]
     if (!selectedImage) return
 
     try {
@@ -136,7 +135,6 @@ const GameSharePopup = ({ open, onClose }: Props) => {
     a.click()
   }
 
-
   const handleClose = () => {
     setVisible(false)
     setTimeout(() => {
@@ -150,80 +148,67 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   return (
     <div className="fixed inset-0 z-50 flex flex-col justify-end">
       <div
-        className={`relative w-full rounded-t-2xl bg-main-beige py-8
-        flex flex-col items-center gap-6
-        h-[calc(100dvh-64px)]
-        [box-shadow:inset_1px_1px_5px_0_rgba(0,0,0,0.3)]
-        transform transition-transform duration-300 ease-out
-        ${visible ? 'translate-y-0' : 'translate-y-full'}`}
+        className={`bg-main-beige relative flex h-[calc(100dvh-64px)] w-full transform flex-col items-center gap-6 rounded-t-2xl py-8 [box-shadow:inset_1px_1px_5px_0_rgba(0,0,0,0.3)] transition-transform duration-300 ease-out ${visible ? 'translate-y-0' : 'translate-y-full'}`}
       >
-        <div className="relative w-full mb-4 flex items-center justify-center">
-            <h2 className="text-4xl font-bold text-main-pink">
-                Share
-            </h2>
+        <div className="relative mb-4 flex w-full items-center justify-center">
+          <h2 className="text-main-pink text-4xl font-bold">Share</h2>
 
-            <button
-                onClick={handleClose}
-                className="absolute right-[10%] font-bold text-lg text-main-pink"
-            >
-                ✕
-            </button>
+          <button
+            onClick={handleClose}
+            className="text-main-pink absolute right-[10%] text-lg font-bold"
+          >
+            ✕
+          </button>
         </div>
 
         {loading && (
-        <div className="flex h-[65dvh] items-center justify-center">
+          <div className="flex h-[65dvh] items-center justify-center">
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-pink-400 border-t-transparent" />
-        </div>
+          </div>
         )}
 
         {!loading && image && (
-        <div className="flex h-[65dvh] w-full min-w-0 overflow-hidden relative">
-          <div 
-          className='flex flex-nowrap overflow-x-auto snap-x snap-mandatory h-full'
-          ref={scrollRef}
-          onScroll={handleScroll}
-          >
-            {/* {image.map((img, i) => (
+          <div className="relative flex h-[65dvh] w-full min-w-0 overflow-hidden">
+            <div
+              className="flex h-full snap-x snap-mandatory flex-nowrap overflow-x-auto"
+              ref={scrollRef}
+              onScroll={handleScroll}
+            >
+              {/* {image.map((img, i) => (
                 <img key={i} src={img} alt="preview" className="mb-4 rounded" />
             ))} */}
-            {/* Left spacer */}
-            <div className="shrink-0 w-1/2" />
+              {/* Left spacer */}
+              <div className="w-1/2 shrink-0" />
 
-            <div className='snap-center shrink-0 px-3 flex justify-center'>
-              <img src={image[0]} alt="preview" className="mb-4 rounded" />
-            </div>
-
-            <div className='snap-center shrink-0 px-3 flex justify-center'>
-              <img src={image[1]} alt="preview" className="mb-4 rounded" />
-            </div>
-
-            <div className="snap-center px-3 flex justify-center items-center">
-              <div className="w-[80vw] max-w-85 aspect-square">
-                <img
-                  src={image[2]}
-                  alt="preview"
-                  className="w-full h-auto object-cover rounded shadow-[1px_5px_5px_rgba(0,0,0,0.3)]"
-                />
+              <div className="flex shrink-0 snap-center justify-center px-3">
+                <img src={image[0]} alt="preview" className="mb-4 rounded" />
               </div>
+
+              <div className="flex shrink-0 snap-center justify-center px-3">
+                <img src={image[1]} alt="preview" className="mb-4 rounded" />
+              </div>
+
+              <div className="flex snap-center items-center justify-center px-3">
+                <div className="aspect-square w-[80vw] max-w-85">
+                  <img
+                    src={image[2]}
+                    alt="preview"
+                    className="h-auto w-full rounded object-cover shadow-[1px_5px_5px_rgba(0,0,0,0.3)]"
+                  />
+                </div>
+              </div>
+
+              {/* Right spacer */}
+              <div className="w-1/2 shrink-0" />
             </div>
-            
-            {/* Right spacer */}
-            <div className="shrink-0 w-1/2" />
           </div>
-        </div>
         )}
 
-        <Button
-          size="lg"
-          className="bg-gradient-purple"
-          onClick={handleShare}
-        >
-          <span className="text-white">{i18n.language === 'th' ? 'บันทึกภาพ' : 'Save Image'}</span>
-          <FlatIcon
-            name="fi-rr-download"
-            className="text-white"
-            size={16}
-          />
+        <Button size="lg" className="bg-gradient-purple" onClick={handleShare}>
+          <span className="text-white">
+            {i18n.language === 'th' ? 'บันทึกภาพ' : 'Save Image'}
+          </span>
+          <FlatIcon name="fi-rr-download" className="text-white" size={16} />
         </Button>
       </div>
     </div>
