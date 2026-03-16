@@ -10,7 +10,9 @@ import CloudLayer from './CloudLayer'
 
 export default function GameMap() {
   const [pieceCount, setPieceCount] = useState<Record<string, number>>({})
-  const [binaryPieceCount, setBinaryPieceCount] = useState<Record<string, number>>({})
+  const [binaryPieceCount, setBinaryPieceCount] = useState<
+    Record<string, number>
+  >({})
   const { mode, setMode } = useCapture()
 
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -21,14 +23,8 @@ export default function GameMap() {
     return window.innerHeight / 2000
   })
 
-  const {
-    bind,
-    zoomToZone,
-    resetZoom,
-    isZoomed,
-    velocityRef,
-    getWorldBounds,
-  } = useCamera(containerRef, cameraWrapperRef, baseScale)
+  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } =
+    useCamera(containerRef, cameraWrapperRef, baseScale)
 
   // Compute base scale
   useLayoutEffect(() => {
@@ -104,7 +100,7 @@ export default function GameMap() {
       style={{
         touchAction: 'none',
         userSelect: 'none',
-        WebkitUserSelect: 'none'
+        WebkitUserSelect: 'none',
       }}
       onClick={() => {
         if (isZoomed) resetZoom()
@@ -136,11 +132,16 @@ export default function GameMap() {
             </defs> */}
 
             <image href={UniMapBg} x={0} y={0} width={2000} height={2000} />
-            <DecorationLayer velocityRef={velocityRef} getWorldBounds={getWorldBounds} />
-            <PieceLayer pieceCount={mode === 'normal' ? pieceCount : binaryPieceCount} />
+            <DecorationLayer
+              velocityRef={velocityRef}
+              getWorldBounds={getWorldBounds}
+            />
+            <PieceLayer
+              pieceCount={mode === 'normal' ? pieceCount : binaryPieceCount}
+            />
             {mode === 'show' && <CountLayer pieceCount={pieceCount} />}
             <ZoomZoneLayer onZoom={zoomToZone} />
-            
+
             <CloudLayer />
           </svg>
         )}

@@ -82,9 +82,9 @@
       }
     },
     "gameGroup": {
-      "achievementGroup": { 
-        "titleGroup": "ภาพรวมความสำเร็จ", 
-        "cardGroup": { 
+      "achievementGroup": {
+        "titleGroup": "ภาพรวมความสำเร็จ",
+        "cardGroup": {
           "var1": {
             "title": "คุณเป็นคนที่",
             "description": "ที่เก็บจิ๊กซอว์มาประกอบเป็นภาพครบ"

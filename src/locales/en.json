@@ -78,9 +78,9 @@
       }
     },
     "gameGroup": {
-      "achievementGroup": { 
-        "titleGroup": "Achievements", 
-        "cardGroup": { 
+      "achievementGroup": {
+        "titleGroup": "Achievements",
+        "cardGroup": {
           "var1": {
             "title": "You are the",
             "description": "to collect all pieces and complete the picture."
@@ -220,6 +220,5 @@
     },
 
     "title": "Title"
-  
   }
 }

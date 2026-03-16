@@ -45,7 +45,7 @@ export const GAME_ASSETS = [
   pinkFlower,
   purpleFlower,
   yelloFlower,
-  cloudImg
+  cloudImg,
 ]
 
 export const PUBLIC_ASSETS = [

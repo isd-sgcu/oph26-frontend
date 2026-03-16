@@ -11,16 +11,21 @@ type NavItem = {
   icon: string // Note: fi-rr-*
 }
 
-export enum BackgroundColorHeader {
+export enum HeaderEnum {
   MAINPINK = 'main-pink',
   MAINLIGHTPINK = 'main-light-pink',
+  TRANSPARENT = 'transparent',
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
+const PATHNAME_TRANSPARENT = ['/', '/auth/profile/ticket', '/auth/qr']
 
-const headerColorClass: Record<BackgroundColorHeader, string> = {
-  [BackgroundColorHeader.MAINPINK]: 'to-main-pink',
-  [BackgroundColorHeader.MAINLIGHTPINK]: 'to-main-light-pink',
+const headerClass: Record<HeaderEnum, string> = {
+  [HeaderEnum.MAINPINK]:
+    'bg-linear-to-b from-main-beige from-30% to-90% to-main-pink relative',
+  [HeaderEnum.MAINLIGHTPINK]:
+    'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
+  [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
 }
 
 const navItems: NavItem[] = [
@@ -66,16 +71,18 @@ export default function Header() {
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [openCustomModal, setOpenCustomModal] = useState(false)
-  const [toColor, setToColor] = useState(BackgroundColorHeader.MAINLIGHTPINK)
+  const [toColor, setToColor] = useState(HeaderEnum.MAINLIGHTPINK)
 
   useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const pathname = location.pathname
     if (PATHNAME_MAINPINK.includes(pathname)) {
-      setToColor(BackgroundColorHeader.MAINPINK)
+      setToColor(HeaderEnum.MAINPINK)
+    } else if (PATHNAME_TRANSPARENT.includes(pathname)) {
+      setToColor(HeaderEnum.TRANSPARENT)
     } else {
-      setToColor(BackgroundColorHeader.MAINLIGHTPINK)
+      setToColor(HeaderEnum.MAINLIGHTPINK)
     }
   }, [location.pathname])
 
@@ -107,8 +114,13 @@ export default function Header() {
   return (
     <>
       <header
-        className={`from-main-beige from-30% to-90% ${headerColorClass[toColor]} relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b p-4`}
+        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
       >
+        {/* Clouds */}
+        {toColor === HeaderEnum.TRANSPARENT && (
+          <div className="absolute top-0 right-0 left-0 -z-1 h-24 w-full bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent"></div>
+        )}
+
         {/* Logo */}
         <img
           src="/logo/cu-journey.webp"
@@ -158,13 +170,13 @@ export default function Header() {
           <>
             {/* Overlay */}
             <div
-              className={`fixed inset-0 z-50 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
+              className={`fixed inset-0 z-500 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
               onClick={closeSidebar}
             />
 
             {/* Sidebar Panel */}
             <div
-              className={`fixed top-0 z-50 flex h-full min-h-screen w-full max-w-[var(--width-page)] -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
+              className={`fixed top-0 z-500 flex h-full min-h-screen w-full max-w-[var(--width-page)] -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
             >
               {/* Header */}
               <div className="flex items-center">

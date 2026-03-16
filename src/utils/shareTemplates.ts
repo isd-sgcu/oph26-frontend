@@ -52,7 +52,7 @@ export async function processWatermarkTemplate(
         canvas.height
       )
 
-      gradient.addColorStop(0, 'rgba(255, 105, 180, 0)')   // transparent
+      gradient.addColorStop(0, 'rgba(255, 105, 180, 0)') // transparent
       gradient.addColorStop(1, 'rgba(246, 172, 210, 0.85)') // pink
 
       ctx.fillStyle = gradient
@@ -101,11 +101,11 @@ async function ensureFontsLoaded() {
     '500 50px "IBM Plex Sans Thai"',
   ]
 
-  await Promise.all(fonts.map(f => document.fonts.load(f)))
+  await Promise.all(fonts.map((f) => document.fonts.load(f)))
   await document.fonts.ready
 
   // Small delay to ensure layout flush
-  await new Promise(resolve => requestAnimationFrame(() => resolve(null)))
+  await new Promise((resolve) => requestAnimationFrame(() => resolve(null)))
 }
 
 export async function processFramedTemplate(
@@ -199,39 +199,44 @@ export async function processFramedTemplate(
   ctx.fillText(username, canvas.width / 2, 370)
 
   // Count
-  ctx.fillText(userData, (canvas.width / 2) - 50, 1620)
+  ctx.fillText(userData, canvas.width / 2 - 50, 1620)
 
   // /20 text
   ctx.font = '600 60px "IBM Plex Sans Thai"'
-  ctx.fillText('/20', (canvas.width / 2) + 50, 1625)
+  ctx.fillText('/20', canvas.width / 2 + 50, 1625)
 
   // Missing pieces text
   ctx.fillStyle = '#000000'
   ctx.font = '500 65px "IBM Plex Sans Thai"'
-  ctx.fillText(localizedText[lang === 0 ? 'th' : 'en'].missingPieces, canvas.width / 2, 550)
+  ctx.fillText(
+    localizedText[lang === 0 ? 'th' : 'en'].missingPieces,
+    canvas.width / 2,
+    550
+  )
 
   // collected
   ctx.font = '500 50px "IBM Plex Sans Thai"'
-  ctx.fillText(localizedText[lang === 0 ? 'th' : 'en'].collected, canvas.width * 0.25, 1620)
+  ctx.fillText(
+    localizedText[lang === 0 ? 'th' : 'en'].collected,
+    canvas.width * 0.25,
+    1620
+  )
 
   // faculty
-  ctx.fillText(localizedText[lang === 0 ? 'th' : 'en'].faculty, canvas.width * 0.75, 1620)
+  ctx.fillText(
+    localizedText[lang === 0 ? 'th' : 'en'].faculty,
+    canvas.width * 0.75,
+    1620
+  )
 
   // 5️⃣ Draw logo
   const logoWidth = logo.width * 1.2
   const logoHeight = (logo.height / logo.width) * logoWidth
 
-  ctx.drawImage(
-    logo,
-    (canvas.width - logoWidth) / 2,
-    90,
-    logoWidth,
-    logoHeight
-  )
+  ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 90, logoWidth, logoHeight)
 
   return canvas.toDataURL('image/png')
 }
-
 
 function roundRect(
   ctx: CanvasRenderingContext2D,
