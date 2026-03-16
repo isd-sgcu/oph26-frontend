@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FlatIcon } from './FlatIcon'
 import { useTranslation } from 'react-i18next'
-import { Link, useRouter } from '@tanstack/react-router'
+import { useLocation, useRouter } from '@tanstack/react-router'
 import { Button } from './ui/button'
 import CustomModal from './CustomModal'
 
@@ -9,7 +9,21 @@ type NavItem = {
   title: string // Note: Don't forget to concern about i18n
   to: string
   icon: string // Note: fi-rr-*
-  params?: Record<string, string>
+}
+
+export enum HeaderEnum {
+  MAINPINK = 'main-pink',
+  MAINLIGHTPINK = 'main-light-pink',
+  TRANSPARENT = 'transparent',
+}
+
+const PATHNAME_MAINPINK = ['/game', '/game/achievement']
+const PATHNAME_TRANSPARENT = ["/", "/auth/profile/ticket", "/auth/qr"]
+
+const headerClass: Record<HeaderEnum, string> = {
+  [HeaderEnum.MAINPINK]: 'bg-linear-to-b from-main-beige from-30% to-90% to-main-pink relative',
+  [HeaderEnum.MAINLIGHTPINK]: 'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
+  [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
 }
 
 const navItems: NavItem[] = [
@@ -23,7 +37,7 @@ const navItems: NavItem[] = [
   {
     title: 'mainEvent',
     icon: 'fi-rr-balloons',
-    to: '',
+    to: '/info/event',
   },
   {
     title: 'map',
@@ -33,7 +47,7 @@ const navItems: NavItem[] = [
   {
     title: 'missingPiece',
     icon: 'fi-rr-layout-fluid',
-    to: '/game/',
+    to: '/game',
   },
   {
     title: 'merchandise',
@@ -50,12 +64,25 @@ const navItems: NavItem[] = [
 export default function Header() {
   const { i18n, t } = useTranslation()
   const router = useRouter()
+  const location = useLocation()
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [openCustomModal, setOpenCustomModal] = useState(false)
+  const [toColor, setToColor] = useState(HeaderEnum.MAINLIGHTPINK)
 
   useEffect(() => setMounted(true), [])
+
+  useEffect(() => {
+    const pathname = location.pathname
+    if (PATHNAME_MAINPINK.includes(pathname)) {
+      setToColor(HeaderEnum.MAINPINK)
+    } else if (PATHNAME_TRANSPARENT.includes(pathname)) {
+      setToColor(HeaderEnum.TRANSPARENT)
+    } else {
+      setToColor(HeaderEnum.MAINLIGHTPINK)
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     if (openSidebar || isClosingSidebar) {
@@ -84,12 +111,19 @@ export default function Header() {
 
   return (
     <>
-      <header className="relative mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between bg-linear-to-b from-[#FAFAE6] to-[#ECECD2] p-4">
+      <header
+        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
+      >
+        {/* Clouds */}
+        {toColor === HeaderEnum.TRANSPARENT && (
+          <div className='top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent w-full h-24'></div>
+        )}
+
         {/* Logo */}
         <img
-          src="/logo.svg"
-          width={69}
-          height={40}
+          src="/logo/cu-journey.webp"
+          width={74}
+          height={48}
           alt="Logo"
           className="cursor-pointer"
           onClick={() => {
@@ -134,13 +168,13 @@ export default function Header() {
           <>
             {/* Overlay */}
             <div
-              className={`fixed inset-0 z-40 bg-black/80 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
+              className={`fixed inset-0 z-500 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
               onClick={closeSidebar}
             />
 
             {/* Sidebar Panel */}
             <div
-              className={`fixed top-0 z-50 flex h-full min-h-screen w-full max-w-(--width-page) -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
+              className={`fixed top-0 z-500 flex h-full min-h-screen w-full max-w-[var(--width-page)] -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
             >
               {/* Header */}
               <div className="flex items-center">
@@ -161,14 +195,13 @@ export default function Header() {
               {/* Navigation */}
               <nav className="mb-10 flex flex-col gap-10">
                 {navItems.map((item) => (
-                  <Link
+                  <div
                     key={item.title}
-                    to={item.to}
-                    params={item.params}
                     onClick={() => {
+                      router.navigate({ to: item.to })
                       setOpenSidebar(false)
                     }}
-                    className="flex items-center gap-4"
+                    className="flex w-fit cursor-pointer items-center gap-4"
                   >
                     <FlatIcon
                       name={item.icon}
@@ -178,7 +211,7 @@ export default function Header() {
                     <span className="text-xl font-bold">
                       {t(`components.header.sidebar.${item.title}`)}
                     </span>
-                  </Link>
+                  </div>
                 ))}
               </nav>
 
