@@ -6,6 +6,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { FACULTIES, FacultyType } from '../const/faculty'
 import { Piece } from './Piece'
+import { collectFriendPiece } from '@/services/pieces/piece'
 
 interface RedeemCodePopupProps {
   open: boolean
@@ -79,16 +80,16 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
               <Button
                 className="bg-gradient-pink text-main-beige justify-self-center"
                 size={'sm'}
-                onClick={() => {
+                onClick={async () => {
                   if (!validCode) {
                     setSuccess(false)
                   } else {
                     try {
-                      // TODO: Send Code using API
-
-                      // MOCK: Faculty
-                      setFacultyPiece('arch')
-
+                      const friendPiece = await collectFriendPiece(code)
+                      if (!friendPiece || !friendPiece.faculty) {
+                        throw new Error('Invalid code')
+                      }
+                      setFacultyPiece(friendPiece.faculty)
                       setSuccess(true)
                     } catch (error) {
                       setSuccess(false)
