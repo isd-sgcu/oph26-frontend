@@ -436,7 +436,7 @@ const ProfileForm = () => {
             {...register('district', { required: 'กรุณาระบุเขต/อำเภอ' })}
           />
           {errors.district && (
-            <p className="mt-0.5 text-xs text-[#ff0000]">กรุณาเขต/อำเภอ</p>
+            <p className="mt-0.5 text-xs text-[#ff0000]">กรุณาระบุเขต/อำเภอ</p>
           )}
         </div>
         {status === 'student' && (
@@ -486,7 +486,7 @@ const ProfileForm = () => {
               <Input
                 placeholder="สถานศึกษา"
                 className="placeholder:text-main-light-pink shadow-none"
-                {...register('school', { required: 'กรุณาระบุสถานศึกษาุ' })}
+                {...register('school', { required: 'กรุณาระบุสถานศึกษา' })}
               />
               {errors.school && (
                 <p className="mt-0.5 text-xs text-[#ff0000]">
