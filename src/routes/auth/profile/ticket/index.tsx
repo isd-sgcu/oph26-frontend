@@ -13,13 +13,13 @@ function RouteComponent() {
   const { t } = useTranslation()
 
   return (
-    <div className="relative p-5 w-full h-full min-h-dvh">
+    <div className="relative h-full min-h-dvh w-full p-5">
       <img
         src="/background/background-1.webp"
         alt=""
-        className="z-0 absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 z-0 h-full w-full object-cover"
       />
-      <div className="z-10 relative flex flex-col justify-center items-center gap-5">
+      <div className="relative z-10 flex flex-col items-center justify-center gap-5">
         {/* --- Ticket Container --- */}
         <Ticket
           id="1234567890"
@@ -30,7 +30,7 @@ function RouteComponent() {
         />
 
         {/* --- Footer Buttons --- */}
-        <div className="flex flex-wrap justify-center items-center gap-6 pb-5 w-full">
+        <div className="flex w-full flex-wrap items-center justify-center gap-6 pb-5">
           <Button
             size={'lg'}
             className="bg-main-beige text-main-pink"

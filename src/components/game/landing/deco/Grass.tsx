@@ -3,17 +3,13 @@ import tinyGreenGrass from '@/assets/game/deco/grass/thin-green-grass.png'
 import yellowGrass from '@/assets/game/deco/grass/yellow-grass.png'
 import tinyYellowGrass from '@/assets/game/deco/grass/thin-yellow-grass.png'
 
-export type GrassVariant =
-  | 'gg'
-  | 'tgg'
-  | 'yg'
-  | 'tyg'
+export type GrassVariant = 'gg' | 'tgg' | 'yg' | 'tyg'
 
 const GRASS_MAP: Record<GrassVariant, string> = {
-  'gg': greenGrass,
-  'tgg': tinyGreenGrass,
-  'yg': yellowGrass,
-  'tyg': tinyYellowGrass
+  gg: greenGrass,
+  tgg: tinyGreenGrass,
+  yg: yellowGrass,
+  tyg: tinyYellowGrass,
 }
 
 export default function Grass({
@@ -38,13 +34,7 @@ export default function Grass({
     <g transform={`translate(${x}, ${y})`}>
       <g transform={`scale(${scaleX}, ${scale})`}>
         <g ref={innerRef}>
-          <image
-            href={grass}
-            width={40}
-            height={60}
-            x={-20}
-            y={-60}
-          />
+          <image href={grass} width={40} height={60} x={-20} y={-60} />
         </g>
       </g>
     </g>

@@ -46,17 +46,21 @@ function RouteComponent() {
     if (window.google) {
       initGoogle()
     } else {
-      const script = document.querySelector('script[src="https://accounts.google.com/gsi/client"]')
+      const script = document.querySelector(
+        'script[src="https://accounts.google.com/gsi/client"]'
+      )
       script?.addEventListener('load', initGoogle)
       return () => script?.removeEventListener('load', initGoogle)
     }
   }, [])
 
   return (
-    <section className="to-main-pink w-full from-[#ECECD2] to-10% relative flex flex-col bg-linear-to-b">
-      <div className="flex flex-col items-center justify-center min-h-screen">
+    <section className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+      <div className="flex min-h-screen flex-col items-center justify-center">
         <img src="/logo.svg" alt="logo" className="w-96" />
-        <h1 className="font-semibold text-2xl text-white text-shadow-sm">CU Open House 2026</h1>
+        <h1 className="text-2xl font-semibold text-white text-shadow-sm">
+          CU Open House 2026
+        </h1>
         <div ref={googleButtonRef} />
       </div>
     </section>

@@ -49,7 +49,7 @@ export default function LandingSectionFour() {
   ]
 
   return (
-    <div className="flex flex-col gap-4 px-5 pt-10 pb-20 w-full">
+    <div className="flex w-full flex-col gap-4 px-5 pt-10 pb-20">
       <h1 className="text-center text-4xl font-bold text-white text-shadow-xs">
         {t('routes.landingGroup.faq.title')}
       </h1>

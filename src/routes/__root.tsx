@@ -25,7 +25,11 @@ export const Route = createRootRoute({
       { rel: 'icon', type: 'image/svg+xml', href: '/logo/cu-journey.webp' },
     ],
     scripts: [
-      { src: 'https://accounts.google.com/gsi/client', async: true, defer: true },
+      {
+        src: 'https://accounts.google.com/gsi/client',
+        async: true,
+        defer: true,
+      },
     ],
   }),
   component: RootDocument,

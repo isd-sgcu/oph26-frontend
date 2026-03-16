@@ -8,11 +8,11 @@ export const Route = createFileRoute('/')({ component: App })
 
 function App() {
   return (
-    <main className='flex flex-col justify-start items-center bg-gradient-pink w-full'>
+    <main className="bg-gradient-pink flex w-full flex-col items-center justify-start">
       <LandingSectionOne />
       <LandingSectionTwo />
       <LandingSectionThree />
       <LandingSectionFour />
-    </main >
+    </main>
   )
 }

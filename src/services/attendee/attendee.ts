@@ -15,6 +15,8 @@ export type CreateAttendeeRequest = {
   objective_other?: string
 }
 
-export const createAttendee = async (payload: CreateAttendeeRequest): Promise<void> => {
+export const createAttendee = async (
+  payload: CreateAttendeeRequest
+): Promise<void> => {
   await Axios.post('/api/attendees/', payload)
 }
