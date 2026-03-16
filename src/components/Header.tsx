@@ -18,11 +18,13 @@ export enum HeaderEnum {
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
-const PATHNAME_TRANSPARENT = ["/", "/auth/profile/ticket", "/auth/qr"]
+const PATHNAME_TRANSPARENT = ['/', '/auth/profile/ticket', '/auth/qr']
 
 const headerClass: Record<HeaderEnum, string> = {
-  [HeaderEnum.MAINPINK]: 'bg-linear-to-b from-main-beige from-30% to-90% to-main-pink relative',
-  [HeaderEnum.MAINLIGHTPINK]: 'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
+  [HeaderEnum.MAINPINK]:
+    'bg-linear-to-b from-main-beige from-30% to-90% to-main-pink relative',
+  [HeaderEnum.MAINLIGHTPINK]:
+    'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
   [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
 }
 
@@ -116,7 +118,7 @@ export default function Header() {
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
-          <div className='top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent w-full h-24'></div>
+          <div className="absolute top-0 right-0 left-0 -z-1 h-24 w-full bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent"></div>
         )}
 
         {/* Logo */}

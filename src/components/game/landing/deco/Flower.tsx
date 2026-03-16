@@ -64,19 +64,19 @@ export default function Flower({
       <g transform={`rotate(${rotate})`}>
         <g transform={`scale(${scale})`}>
           <g
-          className={
+            className={
               animate
-              ? `flower ${isVisible ? 'flower-in' : 'flower-out'}`
-              : undefined
-          }
+                ? `flower ${isVisible ? 'flower-in' : 'flower-out'}`
+                : undefined
+            }
           >
-          <image
+            <image
               href={flowerMap[variant]}
               width={40}
               height={40}
               x={-20}
               y={-40}
-          />
+            />
           </g>
         </g>
       </g>
