@@ -65,7 +65,7 @@ export function useCamera(
       cancelAnimationFrame(animationRef.current)
       animationRef.current = null
     }
-    
+
     isDragging.current = true
     lastPos.current = { x: e.clientX, y: e.clientY }
     e.currentTarget.setPointerCapture(e.pointerId)
@@ -123,9 +123,7 @@ export function useCamera(
       applyTransform()
 
       const done =
-        Math.abs(dx) < 0.5 &&
-        Math.abs(dy) < 0.5 &&
-        Math.abs(ds) < 0.001
+        Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5 && Math.abs(ds) < 0.001
 
       if (!done) {
         animationRef.current = requestAnimationFrame(step)
@@ -185,12 +183,10 @@ export function useCamera(
 
     // 1️⃣ Get current world center
     const screenCenterX = containerWidth / 2
-    const worldCenterX =
-      (screenCenterX - current.x) / currentEffectiveScale
+    const worldCenterX = (screenCenterX - current.x) / currentEffectiveScale
 
     // 2️⃣ Compute new X at scale 1
-    let newX =
-      containerWidth / 2 - worldCenterX * newEffectiveScale
+    let newX = containerWidth / 2 - worldCenterX * newEffectiveScale
 
     // 3️⃣ Clamp
     const worldWidth = 2000 * newEffectiveScale

@@ -21,25 +21,26 @@ const ZONES: ZoomZone[] = [
   { id: 'zone11', x: 1550, y: 1200, width: 250, height: 500, scale: 3 }, //md
 ]
 
-export default function ZoomZoneLayer(
-    { onZoom }: { onZoom: (zone: ZoomZone) => void }
-) {
-
-    return (
-        <>
-        {ZONES.map(zone => (
+export default function ZoomZoneLayer({
+  onZoom,
+}: {
+  onZoom: (zone: ZoomZone) => void
+}) {
+  return (
+    <>
+      {ZONES.map((zone) => (
         <rect
-            key={zone.id}
-            x={zone.x}
-            y={zone.y}
-            width={zone.width}
-            height={zone.height}
-            fill="transparent"
-            // fill="rgba(255, 0, 0, 0.25)"
-            onClick={() => onZoom(zone)}
-            style={{ cursor: 'pointer' }}
+          key={zone.id}
+          x={zone.x}
+          y={zone.y}
+          width={zone.width}
+          height={zone.height}
+          fill="transparent"
+          // fill="rgba(255, 0, 0, 0.25)"
+          onClick={() => onZoom(zone)}
+          style={{ cursor: 'pointer' }}
         />
-        ))}
-        </>
-    )
+      ))}
+    </>
+  )
 }

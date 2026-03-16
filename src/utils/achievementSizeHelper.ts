@@ -1,167 +1,167 @@
 export const ABBR_NAME_SIZE: Record<string, string> = {
   // EDU
-  "ครุ": "text-7xl",
-  "EDU": "text-7xl",
+  ครุ: 'text-7xl',
+  EDU: 'text-7xl',
 
   // PSY
-  "จิตวิทยา": "text-5xl",
-  "PSY": "text-7xl",
+  จิตวิทยา: 'text-5xl',
+  PSY: 'text-7xl',
 
   // DENT
-  "ทันตะ": "text-7xl",
-  "DENT": "text-7xl",
+  ทันตะ: 'text-7xl',
+  DENT: 'text-7xl',
 
   // LAW
-  "นิติ": "text-7xl",
-  "LAW": "text-7xl",
+  นิติ: 'text-7xl',
+  LAW: 'text-7xl',
 
   // COMMARTS
-  "นิเทศ": "text-7xl",
-  "COMMARTS": "text-3xl",
+  นิเทศ: 'text-7xl',
+  COMMARTS: 'text-3xl',
 
   // CBS
-  "บัญชี/ บริหาร": "text-5xl",
-  "CBS": "text-7xl",
+  'บัญชี/ บริหาร': 'text-5xl',
+  CBS: 'text-7xl',
 
   // MED
-  "แพทย์": "text-7xl",
-  "MED": "text-7xl",
+  แพทย์: 'text-7xl',
+  MED: 'text-7xl',
 
   // PHARM
-  "เภสัช": "text-7xl",
-  "PHARM": "text-5xl",
+  เภสัช: 'text-7xl',
+  PHARM: 'text-5xl',
 
   // POLSCI
-  "รัฐศาสตร์": "text-5xl",
-  "POLSCI": "text-5xl",
+  รัฐศาสตร์: 'text-5xl',
+  POLSCI: 'text-5xl',
 
   // SCI
-  "วิทย์": "text-7xl",
-  "SCI": "text-7xl",
+  วิทย์: 'text-7xl',
+  SCI: 'text-7xl',
 
   // SPSC
-  "วิทย์กีฬา": "text-5xl",
-  "SPSC": "text-7xl",
+  วิทย์กีฬา: 'text-5xl',
+  SPSC: 'text-7xl',
 
   // ENG
-  "วิศวะ": "text-7xl",
-  "ENG": "text-7xl",
+  วิศวะ: 'text-7xl',
+  ENG: 'text-7xl',
 
   // FAA
-  "ศิลปกรรม": "text-5xl",
-  "FAA": "text-7xl",
+  ศิลปกรรม: 'text-5xl',
+  FAA: 'text-7xl',
 
   // ECON
-  "เศรษฐศาสตร์": "text-3xl",
-  "ECON": "text-7xl",
+  เศรษฐศาสตร์: 'text-3xl',
+  ECON: 'text-7xl',
 
   // ARCH
-  "สถาปัตย์": "text-5xl",
-  "ARCH": "text-7xl",
+  สถาปัตย์: 'text-5xl',
+  ARCH: 'text-7xl',
 
   // AHS
-  "สหเวช": "text-7xl",
-  "AHS": "text-7xl",
+  สหเวช: 'text-7xl',
+  AHS: 'text-7xl',
 
   // VET
-  "สัตว แพทย์": "text-5xl",
-  "VET": "text-7xl",
+  'สัตว แพทย์': 'text-5xl',
+  VET: 'text-7xl',
 
   // ARTS
-  "อักษร": "text-7xl",
-  "ARTS": "text-7xl",
+  อักษร: 'text-7xl',
+  ARTS: 'text-7xl',
 
   // BAScii
-  "BAScii": "text-5xl",
+  BAScii: 'text-5xl',
 
   // CUSAR
-  "เกษตร": "text-5xl",
-  "CUSAR": "text-5xl",
+  เกษตร: 'text-5xl',
+  CUSAR: 'text-5xl',
 }
 
 export const getAbbrNameSize = (abbr: string) => {
-  return ABBR_NAME_SIZE[abbr] ?? "text-5xl"
+  return ABBR_NAME_SIZE[abbr] ?? 'text-5xl'
 }
 
 export const CANVAS_ABBR_FONT_SIZE: Record<string, number> = {
   // EDU
-  "ครุ": 250,
-  "EDU": 250,
+  ครุ: 250,
+  EDU: 250,
 
   // PSY
-  "จิตวิทยา": 160,
-  "PSY": 250,
+  จิตวิทยา: 160,
+  PSY: 250,
 
   // DENT
-  "ทันตะ": 220,
-  "DENT": 220,
+  ทันตะ: 220,
+  DENT: 220,
 
   // LAW
-  "นิติ": 250,
-  "LAW": 250,
+  นิติ: 250,
+  LAW: 250,
 
   // COMMARTS
-  "นิเทศ": 250,
-  "COMMARTS": 120,
+  นิเทศ: 250,
+  COMMARTS: 120,
 
   // CBS
-  "บัญชี/บริหาร": 100,
-  "CBS": 250,
+  'บัญชี/บริหาร': 100,
+  CBS: 250,
 
   // MED
-  "แพทย์": 220,
-  "MED": 250,
+  แพทย์: 220,
+  MED: 250,
 
   // PHARM
-  "เภสัช": 220,
-  "PHARM": 160,
+  เภสัช: 220,
+  PHARM: 160,
 
   // POLSCI
-  "รัฐศาสตร์": 130,
-  "POLSCI": 160,
+  รัฐศาสตร์: 130,
+  POLSCI: 160,
 
   // SCI
-  "วิทย์": 250,
-  "SCI": 250,
+  วิทย์: 250,
+  SCI: 250,
 
   // SPSC
-  "วิทย์กีฬา": 160,
-  "SPSC": 220,
+  วิทย์กีฬา: 160,
+  SPSC: 220,
 
   // ENG
-  "วิศวะ": 250,
-  "ENG": 250,
+  วิศวะ: 250,
+  ENG: 250,
 
   // FAA
-  "ศิลปกรรม": 130,
-  "FAA": 250,
+  ศิลปกรรม: 130,
+  FAA: 250,
 
   // ECON
-  "เศรษฐศาสตร์": 100,
-  "ECON": 200,
+  เศรษฐศาสตร์: 100,
+  ECON: 200,
 
   // ARCH
-  "สถาปัตย์": 160,
-  "ARCH": 200,
+  สถาปัตย์: 160,
+  ARCH: 200,
 
   // AHS
-  "สหเวช": 200,
-  "AHS": 250,
+  สหเวช: 200,
+  AHS: 250,
 
   // VET
-  "สัตวแพทย์": 130,
-  "VET": 250,
+  สัตวแพทย์: 130,
+  VET: 250,
 
   // ARTS
-  "อักษร": 220,
-  "ARTS": 220,
+  อักษร: 220,
+  ARTS: 220,
 
   // BAScii
-  "BAScii": 190,
+  BAScii: 190,
 
   // CUSAR
-  "เกษตร": 200,
-  "CUSAR": 160,
+  เกษตร: 200,
+  CUSAR: 160,
 }
 
 export const getCanvasAbbrFontSize = (abbr: string) => {
@@ -170,168 +170,168 @@ export const getCanvasAbbrFontSize = (abbr: string) => {
 
 export const ABBR_NAME_SIZE_OVERALL: Record<string, string> = {
   // EDU
-  "ครุ": "text-4xl",
-  "EDU": "text-4xl",
+  ครุ: 'text-4xl',
+  EDU: 'text-4xl',
 
   // PSY
-  "จิตวิทยา": "text-xl",
-  "PSY": "text-4xl",
+  จิตวิทยา: 'text-xl',
+  PSY: 'text-4xl',
 
   // DENT
-  "ทันตะ": "text-4xl",
-  "DENT": "text-4xl",
+  ทันตะ: 'text-4xl',
+  DENT: 'text-4xl',
 
   // LAW
-  "นิติ": "text-4xl",
-  "LAW": "text-4xl",
+  นิติ: 'text-4xl',
+  LAW: 'text-4xl',
 
   // COMMARTS
-  "นิเทศ": "text-4xl",
-  "COMMARTS": "text-md",
+  นิเทศ: 'text-4xl',
+  COMMARTS: 'text-md',
 
   // CBS
-  "บัญชี/บริหาร": "text-xl",
-  "CBS": "text-4xl",
+  'บัญชี/บริหาร': 'text-xl',
+  CBS: 'text-4xl',
 
   // MED
-  "แพทย์": "text-4xl",
-  "MED": "text-4xl",
+  แพทย์: 'text-4xl',
+  MED: 'text-4xl',
 
   // PHARM
-  "เภสัช": "text-4xl",
-  "PHARM": "text-2xl",
+  เภสัช: 'text-4xl',
+  PHARM: 'text-2xl',
 
   // POLSCI
-  "รัฐศาสตร์": "text-xl",
-  "POLSCI": "text-2xl",
+  รัฐศาสตร์: 'text-xl',
+  POLSCI: 'text-2xl',
 
   // SCI
-  "วิทย์": "text-4xl",
-  "SCI": "text-4xl",
+  วิทย์: 'text-4xl',
+  SCI: 'text-4xl',
 
   // SPSC
-  "วิทย์กีฬา": "text-2xl",
-  "SPSC": "text-4xl",
+  วิทย์กีฬา: 'text-2xl',
+  SPSC: 'text-4xl',
 
   // ENG
-  "วิศวะ": "text-4xl",
-  "ENG": "text-4xl",
+  วิศวะ: 'text-4xl',
+  ENG: 'text-4xl',
 
   // FAA
-  "ศิลปกรรม": "text-xl",
-  "FAA": "text-4xl",
+  ศิลปกรรม: 'text-xl',
+  FAA: 'text-4xl',
 
   // ECON
-  "เศรษฐศาสตร์": "text-md",
-  "ECON": "text-4xl",
+  เศรษฐศาสตร์: 'text-md',
+  ECON: 'text-4xl',
 
   // ARCH
-  "สถาปัตย์": "text-xl",
-  "ARCH": "text-3xl",
+  สถาปัตย์: 'text-xl',
+  ARCH: 'text-3xl',
 
   // AHS
-  "สหเวช": "text-3xl",
-  "AHS": "text-4xl",
+  สหเวช: 'text-3xl',
+  AHS: 'text-4xl',
 
   // VET
-  "สัตวแพทย์": "text-xl",
-  "VET": "text-4xl",
+  สัตวแพทย์: 'text-xl',
+  VET: 'text-4xl',
 
   // ARTS
-  "อักษร": "text-4xl",
-  "ARTS": "text-4xl",
+  อักษร: 'text-4xl',
+  ARTS: 'text-4xl',
 
   // BAScii
-  "BAScii": "text-3xl",
+  BAScii: 'text-3xl',
 
   // CUSAR
-  "เกษตร": "text-3xl",
-  "CUSAR": "text-2xl",
+  เกษตร: 'text-3xl',
+  CUSAR: 'text-2xl',
 }
 
 export const getAbbrNameSizeOverall = (abbr: string) => {
-  return ABBR_NAME_SIZE_OVERALL[abbr.trim()] ?? "text-xl"
+  return ABBR_NAME_SIZE_OVERALL[abbr.trim()] ?? 'text-xl'
 }
 
 export const CANVAS_ABBR_SIZE_MINICARD: Record<string, number> = {
   // EDU
-  "ครุ": 120,
-  "EDU": 120,
+  ครุ: 120,
+  EDU: 120,
 
   // PSY
-  "จิตวิทยา": 95,
-  "PSY": 120,
+  จิตวิทยา: 95,
+  PSY: 120,
 
   // DENT
-  "ทันตะ": 120,
-  "DENT": 120,
+  ทันตะ: 120,
+  DENT: 120,
 
   // LAW
-  "นิติ": 120,
-  "LAW": 120,
+  นิติ: 120,
+  LAW: 120,
 
   // COMMARTS
-  "นิเทศ": 120,
-  "COMMARTS": 65,
+  นิเทศ: 120,
+  COMMARTS: 65,
 
   // CBS
-  "บัญชี/บริหาร": 70,
-  "CBS": 120,
+  'บัญชี/บริหาร': 70,
+  CBS: 120,
 
   // MED
-  "แพทย์": 120,
-  "MED": 120,
+  แพทย์: 120,
+  MED: 120,
 
   // PHARM
-  "เภสัช": 120,
-  "PHARM": 95,
+  เภสัช: 120,
+  PHARM: 95,
 
   // POLSCI
-  "รัฐศาสตร์": 85,
-  "POLSCI": 95,
+  รัฐศาสตร์: 85,
+  POLSCI: 95,
 
   // SCI
-  "วิทย์": 120,
-  "SCI": 120,
+  วิทย์: 120,
+  SCI: 120,
 
   // SPSC
-  "วิทย์กีฬา": 95,
-  "SPSC": 120,
+  วิทย์กีฬา: 95,
+  SPSC: 120,
 
   // ENG
-  "วิศวะ": 120,
-  "ENG": 120,
+  วิศวะ: 120,
+  ENG: 120,
 
   // FAA
-  "ศิลปกรรม": 85,
-  "FAA": 120,
+  ศิลปกรรม: 85,
+  FAA: 120,
 
   // ECON
-  "เศรษฐศาสตร์": 60,
-  "ECON": 120,
+  เศรษฐศาสตร์: 60,
+  ECON: 120,
 
   // ARCH
-  "สถาปัตย์": 95,
-  "ARCH": 120,
+  สถาปัตย์: 95,
+  ARCH: 120,
 
   // AHS
-  "สหเวช": 120,
-  "AHS": 120,
+  สหเวช: 120,
+  AHS: 120,
 
   // VET
-  "สัตวแพทย์": 80,
-  "VET": 120,
+  สัตวแพทย์: 80,
+  VET: 120,
 
   // ARTS
-  "อักษร": 120,
-  "ARTS": 120,
+  อักษร: 120,
+  ARTS: 120,
 
   // BAScii
-  "BAScii": 95,
+  BAScii: 95,
 
   // CUSAR
-  "เกษตร": 95,
-  "CUSAR": 95,
+  เกษตร: 95,
+  CUSAR: 95,
 }
 
 export const getMiniCardFacultyFontSize = (abbr: string) => {

@@ -1,139 +1,123 @@
-import { useTranslation } from "react-i18next";
-import { Button } from "../ui/button";
-import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from 'react-i18next'
+import { Button } from '../ui/button'
+import { useNavigate } from '@tanstack/react-router'
 
 export default function LandingSectionTwo() {
-  const { t } = useTranslation();
-  const isRoleStudent = true;
-  const navigate = useNavigate();
+  const { t } = useTranslation()
+  const isRoleStudent = true
+  const navigate = useNavigate()
 
   const handleNavigation = (path: string) => {
     navigate({ to: path })
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="relative bg-gradient-pink w-full overflow-hidden">
+    <div className="flex w-full flex-col">
+      <div className="bg-gradient-pink relative w-full overflow-hidden">
         {/* Container with aspect ratio */}
-        <div className="flex justify-center items-center mx-auto px-5 w-full max-w-sm">
-          <div className="relative mx-auto w-full aspect-324/376">
+        <div className="mx-auto flex w-full max-w-sm items-center justify-center px-5">
+          <div className="relative mx-auto aspect-324/376 w-full">
             {/* Start Pin */}
             <button
-              className="top-[2%] left-[39%] z-10 absolute"
+              className="absolute top-[2%] left-[39%] z-10"
               aria-label="Start"
             >
-              <img
-                src="/landing/pin.svg"
-                alt=""
-                className="w-8.75 h-auto"
-              />
+              <img src="/landing/pin.svg" alt="" className="h-auto w-8.75" />
             </button>
 
             {/* Faculties */}
             <button
-              className="top-[6%] left-[2%] z-10 absolute flex flex-col justify-center items-center gap-1"
+              className="absolute top-[6%] left-[2%] z-10 flex flex-col items-center justify-center gap-1"
               aria-label="Faculties"
               onClick={() => handleNavigation('/info/faculty')}
             >
-              <img
-                src="/landing/trees.svg"
-                alt=""
-                className="w-15.25 h-auto"
-              />
-              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
+              <img src="/landing/trees.svg" alt="" className="h-auto w-15.25" />
+              <span className="text-center text-base font-bold whitespace-nowrap text-white text-shadow-lg sm:text-lg md:text-xl">
                 {t('routes.landingGroup.event.faculty')}
               </span>
             </button>
 
             {/* Event */}
             <button
-              className="top-[11%] right-[10%] z-10 absolute flex flex-col justify-center items-center gap-1"
+              className="absolute top-[11%] right-[10%] z-10 flex flex-col items-center justify-center gap-1"
               aria-label="Flowers"
               onClick={() => handleNavigation('/info/event')}
             >
               <img
                 src="/landing/flowers.svg"
                 alt=""
-                className="w-19.5 h-auto"
+                className="h-auto w-19.5"
               />
-              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
+              <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
                 {t('routes.landingGroup.event.mainEvent')}
               </span>
             </button>
 
             {/* Workshop */}
             <button
-              className="top-[34%] left-[37%] z-10 absolute flex flex-col justify-center items-center -translate-x-1/2"
+              className="absolute top-[34%] left-[37%] z-10 flex -translate-x-1/2 flex-col items-center justify-center"
               aria-label="Workshop"
               onClick={() => handleNavigation('/info/workshop')}
             >
-              <img
-                src="/landing/rocks.svg"
-                alt=""
-                className="w-24.5 h-auto"
-              />
-              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
+              <img src="/landing/rocks.svg" alt="" className="h-auto w-24.5" />
+              <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
                 {t('routes.landingGroup.event.facultyWorkshop')}
               </span>
             </button>
 
             {/* Souvenir */}
             <button
-              className="top-[65%] left-[4%] z-10 absolute flex flex-col justify-center items-center"
+              className="absolute top-[65%] left-[4%] z-10 flex flex-col items-center justify-center"
               aria-label="Souvenir"
               onClick={() => handleNavigation('/info/merchandise')}
             >
-              <img
-                src="/landing/bush.svg"
-                alt=""
-                className="w-24.25 h-auto"
-              />
-              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
+              <img src="/landing/bush.svg" alt="" className="h-auto w-24.25" />
+              <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
                 {t('routes.landingGroup.event.merchandise')}
               </span>
             </button>
 
             {/* Missing Pieces */}
-            {
-              isRoleStudent ? (
-                <button
-                  className="top-[53%] left-[56%] z-10 absolute flex flex-col justify-center items-center gap-1"
-                  aria-label="Missing Pieces"
-                  onClick={() => handleNavigation('/game/piece')}
-                >
-                  <img
-                    src="/landing/jigsaws.svg"
-                    alt=""
-                    className="w-18 h-auto"
-                  />
-                  <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
-                    {t('routes.landingGroup.event.missingPiece')}
-                  </span>
-                </button>
-              ) : (
+            {isRoleStudent ? (
+              <button
+                className="absolute top-[53%] left-[56%] z-10 flex flex-col items-center justify-center gap-1"
+                aria-label="Missing Pieces"
+                onClick={() => handleNavigation('/game/piece')}
+              >
                 <img
-                  src="/landing/mountain.svg"
+                  src="/landing/jigsaws.svg"
                   alt=""
-                  className="top-[44%] -right-[10%] z-10 absolute w-38 h-auto"
+                  className="h-auto w-18"
                 />
-              )
-            }
+                <span className="text-center text-base font-bold whitespace-nowrap text-white text-shadow-lg sm:text-lg md:text-xl">
+                  {t('routes.landingGroup.event.missingPiece')}
+                </span>
+              </button>
+            ) : (
+              <img
+                src="/landing/mountain.svg"
+                alt=""
+                className="absolute top-[44%] -right-[10%] z-10 h-auto w-38"
+              />
+            )}
 
             {/* Road Background */}
             <img
               src="/landing/road.svg"
               alt=""
-              className="w-full h-full object-contain"
+              className="h-full w-full object-contain"
             />
           </div>
         </div>
       </div>
 
-      <div className='flex justify-center items-center bg-main-pink bg-pink py-8 w-full'>
+      <div className="bg-main-pink bg-pink flex w-full items-center justify-center py-8">
         <Button
-          className='bg-main-beige text-main-pink'
+          className="bg-main-beige text-main-pink"
           onClick={() => handleNavigation('/agenda')}
-        >{t('routes.landingGroup.buttonGroup.agenda')}</Button>
+        >
+          {t('routes.landingGroup.buttonGroup.agenda')}
+        </Button>
       </div>
     </div>
   )

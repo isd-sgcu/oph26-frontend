@@ -98,9 +98,9 @@ const GameFooter = () => {
       </footer>
 
       {openSharePopup && (
-        <SharePopup 
-          open={openSharePopup} 
-          onClose={() => setOpenSharePopup(false)} 
+        <SharePopup
+          open={openSharePopup}
+          onClose={() => setOpenSharePopup(false)}
         />
       )}
 
