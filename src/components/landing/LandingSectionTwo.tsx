@@ -2,13 +2,14 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
 import { useNavigate } from '@tanstack/react-router'
 import { useUser } from '@/contexts/UserContext'
+import clsx from 'clsx'
 
 export default function LandingSectionTwo() {
   const { t } = useTranslation()
-  const isRoleStudent = true
   const navigate = useNavigate()
   const userContext = useUser()
   const role = userContext?.role
+  const isRoleStudent = role === 'attendee'
 
   const handleNavigation = (path: string) => {
     navigate({ to: path })
@@ -86,13 +87,14 @@ export default function LandingSectionTwo() {
                 className="top-[53%] left-[56%] z-10 absolute flex flex-col justify-center items-center gap-1"
                 aria-label="Missing Pieces"
                 onClick={() => handleNavigation('/game/piece')}
+                disabled={role === undefined}
               >
                 <img
                   src="/landing/jigsaws.svg"
                   alt=""
                   className="w-18 h-auto"
                 />
-                <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
+                <span className={clsx("text-shadow-lg font-bold text-base sm:text-lg md:text-xl text-center whitespace-nowrap", role === undefined ? "text-white/60" : "text-white")}>
                   {t('routes.landingGroup.event.missingPiece')}
                 </span>
               </button>

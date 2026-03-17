@@ -12,19 +12,19 @@ export default function LandingSectionOne() {
   const { t } = useTranslation()
 
   return (
-    <div className="relative h-screen max-h-fit w-full">
+    <div className="relative w-full h-screen max-h-fit">
       <img
         src="/background/background-2.webp"
         alt=""
-        className="absolute inset-0 z-0 h-full w-full object-cover object-bottom"
+        className="z-0 absolute inset-0 w-full h-full object-bottom object-cover"
         loading="eager"
       />
 
       {/* Content */}
-      <div className="z-30 flex flex-col items-center justify-start gap-9.5 py-20">
+      <div className="z-30 flex flex-col justify-start items-center gap-9.5 py-20">
         {/* Logo */}
-        <div className="z-30 flex w-full flex-col items-center justify-center">
-          <div className="relative w-full drop-shadow-lg">
+        <div className="z-30 flex flex-col justify-center items-center w-full">
+          <div className="relative drop-shadow-lg w-full">
             <img
               src="/logo/cu-journey.webp"
               alt="CU Journey"
@@ -32,35 +32,38 @@ export default function LandingSectionOne() {
               loading="eager"
             />
           </div>
-          <p className="-mt-4 rounded-full bg-black/30 px-3 py-1 text-[15px] font-semibold text-white">
+          <p className="bg-black/30 -mt-4 px-3 py-1 rounded-full font-semibold text-[15px] text-white">
             {t('routes.landingGroup.date')}
           </p>
         </div>
 
         {/* Detail */}
-        <div className="z-30 flex w-full flex-col items-center justify-center gap-8">
-          {role == undefined && (
-            <div className="flex items-center justify-center gap-4">
-              <Button
-                size={'md'}
-                className="bg-main-beige text-main-pink"
-                onClick={() => {
-                  navigate({ to: '/auth/login' })
-                }}
-              >
-                {t('routes.landingGroup.buttonGroup.register')}
-              </Button>
-              <Button
-                onClick={() => {
-                  navigate({ to: '/auth/login' })
-                }}
-              >
-                {t('routes.landingGroup.buttonGroup.login')}
-              </Button>
+        <div className="z-30 flex flex-col justify-center items-center gap-8 w-full">
+          {role == undefined ? (
+            <div className="flex justify-center items-center gap-4 min-h-1">
+              <>
+                <Button
+                  size={'md'}
+                  className="bg-main-beige text-main-pink"
+                  onClick={() => {
+                    navigate({ to: '/auth/login' })
+                  }}
+                >
+                  {t('routes.landingGroup.buttonGroup.register')}
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate({ to: '/auth/login' })
+                  }}
+                >
+                  {t('routes.landingGroup.buttonGroup.login')}
+                </Button>
+              </>
             </div>
+          ) : (
+            <div className='w-full h-12' />
           )}
-
-          <div className="flex w-full flex-col items-center justify-center gap-4 px-5">
+          <div className="flex flex-col justify-center items-center gap-4 px-5 w-full">
             <CountdownTimer />
             <CarouselLanding />
           </div>

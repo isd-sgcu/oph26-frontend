@@ -173,7 +173,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-[(--width-page)] items-center justify-between p-4`}
+        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (

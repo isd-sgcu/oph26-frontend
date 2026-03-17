@@ -16,6 +16,7 @@
         "merchandise": "สินค้าที่ระลึก",
         "account": "บัญชีของฉัน",
         "register": "ลงทะเบียน",
+        "scan": "Scan QR",
         "login": "เข้าสู่ระบบ",
         "logout": "ออกจากระบบ"
       }
@@ -201,7 +202,7 @@
       "buttonGroup": {
         "register": "ลงทะเบียน",
         "login": "เข้าสู่ระบบ",
-        "ticket": "Ticket"
+        "ticket": "CU Ticket"
       },
       "event": {
         "faculty": "คณะ",
