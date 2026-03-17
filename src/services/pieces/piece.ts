@@ -1,5 +1,4 @@
 import { FacultyType } from '@/components/const/faculty'
-import { env } from '@/env'
 import { Axios } from '@/lib/axios'
 
 export type CollectedPiece = {
@@ -18,7 +17,7 @@ export type MyPiece = {
 }
 
 export const getMyPiece = async (): Promise<MyPiece> => {
-  const { data } = await Axios.get(`${env.VITE_PUBLIC_API_URL}/api/pieces/me`)
+  const { data } = await Axios.get(`/pieces/me`)
   return data
 }
 
@@ -42,7 +41,7 @@ export type CollectedPiecesResponse = {
 export const getCollectedPieces =
   async (): Promise<CollectedPiecesResponse> => {
     const { data } = await Axios.get(
-      `${env.VITE_PUBLIC_API_URL}/api/pieces/me/collected`
+      `/pieces/me/collected`
     )
     return data
   }
@@ -56,7 +55,7 @@ export const collectFriendPiece = async (
   piece_code: string
 ): Promise<CollectedPiece> => {
   const { data } = await Axios.post(
-    `${env.VITE_PUBLIC_API_URL}/api/pieces/me/collected`,
+    `/pieces/me/collected`,
     {
       piece_code,
     }
