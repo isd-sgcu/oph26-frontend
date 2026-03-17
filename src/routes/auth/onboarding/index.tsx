@@ -29,25 +29,48 @@ export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
 })
 
-const acknowledgedOptions = [
-  'Facebook',
-  'Instagram',
-  'X',
-  'Tiktok',
-  'Camphub',
-  'ป้ายโฆษณาต่าง ๆ',
-  'ผู้ปกครอง/คนรู้จัก',
-  'อื่น ๆ',
+type Option = {
+  value: string
+  label: string
+}
+
+const acknowledgedOptions: Option[] = [
+  { value: 'Facebook', label: 'Facebook' },
+  { value: 'Instagram', label: 'Instagram' },
+  { value: 'X', label: 'X' },
+  { value: 'Tiktok', label: 'Tiktok' },
+  { value: 'Camphub', label: 'Camphub' },
+  { value: 'Billboard', label: 'ป้ายโฆษณาต่าง ๆ' },
+  { value: 'WordOfMouth', label: 'ผู้ปกครอง/คนรู้จัก' },
+  { value: 'other', label: 'อื่น ๆ' },
 ]
-const objectivesOptions = [
-  'เพื่อเข้าร่วมกิจกรรมและเวิร์กชอปของคณะ/สาขาที่สนใจ',
-  'เพื่อศึกษารายละเอียดหลักสูตร การเรียนการสอน และเส้นทางอาชีพ',
-  'เพื่อค้นหาตนเองและสำรวจความสนใจของตนเอง\n',
-  'เพื่อเตรียมความพร้อมก่อนตัดสินใจเลือกคณะหรือมหาวิทยาลัย',
-  'เพื่อสอบถามข้อมูลการสมัครเรียน ทุนการศึกษา และเกณฑ์การคัดเลือก',
-  'เพื่อเยี่ยมชมบรรยากาศภายในมหาวิทยาลัยและสิ่งอำนวยความสะดวก',
-  'เพื่อพูดคุยกับอาจารย์ รุ่นพี่ หรือศิษย์เก่าเกี่ยวกับประสบการณ์การเรียน',
-  'อื่น ๆ',
+
+const objectivesOptions: Option[] = [
+  {
+    value: 'learnaboutfaculties',
+    label: 'ศึกษารายละเอียดหลักสูตร การเรียนการสอน และเส้นทางอาชีพของคณะต่าง ๆ',
+  },
+  {
+    value: 'findmyself',
+    label: 'ค้นหาตนเองและสำรวจความสนใจของตนเอง',
+  },
+  {
+    value: 'preparefordecision',
+    label: 'เตรียมความพร้อมก่อนตัดสินใจเลือกคณะหรือมหาวิทยาลัย',
+  },
+  {
+    value: 'askaboutadmission',
+    label: 'สอบถามข้อมูลการสมัครเรียน ทุนการศึกษา และเกณฑ์การคัดเลือก',
+  },
+  {
+    value: 'explorechula',
+    label: 'เพื่อเยี่ยมชมบรรยากาศภายในมหาวิทยาลัยและสิ่งอำนวยความสะดวก',
+  },
+  {
+    value: 'talktoteachers',
+    label: 'พูดคุยกับอาจารย์ รุ่นพี่ หรือศิษย์เก่าเกี่ยวกับประสบการณ์การเรียน',
+  },
+  { value: 'other', label: 'อื่น ๆ' },
 ]
 
 const enumValueToKey = Object.fromEntries(
@@ -60,23 +83,24 @@ const facultyThToCode: Record<string, string> = Object.fromEntries(
   faculties.map((f) => [f.th, enumValueToKey[f.facultyEnum]])
 )
 
-function calculateAge(birthDate: string): number {
-  const today = new Date()
-  const birth = new Date(birthDate)
-  let age = today.getFullYear() - birth.getFullYear()
-  const m = today.getMonth() - birth.getMonth()
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--
-  return age
-}
-
-function statusToAttendeeType(status: string): string {
-  switch (status) {
-    case 'student':
-      return 'highschool'
-    case 'parent':
-      return 'parent'
-    case 'educational-personnel':
-      return 'educationstaff'
+const convertStudyLevel = (level: string) => {
+  switch (level) {
+    case 'ประถมศึกษา':
+      return 'elementary'
+    case 'มัธยมศึกษาตอนต้น':
+      return 'matthayom_ton'
+    case 'มัธยมศึกษาตอนปลาย':
+      return 'matthayom_plai'
+    case 'ปวช.':
+      return 'vocational'
+    case 'ปวส.':
+      return 'high_vocational'
+    case 'ปริญญาตรี':
+      return 'undergraduate'
+    case 'ปริญญาโท':
+      return 'master'
+    case 'ปริญญาเอก':
+      return 'doctor'
     default:
       return 'other'
   }
@@ -86,7 +110,7 @@ type IRegistrationForm = {
   firstName: string
   lastName: string
   birthDate: string
-  status: 'student' | 'parent' | 'educational-personnel' | 'other'
+  status: 'student' | 'parent' | 'educationstaff' | 'other'
   email: string
   province: string
   district: string
@@ -95,15 +119,18 @@ type IRegistrationForm = {
   objectives: number[]
   transportation: string
 
-  level?: string
-  school?: string
+  level: string
+  school: string
 
-  interestedFaculties0?: string
-  interestedFaculties1?: string
-  interestedFaculties2?: string
-  interestedFaculties3?: string
+  interestedFaculties0: string
+  interestedFaculties1: string
+  interestedFaculties2: string
+  interestedFaculties3: string
 
   acceptedTerms: boolean
+
+  acknowledgedOther: string
+  objectivesOther: string
 }
 
 function getEmailFromToken(): string {
@@ -204,22 +231,31 @@ function RouteComponent() {
       .map((f) => facultyThToCode[f!])
       .filter(Boolean)
 
-    const newsSourceSelected = data.acknowledged.map(
-      (i) => acknowledgedOptions[i]
-    )
-    const objectiveSelected = data.objectives.map((i) => objectivesOptions[i])
+    const newsSourceSelected = data.acknowledged
+      .map((i) => acknowledgedOptions[i])
+      .map((option) => option.value)
+
+    const objectiveSelected = data.objectives
+      .map((i) => objectivesOptions[i])
+      .map((option) => option.value)
+
+    console.log(objectiveSelected)
 
     createAttendeeMutation.mutate({
-      age: calculateAge(data.birthDate),
-      attendee_type: statusToAttendeeType(data.status),
       firstname: data.firstName,
       surname: data.lastName,
+      attendee_type: data.status,
+      date_of_birth: data.birthDate,
       province: data.province,
-      study_level: data.level ?? undefined,
-      school_name: data.school ?? undefined,
+      district: data.district,
+      study_level: convertStudyLevel(data.level),
+      school_name: data.school,
       news_sources_selected: newsSourceSelected,
-      interested_faculty: interestedFaculty,
+      news_sources_other: data.acknowledgedOther,
       objective_selected: objectiveSelected,
+      objective_other: data.objectivesOther,
+      interested_faculty: interestedFaculty,
+      transportation_method: data.transportation,
     })
   }
 
@@ -239,7 +275,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+    <section className="bg-main-light-pink relative flex w-full flex-col">
       <div className="pt-6">
         <h1 className="px-4 text-4xl font-bold text-white text-shadow-md">
           ลงทะเบียน
@@ -265,6 +301,7 @@ function RouteComponent() {
           <div className="mt-12 mb-8 flex w-full flex-row justify-center gap-6">
             {currentFormPage !== 1 && (
               <Button
+                type="button"
                 size="sm"
                 className="bg-gradient-beige text-main-pink"
                 onClick={prevPage}
@@ -274,6 +311,7 @@ function RouteComponent() {
             )}
             {currentFormPage !== 5 && (
               <Button
+                type="button"
                 size="sm"
                 className="bg-gradient-purple"
                 onClick={nextPage}
@@ -376,7 +414,7 @@ const ProfileForm = () => {
                     <SelectContent>
                       <SelectItem value="student">นักเรียน</SelectItem>
                       <SelectItem value="parent">ผู้ปกครอง</SelectItem>
-                      <SelectItem value="educational-personnel">
+                      <SelectItem value="educationstaff">
                         บุคลากรทางการศึกษา
                       </SelectItem>
                       <SelectItem value="other">อื่น ๆ</SelectItem>
@@ -461,6 +499,7 @@ const ProfileForm = () => {
                       <SelectValue placeholder="เลือกระดับชั้น" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="ประถมศึกษา">ประถมศึกษา</SelectItem>
                       <SelectItem value="มัธยมศึกษาตอนต้น">
                         มัธยมศึกษาตอนต้น
                       </SelectItem>
@@ -469,6 +508,10 @@ const ProfileForm = () => {
                       </SelectItem>
                       <SelectItem value="ปวช.">ปวช.</SelectItem>
                       <SelectItem value="ปวส.">ปวส.</SelectItem>
+                      <SelectItem value="ปริญญาตรี">ปริญญาตรี</SelectItem>
+                      <SelectItem value="ปริญญาโท">ปริญญาโท</SelectItem>
+                      <SelectItem value="ปริญญาเอก">ปริญญาเอก</SelectItem>
+                      <SelectItem value="อื่น ๆ">อื่น ๆ</SelectItem>
                     </SelectContent>
                   </Select>
                 )}
@@ -583,8 +626,20 @@ const FacultiesForm = () => {
 const SurveyForm = () => {
   const {
     control,
+    register,
     formState: { errors },
   } = useFormContext<IRegistrationForm>()
+
+  const acknowledgedOtherSelected = useWatch({
+    control,
+    name: 'acknowledged',
+  })?.includes(acknowledgedOptions.length - 1)
+
+  const objectivesOtherSelected = useWatch({
+    control,
+    name: 'objectives',
+  })?.includes(objectivesOptions.length - 1)
+
   return (
     <FormCard>
       <div>
@@ -616,13 +671,21 @@ const SurveyForm = () => {
                   htmlFor={`acknowledged-${index}`}
                   className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {option}
+                  {option.label}
                 </label>
               </div>
             ))}
           </div>
         )}
       />
+      {acknowledgedOtherSelected && (
+        <Input
+          placeholder="โปรดระบุช่องทางอื่น ๆ"
+          {...register('acknowledgedOther')}
+          className="mt-2"
+        />
+      )}
+
       <div className="mt-2">
         <p className="text-main-pink text-lg font-semibold">
           จุดประสงค์ในการเข้าร่วม Open House*
@@ -652,13 +715,21 @@ const SurveyForm = () => {
                   htmlFor={`objectives-${index}`}
                   className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {option}
+                  {option.label}
                 </label>
               </div>
             ))}
           </div>
         )}
       />
+      {objectivesOtherSelected && (
+        <Input
+          placeholder="โปรดระบุจุดประสงค์อื่น ๆ"
+          {...register('objectivesOther')}
+          className="mt-2"
+        />
+      )}
+
       <div className="mt-2">
         <p className="text-xs font-semibold">
           ท่านเดินทางมา CU Open House 2026 อย่างไร

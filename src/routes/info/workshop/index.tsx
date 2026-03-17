@@ -1,4 +1,4 @@
-import { ALL_FACULTIES } from '@/components/const/faculty'
+import { ALL_FACULTIES, FacultyType } from '@/components/const/faculty'
 import { WORKSHOP_DATA } from '@/components/const/workshop'
 import { FlatIcon } from '@/components/FlatIcon'
 import WorkshopCard from '@/components/info/workshop/WorkshopCard'
@@ -17,15 +17,19 @@ import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/info/workshop/')({
   component: RouteComponent,
+  validateSearch: (search: Record<string, FacultyType | 'all'>) => ({
+    faculty: search['faculty'] ?? 'all',
+  }),
 })
 
 function RouteComponent() {
   const { i18n, t } = useTranslation()
+  const faculty = Route.useSearch() as { faculty: string }
+  const [selectedFaculty, setSelectedFaculty] = useState<string>(
+    faculty.faculty || 'all'
+  )
   const [filteredWorkshops, setFilteredWorkshops] = useState(WORKSHOP_DATA)
   const [searchInput, setSearchInput] = useState('')
-  const [selectedFaculty, setSelectedFaculty] = useState<string | undefined>(
-    undefined
-  )
 
   useEffect(() => {
     let filtered = WORKSHOP_DATA

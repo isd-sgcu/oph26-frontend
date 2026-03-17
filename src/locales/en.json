@@ -120,7 +120,12 @@
       "facultyGroup": {
         "title": "Faculties",
         "inputPlaceholder": "Search for faculties...",
-        "noData": "No faculties found..."
+        "noData": "No faculties found...",
+        "workshopButton": "Workshops",
+        "facultyButton": "View Faculty",
+        "location": "Location: ",
+        "major": "Majors",
+        "field": "Fields"
       },
       "mapGroup": {},
       "merchandiseGroup": {},

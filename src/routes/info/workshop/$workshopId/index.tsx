@@ -50,7 +50,10 @@ function RouteComponent() {
               size="md"
               expanded
               onClick={() => {
-                router.navigate({ to: '/info/workshop' })
+                router.navigate({
+                  to: '/info/workshop',
+                  search: { faculty: 'all' },
+                })
               }}
             >
               <span className="text-white">
@@ -70,7 +73,10 @@ function RouteComponent() {
         <h1 className="relative text-center text-3xl font-bold text-white text-shadow-md">
           <span
             onClick={() => {
-              router.navigate({ to: '/info/workshop' })
+              router.navigate({
+                to: '/info/workshop',
+                search: { faculty: 'all' },
+              })
             }}
             className="absolute left-0 -translate-y-0.5 cursor-pointer text-4xl font-semibold text-white"
           >

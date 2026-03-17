@@ -207,6 +207,27 @@ export interface Major {
   fieldDescription: string
 }
 
+export const FACULTY_MAP: Record<FacultyType, FacultyOption> =
+  Object.fromEntries(FACULTIES.map((f) => [f.value, f])) as Record<
+    FacultyType,
+    FacultyOption
+  >
+
+export interface Faculty {
+  id: FacultyType
+  name: string
+  majors: Major[]
+  imagePath: string
+  location: string
+}
+
+export interface Major {
+  id: string
+  name: string
+  description: string
+  fieldDescription: string
+}
+
 export const FACULTY_DATA: Faculty[] = [
   // คณะครุศาสตร์
   {
@@ -1188,9 +1209,3 @@ export const FACULTY_DATA: Faculty[] = [
     imagePath: '/info/faculty/dorm.webp',
   },
 ]
-
-export const FACULTY_MAP: Record<FacultyType, FacultyOption> =
-  Object.fromEntries(FACULTIES.map((f) => [f.value, f])) as Record<
-    FacultyType,
-    FacultyOption
-  >

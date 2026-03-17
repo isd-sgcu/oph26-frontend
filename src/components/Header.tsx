@@ -3,7 +3,8 @@ import { FlatIcon } from './FlatIcon'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useRouter } from '@tanstack/react-router'
 import { Button } from './ui/button'
-import CustomModal from './CustomModal'
+import { logout } from '@/services/auth/auth'
+import { useUser } from '@/contexts/UserContext'
 
 type NavItem = {
   title: string // Note: Don't forget to concern about i18n
@@ -15,10 +16,12 @@ export enum HeaderEnum {
   MAINPINK = 'main-pink',
   MAINLIGHTPINK = 'main-light-pink',
   TRANSPARENT = 'transparent',
+  MAINBEIGE = 'main-beige',
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
 const PATHNAME_TRANSPARENT = ['/', '/auth/profile/ticket', '/auth/qr']
+const PATHNAME_MAINBEIGE = ['/info/faculty/']
 
 const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.MAINPINK]:
@@ -26,9 +29,35 @@ const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.MAINLIGHTPINK]:
     'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
   [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
+  [HeaderEnum.MAINBEIGE]: 'bg-main-beige relative',
 }
 
-const navItems: NavItem[] = [
+const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
+  { title: 'home', to: '/', icon: 'fi-rr-home' },
+  { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
+  {
+    title: 'facultyWorkshop',
+    icon: 'fi-rr-playing-cards',
+    to: '/info/workshop',
+  },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
+  {
+    title: 'merchandise',
+    icon: 'fi-rr-gift',
+    to: '/info/merchandise',
+  },
+]
+
+const AUTHENTICATED_ATTENDEE_NAV_ITEMS: NavItem[] = [
   { title: 'home', to: '/', icon: 'fi-rr-home' },
   { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
@@ -56,10 +85,35 @@ const navItems: NavItem[] = [
     icon: 'fi-rr-gift',
     to: '/info/merchandise',
   },
+]
+
+const AUTHENTICATED_STAFF_NAV_ITEMS: NavItem[] = [
+  { title: 'home', to: '/', icon: 'fi-rr-home' },
+  { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
-    title: 'account',
-    icon: 'fi-rr-user',
-    to: '/auth/profile',
+    title: 'facultyWorkshop',
+    icon: 'fi-rr-playing-cards',
+    to: '/info/workshop',
+  },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
+  {
+    title: 'merchandise',
+    icon: 'fi-rr-gift',
+    to: '/info/merchandise',
+  },
+  {
+    title: 'scan',
+    icon: 'fi-rr-expand',
+    to: '/auth/qr',
   },
 ]
 
@@ -67,10 +121,11 @@ export default function Header() {
   const { i18n, t } = useTranslation()
   const router = useRouter()
   const location = useLocation()
+  const userContext = useUser()
+  const role = userContext?.role
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [openCustomModal, setOpenCustomModal] = useState(false)
   const [toColor, setToColor] = useState(HeaderEnum.MAINLIGHTPINK)
 
   useEffect(() => setMounted(true), [])
@@ -81,6 +136,8 @@ export default function Header() {
       setToColor(HeaderEnum.MAINPINK)
     } else if (PATHNAME_TRANSPARENT.includes(pathname)) {
       setToColor(HeaderEnum.TRANSPARENT)
+    } else if (PATHNAME_MAINBEIGE.some((path) => pathname.startsWith(path))) {
+      setToColor(HeaderEnum.MAINBEIGE)
     } else {
       setToColor(HeaderEnum.MAINLIGHTPINK)
     }
@@ -110,6 +167,13 @@ export default function Header() {
       setOpenSidebar(false)
     }, 300)
   }
+
+  const selectedNavItems =
+    role == 'attendee'
+      ? AUTHENTICATED_ATTENDEE_NAV_ITEMS
+      : role == 'staff'
+        ? AUTHENTICATED_STAFF_NAV_ITEMS
+        : UNAUTHENTICATED_NAV_ITEMS
 
   return (
     <>
@@ -196,7 +260,7 @@ export default function Header() {
 
               {/* Navigation */}
               <nav className="mb-10 flex flex-col gap-10">
-                {navItems.map((item) => (
+                {selectedNavItems.map((item) => (
                   <div
                     key={item.title}
                     onClick={() => {
@@ -219,60 +283,48 @@ export default function Header() {
 
               {/* Buttons */}
               <div className="mt-auto flex flex-col items-center justify-center gap-4">
-                <Button
-                  size="sm"
-                  className="bg-main-beige"
-                  onClick={() => {
-                    setOpenSidebar(false)
-                    router.navigate({ to: '/auth/login' })
-                  }}
-                >
-                  <span className="text-main-pink">
-                    {t('components.header.sidebar.register')}
-                  </span>
-                </Button>
-
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    setOpenSidebar(false)
-                    router.navigate({ to: '/auth/login' })
-                  }}
-                >
-                  {t('components.header.sidebar.login')}
-                </Button>
-
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    setOpenSidebar(false)
-                    setOpenCustomModal(true)
-                  }}
-                >
-                  {t('components.header.sidebar.logout')}
-                </Button>
+                {role == undefined ? (
+                  <>
+                    <Button
+                      size="sm"
+                      className="bg-main-beige"
+                      onClick={() => {
+                        setOpenSidebar(false)
+                        router.navigate({ to: '/auth/login' })
+                      }}
+                    >
+                      <span className="text-main-pink">
+                        {t('components.header.sidebar.register')}
+                      </span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        setOpenSidebar(false)
+                        router.navigate({ to: '/auth/login' })
+                      }}
+                    >
+                      {t('components.header.sidebar.login')}
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    size="sm"
+                    onClick={async () => {
+                      setOpenSidebar(false)
+                      await logout()
+                      router.navigate({ to: '/' })
+                      window.location.reload()
+                    }}
+                  >
+                    {t('components.header.sidebar.logout')}
+                  </Button>
+                )}
               </div>
             </div>
           </>
         )}
       </header>
-
-      {openCustomModal && (
-        <CustomModal
-          open={openCustomModal}
-          onOpenChange={setOpenCustomModal}
-          iconName="fi-rr-map-marker"
-          title="Title Title Title Title Title Title"
-          subtitle="Subtitle Subtitle Subtitle Subtitle Subtitle Subtitle Subtitle"
-          body="Body Body Body Body Body Body Body Body Body Body"
-          detail="Detail Detail Detail Detail Detail Detail Detail DetailDetail Detail Detail Detail Detail"
-          buttonText="Click"
-          onClick={() => {
-            alert('Log out')
-            setOpenCustomModal(false)
-          }}
-        />
-      )}
     </>
   )
 }
