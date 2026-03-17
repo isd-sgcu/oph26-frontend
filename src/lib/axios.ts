@@ -1,7 +1,8 @@
+import { env } from '@/env'
 import axios from 'axios'
 
 export const Axios = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? '',
+  baseURL: env.VITE_PUBLIC_API_URL,
   timeout: 10000,
   withCredentials: true,
   headers: {
