@@ -28,19 +28,11 @@ function RouteComponent() {
     async function fetchMyPiece() {
       try {
         const myPiece = await getMyPiece()
-        if (
-          !myPiece ||
-          myPiece.faculty === null ||
-          myPiece.piece_code === null
-        ) {
-          router.navigate({ to: '/auth/login' })
-          return
-        }
+        console.log('MyPiece: ', myPiece)
         setMyFaculty(myPiece.faculty)
         setMyCode(myPiece.piece_code)
         setExpiredDate(myPiece.expire_date)
       } catch (error) {
-        router.navigate({ to: '/auth/login' })
         return
       }
     }

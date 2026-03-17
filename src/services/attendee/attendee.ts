@@ -21,7 +21,6 @@ export type CreateAttendeeRequest = {
 export const createAttendee = async (
   payload: CreateAttendeeRequest
 ): Promise<void> => {
-  console.log('Payload: ', payload)
   await Axios.post(`/attendees/`, payload)
 }
 

@@ -54,7 +54,32 @@ const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
   },
 ]
 
-const AUTHENTICATED_ATTENDEE_NAV_ITEMS: NavItem[] = [
+const AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS: NavItem[] = [
+  { title: 'home', to: '/', icon: 'fi-rr-home' },
+  { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
+  {
+    title: 'facultyWorkshop',
+    icon: 'fi-rr-playing-cards',
+    to: '/info/workshop',
+  },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
+  {
+    title: 'merchandise',
+    icon: 'fi-rr-gift',
+    to: '/info/merchandise',
+  },
+]
+
+const AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS: NavItem[] = [
   { title: 'home', to: '/', icon: 'fi-rr-home' },
   { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
@@ -120,6 +145,7 @@ export default function Header() {
   const location = useLocation()
   const userContext = useUser()
   const role = userContext?.role
+  const attendee = userContext?.attendee
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -164,11 +190,13 @@ export default function Header() {
   }
 
   const selectedNavItems =
-    role == 'attendee'
-      ? AUTHENTICATED_ATTENDEE_NAV_ITEMS
-      : role == 'staff'
-        ? AUTHENTICATED_STAFF_NAV_ITEMS
-        : UNAUTHENTICATED_NAV_ITEMS
+    role == 'attendee' && attendee?.attendee_type == 'student'
+      ? AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS
+      : role == 'attendee'
+        ? AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS
+        : role == 'staff'
+          ? AUTHENTICATED_STAFF_NAV_ITEMS
+          : UNAUTHENTICATED_NAV_ITEMS
 
   return (
     <>

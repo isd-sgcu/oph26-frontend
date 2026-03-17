@@ -3,22 +3,26 @@ import { Axios } from '@/lib/axios'
 
 export type CollectedPiece = {
   id: string
-  user_id: string | null
-  faculty: FacultyType | null
+  user_id: string
+  faculty: FacultyType
   collected_at: string
 }
 
 export type MyPiece = {
   id: string
-  user_id: string | null
-  faculty: FacultyType | null
-  piece_code: string | null
+  user_id: string
+  faculty: FacultyType
+  piece_code: string
   expire_date: string
 }
 
 export const getMyPiece = async (): Promise<MyPiece> => {
-  const { data } = await Axios.get(`/pieces/me`)
-  return data
+  try {
+    const { data } = await Axios.get(`/pieces/me`)
+    return data
+  } catch (error) {
+    throw error
+  }
 }
 
 export type AttendeePiecesStats = {
@@ -40,9 +44,7 @@ export type CollectedPiecesResponse = {
 
 export const getCollectedPieces =
   async (): Promise<CollectedPiecesResponse> => {
-    const { data } = await Axios.get(
-      `/pieces/me/collected`
-    )
+    const { data } = await Axios.get(`/pieces/me/collected`)
     return data
   }
 
@@ -54,11 +56,8 @@ export type CollectFriendPieceResponse = {
 export const collectFriendPiece = async (
   piece_code: string
 ): Promise<CollectedPiece> => {
-  const { data } = await Axios.post(
-    `/pieces/me/collected`,
-    {
-      piece_code,
-    }
-  )
+  const { data } = await Axios.post(`/pieces/me/collected`, {
+    piece_code,
+  })
   return data
 }

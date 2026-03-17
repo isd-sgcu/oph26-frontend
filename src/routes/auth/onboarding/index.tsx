@@ -24,6 +24,7 @@ import { faculties, facultyEnum } from '@/const/faculty'
 import { FormProgress } from '@/components/auth/FormProgress'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createAttendee } from '@/services/attendee/attendee'
+import { AttendeeType } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
@@ -110,7 +111,7 @@ type IRegistrationForm = {
   firstName: string
   lastName: string
   birthDate: string
-  status: 'student' | 'parent' | 'educationstaff' | 'other'
+  status: AttendeeType
   email: string
   province: string
   district: string
