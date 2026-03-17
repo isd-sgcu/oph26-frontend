@@ -16,10 +16,12 @@ export enum HeaderEnum {
   MAINPINK = 'main-pink',
   MAINLIGHTPINK = 'main-light-pink',
   TRANSPARENT = 'transparent',
+  MAINBEIGE = 'main-beige',
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
 const PATHNAME_TRANSPARENT = ['/', '/auth/profile/ticket', '/auth/qr']
+const PATHNAME_MAINBEIGE = ['/info/faculty/']
 
 const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.MAINPINK]:
@@ -27,6 +29,7 @@ const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.MAINLIGHTPINK]:
     'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
   [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
+  [HeaderEnum.MAINBEIGE]: 'bg-main-beige relative',
 }
 
 const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
@@ -133,6 +136,8 @@ export default function Header() {
       setToColor(HeaderEnum.MAINPINK)
     } else if (PATHNAME_TRANSPARENT.includes(pathname)) {
       setToColor(HeaderEnum.TRANSPARENT)
+    } else if (PATHNAME_MAINBEIGE.some((path) => pathname.startsWith(path))) {
+      setToColor(HeaderEnum.MAINBEIGE)
     } else {
       setToColor(HeaderEnum.MAINLIGHTPINK)
     }
