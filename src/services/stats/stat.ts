@@ -1,5 +1,4 @@
 import { FacultyType } from '@/components/const/faculty'
-import { env } from '@/env'
 import { Axios } from '@/lib/axios'
 
 export type FacultyRankCount = {
@@ -20,7 +19,7 @@ export type AttendeeStats = {
 
 export const getAttendeeStats = async (): Promise<any> => {
   const { data } = await Axios.get(
-    `${env.VITE_PUBLIC_API_URL}/api/stats/attendees`
+    `/stats/attendees`
   )
   return data
 }
