@@ -29,7 +29,32 @@ const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
 }
 
-const navItems: NavItem[] = [
+const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
+  { title: 'home', to: '/', icon: 'fi-rr-home' },
+  { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
+  {
+    title: 'facultyWorkshop',
+    icon: 'fi-rr-playing-cards',
+    to: '/info/workshop',
+  },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
+  {
+    title: 'merchandise',
+    icon: 'fi-rr-gift',
+    to: '/info/merchandise',
+  },
+]
+
+const AUTHENTICATED_NAV_ITEMS: NavItem[] = [
   { title: 'home', to: '/', icon: 'fi-rr-home' },
   { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
@@ -112,6 +137,10 @@ export default function Header() {
       setOpenSidebar(false)
     }, 300)
   }
+
+  const selectedNavItems = attendee
+    ? AUTHENTICATED_NAV_ITEMS
+    : UNAUTHENTICATED_NAV_ITEMS
 
   return (
     <>
@@ -198,7 +227,7 @@ export default function Header() {
 
               {/* Navigation */}
               <nav className="mb-10 flex flex-col gap-10">
-                {navItems.map((item) => (
+                {selectedNavItems.map((item) => (
                   <div
                     key={item.title}
                     onClick={() => {
