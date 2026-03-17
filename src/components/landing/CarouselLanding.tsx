@@ -141,10 +141,10 @@ export default function CarouselLanding() {
             }
           </CarouselContent>
         </Carousel>
-        <button onClick={handlePrevious} className="top-1/2 left-4 absolute">
+        <button onClick={handlePrevious} className="top-1/2 left-4 z-50 absolute cursor-pointer">
           <FlatIcon name="fi-rr-angle-left" size={16} />
         </button>
-        <button onClick={handleNext} className="top-1/2 right-4 absolute">
+        <button onClick={handleNext} className="top-1/2 right-4 z-50 absolute cursor-pointer">
           <FlatIcon name="fi-rr-angle-right" size={16} />
         </button>
       </div>
