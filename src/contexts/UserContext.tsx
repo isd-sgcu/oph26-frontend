@@ -14,7 +14,7 @@ import {
 export type User = {
   id: string
   email: string
-  role: string
+  role: 'staff' | 'attendee'
 }
 
 export type Attendee = {

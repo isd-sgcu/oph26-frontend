@@ -60,15 +60,6 @@ const facultyThToCode: Record<string, string> = Object.fromEntries(
   faculties.map((f) => [f.th, enumValueToKey[f.facultyEnum]])
 )
 
-function calculateAge(birthDate: string): number {
-  const today = new Date()
-  const birth = new Date(birthDate)
-  let age = today.getFullYear() - birth.getFullYear()
-  const m = today.getMonth() - birth.getMonth()
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--
-  return age
-}
-
 function statusToAttendeeType(status: string): string {
   switch (status) {
     case 'student':
@@ -213,18 +204,20 @@ function RouteComponent() {
     const objectiveSelected = data.objectives.map((i) => objectivesOptions[i])
 
     createAttendeeMutation.mutate({
-      age: calculateAge(data.birthDate),
-      attendee_type: statusToAttendeeType(data.status),
       firstname: data.firstName,
       surname: data.lastName,
+      attendee_type: statusToAttendeeType(data.status),
+      dateOfBirth: data.birthDate,
       province: data.province,
+      district: data.district,
       study_level: data.level ?? undefined,
       school_name: data.school ?? undefined,
       news_sources_selected: newsSourceSelected,
       news_sources_other: data.acknowledgedOther,
-      interested_faculty: interestedFaculty,
       objective_selected: objectiveSelected,
       objective_other: data.objectivesOther,
+      interested_faculty: interestedFaculty,
+      transportationMethod: data.transportation,
     })
   }
 
