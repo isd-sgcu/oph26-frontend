@@ -1,8 +1,9 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
 import { login } from '@/services/auth/auth'
+import { getMyAttendee } from '@/services/attendee/attendee'
 
 declare global {
   interface Window {
@@ -15,14 +16,20 @@ export const Route = createFileRoute('/auth/login/')({
 })
 
 function RouteComponent() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const googleButtonRef = useRef<HTMLDivElement>(null)
 
   const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       localStorage.setItem('token', data.accessToken)
-      navigate({ to: '/auth/onboarding' })
+      window.dispatchEvent(new Event('tokenChanged'))
+      const attendeeData = await getMyAttendee()
+      if (attendeeData != null) {
+        router.navigate({ to: '/' })
+      } else {
+        router.navigate({ to: '/auth/onboarding' })
+      }
     },
   })
 
@@ -55,7 +62,7 @@ function RouteComponent() {
   }, [])
 
   return (
-    <section className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+    <section className="bg-main-light-pink relative flex w-full flex-col">
       <div className="flex min-h-screen flex-col items-center justify-center">
         <img src="/logo.svg" alt="logo" className="w-96" />
         <h1 className="text-2xl font-semibold text-white text-shadow-sm">

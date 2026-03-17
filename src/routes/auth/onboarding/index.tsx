@@ -42,7 +42,7 @@ const acknowledgedOptions = [
 const objectivesOptions = [
   'เพื่อเข้าร่วมกิจกรรมและเวิร์กชอปของคณะ/สาขาที่สนใจ',
   'เพื่อศึกษารายละเอียดหลักสูตร การเรียนการสอน และเส้นทางอาชีพ',
-  'เพื่อค้นหาตนเองและสำรวจความสนใจของตนเอง\n',
+  'เพื่อค้นหาตนเองและสำรวจความสนใจของตนเอง',
   'เพื่อเตรียมความพร้อมก่อนตัดสินใจเลือกคณะหรือมหาวิทยาลัย',
   'เพื่อสอบถามข้อมูลการสมัครเรียน ทุนการศึกษา และเกณฑ์การคัดเลือก',
   'เพื่อเยี่ยมชมบรรยากาศภายในมหาวิทยาลัยและสิ่งอำนวยความสะดวก',
@@ -59,15 +59,6 @@ const enumValueToKey = Object.fromEntries(
 const facultyThToCode: Record<string, string> = Object.fromEntries(
   faculties.map((f) => [f.th, enumValueToKey[f.facultyEnum]])
 )
-
-function calculateAge(birthDate: string): number {
-  const today = new Date()
-  const birth = new Date(birthDate)
-  let age = today.getFullYear() - birth.getFullYear()
-  const m = today.getMonth() - birth.getMonth()
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--
-  return age
-}
 
 function statusToAttendeeType(status: string): string {
   switch (status) {
@@ -104,6 +95,9 @@ type IRegistrationForm = {
   interestedFaculties3?: string
 
   acceptedTerms: boolean
+
+  acknowledgedOther?: string
+  objectivesOther?: string
 }
 
 function getEmailFromToken(): string {
@@ -210,16 +204,20 @@ function RouteComponent() {
     const objectiveSelected = data.objectives.map((i) => objectivesOptions[i])
 
     createAttendeeMutation.mutate({
-      age: calculateAge(data.birthDate),
-      attendee_type: statusToAttendeeType(data.status),
       firstname: data.firstName,
       surname: data.lastName,
+      attendee_type: statusToAttendeeType(data.status),
+      dateOfBirth: data.birthDate,
       province: data.province,
+      district: data.district,
       study_level: data.level ?? undefined,
       school_name: data.school ?? undefined,
       news_sources_selected: newsSourceSelected,
-      interested_faculty: interestedFaculty,
+      news_sources_other: data.acknowledgedOther,
       objective_selected: objectiveSelected,
+      objective_other: data.objectivesOther,
+      interested_faculty: interestedFaculty,
+      transportationMethod: data.transportation,
     })
   }
 
@@ -239,7 +237,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+    <section className="bg-main-light-pink relative flex w-full flex-col">
       <div className="pt-6">
         <h1 className="px-4 text-4xl font-bold text-white text-shadow-md">
           ลงทะเบียน
@@ -265,6 +263,7 @@ function RouteComponent() {
           <div className="mt-12 mb-8 flex w-full flex-row justify-center gap-6">
             {currentFormPage !== 1 && (
               <Button
+                type="button"
                 size="sm"
                 className="bg-gradient-beige text-main-pink"
                 onClick={prevPage}
@@ -274,6 +273,7 @@ function RouteComponent() {
             )}
             {currentFormPage !== 5 && (
               <Button
+                type="button"
                 size="sm"
                 className="bg-gradient-purple"
                 onClick={nextPage}
@@ -583,8 +583,19 @@ const FacultiesForm = () => {
 const SurveyForm = () => {
   const {
     control,
+    register,
     formState: { errors },
   } = useFormContext<IRegistrationForm>()
+
+  const acknowledgedOtherSelected = useWatch({
+    control,
+    name: 'acknowledged',
+  })?.includes(acknowledgedOptions.length - 1)
+  const objectivesOtherSelected = useWatch({
+    control,
+    name: 'objectives',
+  })?.includes(objectivesOptions.length - 1)
+
   return (
     <FormCard>
       <div>
@@ -623,6 +634,14 @@ const SurveyForm = () => {
           </div>
         )}
       />
+      {acknowledgedOtherSelected && (
+        <Input
+          placeholder="โปรดระบุช่องทางอื่น ๆ"
+          {...register('acknowledgedOther')}
+          className="mt-2"
+        />
+      )}
+
       <div className="mt-2">
         <p className="text-main-pink text-lg font-semibold">
           จุดประสงค์ในการเข้าร่วม Open House*
@@ -659,6 +678,14 @@ const SurveyForm = () => {
           </div>
         )}
       />
+      {objectivesOtherSelected && (
+        <Input
+          placeholder="โปรดระบุจุดประสงค์อื่น ๆ"
+          {...register('objectivesOther')}
+          className="mt-2"
+        />
+      )}
+
       <div className="mt-2">
         <p className="text-xs font-semibold">
           ท่านเดินทางมา CU Open House 2026 อย่างไร
