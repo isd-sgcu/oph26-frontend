@@ -100,10 +100,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           }
           setAttendee(attendeeData)
           setRole('attendee')
-        } catch {
+        } catch (error) {
           setAttendee(undefined)
         }
-      } catch {
+      } catch (error) {
         setUser(undefined)
       } finally {
         setLoading(false)
