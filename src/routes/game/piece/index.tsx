@@ -21,18 +21,18 @@ function RouteComponent() {
   const [openMyCode, setOpenMyCode] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
   const [expiredDate, setExpiredDate] = useState<string>(
-    new Date().toISOString()
+    new Date().toLocaleTimeString()
   )
 
   useEffect(() => {
     async function fetchMyPiece() {
       try {
         const myPiece = await getMyPiece()
-        console.log('MyPiece: ', myPiece)
         setMyFaculty(myPiece.faculty)
         setMyCode(myPiece.piece_code)
         setExpiredDate(myPiece.expire_date)
       } catch (error) {
+        router.navigate({ to: '/' })
         return
       }
     }
@@ -51,7 +51,8 @@ function RouteComponent() {
   function formatDateTime(date: string) {
     if (!date) return ''
 
-    const d = new Date(date)
+    let d = new Date(date)
+    d = new Date(d.getTime() + 7 * 60 * 60 * 1000)
 
     const months = {
       th: [
