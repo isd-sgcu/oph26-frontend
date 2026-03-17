@@ -12,6 +12,7 @@ import i18n from '@/lib/i18n'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/lib/queryClient'
 import PageNotFound from '@/components/PageNotFound'
+import { UserProvider } from '@/contexts/UserContext'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -23,6 +24,13 @@ export const Route = createRootRoute({
     links: [
       { rel: 'stylesheet', href: appCss },
       { rel: 'icon', type: 'image/svg+xml', href: '/logo/cu-journey.webp' },
+    ],
+    scripts: [
+      {
+        src: 'https://accounts.google.com/gsi/client',
+        async: true,
+        defer: true,
+      },
     ],
   }),
   component: RootDocument,
@@ -37,10 +45,12 @@ function RootDocument() {
       </head>
       <body className="flex min-h-screen w-full max-w-(--width-page) flex-col justify-self-center">
         <QueryClientProvider client={queryClient}>
-          <Header />
-          <main className="flex flex-1 bg-white">
-            <Outlet />
-          </main>
+          <UserProvider>
+            <Header />
+            <main className="flex flex-1 bg-white">
+              <Outlet />
+            </main>
+          </UserProvider>
           <Footer />
         </QueryClientProvider>
         <Scripts />

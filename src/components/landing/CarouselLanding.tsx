@@ -2,12 +2,12 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  type CarouselApi
-} from "@/components/ui/carousel";
-import clsx from "clsx";
-import { useEffect, useState } from "react";
-import Autoplay from "embla-carousel-autoplay";
-import { FlatIcon } from "../FlatIcon";
+  type CarouselApi,
+} from '@/components/ui/carousel'
+import clsx from 'clsx'
+import { useEffect, useState } from 'react'
+import Autoplay from 'embla-carousel-autoplay'
+import { FlatIcon } from '../FlatIcon'
 
 export default function CarouselLanding() {
   const [api, setApi] = useState<CarouselApi>()
@@ -18,7 +18,7 @@ export default function CarouselLanding() {
       return
     }
     setCurrent(api.selectedScrollSnap() + 1)
-    api.on("select", () => {
+    api.on('select', () => {
       setCurrent(api.selectedScrollSnap() + 1)
     })
   }, [api])
@@ -95,15 +95,15 @@ export default function CarouselLanding() {
       type: "image",
       path: "bright.webp"
     },
-  ];
+  ]
 
   return (
-    <div className='flex flex-col justify-center items-center gap-4 px-5 w-full'>
+    <div className="flex flex-col justify-center items-center gap-4 px-5 w-full">
       <div className="relative flex items-center w-full">
         <Carousel
           opts={{
             loop: true,
-            align: "center",
+            align: 'center',
           }}
           setApi={setApi}
           plugins={[Autoplay({ delay: data[current - 1]?.type === "video" ? 15000 : 3000, stopOnInteraction: false })]}
@@ -141,18 +141,22 @@ export default function CarouselLanding() {
             }
           </CarouselContent>
         </Carousel>
-        <button onClick={handlePrevious} className="top-1/2 left-4 absolute"><FlatIcon name="fi-rr-angle-left" size={16} /></button>
-        <button onClick={handleNext} className="top-1/2 right-4 absolute"><FlatIcon name="fi-rr-angle-right" size={16} /></button>
+        <button onClick={handlePrevious} className="top-1/2 left-4 absolute">
+          <FlatIcon name="fi-rr-angle-left" size={16} />
+        </button>
+        <button onClick={handleNext} className="top-1/2 right-4 absolute">
+          <FlatIcon name="fi-rr-angle-right" size={16} />
+        </button>
       </div>
       <div className="flex gap-2">
         {
           data.map((item) => (
             <div key={item.id} className={clsx('flex flex-col justify-center items-center rounded-full w-2 h-2',
               current === item.id ? 'bg-main-pink' : 'bg-[#D9D9D9]'
-            )}></div>
-          ))
-        }
+            )}
+            ></div>
+          ))}
       </div>
     </div>
-  );
+  )
 }

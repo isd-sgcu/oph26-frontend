@@ -1,16 +1,16 @@
 export type Achievement =
-  | { variant: "var1"; stat: number }
-  | { variant: "var2"; stat: string; top: number }
-  | { variant: "var3"; stat: string; faculty: string }
+  | { variant: 'var1'; stat: number }
+  | { variant: 'var2'; stat: string; top: number }
+  | { variant: 'var3'; stat: string; faculty: string }
   | {
-      variant: "overall"
+      variant: 'overall'
       stat: number
       miniCard1Faculty: string
       miniCard1Count: number
       miniCard2Rank: number
     }
   | {
-      variant: "collectedPieces"
+      variant: 'collectedPieces'
       stat: number
       edu: number
       psy: number
