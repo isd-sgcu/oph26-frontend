@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useUser } from '@/contexts/UserContext'
+import { getFavoriteWorkshops } from '@/services/favorite_workshops/workshop'
 import { getFacultyLabel } from '@/utils/function'
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
@@ -33,6 +34,26 @@ function RouteComponent() {
   )
   const [filteredWorkshops, setFilteredWorkshops] = useState(WORKSHOP_DATA)
   const [searchInput, setSearchInput] = useState('')
+  const [favoriteWorkshops, setFavoriteWorkshops] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    async function fetchFavoriteWorkshops() {
+      try {
+        setLoading(true)
+        const fetchedData = await getFavoriteWorkshops()
+        setFavoriteWorkshops(fetchedData.favorite_workshops ?? [])
+      } catch (error) {
+        setFavoriteWorkshops([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (role === 'attendee') {
+      fetchFavoriteWorkshops()
+    }
+  }, [])
 
   useEffect(() => {
     let filtered = WORKSHOP_DATA
@@ -96,7 +117,11 @@ function RouteComponent() {
         </div>
 
         {/* Workshops */}
-        {filteredWorkshops && filteredWorkshops.length === 0 ? (
+        {loading ? (
+          <div className="text-center text-base font-medium text-white">
+            {t('routes.infoGroup.workshopGroup.loading')}
+          </div>
+        ) : filteredWorkshops && filteredWorkshops.length === 0 ? (
           <div className="text-center text-base font-medium text-white">
             {t('routes.infoGroup.workshopGroup.noData')}
           </div>
@@ -108,6 +133,7 @@ function RouteComponent() {
                   key={workshop.id}
                   workshop={workshop}
                   role={role}
+                  initialFavourite={favoriteWorkshops.includes(workshop.id)}
                 />
               )
             })}
