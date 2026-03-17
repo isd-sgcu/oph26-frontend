@@ -1,14 +1,15 @@
 import { FacultyType } from '@/components/const/faculty'
 import { Axios } from '@/lib/axios'
+import { AxiosError } from 'axios'
 
-export type CollectedPiece = {
+export interface CollectedPiece {
   id: string
   user_id: string
   faculty: FacultyType
   collected_at: string
 }
 
-export type MyPiece = {
+export interface MyPiece {
   id: string
   user_id: string
   faculty: FacultyType
@@ -25,7 +26,7 @@ export const getMyPiece = async (): Promise<MyPiece> => {
   }
 }
 
-export type AttendeePiecesStats = {
+export interface AttendeePiecesStats {
   collected_by_faculty: {
     value: {
       [faculty in FacultyType]?: {
@@ -37,7 +38,7 @@ export type AttendeePiecesStats = {
   total_collected: number
 }
 
-export type CollectedPiecesResponse = {
+export interface CollectedPiecesResponse {
   collected_pieces: CollectedPiece[]
   stats: AttendeePiecesStats
 }
@@ -48,16 +49,20 @@ export const getCollectedPieces =
     return data
   }
 
-export type CollectFriendPieceResponse = {
+export interface CollectFriendPieceResponse {
   ok: boolean
   collected_piece: CollectedPiece
 }
 
 export const collectFriendPiece = async (
   piece_code: string
-): Promise<CollectedPiece> => {
-  const { data } = await Axios.post(`/pieces/me/collected`, {
-    piece_code,
-  })
-  return data
+): Promise<CollectFriendPieceResponse> => {
+  try {
+    const { data } = await Axios.post(`/pieces/me/collected`, {
+      piece_code,
+    })
+    return data
+  } catch (error) {
+    throw error as AxiosError
+  }
 }
