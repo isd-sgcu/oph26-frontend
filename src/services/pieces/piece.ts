@@ -40,9 +40,7 @@ export type CollectedPiecesResponse = {
 
 export const getCollectedPieces =
   async (): Promise<CollectedPiecesResponse> => {
-    const { data } = await Axios.get(
-      `/pieces/me/collected`
-    )
+    const { data } = await Axios.get(`/pieces/me/collected`)
     return data
   }
 
@@ -54,11 +52,8 @@ export type CollectFriendPieceResponse = {
 export const collectFriendPiece = async (
   piece_code: string
 ): Promise<CollectedPiece> => {
-  const { data } = await Axios.post(
-    `/pieces/me/collected`,
-    {
-      piece_code,
-    }
-  )
+  const { data } = await Axios.post(`/pieces/me/collected`, {
+    piece_code,
+  })
   return data
 }
