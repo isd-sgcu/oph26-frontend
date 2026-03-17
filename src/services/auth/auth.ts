@@ -10,6 +10,16 @@ export type TokenResponse = {
 }
 
 export const login = async (payload: LoginRequest): Promise<TokenResponse> => {
-  const { data } = await Axios.post<TokenResponse>('/api/auth/token', payload)
+  const { data } = await Axios.post<TokenResponse>(`/auth/token`, payload)
   return data
+}
+
+export const getMe = async (): Promise<any> => {
+  const { data } = await Axios.get(`/auth/me`)
+  return data
+}
+
+export const logout = async (): Promise<void> => {
+  await Axios.post(`/auth/signOut`)
+  localStorage.removeItem('token')
 }
