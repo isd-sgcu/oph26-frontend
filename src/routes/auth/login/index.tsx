@@ -26,8 +26,10 @@ function RouteComponent() {
       window.dispatchEvent(new Event('tokenChanged'))
       const attendeeData = await getMyAttendee()
       if (attendeeData != null) {
+        // If attendee data exists, navigate to the home page
         router.navigate({ to: '/' })
       } else {
+        // If attendee data does not exist, navigate to the onboarding page
         router.navigate({ to: '/auth/onboarding' })
       }
     },
