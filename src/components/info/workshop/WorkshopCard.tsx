@@ -1,6 +1,7 @@
 import { Workshop } from '@/components/const/workshop'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Button } from '@/components/ui/button'
+import { RoleType } from '@/contexts/UserContext'
 import { getFacultyLabel } from '@/utils/function'
 import { useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
@@ -8,9 +9,10 @@ import { useTranslation } from 'react-i18next'
 
 interface WorkshopCardProps {
   workshop: Workshop
+  role: RoleType | undefined
 }
 
-const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
+const WorkshopCard = ({ workshop, role }: WorkshopCardProps) => {
   const router = useRouter()
   const { i18n, t } = useTranslation()
   const [isFavourite, setIsFavourite] = useState(false)
@@ -27,15 +29,17 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
             {workshop.name}
           </p>
 
-          <FlatIcon
-            name={isFavourite ? 'fi-sr-heart' : 'fi-rr-heart'}
-            size={16}
-            className="text-main-pink cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsFavourite((prev) => !prev)
-            }}
-          />
+          {role && (
+            <FlatIcon
+              name={isFavourite ? 'fi-sr-heart' : 'fi-rr-heart'}
+              size={16}
+              className="text-main-pink cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsFavourite((prev) => !prev)
+              }}
+            />
+          )}
         </div>
 
         {/* Information */}

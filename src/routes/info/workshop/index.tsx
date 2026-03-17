@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useUser } from '@/contexts/UserContext'
 import { getFacultyLabel } from '@/utils/function'
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
@@ -25,6 +26,8 @@ export const Route = createFileRoute('/info/workshop/')({
 function RouteComponent() {
   const { i18n, t } = useTranslation()
   const faculty = Route.useSearch() as { faculty: string }
+  const userContext = useUser()
+  const role = userContext?.role
   const [selectedFaculty, setSelectedFaculty] = useState<string>(
     faculty.faculty || 'all'
   )
@@ -100,7 +103,13 @@ function RouteComponent() {
         ) : (
           <div className="flex h-full max-h-120 flex-col gap-2 overflow-y-auto">
             {filteredWorkshops.map((workshop) => {
-              return <WorkshopCard key={workshop.id} workshop={workshop} />
+              return (
+                <WorkshopCard
+                  key={workshop.id}
+                  workshop={workshop}
+                  role={role}
+                />
+              )
             })}
           </div>
         )}
