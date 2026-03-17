@@ -1,3 +1,4 @@
+import { Attendee } from '@/contexts/UserContext'
 import { Axios } from '@/lib/axios'
 
 export type CreateAttendeeRequest = {
@@ -18,5 +19,11 @@ export type CreateAttendeeRequest = {
 export const createAttendee = async (
   payload: CreateAttendeeRequest
 ): Promise<void> => {
-  await Axios.post('/api/attendees/', payload)
+  console.log(payload)
+  await Axios.post(`/attendees/`, payload)
+}
+
+export const getMyAttendee = async (): Promise<Attendee> => {
+  const { data } = await Axios.get(`/attendees/me`)
+  return data
 }

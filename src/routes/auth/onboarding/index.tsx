@@ -42,7 +42,7 @@ const acknowledgedOptions = [
 const objectivesOptions = [
   'เพื่อเข้าร่วมกิจกรรมและเวิร์กชอปของคณะ/สาขาที่สนใจ',
   'เพื่อศึกษารายละเอียดหลักสูตร การเรียนการสอน และเส้นทางอาชีพ',
-  'เพื่อค้นหาตนเองและสำรวจความสนใจของตนเอง\n',
+  'เพื่อค้นหาตนเองและสำรวจความสนใจของตนเอง',
   'เพื่อเตรียมความพร้อมก่อนตัดสินใจเลือกคณะหรือมหาวิทยาลัย',
   'เพื่อสอบถามข้อมูลการสมัครเรียน ทุนการศึกษา และเกณฑ์การคัดเลือก',
   'เพื่อเยี่ยมชมบรรยากาศภายในมหาวิทยาลัยและสิ่งอำนวยความสะดวก',
@@ -104,6 +104,9 @@ type IRegistrationForm = {
   interestedFaculties3?: string
 
   acceptedTerms: boolean
+
+  acknowledgedOther?: string
+  objectivesOther?: string
 }
 
 function getEmailFromToken(): string {
@@ -218,8 +221,10 @@ function RouteComponent() {
       study_level: data.level ?? undefined,
       school_name: data.school ?? undefined,
       news_sources_selected: newsSourceSelected,
+      news_sources_other: data.acknowledgedOther,
       interested_faculty: interestedFaculty,
       objective_selected: objectiveSelected,
+      objective_other: data.objectivesOther,
     })
   }
 
@@ -265,6 +270,7 @@ function RouteComponent() {
           <div className="mt-12 mb-8 flex w-full flex-row justify-center gap-6">
             {currentFormPage !== 1 && (
               <Button
+                type="button"
                 size="sm"
                 className="bg-gradient-beige text-main-pink"
                 onClick={prevPage}
@@ -274,6 +280,7 @@ function RouteComponent() {
             )}
             {currentFormPage !== 5 && (
               <Button
+                type="button"
                 size="sm"
                 className="bg-gradient-purple"
                 onClick={nextPage}
@@ -583,8 +590,19 @@ const FacultiesForm = () => {
 const SurveyForm = () => {
   const {
     control,
+    register,
     formState: { errors },
   } = useFormContext<IRegistrationForm>()
+
+  const acknowledgedOtherSelected = useWatch({
+    control,
+    name: 'acknowledged',
+  })?.includes(acknowledgedOptions.length - 1)
+  const objectivesOtherSelected = useWatch({
+    control,
+    name: 'objectives',
+  })?.includes(objectivesOptions.length - 1)
+
   return (
     <FormCard>
       <div>
@@ -623,6 +641,14 @@ const SurveyForm = () => {
           </div>
         )}
       />
+      {acknowledgedOtherSelected && (
+        <Input
+          placeholder="โปรดระบุช่องทางอื่น ๆ"
+          {...register('acknowledgedOther')}
+          className="mt-2"
+        />
+      )}
+
       <div className="mt-2">
         <p className="text-main-pink text-lg font-semibold">
           จุดประสงค์ในการเข้าร่วม Open House*
@@ -659,6 +685,14 @@ const SurveyForm = () => {
           </div>
         )}
       />
+      {objectivesOtherSelected && (
+        <Input
+          placeholder="โปรดระบุจุดประสงค์อื่น ๆ"
+          {...register('objectivesOther')}
+          className="mt-2"
+        />
+      )}
+
       <div className="mt-2">
         <p className="text-xs font-semibold">
           ท่านเดินทางมา CU Open House 2026 อย่างไร

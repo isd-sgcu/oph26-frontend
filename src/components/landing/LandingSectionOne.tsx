@@ -3,9 +3,12 @@ import { useNavigate } from '@tanstack/react-router'
 import CountdownTimer from './CountdownTimer'
 import CarouselLanding from './CarouselLanding'
 import { useTranslation } from 'react-i18next'
+import { useUser } from '@/contexts/UserContext'
 
 export default function LandingSectionOne() {
   const navigate = useNavigate()
+  const userContext = useUser()
+  const user = userContext?.user
   const { t } = useTranslation()
 
   return (
@@ -36,24 +39,26 @@ export default function LandingSectionOne() {
 
         {/* Detail */}
         <div className="z-30 flex w-full flex-col items-center justify-center gap-8">
-          <div className="flex items-center justify-center gap-4">
-            <Button
-              size={'md'}
-              className="bg-main-beige text-main-pink"
-              onClick={() => {
-                navigate({ to: '/auth/login' })
-              }}
-            >
-              {t('routes.landingGroup.buttonGroup.register')}
-            </Button>
-            <Button
-              onClick={() => {
-                navigate({ to: '/auth/login' })
-              }}
-            >
-              {t('routes.landingGroup.buttonGroup.login')}
-            </Button>
-          </div>
+          {!user && (
+            <div className="flex items-center justify-center gap-4">
+              <Button
+                size={'md'}
+                className="bg-main-beige text-main-pink"
+                onClick={() => {
+                  navigate({ to: '/auth/login' })
+                }}
+              >
+                {t('routes.landingGroup.buttonGroup.register')}
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate({ to: '/auth/login' })
+                }}
+              >
+                {t('routes.landingGroup.buttonGroup.login')}
+              </Button>
+            </div>
+          )}
 
           <div className="flex w-full flex-col items-center justify-center gap-4 px-5">
             <CountdownTimer />
