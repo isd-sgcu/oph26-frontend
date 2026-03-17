@@ -192,15 +192,12 @@ export const FACULTIES: FacultyOption[] = [
   },
 ]
 
-<<<<<<< HEAD
 export const FACULTY_MAP: Record<FacultyType, FacultyOption> =
   Object.fromEntries(FACULTIES.map((f) => [f.value, f])) as Record<
     FacultyType,
     FacultyOption
   >
 
-=======
->>>>>>> bst-weakend/isd68-160-info-workshop
 export interface Faculty {
   id: FacultyType
   name: string
@@ -1197,12 +1194,3 @@ export const FACULTY_DATA: Faculty[] = [
     imagePath: '/info/faculty/dorm.webp',
   },
 ]
-<<<<<<< HEAD
-=======
-
-export const FACULTY_MAP: Record<FacultyType, FacultyOption> =
-  Object.fromEntries(FACULTIES.map((f) => [f.value, f])) as Record<
-    FacultyType,
-    FacultyOption
-  >
->>>>>>> bst-weakend/isd68-160-info-workshop

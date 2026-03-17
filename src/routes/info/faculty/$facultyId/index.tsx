@@ -1,7 +1,7 @@
 import { FACULTY_DATA } from '@/components/const/faculty'
 import { Button } from '@/components/ui/button'
 import { getFacultyLabel } from '@/utils/function'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/info/faculty/$facultyId/')({
@@ -10,6 +10,7 @@ export const Route = createFileRoute('/info/faculty/$facultyId/')({
 
 function RouteComponent() {
   const { facultyId } = Route.useParams()
+  const router = useRouter()
   const { t } = useTranslation()
   const targetFaculty = FACULTY_DATA.find((faculty) => faculty.id === facultyId)
 
@@ -48,9 +49,17 @@ function RouteComponent() {
 
         {/* ฺButtons */}
         <div className="flex justify-center gap-4">
-          <Button>{t('routes.infoGroup.facultyGroup.buttons.info')}</Button>
-          <Button onClick={}>
-            {t('routes.infoGroup.facultyGroup.buttons.workshop')}
+          <Button
+            onClick={() => {
+              router.navigate({
+                to: '/info/workshop',
+                search: {
+                  faculty: targetFaculty.id,
+                },
+              })
+            }}
+          >
+            {t('routes.infoGroup.facultyGroup.workshopButton')}
           </Button>
         </div>
       </div>

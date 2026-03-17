@@ -124,7 +124,9 @@
       "facultyGroup": {
         "title": "คณะ",
         "inputPlaceholder": "ค้นหาคณะ...",
-        "noData": "ไม่พบคณะที่กำลังค้นหา..."
+        "noData": "ไม่พบคณะที่กำลังค้นหา...",
+        "workshopButton": "Workshops",
+        "facultyButton": "เกี่ยวกับคณะ"
       },
       "mapGroup": {},
       "merchandiseGroup": {},
