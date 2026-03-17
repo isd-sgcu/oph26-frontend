@@ -126,7 +126,10 @@
         "inputPlaceholder": "ค้นหาคณะ...",
         "noData": "ไม่พบคณะที่กำลังค้นหา...",
         "workshopButton": "Workshops",
-        "facultyButton": "เกี่ยวกับคณะ"
+        "facultyButton": "เกี่ยวกับคณะ",
+        "location": "ที่ตั้งคณะ: ",
+        "major": "ภาควิชา",
+        "field": "สาขา"
       },
       "mapGroup": {},
       "merchandiseGroup": {},

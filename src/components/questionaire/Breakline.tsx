@@ -1,10 +1,21 @@
 interface BreakLineProps {
-  variant?: 'black' | 'pink'
+  variant?: 'black' | 'pink' | 'purple'
+  width?: number
 }
 
-const BreakLine = ({ variant = 'black' }: BreakLineProps) => {
-  const lineColor = variant === 'black' ? 'bg-black' : 'bg-main-pink'
-  return <div className={`h-px w-full ${lineColor}`} />
+const BreakLine = ({ variant = 'black', width }: BreakLineProps) => {
+  const lineColor =
+    variant === 'black'
+      ? 'bg-black'
+      : variant === 'pink'
+        ? 'bg-main-pink'
+        : 'bg-sub-purple'
+  return (
+    <div
+      className={`h-px w-full ${lineColor}`}
+      style={{ maxWidth: width ? `${width}px` : '100%' }}
+    />
+  )
 }
 
 export default BreakLine
