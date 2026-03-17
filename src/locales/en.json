@@ -198,7 +198,7 @@
       "buttonGroup": {
         "register": "Register",
         "login": "Login",
-        "agenda": "Booklet"
+        "ticket": "Ticket"
       },
       "event": {
         "faculty": "Faculties",

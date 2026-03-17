@@ -201,7 +201,7 @@
       "buttonGroup": {
         "register": "ลงทะเบียน",
         "login": "เข้าสู่ระบบ",
-        "agenda": "สูจิบัตร"
+        "ticket": "Ticket"
       },
       "event": {
         "faculty": "คณะ",

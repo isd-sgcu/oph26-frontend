@@ -19,7 +19,7 @@ export enum HeaderEnum {
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
-const PATHNAME_TRANSPARENT = ['/', '/auth/profile/ticket', '/auth/qr']
+const PATHNAME_TRANSPARENT = ['/', '/auth/profile/ticket', '/auth/qr', '/auth/login',]
 
 const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.MAINPINK]:
@@ -173,11 +173,11 @@ export default function Header() {
   return (
     <>
       <header
-        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
+        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-[(--width-page)] items-center justify-between p-4`}
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
-          <div className="absolute top-0 right-0 left-0 -z-1 h-24 w-full bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent"></div>
+          <div className="top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent w-full h-24"></div>
         )}
 
         {/* Logo */}
@@ -195,16 +195,15 @@ export default function Header() {
         {/* Right menu */}
         <div className="flex items-center gap-2">
           {/* Lang */}
-          <div className="flex overflow-hidden rounded-lg shadow-sm">
+          <div className="flex shadow-sm rounded-lg overflow-hidden">
             {['th', 'en'].map((lng) => (
               <button
                 key={lng}
                 onClick={() => i18n.changeLanguage(lng)}
-                className={`px-3 py-2 text-sm font-bold transition ${
-                  i18n.language === lng
-                    ? 'bg-main-pink cursor-default text-white'
-                    : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
-                }`}
+                className={`px-3 py-2 text-sm font-bold transition ${i18n.language === lng
+                  ? 'bg-main-pink cursor-default text-white'
+                  : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
+                  }`}
               >
                 {lng.toUpperCase()}
               </button>
@@ -235,7 +234,7 @@ export default function Header() {
 
             {/* Sidebar Panel */}
             <div
-              className={`fixed top-0 z-500 flex h-full min-h-screen w-full max-w-[var(--width-page)] -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
+              className={`fixed top-0 z-500 flex h-full min-h-screen w-full max-w-(--width-page) -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
             >
               {/* Header */}
               <div className="flex items-center">
@@ -254,7 +253,7 @@ export default function Header() {
               </div>
 
               {/* Navigation */}
-              <nav className="mb-10 flex flex-col gap-10">
+              <nav className="flex flex-col gap-10 mb-10">
                 {selectedNavItems.map((item) => (
                   <div
                     key={item.title}
@@ -262,14 +261,14 @@ export default function Header() {
                       router.navigate({ to: item.to })
                       setOpenSidebar(false)
                     }}
-                    className="flex w-fit cursor-pointer items-center gap-4"
+                    className="flex items-center gap-4 w-fit cursor-pointer"
                   >
                     <FlatIcon
                       name={item.icon}
                       size={24}
                       className="text-main-pink"
                     />
-                    <span className="text-xl font-bold">
+                    <span className="font-bold text-xl">
                       {t(`components.header.sidebar.${item.title}`)}
                     </span>
                   </div>
@@ -277,7 +276,7 @@ export default function Header() {
               </nav>
 
               {/* Buttons */}
-              <div className="mt-auto flex flex-col items-center justify-center gap-4">
+              <div className="flex flex-col justify-center items-center gap-4 mt-auto">
                 {role == undefined ? (
                   <>
                     <Button

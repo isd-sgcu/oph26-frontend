@@ -1,78 +1,81 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
 import { useNavigate } from '@tanstack/react-router'
+import { useUser } from '@/contexts/UserContext'
 
 export default function LandingSectionTwo() {
   const { t } = useTranslation()
   const isRoleStudent = true
   const navigate = useNavigate()
+  const userContext = useUser()
+  const role = userContext?.role
 
   const handleNavigation = (path: string) => {
     navigate({ to: path })
   }
 
   return (
-    <div className="flex w-full flex-col">
-      <div className="bg-gradient-pink relative w-full overflow-hidden">
+    <div className="flex flex-col w-full">
+      <div className="relative bg-gradient-pink w-full overflow-hidden">
         {/* Container with aspect ratio */}
-        <div className="mx-auto flex w-full max-w-sm items-center justify-center px-5">
-          <div className="relative mx-auto aspect-324/376 w-full">
+        <div className="flex justify-center items-center mx-auto px-5 w-full max-w-sm">
+          <div className="relative mx-auto w-full aspect-324/376">
             {/* Start Pin */}
             <button
-              className="absolute top-[2%] left-[39%] z-10"
+              className="top-[2%] left-[39%] z-10 absolute"
               aria-label="Start"
             >
-              <img src="/landing/pin.svg" alt="" className="h-auto w-8.75" />
+              <img src="/landing/pin.svg" alt="" className="w-8.75 h-auto" />
             </button>
 
             {/* Faculties */}
             <button
-              className="absolute top-[6%] left-[2%] z-10 flex flex-col items-center justify-center gap-1"
+              className="top-[6%] left-[2%] z-10 absolute flex flex-col justify-center items-center gap-1"
               aria-label="Faculties"
               onClick={() => handleNavigation('/info/faculty')}
             >
-              <img src="/landing/trees.svg" alt="" className="h-auto w-15.25" />
-              <span className="text-center text-base font-bold whitespace-nowrap text-white text-shadow-lg sm:text-lg md:text-xl">
+              <img src="/landing/trees.svg" alt="" className="w-15.25 h-auto" />
+              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
                 {t('routes.landingGroup.event.faculty')}
               </span>
             </button>
 
             {/* Event */}
             <button
-              className="absolute top-[11%] right-[10%] z-10 flex flex-col items-center justify-center gap-1"
+              className="top-[11%] right-[10%] z-10 absolute flex flex-col justify-center items-center gap-1"
               aria-label="Flowers"
               onClick={() => handleNavigation('/info/event')}
             >
               <img
                 src="/landing/flowers.svg"
                 alt=""
-                className="h-auto w-19.5"
+                className="w-19.5 h-auto"
               />
-              <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
+              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
                 {t('routes.landingGroup.event.mainEvent')}
               </span>
             </button>
 
             {/* Workshop */}
             <button
-              className="absolute top-[34%] left-[37%] z-10 flex -translate-x-1/2 flex-col items-center justify-center"
+              className="top-[34%] left-[37%] z-10 absolute flex flex-col justify-center items-center -translate-x-1/2"
               aria-label="Workshop"
               onClick={() => handleNavigation('/info/workshop')}
             >
-              <img src="/landing/rocks.svg" alt="" className="h-auto w-24.5" />
-              <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
+              <img src="/landing/rocks.svg" alt="" className="w-24.5 h-auto" />
+              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
                 {t('routes.landingGroup.event.facultyWorkshop')}
               </span>
             </button>
 
             {/* Souvenir */}
             <button
-              className="absolute top-[65%] left-[4%] z-10 flex flex-col items-center justify-center"
+              className="top-[65%] left-[4%] z-10 absolute flex flex-col justify-center items-center"
               aria-label="Souvenir"
               onClick={() => handleNavigation('/info/merchandise')}
             >
-              <img src="/landing/bush.svg" alt="" className="h-auto w-24.25" />
-              <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
+              <img src="/landing/bush.svg" alt="" className="w-24.25 h-auto" />
+              <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center">
                 {t('routes.landingGroup.event.merchandise')}
               </span>
             </button>
@@ -80,16 +83,16 @@ export default function LandingSectionTwo() {
             {/* Missing Pieces */}
             {isRoleStudent ? (
               <button
-                className="absolute top-[53%] left-[56%] z-10 flex flex-col items-center justify-center gap-1"
+                className="top-[53%] left-[56%] z-10 absolute flex flex-col justify-center items-center gap-1"
                 aria-label="Missing Pieces"
                 onClick={() => handleNavigation('/game/piece')}
               >
                 <img
                   src="/landing/jigsaws.svg"
                   alt=""
-                  className="h-auto w-18"
+                  className="w-18 h-auto"
                 />
-                <span className="text-center text-base font-bold whitespace-nowrap text-white text-shadow-lg sm:text-lg md:text-xl">
+                <span className="text-shadow-lg font-bold text-white text-base sm:text-lg md:text-xl text-center whitespace-nowrap">
                   {t('routes.landingGroup.event.missingPiece')}
                 </span>
               </button>
@@ -97,7 +100,7 @@ export default function LandingSectionTwo() {
               <img
                 src="/landing/mountain.svg"
                 alt=""
-                className="absolute top-[44%] -right-[10%] z-10 h-auto w-38"
+                className="top-[44%] -right-[10%] z-10 absolute w-38 h-auto"
               />
             )}
 
@@ -105,20 +108,24 @@ export default function LandingSectionTwo() {
             <img
               src="/landing/road.svg"
               alt=""
-              className="h-full w-full object-contain"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
       </div>
 
-      <div className="bg-main-pink bg-pink flex w-full items-center justify-center py-8">
-        <Button
-          className="bg-main-beige text-main-pink"
-          onClick={() => handleNavigation('/agenda')}
-        >
-          {t('routes.landingGroup.buttonGroup.agenda')}
-        </Button>
-      </div>
+      {
+        role === 'attendee' && (
+          <div className="flex justify-center items-center bg-main-pink bg-pink py-8 w-full">
+            <Button
+              className="bg-main-beige text-main-pink"
+              onClick={() => handleNavigation('/auth/profile/ticket')}
+            >
+              {t('routes.landingGroup.buttonGroup.ticket')}
+            </Button>
+          </div>
+        )
+      }
     </div>
   )
 }

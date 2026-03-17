@@ -46,42 +46,42 @@ export default function Ticket({
   }, [dreamFaculties, locale])
 
   return (
-    <div className="relative -mt-6 w-full px-5">
-      <div className="relative top-20 z-30 w-full drop-shadow-lg">
+    <div className="relative -mt-6 px-5 w-full">
+      <div className="top-20 z-30 relative drop-shadow-lg w-full">
         <img src="/logo/cu-journey.webp" alt="CU Journey" className="mx-auto" />
       </div>
 
-      <div className="mx-auto flex max-w-80 flex-col items-center justify-start overflow-visible rounded-xl">
+      <div className="flex flex-col justify-start items-center mx-auto rounded-xl max-w-80 overflow-visible">
         {/* Ticket Body */}
-        <div className="bg-sub-beige -mb-2 w-full rounded-t-xl px-6 pt-14 shadow-xl">
+        <div className="bg-sub-beige shadow-xl -mb-2 px-6 pt-14 rounded-t-xl w-full">
           <div className="flex flex-col gap-3">
-            <div className="inline-block w-fit rounded-full border border-[#AEAEB2] px-2 py-1 text-sm font-medium text-[#8E8E93]">
+            <div className="inline-block px-2 py-1 border border-[#AEAEB2] rounded-full w-fit font-medium text-[#8E8E93] text-sm">
               CU-TICKET
             </div>
 
-            <div className="flex w-full items-center justify-between gap-3">
+            <div className="flex justify-between items-center gap-3 w-full">
               <div className="">
-                <p className="text-sm font-semibold">28-29</p>
-                <p className="text-xs font-semibold text-[#8E8E93]">
+                <p className="font-semibold text-sm">28-29</p>
+                <p className="font-semibold text-[#8E8E93] text-xs">
                   {t('routes.authGroup.profileGroup.ticketGroup.month')}
                 </p>
               </div>
               <Plane className="rotate-45" fill="currentColor" size={20} />
-              <div className="w-fit pl-2 text-right">
-                <p className="text-sm font-semibold">
+              <div className="pl-2 w-fit text-right">
+                <p className="font-semibold text-sm">
                   {t('routes.authGroup.profileGroup.ticketGroup.chulalongkorn')}
                 </p>
-                <p className="text-xs font-semibold text-[#8E8E93]">
+                <p className="font-semibold text-[#8E8E93] text-xs">
                   {t('routes.authGroup.profileGroup.ticketGroup.university')}
                 </p>
               </div>
             </div>
 
             <div>
-              <p className="text-xs/loose font-medium text-[#8E8E93]">
+              <p className="font-medium text-[#8E8E93] text-xs/loose">
                 {t('routes.authGroup.profileGroup.ticketGroup.student')}
               </p>
-              <h1 className="text-xl leading-tight font-semibold">
+              <h1 className="font-semibold text-xl leading-tight">
                 {firstName}
                 <br />
                 {lastName}
@@ -94,9 +94,9 @@ export default function Ticket({
               )}
             />
 
-            <div className="min-d-62 mb-6 flex w-full items-start justify-between">
+            <div className="flex justify-between items-start mb-6 w-full min-d-62">
               <div className={clsx(!isHasDream && 'invisible min-h-30')}>
-                <p className="text-xs/loose font-medium text-[#8E8E93]">
+                <p className="font-medium text-[#8E8E93] text-xs/loose">
                   {t(
                     'routes.authGroup.profileGroup.ticketGroup.dreamFaculties'
                   )}
@@ -104,7 +104,7 @@ export default function Ticket({
                 {mappedDreamFaculties.map((fac, index) => (
                   <p
                     key={`${fac.code}-${index}`}
-                    className="text-xs font-semibold"
+                    className="font-semibold text-xs"
                   >
                     {fac.label}
                   </p>
@@ -114,7 +114,7 @@ export default function Ticket({
                 <img
                   src="/auth/profile/ticket/landing/scanned.svg"
                   alt=""
-                  className="absolute right-10 w-35"
+                  className="right-10 absolute w-35"
                   loading="lazy"
                 />
               )}
@@ -155,7 +155,7 @@ export default function Ticket({
         </svg>
 
         {/* QR Code Section */}
-        <div className="bg-sub-beige -mt-2 w-full rounded-b-xl px-6 pt-4 pb-6 shadow-xl">
+        <div className="bg-sub-beige shadow-xl -mt-2 px-6 pt-4 pb-6 rounded-b-xl w-full">
           <div className="flex flex-col items-center gap-2.5 pt-3">
             <QRCode
               size={256}
@@ -166,7 +166,7 @@ export default function Ticket({
               fgColor={'#000'}
               level={'H'}
             />
-            <p className="text-sm font-medium">ID{id}</p>
+            <p className="font-medium text-sm">ID2341242456767</p>
           </div>
         </div>
       </div>

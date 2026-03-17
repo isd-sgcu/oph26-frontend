@@ -48,6 +48,7 @@ function RouteComponent() {
           type: 'standard',
           theme: 'outline',
           size: 'large',
+          shape: 'pill',
         })
       }
     }
@@ -64,12 +65,14 @@ function RouteComponent() {
   }, [])
 
   return (
-    <section className="bg-main-light-pink relative flex w-full flex-col">
-      <div className="flex min-h-screen flex-col items-center justify-center">
-        <img src="/logo.svg" alt="logo" className="w-96" />
-        <h1 className="text-2xl font-semibold text-white text-shadow-sm">
-          CU Open House 2026
-        </h1>
+    <section className="relative flex flex-col bg-gradient-pink-oval w-full">
+      <div className='flex flex-col justify-center items-center gap-10 my-auto pb-10'>
+        <div className="flex flex-col justify-center items-center gap-3">
+          <img src="/logo/cu-journey.webp" alt="logo" className="w-80" />
+          <h1 className="text-shadow-sm font-semibold text-white text-2xl">
+            CU Open House 2026
+          </h1>
+        </div>
         <div ref={googleButtonRef} />
       </div>
     </section>
