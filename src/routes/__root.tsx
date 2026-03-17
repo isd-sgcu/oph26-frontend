@@ -45,8 +45,8 @@ function RootDocument() {
       </head>
       <body className="flex min-h-screen w-full max-w-(--width-page) flex-col justify-self-center">
         <QueryClientProvider client={queryClient}>
-          <Header />
           <UserProvider>
+            <Header />
             <main className="flex flex-1 bg-white">
               <Outlet />
             </main>

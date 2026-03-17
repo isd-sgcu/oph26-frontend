@@ -8,7 +8,7 @@ import { useUser } from '@/contexts/UserContext'
 export default function LandingSectionOne() {
   const navigate = useNavigate()
   const userContext = useUser()
-  const user = userContext?.user
+  const attendee = userContext?.attendee
   const { t } = useTranslation()
 
   return (
@@ -39,7 +39,7 @@ export default function LandingSectionOne() {
 
         {/* Detail */}
         <div className="z-30 flex w-full flex-col items-center justify-center gap-8">
-          {!user && (
+          {!attendee && (
             <div className="flex items-center justify-center gap-4">
               <Button
                 size={'md'}

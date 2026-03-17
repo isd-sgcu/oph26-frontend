@@ -3,7 +3,8 @@ import { FlatIcon } from './FlatIcon'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useRouter } from '@tanstack/react-router'
 import { Button } from './ui/button'
-import CustomModal from './CustomModal'
+import { logout } from '@/services/auth/auth'
+import { useUser } from '@/contexts/UserContext'
 
 type NavItem = {
   title: string // Note: Don't forget to concern about i18n
@@ -67,10 +68,11 @@ export default function Header() {
   const { i18n, t } = useTranslation()
   const router = useRouter()
   const location = useLocation()
+  const userContext = useUser()
+  const attendee = userContext?.attendee
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [openCustomModal, setOpenCustomModal] = useState(false)
   const [toColor, setToColor] = useState(HeaderEnum.MAINLIGHTPINK)
 
   useEffect(() => setMounted(true), [])
@@ -219,60 +221,48 @@ export default function Header() {
 
               {/* Buttons */}
               <div className="mt-auto flex flex-col items-center justify-center gap-4">
-                <Button
-                  size="sm"
-                  className="bg-main-beige"
-                  onClick={() => {
-                    setOpenSidebar(false)
-                    router.navigate({ to: '/auth/login' })
-                  }}
-                >
-                  <span className="text-main-pink">
-                    {t('components.header.sidebar.register')}
-                  </span>
-                </Button>
-
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    setOpenSidebar(false)
-                    router.navigate({ to: '/auth/login' })
-                  }}
-                >
-                  {t('components.header.sidebar.login')}
-                </Button>
-
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    setOpenSidebar(false)
-                    setOpenCustomModal(true)
-                  }}
-                >
-                  {t('components.header.sidebar.logout')}
-                </Button>
+                {!attendee ? (
+                  <>
+                    <Button
+                      size="sm"
+                      className="bg-main-beige"
+                      onClick={() => {
+                        setOpenSidebar(false)
+                        router.navigate({ to: '/auth/login' })
+                      }}
+                    >
+                      <span className="text-main-pink">
+                        {t('components.header.sidebar.register')}
+                      </span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        setOpenSidebar(false)
+                        router.navigate({ to: '/auth/login' })
+                      }}
+                    >
+                      {t('components.header.sidebar.login')}
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    size="sm"
+                    onClick={async () => {
+                      setOpenSidebar(false)
+                      await logout()
+                      router.navigate({ to: '/' })
+                      window.location.reload()
+                    }}
+                  >
+                    {t('components.header.sidebar.logout')}
+                  </Button>
+                )}
               </div>
             </div>
           </>
         )}
       </header>
-
-      {openCustomModal && (
-        <CustomModal
-          open={openCustomModal}
-          onOpenChange={setOpenCustomModal}
-          iconName="fi-rr-map-marker"
-          title="Title Title Title Title Title Title"
-          subtitle="Subtitle Subtitle Subtitle Subtitle Subtitle Subtitle Subtitle"
-          body="Body Body Body Body Body Body Body Body Body Body"
-          detail="Detail Detail Detail Detail Detail Detail Detail DetailDetail Detail Detail Detail Detail"
-          buttonText="Click"
-          onClick={() => {
-            alert('Log out')
-            setOpenCustomModal(false)
-          }}
-        />
-      )}
     </>
   )
 }

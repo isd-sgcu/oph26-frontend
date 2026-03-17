@@ -1,7 +1,8 @@
 import { FacultyType } from '@/components/const/faculty'
 import { getMyAttendee } from '@/services/attendee/attendee'
 import { getMe } from '@/services/auth/auth'
-import { useRouter } from 'node_modules/@tanstack/react-router/dist/esm/useRouter'
+import { useLocation } from '@tanstack/react-router'
+
 import {
   createContext,
   useContext,
@@ -39,9 +40,8 @@ export type Attendee = {
 }
 
 export type UserContextType = {
-  user: User | null
-  attendee?: Attendee
-  isAttendee: boolean
+  user: User | undefined
+  attendee: Attendee | undefined
 }
 
 const UserContext = createContext<UserContextType | null>(null)
@@ -49,14 +49,31 @@ const UserContext = createContext<UserContextType | null>(null)
 export const useUser = () => useContext(UserContext)
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const router = useRouter()
-  const [user, setUser] = useState<User | null>(null)
+  const location = useLocation()
+  const [user, setUser] = useState<User | undefined>(undefined)
   const [attendee, setAttendee] = useState<Attendee | undefined>(undefined)
-  const [isAttendee, setIsAttendee] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handleTokenChange = () => setToken(localStorage.getItem('token'))
+    window.addEventListener('tokenChanged', handleTokenChange)
+    window.addEventListener('storage', handleTokenChange)
+    return () => {
+      window.removeEventListener('tokenChanged', handleTokenChange)
+      window.removeEventListener('storage', handleTokenChange)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        setUser(undefined)
+        setLoading(false)
+        localStorage.removeItem('token')
+        return
+      }
       try {
         const userData = await getMe()
         setUser(userData)
@@ -65,24 +82,22 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           const attendeeData = await getMyAttendee()
           setAttendee(attendeeData)
           console.log('Attendee data fetched:', attendeeData)
-          setIsAttendee(userData.role === 'attendee' && !!attendeeData)
         } catch {
           setAttendee(undefined)
-          setIsAttendee(false)
         }
       } catch {
-        setUser(null)
+        setUser(undefined)
       } finally {
         setLoading(false)
       }
     }
     fetchData()
-  }, [router])
+  }, [location.pathname, token])
 
   if (loading) return null
 
   return (
-    <UserContext.Provider value={{ user, attendee, isAttendee }}>
+    <UserContext.Provider value={{ user, attendee }}>
       {children}
     </UserContext.Provider>
   )
