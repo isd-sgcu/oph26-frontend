@@ -5,17 +5,17 @@ export type CreateAttendeeRequest = {
   firstname: string
   surname: string
   attendee_type: string
-  dateOfBirth: string
+  date_of_birth: string
   province: string
   district: string
-  study_level?: string
-  school_name?: string
+  study_level: string
+  school_name: string
   news_sources_selected: string[]
-  news_sources_other?: string
+  news_sources_other: string
   objective_selected: string[]
-  objective_other?: string
+  objective_other: string
   interested_faculty: string[]
-  transportationMethod: string
+  transportation_method: string
 }
 
 export interface GetMyAttendeeResponse {
@@ -48,6 +48,7 @@ export interface GetMyAttendeeResponse {
 export const createAttendee = async (
   payload: CreateAttendeeRequest
 ): Promise<void> => {
+  console.log('Payload: ', payload)
   await Axios.post(`/attendees/`, payload)
 }
 

@@ -42,6 +42,7 @@ export type Attendee = {
 export type UserContextType = {
   user: User | undefined
   attendee: Attendee | undefined
+  role: 'staff' | 'attendee' | undefined
 }
 
 const UserContext = createContext<UserContextType | null>(null)
@@ -54,6 +55,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [attendee, setAttendee] = useState<Attendee | undefined>(undefined)
   const [loading, setLoading] = useState(true)
   const [token, setToken] = useState<string | null>(null)
+  const [role, setRole] = useState<'staff' | 'attendee' | undefined>(undefined)
 
   useEffect(() => {
     const handleTokenChange = () => setToken(localStorage.getItem('token'))
@@ -78,9 +80,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         const userData = await getMe()
         if (!userData) {
           setUser(undefined)
+          setRole(undefined)
           return
         }
         setUser(userData)
+        if (userData.role == 'staff') {
+          setRole('staff')
+          return
+        }
         try {
           const attendeeData = await getMyAttendee()
           if (!attendeeData) {
@@ -88,6 +95,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             return
           }
           setAttendee(attendeeData)
+          setRole('attendee')
         } catch {
           setAttendee(undefined)
         }
@@ -103,7 +111,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   if (loading) return null
 
   return (
-    <UserContext.Provider value={{ user, attendee }}>
+    <UserContext.Provider value={{ user, attendee, role }}>
       {children}
     </UserContext.Provider>
   )

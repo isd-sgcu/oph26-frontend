@@ -119,8 +119,7 @@ export default function Header() {
   const router = useRouter()
   const location = useLocation()
   const userContext = useUser()
-  const attendee = userContext?.attendee
-  const user = userContext?.user
+  const role = userContext?.role
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -164,11 +163,12 @@ export default function Header() {
     }, 300)
   }
 
-  const selectedNavItems = attendee
-    ? AUTHENTICATED_ATTENDEE_NAV_ITEMS
-    : user
-      ? AUTHENTICATED_STAFF_NAV_ITEMS
-      : UNAUTHENTICATED_NAV_ITEMS
+  const selectedNavItems =
+    role == 'attendee'
+      ? AUTHENTICATED_ATTENDEE_NAV_ITEMS
+      : role == 'staff'
+        ? AUTHENTICATED_STAFF_NAV_ITEMS
+        : UNAUTHENTICATED_NAV_ITEMS
 
   return (
     <>
@@ -278,7 +278,7 @@ export default function Header() {
 
               {/* Buttons */}
               <div className="mt-auto flex flex-col items-center justify-center gap-4">
-                {!attendee && !user ? (
+                {role == undefined ? (
                   <>
                     <Button
                       size="sm"
