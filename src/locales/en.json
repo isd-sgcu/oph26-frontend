@@ -124,7 +124,29 @@
       },
       "mapGroup": {},
       "merchandiseGroup": {},
-      "workshopGroup": {}
+      "workshopGroup": {
+        "title": "Workshops",
+        "inputPlaceholder": "Enter workshop name...",
+        "all": "All Faculties",
+        "noData": "No workshops found...",
+        "viewDetails": "View Details",
+        "faculty": "Faculty",
+        "location": "Location",
+        "time": "Time",
+        "back": "Back",
+        "notFound": "Workshop Not Found",
+        "details": "Details",
+        "owner": "Owner",
+        "howToParticipate": "How to Participate",
+        "preregistered": "Pre-registered",
+        "walkin": "Walk-in Available",
+        "hasLimitParticipants": "There is a limit of participants per round",
+        "noLimitParticipants": "No limit of participants per round",
+        "numRoundsPerDay": "Number of rounds per day",
+        "contactTitle": "To receive more information",
+        "registerTitle": "Register for this workshop",
+        "register": "Register"
+      }
     },
     "questionaireGroup": {
       "title": "Questionaire",

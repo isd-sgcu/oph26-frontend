@@ -21,6 +21,32 @@ export type FacultyType =
   | 'cusar'
   | 'dorm'
 
+export const ALL_FACULTIES = (): FacultyType[] => {
+  return [
+    'edu',
+    'psy',
+    'dent',
+    'law',
+    'commarts',
+    'cbs',
+    'md',
+    'pharm',
+    'polsci',
+    'sci',
+    'spsc',
+    'eng',
+    'faa',
+    'econ',
+    'arch',
+    'ahs',
+    'vet',
+    'arts',
+    'scii',
+    'cusar',
+    'dorm',
+  ]
+}
+
 export interface FacultyOption {
   value: FacultyType
   variant: 1 | 2 | 4 | 5 | 6
@@ -166,12 +192,15 @@ export const FACULTIES: FacultyOption[] = [
   },
 ]
 
+<<<<<<< HEAD
 export const FACULTY_MAP: Record<FacultyType, FacultyOption> =
   Object.fromEntries(FACULTIES.map((f) => [f.value, f])) as Record<
     FacultyType,
     FacultyOption
   >
 
+=======
+>>>>>>> bst-weakend/isd68-160-info-workshop
 export interface Faculty {
   id: FacultyType
   name: string
@@ -1168,3 +1197,12 @@ export const FACULTY_DATA: Faculty[] = [
     imagePath: '/info/faculty/dorm.webp',
   },
 ]
+<<<<<<< HEAD
+=======
+
+export const FACULTY_MAP: Record<FacultyType, FacultyOption> =
+  Object.fromEntries(FACULTIES.map((f) => [f.value, f])) as Record<
+    FacultyType,
+    FacultyOption
+  >
+>>>>>>> bst-weakend/isd68-160-info-workshop
