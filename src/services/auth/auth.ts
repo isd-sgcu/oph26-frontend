@@ -1,3 +1,4 @@
+import { User } from '@/contexts/UserContext'
 import { Axios } from '@/lib/axios'
 
 export type LoginRequest = {
@@ -10,6 +11,20 @@ export type TokenResponse = {
 }
 
 export const login = async (payload: LoginRequest): Promise<TokenResponse> => {
-  const { data } = await Axios.post<TokenResponse>('/api/auth/token', payload)
+  const { data } = await Axios.post<TokenResponse>(`/auth/token`, payload)
   return data
+}
+
+export const getMe = async (): Promise<User | null> => {
+  try {
+    const { data } = await Axios.get(`/auth/me`)
+    return data
+  } catch (error) {
+    return null
+  }
+}
+
+export const logout = async (): Promise<void> => {
+  await Axios.post(`/auth/signOut`)
+  localStorage.removeItem('token')
 }

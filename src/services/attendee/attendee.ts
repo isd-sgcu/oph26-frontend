@@ -1,22 +1,35 @@
+import { Attendee } from '@/contexts/UserContext'
 import { Axios } from '@/lib/axios'
 
 export type CreateAttendeeRequest = {
-  age: number
-  attendee_type: string
   firstname: string
   surname: string
+  attendee_type: string
+  date_of_birth: string
   province: string
-  study_level?: string
-  school_name?: string
+  district: string
+  study_level: string
+  school_name: string
   news_sources_selected: string[]
-  news_sources_other?: string
-  interested_faculty: string[]
+  news_sources_other: string
   objective_selected: string[]
-  objective_other?: string
+  objective_other: string
+  interested_faculty: string[]
+  transportation_method: string
 }
 
 export const createAttendee = async (
   payload: CreateAttendeeRequest
 ): Promise<void> => {
-  await Axios.post('/api/attendees/', payload)
+  console.log('Payload: ', payload)
+  await Axios.post(`/attendees/`, payload)
+}
+
+export const getMyAttendee = async (): Promise<Attendee | null> => {
+  try {
+    const { data } = await Axios.get(`/attendees/me`)
+    return data
+  } catch (error) {
+    return null
+  }
 }
