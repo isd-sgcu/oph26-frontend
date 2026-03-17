@@ -15,9 +15,13 @@ export const login = async (payload: LoginRequest): Promise<TokenResponse> => {
   return data
 }
 
-export const getMe = async (): Promise<User> => {
-  const { data } = await Axios.get(`/auth/me`)
-  return data
+export const getMe = async (): Promise<User | null> => {
+  try {
+    const { data } = await Axios.get(`/auth/me`)
+    return data
+  } catch (error) {
+    return null
+  }
 }
 
 export const logout = async (): Promise<void> => {

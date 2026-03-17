@@ -76,12 +76,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       }
       try {
         const userData = await getMe()
+        if (!userData) {
+          setUser(undefined)
+          return
+        }
         setUser(userData)
-        console.log('User data fetched:', userData)
         try {
           const attendeeData = await getMyAttendee()
+          if (!attendeeData) {
+            setAttendee(undefined)
+            return
+          }
           setAttendee(attendeeData)
-          console.log('Attendee data fetched:', attendeeData)
         } catch {
           setAttendee(undefined)
         }

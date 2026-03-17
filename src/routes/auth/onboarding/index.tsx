@@ -244,7 +244,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
+    <section className="bg-main-light-pink relative flex w-full flex-col">
       <div className="pt-6">
         <h1 className="px-4 text-4xl font-bold text-white text-shadow-md">
           ลงทะเบียน

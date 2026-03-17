@@ -25,7 +25,7 @@ function RouteComponent() {
       localStorage.setItem('token', data.accessToken)
       window.dispatchEvent(new Event('tokenChanged'))
       const attendeeData = await getMyAttendee()
-      if (attendeeData) {
+      if (attendeeData != null) {
         router.navigate({ to: '/' })
       } else {
         router.navigate({ to: '/auth/onboarding' })

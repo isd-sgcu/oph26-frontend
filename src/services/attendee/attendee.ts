@@ -22,7 +22,11 @@ export const createAttendee = async (
   await Axios.post(`/attendees/`, payload)
 }
 
-export const getMyAttendee = async (): Promise<Attendee> => {
-  const { data } = await Axios.get(`/attendees/me`)
-  return data
+export const getMyAttendee = async (): Promise<Attendee | null> => {
+  try {
+    const { data } = await Axios.get(`/attendees/me`)
+    return data
+  } catch (error) {
+    return null
+  }
 }
