@@ -1,6 +1,8 @@
 import { Workshop } from '@/components/const/workshop'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Button } from '@/components/ui/button'
+import { RoleType } from '@/contexts/UserContext'
+import { updateFavoriteWorkshop } from '@/services/favorite_workshops/workshop'
 import { getFacultyLabel } from '@/utils/function'
 import { useRouter } from '@tanstack/react-router'
 import { useState } from 'react'
@@ -8,12 +10,18 @@ import { useTranslation } from 'react-i18next'
 
 interface WorkshopCardProps {
   workshop: Workshop
+  role: RoleType | undefined
+  initialFavourite: boolean
 }
 
-const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
+const WorkshopCard = ({
+  workshop,
+  role,
+  initialFavourite,
+}: WorkshopCardProps) => {
   const router = useRouter()
   const { i18n, t } = useTranslation()
-  const [isFavourite, setIsFavourite] = useState(false)
+  const [isFavourite, setIsFavourite] = useState(initialFavourite)
 
   const facultyLabel = getFacultyLabel(workshop.faculty)
 
@@ -27,15 +35,20 @@ const WorkshopCard = ({ workshop }: WorkshopCardProps) => {
             {workshop.name}
           </p>
 
-          <FlatIcon
-            name={isFavourite ? 'fi-sr-heart' : 'fi-rr-heart'}
-            size={16}
-            className="text-main-pink cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsFavourite((prev) => !prev)
-            }}
-          />
+          {role == 'attendee' && (
+            <FlatIcon
+              name={isFavourite ? 'fi-sr-heart' : 'fi-rr-heart'}
+              size={16}
+              className="text-main-pink cursor-pointer"
+              onClick={async (e) => {
+                e.stopPropagation()
+                try {
+                  await updateFavoriteWorkshop(workshop.id, !isFavourite)
+                  setIsFavourite((prev) => !prev)
+                } catch (error) {}
+              }}
+            />
+          )}
         </div>
 
         {/* Information */}

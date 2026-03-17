@@ -11,10 +11,12 @@ import {
   useState,
 } from 'react'
 
+export type RoleType = 'staff' | 'attendee'
+
 export type User = {
   id: string
   email: string
-  role: 'staff' | 'attendee'
+  role: RoleType
 }
 
 export type Attendee = {
@@ -42,7 +44,7 @@ export type Attendee = {
 export type UserContextType = {
   user: User | undefined
   attendee: Attendee | undefined
-  role: 'staff' | 'attendee' | undefined
+  role: RoleType | undefined
 }
 
 const UserContext = createContext<UserContextType | null>(null)

@@ -133,6 +133,7 @@
         "title": "Workshops",
         "inputPlaceholder": "Enter workshop name...",
         "all": "All Faculties",
+        "loading": "Loading...",
         "noData": "No workshops found...",
         "viewDetails": "View Details",
         "faculty": "Faculty",

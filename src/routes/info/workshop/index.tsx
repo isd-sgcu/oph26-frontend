@@ -10,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useUser } from '@/contexts/UserContext'
+import { getFavoriteWorkshops } from '@/services/favorite_workshops/workshop'
 import { getFacultyLabel } from '@/utils/function'
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
@@ -25,11 +27,33 @@ export const Route = createFileRoute('/info/workshop/')({
 function RouteComponent() {
   const { i18n, t } = useTranslation()
   const faculty = Route.useSearch() as { faculty: string }
+  const userContext = useUser()
+  const role = userContext?.role
   const [selectedFaculty, setSelectedFaculty] = useState<string>(
     faculty.faculty || 'all'
   )
   const [filteredWorkshops, setFilteredWorkshops] = useState(WORKSHOP_DATA)
   const [searchInput, setSearchInput] = useState('')
+  const [favoriteWorkshops, setFavoriteWorkshops] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    async function fetchFavoriteWorkshops() {
+      try {
+        setLoading(true)
+        const fetchedData = await getFavoriteWorkshops()
+        setFavoriteWorkshops(fetchedData.favorite_workshops ?? [])
+      } catch (error) {
+        setFavoriteWorkshops([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (role === 'attendee') {
+      fetchFavoriteWorkshops()
+    }
+  }, [])
 
   useEffect(() => {
     let filtered = WORKSHOP_DATA
@@ -93,14 +117,25 @@ function RouteComponent() {
         </div>
 
         {/* Workshops */}
-        {filteredWorkshops && filteredWorkshops.length === 0 ? (
+        {loading ? (
+          <div className="text-center text-base font-medium text-white">
+            {t('routes.infoGroup.workshopGroup.loading')}
+          </div>
+        ) : filteredWorkshops && filteredWorkshops.length === 0 ? (
           <div className="text-center text-base font-medium text-white">
             {t('routes.infoGroup.workshopGroup.noData')}
           </div>
         ) : (
           <div className="flex h-full max-h-120 flex-col gap-2 overflow-y-auto">
             {filteredWorkshops.map((workshop) => {
-              return <WorkshopCard key={workshop.id} workshop={workshop} />
+              return (
+                <WorkshopCard
+                  key={workshop.id}
+                  workshop={workshop}
+                  role={role}
+                  initialFavourite={favoriteWorkshops.includes(workshop.id)}
+                />
+              )
             })}
           </div>
         )}
