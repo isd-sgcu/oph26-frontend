@@ -15,16 +15,20 @@ function RouteComponent() {
   const navigate = useNavigate()
 
   const userContext = useUser()
-  const attendee = userContext?.attendee
+  if (!userContext) {
+    return null
+  }
 
-  // ใช้ useEffect สำหรับ navigation
+  const attendee = userContext.attendee
+  const role = userContext.role
+
   useEffect(() => {
-    if (!attendee) {
+    if (!attendee || role !== 'staff') {
       navigate({ to: '/' })
     }
-  }, [attendee, navigate])
+  }, [attendee, role, navigate])
 
-  if (!attendee) {
+  if (!attendee || role !== 'staff') {
     return null
   }
 

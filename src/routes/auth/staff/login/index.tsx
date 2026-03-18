@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
 import { login } from '@/services/auth/auth'
+import { useUser } from '@/contexts/UserContext'
 
 declare global {
   interface Window {
@@ -17,6 +18,22 @@ export const Route = createFileRoute('/auth/staff/login/')({
 function RouteComponent() {
   const router = useRouter()
   const googleButtonRef = useRef<HTMLDivElement>(null)
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const user = userContext.user
+
+  useEffect(() => {
+    if (user?.role !== 'staff') {
+      router.navigate({ to: '/' })
+    }
+  }, [user, router])
+
+  if (user?.role !== 'staff') {
+    return null
+  }
 
   const loginMutation = useMutation({
     mutationFn: login,

@@ -11,15 +11,20 @@ export const Route = createFileRoute('/auth/staff/onboarding/')({
 function RouteComponent() {
   const router = useRouter()
   const userContext = useUser()
-  const role = userContext?.role
+  if (!userContext) {
+    return null
+  }
+
+  const user = userContext.user
+  const role = userContext.role
 
   useEffect(() => {
-    if (role !== 'staff') {
+    if (!user || role !== 'staff') {
       router.navigate({ to: '/' })
     }
-  }, [role, router])
+  }, [user, role, router])
 
-  if (role !== 'staff') {
+  if (!user || role !== 'staff') {
     return null
   }
 

@@ -12,16 +12,20 @@ export const Route = createFileRoute('/game')({
 
 function GameLayout() {
   const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
   const router = useRouter()
-  const attendee = userContext?.attendee
+  const attendee = userContext.attendee
 
   useEffect(() => {
-    if (!attendee) {
+    if (!attendee || attendee.attendee_type != 'student') {
       router.navigate({ to: '/' })
     }
   }, [attendee, router])
 
-  if (!attendee) {
+  if (!attendee || attendee.attendee_type != 'student') {
     return null
   }
 

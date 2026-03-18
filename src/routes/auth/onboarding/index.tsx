@@ -24,7 +24,7 @@ import { faculties, facultyEnum } from '@/const/faculty'
 import { FormProgress } from '@/components/auth/FormProgress'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createAttendee } from '@/services/attendee/attendee'
-import { useUser } from '@/contexts/UserContext'
+import { AttendeeType, useUser } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
@@ -111,7 +111,7 @@ type IRegistrationForm = {
   firstName: string
   lastName: string
   birthDate: string
-  status: 'student' | 'parent' | 'educationstaff' | 'other'
+  status: AttendeeType
   email: string
   province: string
   district: string
@@ -149,15 +149,20 @@ function RouteComponent() {
   const navigate = useNavigate()
   const [currentFormPage, setCurrentFormPage] = useState<number>(1)
   const userContext = useUser()
-  const attendee = userContext?.attendee
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
+  const user = userContext.user
 
   useEffect(() => {
-    if (attendee) {
+    if (attendee || !user || user.role !== 'attendee') {
       navigate({ to: '/' })
     }
-  }, [attendee, navigate])
+  }, [attendee, user, navigate])
 
-  if (attendee) {
+  if (attendee || !user || user.role !== 'attendee') {
     return null
   }
 

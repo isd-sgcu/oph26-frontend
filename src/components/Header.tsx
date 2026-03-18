@@ -147,8 +147,12 @@ export default function Header() {
   const router = useRouter()
   const location = useLocation()
   const userContext = useUser()
-  const role = userContext?.role
-  const attendee = userContext?.attendee
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
+  const attendee = userContext.attendee
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)

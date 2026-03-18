@@ -8,7 +8,11 @@ import { useUser } from '@/contexts/UserContext'
 export default function LandingSectionOne() {
   const navigate = useNavigate()
   const userContext = useUser()
-  const role = userContext?.role
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
   const { t } = useTranslation()
 
   return (

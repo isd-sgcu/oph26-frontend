@@ -15,7 +15,11 @@ function RouteComponent() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const userContext = useUser()
-  const attendee = userContext?.attendee
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
 
   useEffect(() => {
     if (!attendee) {

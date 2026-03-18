@@ -19,9 +19,11 @@ export type User = {
   role: RoleType
 }
 
+export type AttendeeType = 'student' | 'parent' | 'educationstaff' | 'other'
+
 export type Attendee = {
   age: number
-  attendee_type: string
+  attendee_type: AttendeeType
   certificate_name: string | null
   createdAt: string
   favorite_workshops: string[]
@@ -57,7 +59,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [attendee, setAttendee] = useState<Attendee | undefined>(undefined)
   const [loading, setLoading] = useState(true)
   const [token, setToken] = useState<string | null>(null)
-  const [role, setRole] = useState<'staff' | 'attendee' | undefined>(undefined)
+  const [role, setRole] = useState<RoleType | undefined>(undefined)
 
   useEffect(() => {
     const handleTokenChange = () => setToken(localStorage.getItem('token'))
@@ -74,32 +76,37 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const token = localStorage.getItem('token')
       if (!token) {
         setUser(undefined)
+        setRole(undefined)
         setLoading(false)
         localStorage.removeItem('token')
         return
       }
       try {
-        const userData = await getMe()
-        if (!userData) {
-          setUser(undefined)
-          setRole(undefined)
-          return
-        }
-        setUser(userData)
-        if (userData.role == 'staff') {
-          setRole('staff')
-          return
-        }
-        try {
-          const attendeeData = await getMyAttendee()
-          if (!attendeeData) {
-            setAttendee(undefined)
+        if (!user) {
+          const userData = await getMe()
+          if (!userData) {
+            setUser(undefined)
+            setRole(undefined)
             return
           }
-          setAttendee(attendeeData)
-          setRole('attendee')
-        } catch {
-          setAttendee(undefined)
+          setUser(userData)
+          if (userData.role == 'staff') {
+            setRole('staff')
+            return
+          }
+          try {
+            if (!attendee) {
+              const attendeeData = await getMyAttendee()
+              if (!attendeeData) {
+                setAttendee(undefined)
+                return
+              }
+              setAttendee(attendeeData)
+              setRole('attendee')
+            }
+          } catch {
+            setAttendee(undefined)
+          }
         }
       } catch {
         setUser(undefined)
