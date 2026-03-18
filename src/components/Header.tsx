@@ -218,16 +218,29 @@ export default function Header() {
         )}
 
         {/* Logo */}
-        <img
-          src="/logo/cu-journey.webp"
-          width={74}
-          height={48}
-          alt="Logo"
-          className="cursor-pointer"
-          onClick={() => {
-            router.navigate({ to: '/' })
-          }}
-        />
+        <div className="flex items-center gap-2">
+          <img
+            src="/logo/cu-journey.webp"
+            width={74}
+            height={48}
+            alt="Logo"
+            className="cursor-pointer"
+            onClick={() => {
+              router.navigate({ to: '/' })
+            }}
+          />
+
+          <img
+            src="/logo/sponsor/1_centralretail.webp"
+            width={74}
+            height={48}
+            alt="Logo"
+            className="cursor-pointer"
+            onClick={() => {
+              router.navigate({ to: '/' })
+            }}
+          />
+        </div>
 
         {/* Right menu */}
         <div className="flex items-center gap-2">
