@@ -345,8 +345,7 @@ export default function Header() {
                     onClick={async () => {
                       setOpenSidebar(false)
                       await logout()
-                      router.navigate({ to: '/' })
-                      window.location.reload()
+                      router.navigate({ to: '/', reloadDocument: true })
                     }}
                   >
                     {t('components.header.sidebar.logout')}

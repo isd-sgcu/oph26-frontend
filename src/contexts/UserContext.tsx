@@ -77,6 +77,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       if (!token) {
         setUser(undefined)
         setRole(undefined)
+        setAttendee(undefined)
         setLoading(false)
         localStorage.removeItem('token')
         return
@@ -87,6 +88,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           if (!userData) {
             setUser(undefined)
             setRole(undefined)
+            setAttendee(undefined)
             return
           }
           setUser(userData)
