@@ -19,12 +19,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { provinces } from '@/const/province'
-import { faculties, facultyEnum } from '@/const/faculty'
+import { provinces } from '@/components/const/province'
 import { FormProgress } from '@/components/auth/FormProgress'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createAttendee } from '@/services/attendee/attendee'
 import { AttendeeType, useUser } from '@/contexts/UserContext'
+import { FACULTIES } from '@/components/const/faculty'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
@@ -73,16 +73,6 @@ const objectivesOptions: Option[] = [
   },
   { value: 'other', label: 'อื่น ๆ' },
 ]
-
-const enumValueToKey = Object.fromEntries(
-  Object.entries(facultyEnum).map(([key, value]) => [
-    value as string,
-    key.toLowerCase(),
-  ])
-)
-const facultyThToCode: Record<string, string> = Object.fromEntries(
-  faculties.map((f) => [f.th, enumValueToKey[f.facultyEnum]])
-)
 
 const convertStudyLevel = (level: string) => {
   switch (level) {
@@ -246,7 +236,7 @@ function RouteComponent() {
       data.interestedFaculties3,
     ]
       .filter((f) => f && f !== 'ยังไม่ได้ตัดสินใจเลือก')
-      .map((f) => facultyThToCode[f!])
+      .map((f) => FACULTIES.find((fac) => fac.label.th === f)?.value)
       .filter(Boolean)
 
     const newsSourceSelected = data.acknowledged
@@ -364,7 +354,7 @@ const ProfileForm = () => {
     <FormCard>
       <div>
         <p className="text-main-pink text-lg font-semibold">ข้อมูลส่วนตัว</p>
-        <div className="h-[1px] w-full bg-[#AFAFAF]"></div>
+        <div className="h-px w-full bg-[#AFAFAF]"></div>
       </div>
       <div className="flex flex-col gap-3 text-sm">
         <div>
@@ -499,7 +489,7 @@ const ProfileForm = () => {
               <p className="text-main-pink mt-3 text-lg font-semibold">
                 การศึกษา
               </p>
-              <div className="h-[1px] w-full bg-[#AFAFAF]"></div>
+              <div className="h-px w-full bg-[#AFAFAF]"></div>
             </div>
             <div>
               <p className="font-semibold">
@@ -614,8 +604,8 @@ const FacultiesForm = () => {
                   .filter((name) => name !== fieldName)
                   .map((name) => watch(name))
                   .filter((v) => v && v !== 'ยังไม่ได้ตัดสินใจเลือก')
-                const filteredFaculties = faculties.filter(
-                  (fac) => !otherValues.includes(fac.th)
+                const filteredFaculties = FACULTIES.filter(
+                  (fac) => !otherValues.includes(fac.label.th)
                 )
                 return (
                   <>
@@ -643,8 +633,8 @@ const FacultiesForm = () => {
                           </SelectItem>
                         )}
                         {filteredFaculties.map((fac) => (
-                          <SelectItem key={fac.th} value={fac.th}>
-                            {fac.th}
+                          <SelectItem key={fac.label.th} value={fac.label.th}>
+                            {fac.label.th}
                           </SelectItem>
                         ))}
                       </SelectContent>
