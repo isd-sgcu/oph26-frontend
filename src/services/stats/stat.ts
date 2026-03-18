@@ -18,6 +18,8 @@ export type AttendeeStats = {
 }
 
 export const getAttendeeStats = async (): Promise<any> => {
-  const { data } = await Axios.get(`/stats/attendees`)
+  const { data } = await Axios.get(
+    `/stats/attendees`
+  )
   return data
 }

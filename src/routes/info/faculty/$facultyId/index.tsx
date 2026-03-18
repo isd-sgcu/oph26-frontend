@@ -41,8 +41,18 @@ function RouteComponent() {
             className="mx-auto mb-4 rounded-xl object-cover"
             alt={getFacultyLabel(targetFaculty.id).th}
           />
-          <h1 className="text-center text-2xl font-semibold text-black">
-            {getFacultyLabel(targetFaculty.id).th}
+          <h1 className="relative w-full text-center text-2xl font-semibold text-black">
+            <span
+              onClick={() => {
+                router.navigate({
+                  to: '/info/faculty',
+                })
+              }}
+              className="absolute left-0 cursor-pointer text-4xl font-semibold"
+            >
+              {'<'}
+            </span>
+            <span>{getFacultyLabel(targetFaculty.id).th}</span>
           </h1>
           <h2 className="text-center text-base text-black">
             {getFacultyLabel(targetFaculty.id).en}
@@ -51,6 +61,13 @@ function RouteComponent() {
 
         {/* ฺButtons */}
         <div className="flex justify-center gap-4">
+          <Button
+            onClick={() => {
+              window.open(targetFaculty.websiteUrl, '_blank')
+            }}
+          >
+            {t('routes.infoGroup.facultyGroup.facultyButton')}
+          </Button>
           <Button
             className="bg-gradient-purple"
             onClick={() => {

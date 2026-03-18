@@ -28,7 +28,11 @@ function RouteComponent() {
   const { i18n, t } = useTranslation()
   const faculty = Route.useSearch() as { faculty: string }
   const userContext = useUser()
-  const role = userContext?.role
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
   const [selectedFaculty, setSelectedFaculty] = useState<string>(
     faculty.faculty || 'all'
   )

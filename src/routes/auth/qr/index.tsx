@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import QrCodeScanner from '@/components/auth/qr/QrCodeScanner'
 import { useNavigate } from '@tanstack/react-router'
+import { useUser } from '@/contexts/UserContext'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/auth/qr/')({
   component: RouteComponent,
@@ -11,6 +13,24 @@ export const Route = createFileRoute('/auth/qr/')({
 function RouteComponent() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
+  const role = userContext.role
+
+  useEffect(() => {
+    if (!attendee || role !== 'staff') {
+      navigate({ to: '/' })
+    }
+  }, [attendee, role, navigate])
+
+  if (!attendee || role !== 'staff') {
+    return null
+  }
 
   const user = {
     firstName: 'John',

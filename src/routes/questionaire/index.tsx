@@ -64,6 +64,15 @@ function RouteComponent() {
     setOpenHighSchoolInformationPopup(highSchool)
   }, [])
 
+  // Check Date (Can access after 30 March 2026)
+  useEffect(() => {
+    const currentDate = new Date()
+    const targetDate = new Date('2026-03-30T00:00:00')
+    if (currentDate < targetDate) {
+      router.navigate({ to: '/' })
+    }
+  }, [])
+
   // Check Step 1
   useEffect(() => {
     if (

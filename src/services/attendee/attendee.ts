@@ -1,5 +1,6 @@
 import { Attendee } from '@/contexts/UserContext'
 import { Axios } from '@/lib/axios'
+import { AxiosError } from 'axios'
 
 export type CreateAttendeeRequest = {
   firstname: string
@@ -21,8 +22,11 @@ export type CreateAttendeeRequest = {
 export const createAttendee = async (
   payload: CreateAttendeeRequest
 ): Promise<void> => {
-  console.log('Payload: ', payload)
-  await Axios.post(`/attendees/`, payload)
+  try {
+    await Axios.post(`/attendees/`, payload)
+  } catch (error) {
+    throw error as AxiosError
+  }
 }
 
 export const getMyAttendee = async (): Promise<Attendee | null> => {
@@ -30,6 +34,6 @@ export const getMyAttendee = async (): Promise<Attendee | null> => {
     const { data } = await Axios.get(`/attendees/me`)
     return data
   } catch (error) {
-    return null
+    throw error as AxiosError
   }
 }
