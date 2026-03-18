@@ -136,8 +136,6 @@
         "store": "Contact store: ",
         "buy": "Buy Now"
       },
-      "workshopGroup": {}
-      "merchandiseGroup": {},
       "workshopGroup": {
         "title": "Workshops",
         "inputPlaceholder": "Enter workshop name...",
