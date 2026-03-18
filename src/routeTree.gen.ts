@@ -24,7 +24,6 @@ import { Route as AuthOnboardingIndexRouteImport } from './routes/auth/onboardin
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
 import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/workshop/$workshopId/index'
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
-import { Route as AuthStaffOnboardingIndexRouteImport } from './routes/auth/staff/onboarding/index'
 import { Route as AuthStaffLoginIndexRouteImport } from './routes/auth/staff/login/index'
 import { Route as AuthProfileTicketIndexRouteImport } from './routes/auth/profile/ticket/index'
 
@@ -105,12 +104,6 @@ const InfoFacultyFacultyIdIndexRoute =
     path: '/info/faculty/$facultyId/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AuthStaffOnboardingIndexRoute =
-  AuthStaffOnboardingIndexRouteImport.update({
-    id: '/auth/staff/onboarding/',
-    path: '/auth/staff/onboarding/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const AuthStaffLoginIndexRoute = AuthStaffLoginIndexRouteImport.update({
   id: '/auth/staff/login/',
   path: '/auth/staff/login/',
@@ -138,7 +131,6 @@ export interface FileRoutesByFullPath {
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId/': typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -157,7 +149,6 @@ export interface FileRoutesByTo {
   '/info/workshop': typeof InfoWorkshopIndexRoute
   '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId': typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -178,7 +169,6 @@ export interface FileRoutesById {
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId/': typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -200,7 +190,6 @@ export interface FileRouteTypes {
     | '/info/workshop/'
     | '/auth/profile/ticket/'
     | '/auth/staff/login/'
-    | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
     | '/info/workshop/$workshopId/'
   fileRoutesByTo: FileRoutesByTo
@@ -219,7 +208,6 @@ export interface FileRouteTypes {
     | '/info/workshop'
     | '/auth/profile/ticket'
     | '/auth/staff/login'
-    | '/auth/staff/onboarding'
     | '/info/faculty/$facultyId'
     | '/info/workshop/$workshopId'
   id:
@@ -239,7 +227,6 @@ export interface FileRouteTypes {
     | '/info/workshop/'
     | '/auth/profile/ticket/'
     | '/auth/staff/login/'
-    | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
     | '/info/workshop/$workshopId/'
   fileRoutesById: FileRoutesById
@@ -256,7 +243,6 @@ export interface RootRouteChildren {
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
   AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
   AuthStaffLoginIndexRoute: typeof AuthStaffLoginIndexRoute
-  AuthStaffOnboardingIndexRoute: typeof AuthStaffOnboardingIndexRoute
   InfoFacultyFacultyIdIndexRoute: typeof InfoFacultyFacultyIdIndexRoute
   InfoWorkshopWorkshopIdIndexRoute: typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -368,13 +354,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InfoFacultyFacultyIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/staff/onboarding/': {
-      id: '/auth/staff/onboarding/'
-      path: '/auth/staff/onboarding'
-      fullPath: '/auth/staff/onboarding/'
-      preLoaderRoute: typeof AuthStaffOnboardingIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth/staff/login/': {
       id: '/auth/staff/login/'
       path: '/auth/staff/login'
@@ -422,7 +401,6 @@ const rootRouteChildren: RootRouteChildren = {
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
   AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
   AuthStaffLoginIndexRoute: AuthStaffLoginIndexRoute,
-  AuthStaffOnboardingIndexRoute: AuthStaffOnboardingIndexRoute,
   InfoFacultyFacultyIdIndexRoute: InfoFacultyFacultyIdIndexRoute,
   InfoWorkshopWorkshopIdIndexRoute: InfoWorkshopWorkshopIdIndexRoute,
 }

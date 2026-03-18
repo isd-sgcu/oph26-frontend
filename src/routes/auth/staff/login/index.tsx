@@ -2,7 +2,7 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
-import { login } from '@/services/auth/auth'
+import { getMe, login } from '@/services/auth/auth'
 import { useUser } from '@/contexts/UserContext'
 
 declare global {
@@ -24,7 +24,14 @@ function RouteComponent() {
     onSuccess: async (data) => {
       localStorage.setItem('token', data.accessToken)
       window.dispatchEvent(new Event('tokenChanged'))
-      router.navigate({ to: '/auth/staff/onboarding' })
+      try {
+        const user = await getMe()
+        if (user?.role === 'staff') {
+          router.navigate({ to: '/', reloadDocument: true })
+        } else {
+          router.navigate({ to: '/auth/onboarding', reloadDocument: true })
+        }
+      } catch (error) {}
     },
   })
 
@@ -60,9 +67,12 @@ function RouteComponent() {
     <section className="bg-main-light-pink relative flex w-full flex-col">
       <div className="flex min-h-screen flex-col items-center justify-center">
         <img src="/logo.svg" alt="logo" className="w-96" />
-        <h1 className="text-2xl font-semibold text-white text-shadow-sm">
-          CU Open House 2026
+        <h1 className="text-4xl font-semibold text-white text-shadow-sm">
+          Staff
         </h1>
+        <h2 className="text-xl font-semibold text-white text-shadow-sm">
+          CU Open House 2026
+        </h2>
         <div ref={googleButtonRef} />
       </div>
     </section>
