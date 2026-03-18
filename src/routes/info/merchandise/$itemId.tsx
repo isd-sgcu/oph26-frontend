@@ -14,27 +14,50 @@ function RouteComponent() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { itemId } = Route.useParams()
-
+  const { variant } = Route.useSearch() as { variant?: number }
+  
   const merch = getMerchandiseById(itemId)
+  
+  const initialIndex = merch.variant.findIndex(
+  (v) => v.id === Number(variant)
+)
 
-  // --------------Carousel-----------------
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
+// Variant
+const [selectedVariantIndex, setSelectedVariantIndex] = useState(
+  initialIndex >= 0 ? initialIndex : 0
+)
 
-  useEffect(() => {
-    if (!api) return
+// --------------Carousel-----------------
+const [api, setApi] = useState<CarouselApi>()
+const [current, setCurrent] = useState(0)
 
+useEffect(() => {
+  if (!api) return
+  
+  setCurrent(api.selectedScrollSnap())
+  
+  api.on("select", () => {
     setCurrent(api.selectedScrollSnap())
+  })
+}, [api])
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap())
+useEffect(() => {
+  if (!api) return
+
+  api.scrollTo(0, true)
+  setCurrent(0)
+}, [selectedVariantIndex, api])
+
+useEffect(() => {
+  merch.variant.forEach((variant) => {
+    variant.imgPath.forEach((src) => {
+      const img = new Image()
+      img.src = src
     })
-  }, [api])
+  })
+}, [merch])
 
-  //-----------------------------------------
-
-  // Variant
-  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0)
+//-----------------------------------------
 
   return (
   <div className='bg-gradient-pink flex-1 p-5'>
@@ -57,10 +80,10 @@ function RouteComponent() {
         <CarouselContent>
           {merch.variant[selectedVariantIndex].imgPath.map((img, i) => (
             <CarouselItem key={i}>
-              <div className="w-full aspect-square bg-white rounded-xl overflow-hidden">
+              <div className="w-full aspect-3/2 bg-white rounded-xl overflow-hidden">
                 <img
                   src={img}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </CarouselItem>
@@ -138,7 +161,16 @@ function RouteComponent() {
                   ? "bg-gradient-purple text-white"
                   : "bg-gradient-beige text-main-pink"
               }
-              onClick={() => setSelectedVariantIndex(index)}
+              onClick={() => {
+                setSelectedVariantIndex(index)
+
+                navigate({
+                  to: "/info/merchandise/$itemId",
+                  params: { itemId },
+                  search: { variant: variant.id },
+                  replace: true, // prevents history spam
+                })
+              }}
             >
               {variant.title}
             </Button>
@@ -149,21 +181,36 @@ function RouteComponent() {
 
     {/* Details */}
     <div className='text-white mt-5'>
-      {merch.detail}
+      {merch.variant[selectedVariantIndex].detail}
     </div>
 
     {/* Shop link */}
-    <div className='text-main-beige font-semibold text-lg my-5'>
-        {t('routes.infoGroup.merchandiseGroup.store')} {merch.shopName}
+    <div className='text-main-beige font-semibold text-lg my-5 flex items-center gap-2'>
+      <span>{t('routes.infoGroup.merchandiseGroup.store')}</span>
+
+      <a
+        href="https://www.instagram.com/cu.item/"
+        target="_blank"
+        className="flex items-center gap-1 whitespace-nowrap text-main-beige"
+      >
+        <FlatIcon name="fi-brands-instagram" size={18} />
+        <span className="underline">cu.item</span>
+      </a>
     </div>
 
     {/* Buy button */}
     <Button
       size="lg"
       className='w-full bg-gradient-purple text-white font-semibold text-xl'
-      // onClick={()}
+      asChild
     >
-      {t('routes.infoGroup.merchandiseGroup.buy')}
+      <a
+        href="https://cuitem.shop/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t('routes.infoGroup.merchandiseGroup.buy')}
+      </a>
     </Button>
   </div>
   )
