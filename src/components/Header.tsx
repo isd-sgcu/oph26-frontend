@@ -178,7 +178,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
+        className={`${headerClass[toColor]} z-50 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
@@ -234,7 +234,7 @@ export default function Header() {
           <>
             {/* Overlay */}
             <div
-              className={`fixed inset-0 z-500 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
+              className={`fixed inset-0 z-50 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
               onClick={closeSidebar}
             />
 
