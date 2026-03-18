@@ -1,12 +1,22 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { FormCard } from '@/components/auth/FormCard.tsx'
 import { Input } from '@/components/ui/input.tsx'
+import { useUser } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/staff/onboarding/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const router = useRouter()
+  const userContext = useUser()
+  const role = userContext?.role
+
+  if (role !== 'staff') {
+    router.navigate({ to: '/' })
+    return
+  }
+
   return (
     <section className="to-main-pink relative flex w-full flex-col bg-linear-to-b from-[#ECECD2] to-10%">
       <div className="pt-6">
