@@ -1,8 +1,9 @@
-import { Outlet, createFileRoute, useNavigate } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouter } from '@tanstack/react-router'
 import GameFooter from '@/components/game/GameFooter'
 import PageNotFound from '@/components/PageNotFound'
 import { CaptureProvider } from '@/contexts/CaptureContext'
 import { useUser } from '@/contexts/UserContext'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/game')({
   component: GameLayout,
@@ -11,12 +12,17 @@ export const Route = createFileRoute('/game')({
 
 function GameLayout() {
   const userContext = useUser()
-  const navigate = useNavigate()
+  const router = useRouter()
   const attendee = userContext?.attendee
 
+  useEffect(() => {
+    if (!attendee) {
+      router.navigate({ to: '/' })
+    }
+  }, [attendee, router])
+
   if (!attendee) {
-    navigate({ to: '/' })
-    return
+    return null
   }
 
   return (

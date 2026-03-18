@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { FormCard } from '@/components/auth/FormCard.tsx'
 import { Input } from '@/components/ui/input.tsx'
 import { useUser } from '@/contexts/UserContext'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/auth/staff/onboarding/')({
   component: RouteComponent,
@@ -12,9 +13,14 @@ function RouteComponent() {
   const userContext = useUser()
   const role = userContext?.role
 
+  useEffect(() => {
+    if (role !== 'staff') {
+      router.navigate({ to: '/' })
+    }
+  }, [role, router])
+
   if (role !== 'staff') {
-    router.navigate({ to: '/' })
-    return
+    return null
   }
 
   return (

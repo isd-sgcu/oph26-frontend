@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import {
@@ -151,9 +151,14 @@ function RouteComponent() {
   const userContext = useUser()
   const attendee = userContext?.attendee
 
+  useEffect(() => {
+    if (attendee) {
+      navigate({ to: '/' })
+    }
+  }, [attendee, navigate])
+
   if (attendee) {
-    navigate({ to: '/' })
-    return
+    return null
   }
 
   const createAttendeeMutation = useMutation({
