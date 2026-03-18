@@ -13,7 +13,6 @@ import { Route as GameRouteRouteImport } from './routes/game/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
-import { Route as CertificateIndexRouteImport } from './routes/certificate/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
 import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
@@ -50,11 +49,6 @@ const GameIndexRoute = GameIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => GameRouteRoute,
-} as any)
-const CertificateIndexRoute = CertificateIndexRouteImport.update({
-  id: '/certificate/',
-  path: '/certificate/',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const InfoWorkshopIndexRoute = InfoWorkshopIndexRouteImport.update({
   id: '/info/workshop/',
@@ -143,7 +137,6 @@ const AuthProfileTicketIndexRoute = AuthProfileTicketIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
-  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
@@ -165,7 +158,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/certificate': typeof CertificateIndexRoute
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
@@ -189,7 +181,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
-  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
@@ -214,7 +205,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/game'
-    | '/certificate/'
     | '/game/'
     | '/questionaire/'
     | '/auth/login/'
@@ -236,7 +226,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/certificate'
     | '/game'
     | '/questionaire'
     | '/auth/login'
@@ -259,7 +248,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/game'
-    | '/certificate/'
     | '/game/'
     | '/questionaire/'
     | '/auth/login/'
@@ -283,7 +271,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
-  CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
@@ -329,13 +316,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/game/'
       preLoaderRoute: typeof GameIndexRouteImport
       parentRoute: typeof GameRouteRoute
-    }
-    '/certificate/': {
-      id: '/certificate/'
-      path: '/certificate'
-      fullPath: '/certificate/'
-      preLoaderRoute: typeof CertificateIndexRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/info/workshop/': {
       id: '/info/workshop/'
@@ -473,7 +453,6 @@ const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
-  CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,

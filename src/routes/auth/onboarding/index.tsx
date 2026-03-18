@@ -24,6 +24,7 @@ import { faculties, facultyEnum } from '@/const/faculty'
 import { FormProgress } from '@/components/auth/FormProgress'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createAttendee } from '@/services/attendee/attendee'
+import { useUser } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
@@ -147,6 +148,13 @@ function getEmailFromToken(): string {
 function RouteComponent() {
   const navigate = useNavigate()
   const [currentFormPage, setCurrentFormPage] = useState<number>(1)
+  const userContext = useUser()
+  const attendee = userContext?.attendee
+
+  if (attendee) {
+    navigate({ to: '/' })
+    return
+  }
 
   const createAttendeeMutation = useMutation({
     mutationFn: createAttendee,

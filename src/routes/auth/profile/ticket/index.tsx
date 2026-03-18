@@ -5,6 +5,7 @@ import Ticket from '@/components/auth/profile/ticket'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
+import { useUser } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -13,6 +14,13 @@ export const Route = createFileRoute('/auth/profile/ticket/')({
 function RouteComponent() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const userContext = useUser()
+  const attendee = userContext?.attendee
+
+  if (!attendee) {
+    navigate({ to: '/' })
+    return
+  }
 
   const [showEvaluationBanner, setShowEvaluationBanner] = useState(false)
   const [hasPermission, setHasPermission] = useState(false)
