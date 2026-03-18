@@ -22,6 +22,7 @@ import { Route as GameAchievementIndexRouteImport } from './routes/game/achievem
 import { Route as AuthQrIndexRouteImport } from './routes/auth/qr/index'
 import { Route as AuthOnboardingIndexRouteImport } from './routes/auth/onboarding/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
+import { Route as InfoMerchandiseItemIdRouteImport } from './routes/info/merchandise/$itemId'
 import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/workshop/$workshopId/index'
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
 import { Route as AuthStaffLoginIndexRouteImport } from './routes/auth/staff/login/index'
@@ -92,6 +93,11 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   path: '/auth/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InfoMerchandiseItemIdRoute = InfoMerchandiseItemIdRouteImport.update({
+  id: '/info/merchandise/$itemId',
+  path: '/info/merchandise/$itemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InfoWorkshopWorkshopIdIndexRoute =
   InfoWorkshopWorkshopIdIndexRouteImport.update({
     id: '/info/workshop/$workshopId/',
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/game': typeof GameRouteRouteWithChildren
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
   '/auth/qr/': typeof AuthQrIndexRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/onboarding': typeof AuthOnboardingIndexRoute
   '/auth/qr': typeof AuthQrIndexRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/game': typeof GameRouteRouteWithChildren
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
   '/auth/qr/': typeof AuthQrIndexRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/game'
     | '/game/'
     | '/questionaire/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
     | '/auth/qr/'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/questionaire'
+    | '/info/merchandise/$itemId'
     | '/auth/login'
     | '/auth/onboarding'
     | '/auth/qr'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/game'
     | '/game/'
     | '/questionaire/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
     | '/auth/qr/'
@@ -235,6 +247,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
+  InfoMerchandiseItemIdRoute: typeof InfoMerchandiseItemIdRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
   AuthQrIndexRoute: typeof AuthQrIndexRoute
@@ -340,6 +353,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/info/merchandise/$itemId': {
+      id: '/info/merchandise/$itemId'
+      path: '/info/merchandise/$itemId'
+      fullPath: '/info/merchandise/$itemId'
+      preLoaderRoute: typeof InfoMerchandiseItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/info/workshop/$workshopId/': {
       id: '/info/workshop/$workshopId/'
       path: '/info/workshop/$workshopId'
@@ -393,6 +413,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
+  InfoMerchandiseItemIdRoute: InfoMerchandiseItemIdRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
   AuthQrIndexRoute: AuthQrIndexRoute,
