@@ -147,8 +147,12 @@ export default function Header() {
   const router = useRouter()
   const location = useLocation()
   const userContext = useUser()
-  const role = userContext?.role
-  const attendee = userContext?.attendee
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
+  const attendee = userContext.attendee
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -206,7 +210,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
+        className={`${headerClass[toColor]} z-50 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
@@ -262,7 +266,7 @@ export default function Header() {
           <>
             {/* Overlay */}
             <div
-              className={`fixed inset-0 z-500 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
+              className={`fixed inset-0 z-50 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
               onClick={closeSidebar}
             />
 
@@ -341,8 +345,7 @@ export default function Header() {
                     onClick={async () => {
                       setOpenSidebar(false)
                       await logout()
-                      router.navigate({ to: '/' })
-                      window.location.reload()
+                      router.navigate({ to: '/', reloadDocument: true })
                     }}
                   >
                     {t('components.header.sidebar.logout')}

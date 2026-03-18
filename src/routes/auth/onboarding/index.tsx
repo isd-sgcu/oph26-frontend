@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import {
@@ -24,7 +24,7 @@ import { faculties, facultyEnum } from '@/const/faculty'
 import { FormProgress } from '@/components/auth/FormProgress'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createAttendee } from '@/services/attendee/attendee'
-import { AttendeeType } from '@/contexts/UserContext'
+import { AttendeeType, useUser } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
@@ -148,11 +148,28 @@ function getEmailFromToken(): string {
 function RouteComponent() {
   const navigate = useNavigate()
   const [currentFormPage, setCurrentFormPage] = useState<number>(1)
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
+  const user = userContext.user
+
+  useEffect(() => {
+    if (attendee || !user || user.role !== 'attendee') {
+      navigate({ to: '/' })
+    }
+  }, [attendee, user, navigate])
+
+  if (attendee || !user || user.role !== 'attendee') {
+    return null
+  }
 
   const createAttendeeMutation = useMutation({
     mutationFn: createAttendee,
     onSuccess: () => {
-      navigate({ to: '/' })
+      navigate({ to: '/', reloadDocument: true })
     },
   })
 

@@ -55,6 +55,16 @@
           "dreamFaculties": "Dream Faculties",
           "button": {
             "home": "Home"
+          },
+          "evaluationBanner": {
+            "titleNoPermission": "You are not eligible to complete \n the evaluation and <u>receive a certificate</u> because you did not attend the onsite event at Chulalongkorn University \n on March 28-29, 2026",
+            "titleHasPermission": "You have attended CU Open House 2026 \n at Chulalongkorn University \n on March 28-29, 2026",
+            "detailNoPermission": "You have attended the event, but an error occurred?",
+            "button": {
+              "questionaire": "Complete Evaluation",
+              "certificate": "Receive Certificate",
+              "report": "Report"
+            }
           }
         }
       },

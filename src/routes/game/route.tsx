@@ -1,7 +1,9 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, useRouter } from '@tanstack/react-router'
 import GameFooter from '@/components/game/GameFooter'
 import PageNotFound from '@/components/PageNotFound'
 import { CaptureProvider } from '@/contexts/CaptureContext'
+import { useUser } from '@/contexts/UserContext'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/game')({
   component: GameLayout,
@@ -9,6 +11,24 @@ export const Route = createFileRoute('/game')({
 })
 
 function GameLayout() {
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const router = useRouter()
+  const attendee = userContext.attendee
+
+  useEffect(() => {
+    if (!attendee || attendee.attendee_type != 'student') {
+      router.navigate({ to: '/' })
+    }
+  }, [attendee, router])
+
+  if (!attendee || attendee.attendee_type != 'student') {
+    return null
+  }
+
   return (
     <div className="flex w-full flex-col">
       <CaptureProvider>

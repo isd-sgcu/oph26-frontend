@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
 import { login } from '@/services/auth/auth'
 import { getMyAttendee } from '@/services/attendee/attendee'
+import { useUser } from '@/contexts/UserContext'
 
 declare global {
   interface Window {
@@ -27,7 +28,7 @@ function RouteComponent() {
       const attendeeData = await getMyAttendee()
       if (attendeeData != null) {
         // If attendee data exists, navigate to the home page
-        router.navigate({ to: '/' })
+        router.navigate({ to: '/', reloadDocument: true })
       } else {
         // If attendee data does not exist, navigate to the onboarding page
         router.navigate({ to: '/auth/onboarding' })

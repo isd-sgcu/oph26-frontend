@@ -76,32 +76,39 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const token = localStorage.getItem('token')
       if (!token) {
         setUser(undefined)
+        setRole(undefined)
+        setAttendee(undefined)
         setLoading(false)
         localStorage.removeItem('token')
         return
       }
       try {
-        const userData = await getMe()
-        if (!userData) {
-          setUser(undefined)
-          setRole(undefined)
-          return
-        }
-        setUser(userData)
-        if (userData.role == 'staff') {
-          setRole('staff')
-          return
-        }
-        try {
-          const attendeeData = await getMyAttendee()
-          if (!attendeeData) {
+        if (!user) {
+          const userData = await getMe()
+          if (!userData) {
+            setUser(undefined)
+            setRole(undefined)
             setAttendee(undefined)
             return
           }
-          setAttendee(attendeeData)
-          setRole('attendee')
-        } catch (error) {
-          setAttendee(undefined)
+          setUser(userData)
+          if (userData.role == 'staff') {
+            setRole('staff')
+            return
+          }
+          try {
+            if (!attendee) {
+              const attendeeData = await getMyAttendee()
+              if (!attendeeData) {
+                setAttendee(undefined)
+                return
+              }
+              setAttendee(attendeeData)
+              setRole('attendee')
+            }
+          } catch {
+            setAttendee(undefined)
+          }
         }
       } catch (error) {
         setUser(undefined)

@@ -32,6 +32,7 @@ const FACULTY_IMAGE: Record<FacultyType, string> = {
   arts: '/faculty/arts.png',
   scii: '/faculty/scii.png',
   cusar: '/faculty/cusar.png',
+  dorm: '',
 }
 
 const JIGSAW_PATH: Record<PieceVariant, string> = {
