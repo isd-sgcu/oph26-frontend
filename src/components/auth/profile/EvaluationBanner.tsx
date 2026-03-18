@@ -48,8 +48,7 @@ const EvaluationBanner = ({
               className="bg-gradient-pink"
               expanded
               onClick={() => {
-                // TODO: Navigate to Report Place
-                alert('Report!!')
+                window.open('https://forms.gle/a45qGpXRHezrVQsu7', '_blank')
                 setOpen(false)
               }}
             >
