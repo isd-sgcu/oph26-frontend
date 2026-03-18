@@ -257,8 +257,6 @@ function RouteComponent() {
       .map((i) => objectivesOptions[i])
       .map((option) => option.value)
 
-    console.log(objectiveSelected)
-
     createAttendeeMutation.mutate({
       firstname: data.firstName,
       surname: data.lastName,
@@ -567,6 +565,7 @@ const FacultiesForm = () => {
     register,
     formState: { errors },
     control,
+    setValue,
     watch,
   } = useFormContext<IRegistrationForm>()
   const fieldNames = [
@@ -575,68 +574,93 @@ const FacultiesForm = () => {
     'interestedFaculties2',
     'interestedFaculties3',
   ] as const
+
+  const handleFacultiesChange = (index: number, value: string) => {
+    setValue(fieldNames[index], value)
+    if (index === 1 && value === 'ยังไม่ได้ตัดสินใจเลือก') {
+      setValue(fieldNames[2], 'ยังไม่ได้ตัดสินใจเลือก')
+      setValue(fieldNames[3], 'ยังไม่ได้ตัดสินใจเลือก')
+    }
+    if (index === 2 && value === 'ยังไม่ได้ตัดสินใจเลือก') {
+      setValue(fieldNames[3], 'ยังไม่ได้ตัดสินใจเลือก')
+    }
+  }
   return (
     <FormCard>
       <div>
         <p className="text-main-pink text-lg font-semibold">
           จัดอันดับคณะที่สนใจ
         </p>
-        <div className="h-[1px] w-full bg-[#AFAFAF]"></div>
+        <div className="h-px w-full bg-[#AFAFAF]"></div>
       </div>
-      {fieldNames.map((fieldName, index) => (
-        <div key={index}>
-          <p className="font-semibold">
-            อันดับ {index + 1}
-            <span className="text-[#ff0000]">*</span>
-          </p>
-          <Controller
-            name={fieldName}
-            control={control}
-            render={({ field }) => {
-              const otherValues = fieldNames
-                .filter((name) => name !== fieldName)
-                .map((name) => watch(name))
-                .filter((v) => v && v !== 'ยังไม่ได้ตัดสินใจเลือก')
-              const filteredFaculties = faculties.filter(
-                (fac) => !otherValues.includes(fac.th)
-              )
-              return (
-                <>
-                  <input
-                    type="hidden"
-                    {...register(fieldName, {
-                      required: 'กรุณาเลือกคณะที่สนใจ',
-                    })}
-                    value={field.value}
-                  />
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className="data-placeholder:text-main-light-pink w-full shadow-none">
-                      <SelectValue placeholder="เลือกคณะ" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-40 max-w-full overflow-y-auto">
-                      {index > 0 && (
-                        <SelectItem value="ยังไม่ได้ตัดสินใจเลือก">
-                          ยังไม่ได้ตัดสินใจเลือก
-                        </SelectItem>
-                      )}
-                      {filteredFaculties.map((fac) => (
-                        <SelectItem key={fac.th} value={fac.th}>
-                          {fac.th}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors[fieldName] && (
-                    <p className="mt-0.5 text-xs text-[#ff0000]">
-                      กรุณาเลือกคณะที่สนใจ
-                    </p>
-                  )}
-                </>
-              )
-            }}
-          />
-        </div>
-      ))}
+
+      {fieldNames.map((fieldName, index) => {
+        const prevAllSelected = fieldNames.slice(0, index).every((name) => {
+          const v = watch(name)
+          return v && v !== 'ยังไม่ได้ตัดสินใจเลือก'
+        })
+
+        return (
+          <div key={index}>
+            <p className="font-semibold">
+              อันดับ {index + 1}
+              <span className="text-[#ff0000]">*</span>
+            </p>
+            <Controller
+              name={fieldName}
+              control={control}
+              render={({ field }) => {
+                const otherValues = fieldNames
+                  .filter((name) => name !== fieldName)
+                  .map((name) => watch(name))
+                  .filter((v) => v && v !== 'ยังไม่ได้ตัดสินใจเลือก')
+                const filteredFaculties = faculties.filter(
+                  (fac) => !otherValues.includes(fac.th)
+                )
+                return (
+                  <>
+                    <input
+                      type="hidden"
+                      {...register(fieldName, {
+                        required: 'กรุณาเลือกคณะที่สนใจ',
+                      })}
+                      value={field.value}
+                    />
+                    <Select
+                      onValueChange={(value) =>
+                        handleFacultiesChange(index, value)
+                      }
+                      value={field.value}
+                      disabled={index > 0 && !prevAllSelected}
+                    >
+                      <SelectTrigger className="data-placeholder:text-main-light-pink w-full shadow-none">
+                        <SelectValue placeholder="เลือกคณะ" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-40 max-w-full overflow-y-auto">
+                        {index > 0 && (
+                          <SelectItem value="ยังไม่ได้ตัดสินใจเลือก">
+                            ยังไม่ได้ตัดสินใจเลือก
+                          </SelectItem>
+                        )}
+                        {filteredFaculties.map((fac) => (
+                          <SelectItem key={fac.th} value={fac.th}>
+                            {fac.th}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {errors[fieldName] && (
+                      <p className="mt-0.5 text-xs text-[#ff0000]">
+                        กรุณาเลือกคณะที่สนใจ
+                      </p>
+                    )}
+                  </>
+                )
+              }}
+            />
+          </div>
+        )
+      })}
     </FormCard>
   )
 }
