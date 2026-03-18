@@ -169,7 +169,7 @@ function RouteComponent() {
   const createAttendeeMutation = useMutation({
     mutationFn: createAttendee,
     onSuccess: () => {
-      navigate({ to: '/' })
+      navigate({ to: '/', reloadDocument: true })
     },
   })
 
