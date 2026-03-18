@@ -50,11 +50,25 @@ function RouteComponent() {
                   'Attendee data not found for the current user'
               ) {
                 router.navigate({ to: '/auth/onboarding' })
+              } else if (
+                error instanceof AxiosError &&
+                error.response?.status === 403 &&
+                error.response?.data?.error ===
+                  'Forbidden, staff accounts cannot access attendee data'
+              ) {
+                router.navigate({ to: '/' })
               }
             }
           } catch (error) {
             router.navigate({ to: '/', reloadDocument: true })
           }
+        } else if (
+          error instanceof AxiosError &&
+          error.response?.status === 403 &&
+          error.response?.data?.error ===
+            'Forbidden, staff accounts cannot access attendee data'
+        ) {
+          router.navigate({ to: '/' })
         }
       }
     },
