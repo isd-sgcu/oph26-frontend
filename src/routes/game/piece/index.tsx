@@ -33,8 +33,13 @@ function RouteComponent() {
         const myPiece = await getMyPiece()
         if (myPiece) {
           setPiece(myPiece)
-          if (!localStorage.getItem(`showPieceCode_${myPiece.id}`)) {
-            localStorage.setItem(`showPieceCode_${myPiece.id}`, 'false')
+          if (!localStorage.getItem(`showPieceCode_${myPiece.piece_code}`)) {
+            localStorage.setItem(`showPieceCode_${myPiece.piece_code}`, 'false')
+          } else {
+            const showCode = localStorage.getItem(
+              `showPieceCode_${myPiece.piece_code}`
+            )
+            setOpenMyCode(showCode === 'true')
           }
         }
       } catch (error) {
@@ -107,7 +112,9 @@ function RouteComponent() {
   if (loading) {
     return (
       <div className="bg-main-light-pink relative flex-1 overflow-hidden">
-        <p>Loading...</p>
+        <p className="text-center text-base font-medium text-white">
+          Loading...
+        </p>
       </div>
     )
   }
@@ -183,7 +190,10 @@ function RouteComponent() {
               size={'lg'}
               onClick={() => {
                 setOpenMyCode(true)
-                localStorage.setItem(`showPieceCode_${piece?.id}`, 'true')
+                localStorage.setItem(
+                  `showPieceCode_${piece?.piece_code}`,
+                  'true'
+                )
               }}
             >
               {t('routes.gameGroup.pieceGroup.codeCreate')}
