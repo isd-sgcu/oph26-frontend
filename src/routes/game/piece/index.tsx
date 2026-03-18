@@ -52,7 +52,6 @@ function RouteComponent() {
     if (!date) return ''
 
     let d = new Date(date)
-    d = new Date(d.getTime() + 7 * 60 * 60 * 1000)
 
     const months = {
       th: [

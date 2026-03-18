@@ -2,9 +2,9 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
-import { login } from '@/services/auth/auth'
+import { login, refreshToken } from '@/services/auth/auth'
 import { getMyAttendee } from '@/services/attendee/attendee'
-import { useUser } from '@/contexts/UserContext'
+import { AxiosError } from 'axios'
 
 declare global {
   interface Window {
@@ -25,13 +25,37 @@ function RouteComponent() {
     onSuccess: async (data) => {
       localStorage.setItem('token', data.accessToken)
       window.dispatchEvent(new Event('tokenChanged'))
-      const attendeeData = await getMyAttendee()
-      if (attendeeData != null) {
-        // If attendee data exists, navigate to the home page
+      try {
+        await getMyAttendee()
         router.navigate({ to: '/', reloadDocument: true })
-      } else {
-        // If attendee data does not exist, navigate to the onboarding page
-        router.navigate({ to: '/auth/onboarding' })
+      } catch (error) {
+        if (
+          error instanceof AxiosError &&
+          error.response?.status === 404 &&
+          error.response?.data?.error ===
+            'Attendee data not found for the current user'
+        ) {
+          try {
+            const refreshData = await refreshToken()
+            localStorage.setItem('token', refreshData.accessToken)
+            window.dispatchEvent(new Event('tokenChanged'))
+            try {
+              await getMyAttendee()
+              router.navigate({ to: '/', reloadDocument: true })
+            } catch (error) {
+              if (
+                error instanceof AxiosError &&
+                error.response?.status === 404 &&
+                error.response?.data?.error ===
+                  'Attendee data not found for the current user'
+              ) {
+                router.navigate({ to: '/auth/onboarding' })
+              }
+            }
+          } catch (error) {
+            router.navigate({ to: '/', reloadDocument: true })
+          }
+        }
       }
     },
   })

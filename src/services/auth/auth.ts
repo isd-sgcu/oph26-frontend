@@ -8,7 +8,7 @@ export type LoginRequest = {
 
 export type TokenResponse = {
   accessToken: string
-  refreshToken: string
+  refreshToken?: string
 }
 
 export const login = async (payload: LoginRequest): Promise<TokenResponse> => {
@@ -22,7 +22,7 @@ export const login = async (payload: LoginRequest): Promise<TokenResponse> => {
 
 export const refreshToken = async (): Promise<TokenResponse> => {
   try {
-    const { data } = await Axios.post<TokenResponse>(`/auth/refreshToken`)
+    const { data } = await Axios.post<TokenResponse>(`/auth/refresh`)
     return data
   } catch (error) {
     throw error as AxiosError
