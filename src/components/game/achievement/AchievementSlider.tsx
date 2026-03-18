@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState } from 'react'
 
 type AchievementSliderProps = {
   children: React.ReactNode
 }
 
-export default function AchievementSlider({ children }: AchievementSliderProps) {
+export default function AchievementSlider({
+  children,
+}: AchievementSliderProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -36,37 +38,34 @@ export default function AchievementSlider({ children }: AchievementSliderProps) 
   }
 
   return (
-    <div className="w-full h-[calc(100%-100px)] min-w-0 overflow-hidden relative">
+    <div className="relative h-[calc(100%-100px)] w-full min-w-0 overflow-hidden">
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory h-full"
-        >
+        className="flex h-full snap-x snap-mandatory flex-nowrap overflow-x-auto"
+      >
         {/* Left spacer */}
-        <div className="shrink-0 w-1/2" />
+        <div className="w-1/2 shrink-0" />
 
         {React.Children.map(children, (child, index) => (
           <div
-          key={index}
-          className="snap-center shrink-0 px-3 flex justify-center"
+            key={index}
+            className="flex shrink-0 snap-center justify-center px-3"
           >
             {child}
           </div>
         ))}
 
         {/* Right spacer */}
-        <div className="shrink-0 w-1/2" />
+        <div className="w-1/2 shrink-0" />
       </div>
 
-
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
         {Array.from({ length: childCount }).map((_, index) => (
           <span
             key={index}
-            className={`w-1.5 aspect-square rounded-full transition-all ${
-              index === activeIndex
-                ? "bg-main-pink"
-                : "bg-[#D9D9D9]"
+            className={`aspect-square w-1.5 rounded-full transition-all ${
+              index === activeIndex ? 'bg-main-pink' : 'bg-[#D9D9D9]'
             }`}
           />
         ))}
@@ -74,4 +73,3 @@ export default function AchievementSlider({ children }: AchievementSliderProps) 
     </div>
   )
 }
-

@@ -14,10 +14,7 @@ function RouteComponent() {
 
   useEffect(() => {
     async function load() {
-      await preloadImages([
-        ...GAME_ASSETS,
-        ...PUBLIC_ASSETS,
-      ])
+      await preloadImages([...GAME_ASSETS, ...PUBLIC_ASSETS])
 
       // wait 1 frame to ensure layout complete
       await new Promise((r) => requestAnimationFrame(() => r(null)))
@@ -27,11 +24,11 @@ function RouteComponent() {
 
     load()
   }, [])
-  
+
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
       {/* MAP */}
-      {!ready && <LoadingOverlay text='Loading your journey...'/>}
+      {!ready && <LoadingOverlay text="Loading your journey..." />}
 
       {ready && (
         <div className="absolute inset-0 top-15 z-0">
@@ -56,7 +53,6 @@ function RouteComponent() {
             <span className="text-xl">of my Journey</span>
           </div>
         </div>
-
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ const PageNotFound = () => {
   if (!mounted) return null
 
   return (
-    <div className="relative flex-1 bg-gradient-pink-oval h-screen overflow-hidden">
+    <div className="bg-gradient-pink-oval relative h-screen flex-1 overflow-hidden">
       {/* Upper Road */}
       <img
         src="/background/road1.svg"
@@ -43,13 +43,18 @@ const PageNotFound = () => {
       />
 
       {/* Content  */}
-      <div className="z-10 relative flex flex-col justify-center items-center gap-10 px-4 py-6 w-full h-full">
-        <div className='flex flex-col justify-center items-center gap-7 w-full'>
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-10 px-4 py-6">
+        <div className="flex w-full flex-col items-center justify-center gap-7">
           {/* Logo */}
-          <img src="/logo/cu-journey.webp" alt="Logo" width={297} height={194} />
+          <img
+            src="/logo/cu-journey.webp"
+            alt="Logo"
+            width={297}
+            height={194}
+          />
 
           {/* Text */}
-          <h1 className="text-shadow-xs mb-10 font-bold text-white text-5xl text-center">
+          <h1 className="mb-10 text-center text-5xl font-bold text-white text-shadow-xs">
             {t('components.pageNotFound.title')}
           </h1>
         </div>

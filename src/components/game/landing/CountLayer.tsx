@@ -50,24 +50,19 @@ export default function CountLayer({
             // filter="url(#badge-shadow)"
           >
             {/* Yellow Circle */}
-            <circle
-              cx="75"
-              cy="25"
-              r="30"
-              fill="url(#gradient-beige-darker)"
-            />
+            <circle cx="75" cy="25" r="30" fill="url(#gradient-beige-darker)" />
 
             {/* Number */}
             <text
-                x="75"
-                y="25"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fontSize="30"
-                fontWeight="600"
-                fill="black"
+              x="75"
+              y="25"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize="30"
+              fontWeight="600"
+              fill="black"
             >
-                {count > 99 ? '99+' : count}
+              {count > 99 ? '99+' : count}
             </text>
           </g>
         )

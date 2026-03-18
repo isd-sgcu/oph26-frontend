@@ -2,7 +2,8 @@ import { FACULTIES, FacultyType } from '@/components/const/faculty'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Piece } from '@/components/game/Piece'
 import { Button } from '@/components/ui/button'
-import { createFileRoute } from '@tanstack/react-router'
+import { getMyPiece } from '@/services/pieces/piece'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,9 +14,10 @@ export const Route = createFileRoute('/game/piece/')({
 function RouteComponent() {
   const { i18n, t } = useTranslation()
   const copyTimeoutRef = useRef<number | null>(null)
+  const router = useRouter()
 
-  const [myFaculty, setMyFaculty] = useState<FacultyType>('arch')
-  const [myCode, setMyCode] = useState('MYBACK')
+  const [myFaculty, setMyFaculty] = useState<FacultyType>()
+  const [myCode, setMyCode] = useState('')
   const [openMyCode, setOpenMyCode] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
   const [expiredDate, setExpiredDate] = useState<string>(
@@ -23,7 +25,27 @@ function RouteComponent() {
   )
 
   useEffect(() => {
-    setMyFaculty(FACULTIES[Math.floor(Math.random() * FACULTIES.length)].value)
+    async function fetchMyPiece() {
+      try {
+        const myPiece = await getMyPiece()
+        if (
+          !myPiece ||
+          myPiece.faculty === null ||
+          myPiece.piece_code === null
+        ) {
+          router.navigate({ to: '/auth/login' })
+          return
+        }
+        setMyFaculty(myPiece.faculty)
+        setMyCode(myPiece.piece_code)
+        setExpiredDate(myPiece.expire_date)
+      } catch (error) {
+        router.navigate({ to: '/auth/login' })
+        return
+      }
+    }
+
+    fetchMyPiece()
   }, [])
 
   useEffect(() => {

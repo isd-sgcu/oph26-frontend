@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
-import Bush, { BushVariant } from "./deco/Bush";
-import Grass, { GrassVariant } from "./deco/Grass";
-import Mountain from "./deco/Mountain";
-import WavingTree, { type TreeVariant } from "./deco/WavingTree";
-import React from "react";
-import Flower, { FlowerVariant } from "./deco/Flower";
+import { useEffect, useRef } from 'react'
+import Bush, { BushVariant } from './deco/Bush'
+import Grass, { GrassVariant } from './deco/Grass'
+import Mountain from './deco/Mountain'
+import WavingTree, { type TreeVariant } from './deco/WavingTree'
+import React from 'react'
+import Flower, { FlowerVariant } from './deco/Flower'
 
 type MountainConfig = {
   x: number
@@ -159,7 +159,7 @@ const GRASSES: GrassConfig[] = [
   { x: 385, y: 1115, scale: 0.6, variant: 'tyg' },
   { x: 390, y: 1625, scale: 1, variant: 'gg' },
   { x: 370, y: 1615, scale: 0.8, variant: 'tgg' },
-  
+
   // commarts, law panel
   { x: 550, y: 1420, scale: 0.8, variant: 'tyg' },
   { x: 535, y: 1437, scale: 0.8, variant: 'gg' },
@@ -171,7 +171,7 @@ const GRASSES: GrassConfig[] = [
   //middle panel
   { x: 940, y: 460, scale: 1, variant: 'gg' },
   { x: 1180, y: 750, scale: 1.2, variant: 'gg' },
-  
+
   // right panel
   { x: 1530, y: 650, scale: 1.5, variant: 'gg' },
   { x: 1750, y: 600, scale: 1.5, variant: 'gg' },
@@ -257,11 +257,11 @@ const FLOWERS: FlowerConfig[] = [
   { x: 1970, y: 1670, scale: 1, variant: 'yellow' },
 ]
 
-export default function DecorationLayer({ 
+export default function DecorationLayer({
   velocityRef,
   getWorldBounds,
-} : {  
-  velocityRef: React.RefObject<number> 
+}: {
+  velocityRef: React.RefObject<number>
   getWorldBounds: () => {
     left: number
     right: number
@@ -269,7 +269,6 @@ export default function DecorationLayer({
     bottom: number
   } | null
 }) {
-
   const grassRefs = useRef<(SVGGElement | null)[]>([])
   const flipMultipliers = useRef<number[]>([])
   const rotation = useRef(0)
@@ -280,16 +279,15 @@ export default function DecorationLayer({
     const update = () => {
       const velocity = velocityRef.current
 
-      const strength = 2.5   // try 1.5–2.5
-      const maxTilt = 10      // max degrees
+      const strength = 2.5 // try 1.5–2.5
+      const maxTilt = 10 // max degrees
 
       const targetRotation = Math.max(
         -maxTilt,
         Math.min(maxTilt, velocity * strength)
       )
 
-      rotation.current +=
-        (targetRotation - rotation.current) * 0.15
+      rotation.current += (targetRotation - rotation.current) * 0.15
 
       grassRefs.current.forEach((el, i) => {
         if (!el) return
