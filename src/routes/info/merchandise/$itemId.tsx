@@ -133,7 +133,7 @@ useEffect(() => {
     {/* Details */}
     <div className='flex flex-row justify-between text-main-beige'>
       <div className='font-semibold text-xl'>
-        {merch.name}
+        {merch.name} {merch.variant[selectedVariantIndex].title}
       </div>
       <div className='flex flex-col text-right'>
         <span className='font-semibold text-xl'>฿ {merch.price}</span>
