@@ -17,12 +17,12 @@ export interface MyPiece {
   expire_date: string
 }
 
-export const getMyPiece = async (): Promise<MyPiece> => {
+export const getMyPiece = async (): Promise<MyPiece | null> => {
   try {
     const { data } = await Axios.get(`/pieces/me`)
     return data
   } catch (error) {
-    throw error
+    return null
   }
 }
 

@@ -1,8 +1,9 @@
-import { FACULTIES, FacultyType } from '@/components/const/faculty'
+import { FACULTIES } from '@/components/const/faculty'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Piece } from '@/components/game/Piece'
 import { Button } from '@/components/ui/button'
-import { getMyPiece } from '@/services/pieces/piece'
+import { useUser } from '@/contexts/UserContext'
+import { getMyPiece, MyPiece } from '@/services/pieces/piece'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,25 +16,32 @@ function RouteComponent() {
   const { i18n, t } = useTranslation()
   const copyTimeoutRef = useRef<number | null>(null)
   const router = useRouter()
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
 
-  const [myFaculty, setMyFaculty] = useState<FacultyType>()
-  const [myCode, setMyCode] = useState('')
   const [openMyCode, setOpenMyCode] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
-  const [expiredDate, setExpiredDate] = useState<string>(
-    new Date().toLocaleTimeString()
-  )
+  const [piece, setPiece] = useState<MyPiece | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchMyPiece() {
+      setLoading(true)
       try {
         const myPiece = await getMyPiece()
-        setMyFaculty(myPiece.faculty)
-        setMyCode(myPiece.piece_code)
-        setExpiredDate(myPiece.expire_date)
+        if (myPiece) {
+          setPiece(myPiece)
+          if (!localStorage.getItem(`showPieceCode_${myPiece.id}`)) {
+            localStorage.setItem(`showPieceCode_${myPiece.id}`, 'false')
+          }
+        }
       } catch (error) {
         router.navigate({ to: '/' })
         return
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -48,11 +56,9 @@ function RouteComponent() {
     }
   }, [])
 
-  function formatDateTime(date: string) {
+  function formatDateTime(date: string | undefined) {
     if (!date) return ''
-
     let d = new Date(date)
-
     const months = {
       th: [
         'ม.ค.',
@@ -98,7 +104,15 @@ function RouteComponent() {
       : `${day} ${month} ${year} ${hour}.${minute}`
   }
 
-  const selectedFaculty = FACULTIES.find((f) => f.value == myFaculty)
+  if (loading) {
+    return (
+      <div className="bg-main-light-pink relative flex-1 overflow-hidden">
+        <p>Loading...</p>
+      </div>
+    )
+  }
+
+  const selectedFaculty = FACULTIES.find((f) => f.value == piece?.faculty)
 
   return (
     <div className="bg-main-light-pink relative flex-1 overflow-hidden">
@@ -110,7 +124,7 @@ function RouteComponent() {
 
         {/* Content */}
         <div
-          className={`bg-main-beige mt-4 mb-24 flex h-full w-full flex-col items-center rounded-xl px-6 py-8`}
+          className={`bg-main-beige mt-4 mb-24 flex h-full w-full flex-col items-center rounded-xl px-4 py-8`}
         >
           {/* Header */}
           <h2 className="text-main-pink mb-3 text-center text-2xl font-semibold break-all">
@@ -132,7 +146,7 @@ function RouteComponent() {
               <button
                 className="my-1 flex h-16 w-full items-center rounded-full bg-white shadow-md"
                 onClick={() => {
-                  navigator.clipboard.writeText(myCode)
+                  navigator.clipboard.writeText(piece?.piece_code ?? '')
                   setIsCopied(true)
                   if (copyTimeoutRef.current) {
                     clearTimeout(copyTimeoutRef.current)
@@ -145,7 +159,7 @@ function RouteComponent() {
                 }}
               >
                 <span className="text-main-pink flex-1 px-2 text-center text-2xl font-medium">
-                  {myCode}
+                  {piece?.piece_code ?? ''}
                 </span>
                 <span className="bg-gradient-purple flex h-full cursor-pointer items-center rounded-r-full px-5 py-2">
                   <FlatIcon
@@ -160,7 +174,7 @@ function RouteComponent() {
                   ? t('routes.gameGroup.pieceGroup.codeCopied')
                   : t('routes.gameGroup.pieceGroup.codeExpired') +
                     ' ' +
-                    formatDateTime(expiredDate)}
+                    formatDateTime(piece?.expire_date)}
               </p>
             </>
           ) : (
@@ -169,6 +183,7 @@ function RouteComponent() {
               size={'lg'}
               onClick={() => {
                 setOpenMyCode(true)
+                localStorage.setItem(`showPieceCode_${piece?.id}`, 'true')
               }}
             >
               {t('routes.gameGroup.pieceGroup.codeCreate')}
