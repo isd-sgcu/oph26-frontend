@@ -121,7 +121,16 @@
       }
     },
     "infoGroup": {
-      "facultyGroup": {},
+      "facultyGroup": {
+        "title": "คณะ",
+        "inputPlaceholder": "ค้นหาคณะ...",
+        "noData": "ไม่พบคณะที่กำลังค้นหา...",
+        "workshopButton": "Workshops",
+        "facultyButton": "เกี่ยวกับคณะ",
+        "location": "ที่ตั้งคณะ: ",
+        "major": "ภาควิชา",
+        "field": "สาขา"
+      },
       "mapGroup": {},
       "merchandiseGroup": {
         "title": "สินค้าที่ระลึก",
@@ -132,6 +141,31 @@
         "buy": "สั่งซื้อสินค้า"
       },
       "workshopGroup": {}
+      "merchandiseGroup": {},
+      "workshopGroup": {
+        "title": "ข้อมูลเวิร์คชอป",
+        "inputPlaceholder": "กรอกชื่อเวิร์คชอป...",
+        "all": "ทุกคณะ",
+        "loading": "Loading...",
+        "noData": "ไม่พบเวิร์คชอปที่กำลังค้นหา...",
+        "viewDetails": "ดูรายละเอียดเพิ่มเติม",
+        "faculty": "คณะ",
+        "location": "สถานที่",
+        "time": "เวลา",
+        "back": "ย้อนกลับ",
+        "notFound": "ไม่พบเวิร์คชอป",
+        "details": "รายละเอียดกิจกรรม",
+        "owner": "ผู้จัดกิจกรรม",
+        "howToParticipate": "วิธีการเข้าร่วม",
+        "preregistered": "จำเป็นต้องลงทะเบียนล่วงหน้า",
+        "walkin": "สามารถ walk-in ที่หน้างานได้เลย",
+        "hasLimitParticipants": "จำกัดจำนวนผู้เข้าร่วม/รอบ",
+        "noLimitParticipants": "ไม่จำกัดจำนวนผู้เข้าร่วม/รอบ",
+        "numRoundsPerDay": "จำนวนรอบต่อวัน",
+        "contactTitle": "ติดตามรายละเอียดเพิ่มเติมได้ที่",
+        "registerTitle": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
+        "register": "ลงทะเบียน"
+      }
     },
     "questionaireGroup": {
       "title": "แบบประเมิน",
