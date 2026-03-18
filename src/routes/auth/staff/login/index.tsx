@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-export const Route = createFileRoute('/auth/login/')({
+export const Route = createFileRoute('/auth/staff/login/')({
   component: RouteComponent,
 })
 
