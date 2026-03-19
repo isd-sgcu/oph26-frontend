@@ -39,6 +39,7 @@ export interface AttendeePiecesStats {
 export interface CollectedPiecesResponse {
   collected_pieces: CollectedPiece[]
   stats: AttendeePiecesStats
+  rank: number
 }
 
 export const getCollectedPieces =

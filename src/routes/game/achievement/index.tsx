@@ -57,6 +57,17 @@ function RouteComponent() {
       }
 
       // The 'var1' Data
+      const var1Data: Achievement = {
+        variant: 'var1',
+        stat: -1,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        var1Data.stat = fetchedCollectedPiecesData.rank ?? -1
+        if (var1Data.stat != -1) {
+          data.push(var1Data)
+        }
+      }
 
       // The 'var2' Data
       let var2Data: Achievement | null = null
@@ -99,6 +110,8 @@ function RouteComponent() {
       }
 
       if (fetchedCollectedPiecesData) {
+        overallData.miniCard2Rank = fetchedCollectedPiecesData.rank ?? -1
+
         const allFacultyStats =
           fetchedCollectedPiecesData.stats.collected_by_faculty
 
