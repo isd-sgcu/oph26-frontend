@@ -293,8 +293,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     hasLimitParticipants: true,
     url: 'https://docs.google.com/forms/d/1W2OqaYGGN1G5XRHWcYiFlmdnFYgdDjCgxlIqqVp0gWo/edit',
     faculty: 'law',
-    timeSlot:
-      '09:00 - 10:30 / 10:30 - 12:00 / 13:00 - 14:30 / 14:30 - 16:00 / 14:00 - 15:00 / 15:00 - 16:00',
+    timeSlot: '09:00 - 10:30 / 10:30 - 12:00 / 13:00 - 14:30 / 14:30 - 16:00',
     locationName:
       'ห้อง 605, 606, 904, 905 อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
     locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
@@ -681,7 +680,8 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://docs.google.com/forms/d/e/1FAIpQLSdICBgxJ_kYVQiQui5SncdKsYWLG6nm78J1bCxhGjkneAI59A/viewform?usp=publish-editor',
     faculty: 'polsci',
     timeSlot: '13:00 - 13.45 / 14.00 - 14.45 / 15.00 - 15.45',
-    locationName: 'ห้อง 514, 515 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี)',
+    locationName:
+      'ห้อง 514, 515 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 607-608',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
