@@ -86,7 +86,7 @@ const convertStudyLevel = (level: string) => {
     case 'ปวช.':
       return 'vocational'
     case 'ปวส.':
-      return 'high_vocational'
+      return 'highervocational'
     case 'ปริญญาตรี':
       return 'undergraduate'
     case 'ปริญญาโท':
