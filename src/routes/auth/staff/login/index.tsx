@@ -30,7 +30,7 @@ function RouteComponent() {
         } else {
           router.navigate({ to: '/auth/onboarding', reloadDocument: true })
         }
-      } catch (error) {}
+      } catch (error) { }
     },
   })
 
@@ -63,13 +63,13 @@ function RouteComponent() {
   }, [])
 
   return (
-    <section className="bg-main-light-pink relative flex w-full flex-col">
-      <div className="flex min-h-screen flex-col items-center justify-center">
+    <section className="relative flex flex-col bg-main-light-pink w-full">
+      <div className="flex flex-col justify-center items-center min-h-screen">
         <img src="/logo/cu-journey.webp" alt="logo" className="w-96" />
-        <h1 className="text-4xl font-semibold text-white text-shadow-sm">
+        <h1 className="text-shadow-sm font-semibold text-white text-4xl">
           Staff
         </h1>
-        <h2 className="text-xl font-semibold text-white text-shadow-sm">
+        <h2 className="text-shadow-sm font-semibold text-white text-xl">
           CU Open House 2026
         </h2>
         <div ref={googleButtonRef} />

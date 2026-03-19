@@ -2,151 +2,168 @@ import { IDetectedBarcode, outline, Scanner } from '@yudiel/react-qr-scanner'
 import { useState } from 'react'
 import CustomModal from '@/components/CustomModal'
 import { useTranslation } from 'react-i18next'
+import { useUser } from '@/contexts/UserContext'
+import { useNavigate } from '@tanstack/react-router'
+import { checkIn, CheckInErrorResponse, CheckInResponse } from '@/services/checkin/checkin'
 import { FACULTIES } from '@/components/const/faculty'
+// import { facultyEnum } from '@/const/faculty'
 
 export default function QrCodeScanner() {
   const { t, i18n } = useTranslation()
-  const [scannedData, setScannedData] = useState<string>('')
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [isScanning, setIsScanning] = useState<boolean>(true)
-  const [title, setTitle] = useState<string | React.ReactNode>('')
-  const [subtitle, setSubtitle] = useState<string | React.ReactNode>('')
-  const [body, setBody] = useState<string | React.ReactNode>('')
-  const [detail, setDetail] = useState<string | React.ReactNode>('')
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+  const userContext = useUser()
+  const navigate = useNavigate()
 
-  const handleScanQrCode = (data: IDetectedBarcode[]) => {
-    if (!isScanning) return
+  if (!userContext) {
+    navigate({ to: '/' })
+    return null
+  }
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isScanning, setIsScanning] = useState(true)
+  const [modalContent, setModalContent] = useState<{
+    title: React.ReactNode
+    subtitle: React.ReactNode
+    body: React.ReactNode
+    detail: React.ReactNode
+    isSuccess: boolean
+  }>({
+    title: '',
+    subtitle: '',
+    body: '',
+    detail: '',
+    isSuccess: false,
+  })
+
+  const handleScanQrCode = async (data: IDetectedBarcode[]) => {
+    if (!isScanning || !data || data.length === 0) return
+
+    setIsScanning(false)
 
     try {
-      if (!data || data.length === 0) {
-        throw new Error('No data found in QR code.')
-      }
-
-      setIsScanning(false)
-
-      const now = new Date()
-      const locale = i18n.language
       const scannedValue = data[0].rawValue
-      setScannedData(scannedValue)
+      const response = await checkIn({ ticket_code: scannedValue })
 
-      // ** TODO ** Fetch data from backend using scannedValue
-      const mockSuccess = false
-      const errorCode = 'error_02'
-      let facultyName = ''
-
-      setIsSuccess(mockSuccess)
-
-      if (mockSuccess) {
-        setTitle(
-          <div className="flex flex-col gap-1">
-            <p className="text-2xl font-bold">{'John Doe'}</p>
-            <p className="text-grey text-sm font-normal">ID : {'12345678'}</p>
-          </div>
-        )
-        setSubtitle(
-          <div className="text-center text-xl font-semibold text-pretty">
-            <p>{'John Doe'}</p>
-            <p>{t('routes.authGroup.qrGroup.modal.success.subtitle')}</p>
-            <p>CU OPEN HOUSE 2026</p>
-          </div>
-        )
-        facultyName =
-          locale === 'th'
-            ? FACULTIES.find((fac) => fac.value === 'eng')?.label?.th || ''
-            : FACULTIES.find((fac) => fac.value === 'eng')?.label?.en || ''
-        setBody(
-          <div
-            className="text-center text-sm text-pretty"
-            dangerouslySetInnerHTML={{
-              __html: t('routes.authGroup.qrGroup.modal.success.body', {
-                StaffName: 'น้องสตาฟ ใครเอ่ย',
-                FacultyName: facultyName,
-                Date: now.toLocaleDateString(
-                  locale === 'th' ? 'th-TH' : 'en-US',
-                  {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  }
-                ),
-                Time: now.toLocaleTimeString('th-TH', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                }),
-              }),
-            }}
-          ></div>
-        )
-        setDetail(
-          <div className="border-main-pink text-main-pink rounded-2xl border-2 px-3 py-2 text-center text-sm text-pretty">
-            {t('routes.authGroup.qrGroup.modal.success.detail')}
-          </div>
-        )
+      if (response.success) {
+        // Handle success response
+        handleSuccessResponse(response as CheckInResponse)
       } else {
-        setTitle(
-          <p className="text-error-base text-2xl font-bold">
-            {t('routes.authGroup.qrGroup.modal.error.title')}
-          </p>
-        )
-        setSubtitle(
-          <div className="text-center text-xl font-semibold text-pretty">
-            {errorCode === 'error_02' && <p>John Doe</p>}
-            <p>
-              {t(`routes.authGroup.qrGroup.modal.error.subtitle.${errorCode}`)}
-            </p>
-          </div>
-        )
-        setBody('')
-        setDetail('')
+        // Handle error response
+        handleErrorResponse(response as CheckInErrorResponse)
       }
-
-      setIsModalOpen(true)
-    } catch (error: any) {
-      setIsSuccess(false)
-      setTitle(
-        <p className="text-error-base text-3xl font-bold">
-          {t('routes.authGroup.qrGroup.modal.error.title')}
-        </p>
-      )
-      setSubtitle(
-        <p className="text-center text-xl font-semibold text-pretty">
-          {t('routes.authGroup.qrGroup.modal.error.subtitle.error_01')}
-        </p>
-      )
-      setBody('')
-      setDetail('')
+    } catch (error) {
+      console.error('Unexpected error during check-in:', error)
+      handleUnexpectedError()
+    } finally {
       setIsModalOpen(true)
     }
+  }
+
+  const handleSuccessResponse = (response: CheckInResponse) => {
+    const now = new Date()
+    const locale = i18n.language
+    const data = response.data
+    const faculty = FACULTIES.find(f => f.value === data.faculty)
+
+    setModalContent({
+      isSuccess: true,
+      title: (
+        <div className="flex flex-col gap-1">
+          <p className="font-bold text-2xl">{`${data.firstname} ${data.surname}`}</p>
+          <p className="font-normal text-grey text-sm">ID: {data.ticket_code}</p>
+        </div>
+      ),
+      subtitle: (
+        <div className="font-semibold text-xl text-center text-pretty">
+          <p>{t('routes.authGroup.qrGroup.modal.success.subtitle', {
+            faculty: locale === 'th' ? faculty?.label.th : faculty?.label.en,
+          })}</p>
+        </div>
+      ),
+      body: (
+        <div
+          className="text-sm text-center text-pretty"
+          dangerouslySetInnerHTML={{
+            __html: t('routes.authGroup.qrGroup.modal.success.body', {
+              date: new Date(data.check_in_at).toLocaleDateString(
+                locale === 'th' ? 'th-TH' : 'en-US',
+                { year: 'numeric', month: 'short', day: 'numeric' }
+              ),
+              time: now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
+            }),
+          }}
+        ></div>
+      ),
+      detail: (
+        <div className="px-3 py-2 border-2 border-main-pink rounded-2xl text-main-pink text-sm text-center text-pretty">
+          {t('routes.authGroup.qrGroup.modal.success.detail')}
+        </div>
+      ),
+    })
+  }
+
+  // Handle error response
+  const handleErrorResponse = (response: CheckInErrorResponse) => {
+    const status = response.status
+    const data = response.data
+
+    setModalContent({
+      isSuccess: false,
+      title: (
+        <p className="font-bold text-error-base text-2xl">
+          {
+            status === 409 ?
+              t('routes.authGroup.qrGroup.modal.error.title2') :
+              t('routes.authGroup.qrGroup.modal.error.title')
+          }
+        </p>
+      ),
+      subtitle: (
+        <div className="font-semibold text-xl text-center text-pretty">
+          {
+            status === 409 && (
+              <p>{data.firstname + " " + data.surname}</p>
+            )
+          }
+          <p>{t(`routes.authGroup.qrGroup.modal.error.subtitle.${status}`)}</p>
+        </div>
+      ),
+      body: '',
+      detail: '',
+    })
+  }
+
+  const handleUnexpectedError = () => {
+    setModalContent({
+      isSuccess: false,
+      title: (
+        <p className="font-bold text-error-base text-2xl">
+          {t('routes.authGroup.qrGroup.modal.error.title')}
+        </p>
+      ),
+      subtitle: (
+        <div className="font-semibold text-xl text-center text-pretty">
+          <p>{t('routes.authGroup.qrGroup.modal.error.subtitle.400')}</p>
+        </div>
+      ),
+      body: '',
+      detail: '',
+    })
   }
 
   const handleCloseModal = () => {
     setIsModalOpen(false)
-
-    // Reset all states
     setTimeout(() => {
-      setTitle('')
-      setSubtitle('')
-      setBody('')
-      setDetail('')
-      setScannedData('')
-      setIsSuccess(false)
+      setModalContent({ title: '', subtitle: '', body: '', detail: '', isSuccess: false })
       setIsScanning(true)
     }, 300)
   }
 
-  const handleModalOpenChange = (open: boolean) => {
-    if (!open) {
-      handleCloseModal()
-    }
-  }
-
   return (
     <>
-      <div className="bg-primary-bg relative flex aspect-square! w-full max-w-full flex-col items-center justify-center overflow-hidden rounded-2xl md:w-120">
+      <div className="relative flex flex-col justify-center items-center bg-primary-bg rounded-2xl w-full md:w-120 max-w-full aspect-square! overflow-hidden">
         <Scanner
           onScan={handleScanQrCode}
-          onError={() => console.log('Error')}
+          onError={() => console.error('Scanner error')}
           components={{
             onOff: false,
             torch: true,
@@ -172,25 +189,18 @@ export default function QrCodeScanner() {
             },
           }}
           scanDelay={2000}
-          allowMultiple={true}
+          allowMultiple={false}
           sound={false}
-        >
-          <div className="pointer-events-none absolute inset-0 p-4">
-            <div className="absolute top-12 left-12 h-10 w-10 rounded-xs border-5 border-r-0 border-b-0 border-white" />
-            <div className="absolute top-12 right-12 h-10 w-10 rounded-xs border-5 border-b-0 border-l-0 border-white" />
-            <div className="absolute bottom-12 left-12 h-10 w-10 rounded-xs border-5 border-t-0 border-r-0 border-white" />
-            <div className="absolute right-12 bottom-12 h-10 w-10 rounded-xs border-5 border-t-0 border-l-0 border-white" />
-          </div>
-        </Scanner>
+        />
       </div>
       <CustomModal
         open={isModalOpen}
-        onOpenChange={handleModalOpenChange}
-        iconName={isSuccess ? 'fi-rr-check-circle' : 'fi-rr-cross-circle'}
-        title={title}
-        subtitle={subtitle}
-        body={body}
-        detail={detail}
+        onOpenChange={(open) => !open && handleCloseModal()}
+        iconName={modalContent.isSuccess ? 'fi-rr-check-circle' : 'fi-rr-cross-circle'}
+        title={modalContent.title}
+        subtitle={modalContent.subtitle}
+        body={modalContent.body}
+        detail={modalContent.detail}
         buttonText={t('routes.authGroup.qrGroup.modal.confirmBtn')}
         onClick={handleCloseModal}
       />
