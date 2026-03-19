@@ -53,6 +53,7 @@ function RouteComponent() {
     } else {
       setIsHighSchoolStudent(false)
     }
+
   }, [])
 
   return (
