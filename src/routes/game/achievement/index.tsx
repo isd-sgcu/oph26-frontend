@@ -63,8 +63,8 @@ function RouteComponent() {
       }
 
       if (fetchedCollectedPiecesData) {
-        var1Data.stat = fetchedCollectedPiecesData.rank ?? -1
-        if (var1Data.stat != -1) {
+        var1Data.stat = fetchedCollectedPiecesData.stats.rank
+        if (var1Data.stat > 0) {
           data.push(var1Data)
         }
       }
@@ -99,6 +99,40 @@ function RouteComponent() {
       }
 
       // The 'var3' Data
+      let var3Data: Achievement = {
+        variant: 'var3',
+        stat: '0',
+        faculty: 'edu',
+      }
+
+      if (fetchedCollectedPiecesData) {
+        const sameMissingCounter =
+          fetchedCollectedPiecesData.stats.same_missing_count
+        const sameMissingCountsArray = Object.entries(sameMissingCounter).map(
+          ([missingCount, attendeeCount]) => ({
+            missingFaculty: FACULTIES[Number(missingCount) - 1].value,
+            count: attendeeCount,
+          })
+        )
+
+        const no0SameMissingCountArray = sameMissingCountsArray.filter(
+          (item) => item.count > 0
+        )
+
+        if (no0SameMissingCountArray.length > 0) {
+          const randomSameMissingItem =
+            no0SameMissingCountArray[
+              Math.floor(Math.random() * no0SameMissingCountArray.length)
+            ]
+          var3Data = {
+            variant: 'var3',
+            stat: randomSameMissingItem.count.toString(),
+            faculty: randomSameMissingItem.missingFaculty,
+          }
+        }
+      }
+
+      data.push(var3Data)
 
       // The 'overall' Data
       const overallData: Achievement = {
@@ -110,7 +144,7 @@ function RouteComponent() {
       }
 
       if (fetchedCollectedPiecesData) {
-        overallData.miniCard2Rank = fetchedCollectedPiecesData.rank ?? -1
+        overallData.miniCard2Rank = fetchedCollectedPiecesData.stats.rank ?? -1
 
         const allFacultyStats =
           fetchedCollectedPiecesData.stats.collected_by_faculty

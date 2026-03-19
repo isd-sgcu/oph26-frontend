@@ -230,7 +230,7 @@ export async function processFramedTemplate(
   )
 
   // 5️⃣ Draw logo
-  const logoWidth = logo.width * 1.2
+  const logoWidth = logo.width * 0.25
   const logoHeight = (logo.height / logo.width) * logoWidth
 
   ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 90, logoWidth, logoHeight)
