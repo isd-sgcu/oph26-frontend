@@ -3,6 +3,7 @@ import AchievementCard from '@/components/game/achievement/AchievementCard'
 import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
 import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
+import { useUser } from '@/contexts/UserContext'
 import { getMyLeaderboard } from '@/services/leaderboard/leaderboard'
 import { Achievement } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
@@ -18,6 +19,10 @@ function RouteComponent() {
   const { t, i18n } = useTranslation()
   const isEnglish = i18n.language.startsWith('en')
   const [loading, setLoading] = useState(true)
+  const userContext = useUser()
+  if (!userContext) return null
+
+  const attendee = userContext.attendee
 
   const [achievements, setAchievements] = useState<Achievement[]>([])
 
@@ -114,7 +119,7 @@ function RouteComponent() {
             open={isShareOpen}
             achievement={selectedAchievement}
             onClose={() => setShareOpen(false)}
-            name={'John Doe'}
+            name={attendee?.firstname + ' ' + attendee?.surname}
           />
         </div>
       )}
