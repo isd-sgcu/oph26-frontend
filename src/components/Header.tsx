@@ -285,7 +285,7 @@ export default function Header() {
 
             {/* Sidebar Panel */}
             <div
-              className={`fixed top-0 z-500 flex h-full min-h-screen w-full max-w-[var(--width-page)] -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
+              className={`fixed top-0 z-500 flex h-full min-h-screen w-full max-w-(--width-page) -translate-x-4 flex-col gap-4 overflow-auto bg-white px-4 py-8 shadow-lg ${isClosingSidebar ? 'animate-slide-out-left' : 'animate-slide-in-left'} `}
             >
               {/* Header */}
               <div className="flex items-center">
@@ -327,7 +327,7 @@ export default function Header() {
               </nav>
 
               {/* Buttons */}
-              <div className="mt-auto flex flex-col items-center justify-center gap-4">
+              <div className="mt-auto mb-6 flex flex-col items-center justify-center gap-4">
                 {role == undefined ? (
                   <>
                     <Button
