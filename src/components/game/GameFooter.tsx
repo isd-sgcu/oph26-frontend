@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import RedeemCodePopup from './RedeemCodePopup'
 import SharePopup from './SharePopup'
 import { useTranslation } from 'react-i18next'
+import { getCollectedPieces } from '@/services/pieces/piece'
 
 const GameFooter = () => {
   const location = useLocation()
@@ -14,6 +15,7 @@ const GameFooter = () => {
   const [openRedeemCodePopup, setOpenRedeemCodePopup] = useState(false)
   const [openSharePopup, setOpenSharePopup] = useState(false)
   const [isWrap, setIsWrap] = useState(false)
+  const [collectedNumber, setCollectedNumber] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,6 +24,17 @@ const GameFooter = () => {
 
     handleResize()
     window.addEventListener('resize', handleResize)
+
+    const fetchCollectedPieces = async () => {
+      try {
+        const collectedPieces = await getCollectedPieces()
+        setCollectedNumber(collectedPieces.stats.total_collected)
+      } catch (error) {
+        setCollectedNumber(0)
+      }
+    }
+
+    fetchCollectedPieces()
 
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -100,6 +113,7 @@ const GameFooter = () => {
         <SharePopup
           open={openSharePopup}
           onClose={() => setOpenSharePopup(false)}
+          collectedNumber={collectedNumber}
         />
       )}
 

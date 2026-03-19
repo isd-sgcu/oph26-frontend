@@ -1,11 +1,17 @@
-import { FACULTIES } from '@/components/const/faculty'
+import { FACULTIES, FACULTY_KEYS } from '@/components/const/faculty'
 import AchievementCard from '@/components/game/achievement/AchievementCard'
 import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
 import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { useUser } from '@/contexts/UserContext'
-import { getMyLeaderboard } from '@/services/leaderboard/leaderboard'
-import { getCollectedPieces } from '@/services/pieces/piece'
+import {
+  getMyLeaderboard,
+  Leaderboard,
+} from '@/services/leaderboard/leaderboard'
+import {
+  CollectedPiecesResponse,
+  getCollectedPieces,
+} from '@/services/pieces/piece'
 import { Achievement, AchievementCollectedPieces } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
@@ -35,13 +41,38 @@ function RouteComponent() {
   useEffect(() => {
     async function fetchAchievements() {
       const data: Achievement[] = []
+      let fetchedCollectedPiecesData: CollectedPiecesResponse | undefined
+      let leaderboardData: Leaderboard | undefined
+
+      try {
+        fetchedCollectedPiecesData = await getCollectedPieces()
+      } catch (error) {
+        console.error('Error fetching collected pieces data:', error)
+      }
+
+      try {
+        leaderboardData = await getMyLeaderboard()
+      } catch (error) {
+        console.error('Error fetching leaderboard data:', error)
+      }
 
       // The 'var1' Data
+      const var1Data: Achievement = {
+        variant: 'var1',
+        stat: -1,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        var1Data.stat = fetchedCollectedPiecesData.stats.rank
+        if (var1Data.stat > 0) {
+          data.push(var1Data)
+        }
+      }
 
       // The 'var2' Data
       let var2Data: Achievement | null = null
-      try {
-        const leaderboardData = await getMyLeaderboard()
+
+      if (leaderboardData) {
         const allTopsIndexFromLeaderboard = leaderboardData.is_top
           .map((item, index) => (item === true ? index : -1))
           .filter((index) => index !== -1)
@@ -61,17 +92,86 @@ function RouteComponent() {
             top: 1,
           }
         }
-      } catch (error) {
-        console.error('Error fetching leaderboard data:', error)
-      } finally {
+
         if (var2Data != null) {
           data.push(var2Data)
         }
       }
 
       // The 'var3' Data
+      let var3Data: Achievement = {
+        variant: 'var3',
+        stat: '0',
+        faculty: 'edu',
+      }
+
+      if (fetchedCollectedPiecesData) {
+        const sameMissingCounter =
+          fetchedCollectedPiecesData.stats.same_missing_count
+        const sameMissingCountsArray = Object.entries(sameMissingCounter).map(
+          ([missingCount, attendeeCount]) => ({
+            missingFaculty: FACULTIES[Number(missingCount) - 1].value,
+            count: attendeeCount,
+          })
+        )
+
+        const no0SameMissingCountArray = sameMissingCountsArray.filter(
+          (item) => item.count > 0
+        )
+
+        if (no0SameMissingCountArray.length > 0) {
+          const randomSameMissingItem =
+            no0SameMissingCountArray[
+              Math.floor(Math.random() * no0SameMissingCountArray.length)
+            ]
+          var3Data = {
+            variant: 'var3',
+            stat: randomSameMissingItem.count.toString(),
+            faculty: randomSameMissingItem.missingFaculty,
+          }
+        }
+      }
+
+      data.push(var3Data)
 
       // The 'overall' Data
+      const overallData: Achievement = {
+        variant: 'overall',
+        stat: 0,
+        miniCard1Faculty: 'edu',
+        miniCard1Count: 0,
+        miniCard2Rank: -1,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        overallData.miniCard2Rank = fetchedCollectedPiecesData.stats.rank ?? -1
+
+        const allFacultyStats =
+          fetchedCollectedPiecesData.stats.collected_by_faculty
+
+        overallData.stat = fetchedCollectedPiecesData.stats.total_collected
+
+        let maxFaculty: keyof AchievementCollectedPieces | null = null
+        let maxCount = -1
+
+        FACULTY_KEYS.forEach((faculty) => {
+          // @ts-ignore
+          const value = allFacultyStats[faculty]
+          if (value && typeof value.count === 'number') {
+            if (value.count > maxCount) {
+              maxCount = value.count
+              maxFaculty = faculty
+            }
+          }
+        })
+
+        if (maxFaculty) {
+          overallData.miniCard1Faculty = maxFaculty
+          overallData.miniCard1Count = maxCount
+        }
+      }
+
+      data.push(overallData)
 
       // The 'collectedPieces' Data
       const collectedPiecesData: AchievementCollectedPieces = {
@@ -98,51 +198,27 @@ function RouteComponent() {
         scii: 0,
         cusar: 0,
       }
-      try {
-        const fetchedCollectedPiecesData = await getCollectedPieces()
+
+      if (fetchedCollectedPiecesData) {
         const allFacultyStats =
           fetchedCollectedPiecesData.stats.collected_by_faculty
         collectedPiecesData.stat =
           fetchedCollectedPiecesData.stats.total_collected
 
-        const facultyKeys: Array<keyof AchievementCollectedPieces> = [
-          'edu',
-          'psy',
-          'pharm',
-          'dent',
-          'commarts',
-          'ahs',
-          'faa',
-          'vet',
-          'law',
-          'arch',
-          'eng',
-          'arts',
-          'md',
-          'sci',
-          'econ',
-          'polsci',
-          'cbs',
-          'spsc',
-          'scii',
-          'cusar',
-        ]
-
         Object.entries(allFacultyStats).forEach(([faculty, value]) => {
           if (
             value &&
             typeof value.count === 'number' &&
-            facultyKeys.includes(faculty as keyof AchievementCollectedPieces)
+            FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
           ) {
+            // @ts-ignore
             collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
               value.count
           }
         })
-      } catch (error) {
-        console.error('Error fetching collected pieces data:', error)
-      } finally {
-        data.push(collectedPiecesData)
       }
+
+      data.push(collectedPiecesData)
 
       setAchievements(data)
       setLoading(false)

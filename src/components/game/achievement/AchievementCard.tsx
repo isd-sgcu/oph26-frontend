@@ -123,7 +123,7 @@ export default function AchievementCard({
                 <span
                   className={`${isEnglish && (stat as number) > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}
                 >
-                  {stat + '%'}
+                  {Math.round(stat as number) + '%'}
                 </span>
               )}
 

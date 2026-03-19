@@ -34,6 +34,8 @@ export interface AttendeePiecesStats {
     }
   }
   total_collected: number
+  same_missing_count: Record<number, number>
+  rank: number
 }
 
 export interface CollectedPiecesResponse {

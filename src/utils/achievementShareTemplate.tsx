@@ -450,7 +450,7 @@ export async function achievementShareOverall(
 
   ctx.shadowColor = 'transparent'
 
-  const logoWidth = logo.width * 1.2
+  const logoWidth = logo.width * 0.25
   const logoHeight = (logo.height / logo.width) * logoWidth
 
   ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 90, logoWidth, logoHeight)
@@ -516,7 +516,7 @@ export async function achievementShareCollectedPieces(
   ctx.drawImage(piecesImage, 0, 500, 1080, 1500)
 
   // Logo
-  const logoWidth = logo.width * 1.2
+  const logoWidth = logo.width * 0.25
   const logoHeight = (logo.height / logo.width) * logoWidth
 
   ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 90, logoWidth, logoHeight)
