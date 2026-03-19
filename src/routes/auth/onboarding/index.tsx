@@ -26,8 +26,6 @@ import { createAttendee } from '@/services/attendee/attendee'
 import { AttendeeType, useUser } from '@/contexts/UserContext'
 import { PRIVACY_TEXT } from '@/components/const/privacy'
 import { FACULTIES } from '@/components/const/faculty'
-import { get } from 'http'
-import { getFacultyLabel } from '@/utils/function'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
