@@ -28,11 +28,9 @@ export const getMyPiece = async (): Promise<MyPiece | null> => {
 
 export interface AttendeePiecesStats {
   collected_by_faculty: {
-    value: {
-      [faculty in FacultyType]?: {
-        count: number
-        is_top_1: boolean
-      }
+    [faculty in FacultyType]?: {
+      count: number
+      is_top_1: boolean
     }
   }
   total_collected: number

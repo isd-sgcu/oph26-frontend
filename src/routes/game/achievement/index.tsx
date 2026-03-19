@@ -6,7 +6,7 @@ import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { useUser } from '@/contexts/UserContext'
 import { getMyLeaderboard } from '@/services/leaderboard/leaderboard'
 import { getCollectedPieces } from '@/services/pieces/piece'
-import { Achievement } from '@/types/achievement'
+import { Achievement, AchievementCollectedPieces } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
@@ -74,7 +74,7 @@ function RouteComponent() {
       // The 'overall' Data
 
       // The 'collectedPieces' Data
-      const collectedPiecesData: Achievement = {
+      const collectedPiecesData: AchievementCollectedPieces = {
         variant: 'collectedPieces',
         stat: 0,
         edu: 0,
@@ -100,7 +100,44 @@ function RouteComponent() {
       }
       try {
         const fetchedCollectedPiecesData = await getCollectedPieces()
-        console.log(fetchedCollectedPiecesData)
+        const allFacultyStats =
+          fetchedCollectedPiecesData.stats.collected_by_faculty
+        collectedPiecesData.stat =
+          fetchedCollectedPiecesData.stats.total_collected
+
+        const facultyKeys: Array<keyof AchievementCollectedPieces> = [
+          'edu',
+          'psy',
+          'pharm',
+          'dent',
+          'commarts',
+          'ahs',
+          'faa',
+          'vet',
+          'law',
+          'arch',
+          'eng',
+          'arts',
+          'md',
+          'sci',
+          'econ',
+          'polsci',
+          'cbs',
+          'spsc',
+          'scii',
+          'cusar',
+        ]
+
+        Object.entries(allFacultyStats).forEach(([faculty, value]) => {
+          if (
+            value &&
+            typeof value.count === 'number' &&
+            facultyKeys.includes(faculty as keyof AchievementCollectedPieces)
+          ) {
+            collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
+              value.count
+          }
+        })
       } catch (error) {
         console.error('Error fetching collected pieces data:', error)
       } finally {
