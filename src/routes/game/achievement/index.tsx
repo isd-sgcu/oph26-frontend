@@ -1,4 +1,4 @@
-import { FACULTIES } from '@/components/const/faculty'
+import { FACULTIES, FACULTY_KEYS } from '@/components/const/faculty'
 import AchievementCard from '@/components/game/achievement/AchievementCard'
 import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
@@ -21,29 +21,6 @@ import { useTranslation } from 'react-i18next'
 export const Route = createFileRoute('/game/achievement/')({
   component: RouteComponent,
 })
-
-const facultyKeys: Array<keyof AchievementCollectedPieces> = [
-  'edu',
-  'psy',
-  'pharm',
-  'dent',
-  'commarts',
-  'ahs',
-  'faa',
-  'vet',
-  'law',
-  'arch',
-  'eng',
-  'arts',
-  'md',
-  'sci',
-  'econ',
-  'polsci',
-  'cbs',
-  'spsc',
-  'scii',
-  'cusar',
-]
 
 function RouteComponent() {
   const { t, i18n } = useTranslation()
@@ -130,7 +107,7 @@ function RouteComponent() {
         let maxFaculty: keyof AchievementCollectedPieces | null = null
         let maxCount = -1
 
-        facultyKeys.forEach((faculty) => {
+        FACULTY_KEYS.forEach((faculty) => {
           // @ts-ignore
           const value = allFacultyStats[faculty]
           if (value && typeof value.count === 'number') {
@@ -185,7 +162,7 @@ function RouteComponent() {
           if (
             value &&
             typeof value.count === 'number' &&
-            facultyKeys.includes(faculty as keyof AchievementCollectedPieces)
+            FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
           ) {
             // @ts-ignore
             collectedPiecesData[faculty as keyof AchievementCollectedPieces] =

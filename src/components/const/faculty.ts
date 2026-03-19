@@ -1,3 +1,5 @@
+import { AchievementCollectedPieces } from '@/types/achievement'
+
 export type FacultyType =
   | 'edu'
   | 'psy'
@@ -1231,4 +1233,27 @@ export const FACULTY_DATA: Faculty[] = [
     imagePath: '/info/faculty/dorm.webp',
     websiteUrl: 'https://www.rcu.sa.chula.ac.th/',
   },
+]
+
+export const FACULTY_KEYS: Array<keyof AchievementCollectedPieces> = [
+  'edu',
+  'psy',
+  'pharm',
+  'dent',
+  'commarts',
+  'ahs',
+  'faa',
+  'vet',
+  'law',
+  'arch',
+  'eng',
+  'arts',
+  'md',
+  'sci',
+  'econ',
+  'polsci',
+  'cbs',
+  'spsc',
+  'scii',
+  'cusar',
 ]
