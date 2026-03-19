@@ -12,7 +12,7 @@ export default function LandingSectionOne() {
   const { t } = useTranslation()
 
   return (
-    <div className="relative w-full h-screen max-h-fit">
+    <div className="relative w-full h-screen min-h-fit">
       <img
         src="/background/background-2.webp"
         alt=""
@@ -21,7 +21,7 @@ export default function LandingSectionOne() {
       />
 
       {/* Content */}
-      <div className="z-30 flex flex-col justify-start items-center gap-9.5 py-20">
+      <div className="z-30 flex flex-col justify-start items-center gap-9.5 pt-15 pb-20">
         {/* Logo */}
         <div className="z-30 flex flex-col justify-center items-center w-full">
           <div className="relative drop-shadow-lg w-full">
