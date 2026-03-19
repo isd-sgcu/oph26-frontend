@@ -1,21 +1,35 @@
 import { MERCHANDISE } from '@/components/const/Merchandise'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/info/merchandise/')({
   component: RouteComponent,
 })
 
+const POPUP_KEY = 'merch_popup_last_seen'
+const COOLDOWN = 1000 * 60 * 10 // 10 mins
+
 function RouteComponent() {
   const { t } = useTranslation()
+  const [showPopup, setShowPopup] = useState(false)
+
+  useEffect(() => {
+    const lastSeen = localStorage.getItem(POPUP_KEY)
+    const now = Date.now()
+
+    if (!lastSeen || now - Number(lastSeen) > COOLDOWN) {
+      setShowPopup(true)
+      localStorage.setItem(POPUP_KEY, now.toString())
+    }
+  }, [])
 
   return (
-  <div className='bg-gradient-pink flex-1 p-5'>
-    <div className="h-48.5 self-stretch rounded-2xl mb-6">
-      <img src="/info/merchandise/banner.png" alt="banner" className='rounded-2xl shadow-[0_1px_2px_0_rgba(0,0,0,0.5)]'/>
-    </div>
+  <div className='bg-gradient-pink flex-1 p-5 flex flex-col gap-5'>
+      
+    <img src="/info/merchandise/banner.png" alt="banner" className='rounded-2xl shadow-[0_1px_2px_0_rgba(0,0,0,0.5)]'/>
 
-    <h1 className='text-white text-2xl font-bold text-shadow-[0_1px_2px_rgba(0,0,0,0.5)] mb-3'>{t('routes.infoGroup.merchandiseGroup.title')}</h1>
+    <h1 className='text-white text-2xl font-bold text-shadow-[0_1px_2px_rgba(0,0,0,0.5)]'>{t('routes.infoGroup.merchandiseGroup.title')}</h1>
     
     <div className="grid grid-cols-2 gap-6">
       {MERCHANDISE.flatMap((item) =>
@@ -51,6 +65,27 @@ function RouteComponent() {
         ))
       )}
     </div>
+
+    {showPopup && (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="relative bg-white rounded-2xl p-3 shadow-xl">
+          
+          <img
+            src="/info/merchandise/popup.png"
+            alt="popup"
+            className="w-[90vw] rounded-xl object-contain"
+          />
+
+          <button
+            onClick={() => setShowPopup(false)}
+            className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-main-pink text-white rounded-full w-8 h-8 flex items-center justify-center shadow-md"
+          >
+            ✕
+          </button>
+          
+        </div>
+      </div>
+    )}
   </div>
   )
 }
