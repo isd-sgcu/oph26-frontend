@@ -4,8 +4,14 @@ import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
 import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { useUser } from '@/contexts/UserContext'
-import { getMyLeaderboard } from '@/services/leaderboard/leaderboard'
-import { getCollectedPieces } from '@/services/pieces/piece'
+import {
+  getMyLeaderboard,
+  Leaderboard,
+} from '@/services/leaderboard/leaderboard'
+import {
+  CollectedPiecesResponse,
+  getCollectedPieces,
+} from '@/services/pieces/piece'
 import { Achievement, AchievementCollectedPieces } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
@@ -35,13 +41,27 @@ function RouteComponent() {
   useEffect(() => {
     async function fetchAchievements() {
       const data: Achievement[] = []
+      let fetchedCollectedPiecesData: CollectedPiecesResponse | undefined
+      let leaderboardData: Leaderboard | undefined
+
+      try {
+        fetchedCollectedPiecesData = await getCollectedPieces()
+      } catch (error) {
+        console.error('Error fetching collected pieces data:', error)
+      }
+
+      try {
+        leaderboardData = await getMyLeaderboard()
+      } catch (error) {
+        console.error('Error fetching leaderboard data:', error)
+      }
 
       // The 'var1' Data
 
       // The 'var2' Data
       let var2Data: Achievement | null = null
-      try {
-        const leaderboardData = await getMyLeaderboard()
+
+      if (leaderboardData) {
         const allTopsIndexFromLeaderboard = leaderboardData.is_top
           .map((item, index) => (item === true ? index : -1))
           .filter((index) => index !== -1)
@@ -61,9 +81,7 @@ function RouteComponent() {
             top: 1,
           }
         }
-      } catch (error) {
-        console.error('Error fetching leaderboard data:', error)
-      } finally {
+
         if (var2Data != null) {
           data.push(var2Data)
         }
@@ -98,8 +116,8 @@ function RouteComponent() {
         scii: 0,
         cusar: 0,
       }
-      try {
-        const fetchedCollectedPiecesData = await getCollectedPieces()
+
+      if (fetchedCollectedPiecesData) {
         const allFacultyStats =
           fetchedCollectedPiecesData.stats.collected_by_faculty
         collectedPiecesData.stat =
@@ -134,15 +152,14 @@ function RouteComponent() {
             typeof value.count === 'number' &&
             facultyKeys.includes(faculty as keyof AchievementCollectedPieces)
           ) {
+            // @ts-ignore
             collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
               value.count
           }
         })
-      } catch (error) {
-        console.error('Error fetching collected pieces data:', error)
-      } finally {
-        data.push(collectedPiecesData)
       }
+
+      data.push(collectedPiecesData)
 
       setAchievements(data)
       setLoading(false)
