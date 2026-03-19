@@ -117,12 +117,16 @@ export default function LandingSectionTwo() {
       </div>
 
       <div className="flex flex-col justify-center items-center gap-4 bg-main-pink bg-pink py-8 w-full">
-        <Button
-          className="bg-main-beige text-main-pink"
-          onClick={() => handleNavigation('/agenda')}
-        >
-          {t('routes.landingGroup.buttonGroup.agenda')}
-        </Button>
+        {
+          role === 'attendee' && (
+            <Button
+              className="bg-main-beige text-main-pink"
+              onClick={() => handleNavigation('/auth/profile/ticket')}
+            >
+              {t('routes.landingGroup.buttonGroup.ticket')}
+            </Button>
+          )
+        }
         <Button
           expanded
           className="bg-main-beige text-main-pink"
@@ -131,18 +135,6 @@ export default function LandingSectionTwo() {
           {t('routes.landingGroup.buttonGroup.privacy')}
         </Button>
       </div>
-      {
-        role === 'attendee' && (
-          <div className="flex justify-center items-center bg-main-pink bg-pink py-8 w-full">
-            <Button
-              className="bg-main-beige text-main-pink"
-              onClick={() => handleNavigation('/auth/profile/ticket')}
-            >
-              {t('routes.landingGroup.buttonGroup.ticket')}
-            </Button>
-          </div>
-        )
-      }
     </div>
   )
 }

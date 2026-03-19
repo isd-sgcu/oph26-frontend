@@ -19,16 +19,16 @@ function RouteComponent() {
     return null
   }
 
-  const attendee = userContext.attendee
+  const user = userContext.user
   const role = userContext.role
 
   useEffect(() => {
-    if (!attendee || role !== 'staff') {
+    if (!user || role !== 'staff') {
       navigate({ to: '/' })
     }
-  }, [attendee, role, navigate])
+  }, [user, role, navigate])
 
-  if (!attendee || role !== 'staff') {
+  if (!user || role !== 'staff') {
     return null
   }
 
