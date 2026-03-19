@@ -1,4 +1,4 @@
-import { getMerchandiseById } from '@/components/const/merchandise'
+import { getMerchandiseById } from '@/components/const/Merchandise'
 import { FlatIcon } from '@/components/FlatIcon'
 import { Button } from '@/components/ui/button'
 import {
