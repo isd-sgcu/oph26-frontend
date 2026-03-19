@@ -237,7 +237,7 @@ function RouteComponent() {
       data.interestedFaculties3,
     ]
       .filter((f) => f && f !== 'ยังไม่ได้ตัดสินใจเลือก')
-      .map((f) => FACULTIES.find((fac) => fac.label.th === f)?.value)
+      .map((f) => FACULTIES.find((fac) => fac.value === f)?.value)
       .filter(Boolean)
 
     const newsSourceSelected = data.acknowledged
@@ -606,7 +606,7 @@ const FacultiesForm = () => {
                   .map((name) => watch(name))
                   .filter((v) => v && v !== 'ยังไม่ได้ตัดสินใจเลือก')
                 const filteredFaculties = FACULTIES.filter(
-                  (fac) => !otherValues.includes(fac.label.th)
+                  (fac) => !otherValues.includes(fac.value)
                 )
                 return (
                   <>
@@ -634,7 +634,7 @@ const FacultiesForm = () => {
                           </SelectItem>
                         )}
                         {filteredFaculties.map((fac) => (
-                          <SelectItem key={fac.label.th} value={fac.label.th}>
+                          <SelectItem key={fac.value} value={fac.value}>
                             {fac.label.th}
                           </SelectItem>
                         ))}
