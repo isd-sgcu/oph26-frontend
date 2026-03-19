@@ -81,6 +81,7 @@
           },
           "error": {
             "title": "ERROR!",
+            "title2": "Failed to check in",
             "subtitle": {
               "400": "Not found scanned ID",
               "401": "User unauthorized",

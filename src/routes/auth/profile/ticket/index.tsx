@@ -29,16 +29,30 @@ function RouteComponent() {
   useEffect(() => {
     const currentDate = new Date()
     const targetDate = new Date('2026-03-30T00:00:00')
-    const allowedAttendeeTypes = ['elementary', 'matthayom_ton', 'matthayom_plai', 'vocational']
+    const allowedAttendeeLevels = ['matthayom_ton', 'matthayom_plai', 'vocational']
+
+    if (!userAttendee) {
+      setShowEvaluationBanner(false)
+      setHasPermission(false)
+      return
+    }
+
     if (currentDate >= targetDate) {
       setShowEvaluationBanner(false)
       setHasPermission(false)
-    } else {
+    } else if (userAttendee?.checked_in_at) {
       setShowEvaluationBanner(true)
+      setHasPermission(true)
+    } else {
+      setShowEvaluationBanner(false)
       setHasPermission(true)
     }
 
-    setIsHighSchoolStudent(allowedAttendeeTypes.includes(userAttendee?.attendee_type || '') || false)
+    if (userAttendee?.attendee_type === 'student') {
+      setIsHighSchoolStudent(allowedAttendeeLevels.includes(userAttendee.study_level || '') || false)
+    } else {
+      setIsHighSchoolStudent(false)
+    }
   }, [])
 
   return (

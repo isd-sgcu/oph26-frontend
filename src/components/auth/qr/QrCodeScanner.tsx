@@ -3,9 +3,10 @@ import { useState } from 'react'
 import CustomModal from '@/components/CustomModal'
 import { useTranslation } from 'react-i18next'
 import { useUser } from '@/contexts/UserContext'
-import { notFound, useNavigate } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { checkIn, CheckInErrorResponse, CheckInResponse } from '@/services/checkin/checkin'
-import { facultyEnum } from '@/const/faculty'
+import { FACULTIES } from '@/components/const/faculty'
+// import { facultyEnum } from '@/const/faculty'
 
 export default function QrCodeScanner() {
   const { t, i18n } = useTranslation()
@@ -41,28 +42,27 @@ export default function QrCodeScanner() {
     try {
       const scannedValue = data[0].rawValue
       const response = await checkIn({ ticket_code: scannedValue })
-      console.log('Check-in response:', response)
 
-      if (response && response.success) {
-        handleSuccessResponse(response)
-      } else if (response && ((response as CheckInErrorResponse).error || "AxiosError" in response)) {
-        handleErrorResponse(response)
+      if (response.success) {
+        // Handle success response
+        handleSuccessResponse(response as CheckInResponse)
       } else {
-        handleUnexpectedError()
+        // Handle error response
+        handleErrorResponse(response as CheckInErrorResponse)
       }
     } catch (error) {
-      console.error('Error during check-in:', error)
+      console.error('Unexpected error during check-in:', error)
+      handleUnexpectedError()
     } finally {
       setIsModalOpen(true)
     }
   }
 
   const handleSuccessResponse = (response: CheckInResponse) => {
-    console.log('Handling success response:', response)
     const now = new Date()
     const locale = i18n.language
     const data = response.data
-
+    const faculty = FACULTIES.find(f => f.value === data.faculty)
 
     setModalContent({
       isSuccess: true,
@@ -74,9 +74,9 @@ export default function QrCodeScanner() {
       ),
       subtitle: (
         <div className="font-semibold text-xl text-center text-pretty">
-          <p>{`${data.firstname} ${data.surname}`}</p>
-          <p>{t('routes.authGroup.qrGroup.modal.success.subtitle')}</p>
-          <p>CU OPEN HOUSE 2026</p>
+          <p>{t('routes.authGroup.qrGroup.modal.success.subtitle', {
+            faculty: locale === 'th' ? faculty?.label.th : faculty?.label.en,
+          })}</p>
         </div>
       ),
       body: (
@@ -103,17 +103,28 @@ export default function QrCodeScanner() {
 
   // Handle error response
   const handleErrorResponse = (response: CheckInErrorResponse) => {
+    const status = response.status
+    const data = response.data
+
     setModalContent({
       isSuccess: false,
       title: (
         <p className="font-bold text-error-base text-2xl">
-          {t('routes.authGroup.qrGroup.modal.error.title')}
+          {
+            status === 409 ?
+              t('routes.authGroup.qrGroup.modal.error.title2') :
+              t('routes.authGroup.qrGroup.modal.error.title')
+          }
         </p>
       ),
       subtitle: (
         <div className="font-semibold text-xl text-center text-pretty">
-          {response.status === 'error_02' && <p>{`${response.firstname} ${response.surname}`}</p>}
-          <p>{t(`routes.authGroup.qrGroup.modal.error.subtitle.${response.status}`)}</p>
+          {
+            status === 409 && (
+              <p>{data.firstname + " " + data.surname}</p>
+            )
+          }
+          <p>{t(`routes.authGroup.qrGroup.modal.error.subtitle.${status}`)}</p>
         </div>
       ),
       body: '',
