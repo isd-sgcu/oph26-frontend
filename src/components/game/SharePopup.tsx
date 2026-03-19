@@ -41,7 +41,10 @@ const GameSharePopup = ({ open, onClose }: Props) => {
 
       const img = await captureGameMap()
 
-      const watermark = await processWatermarkTemplate(img, '/logo.svg')
+      const watermark = await processWatermarkTemplate(
+        img,
+        '/logo/cu-journey.webp'
+      )
 
       // Determine lang: 0 = th, 1 = en
       const lang = i18n.language === 'th' ? 0 : 1
@@ -51,7 +54,7 @@ const GameSharePopup = ({ open, onClose }: Props) => {
         "N'Jaramed",
         '8',
         '/background/shareTemplate1.svg',
-        '/logo.svg',
+        '/logo/cu-journey.webp',
         lang
       )
 
@@ -66,7 +69,7 @@ const GameSharePopup = ({ open, onClose }: Props) => {
         "N'Jaramed",
         '8',
         '/background/shareTemplate1.svg',
-        '/logo.svg',
+        '/logo/cu-journey.webp',
         lang
       )
 
