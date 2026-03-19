@@ -28,7 +28,7 @@ const GameFooter = () => {
 
   return (
     <>
-      <div className="fixed bottom-8 left-1/2 z-50 flex w-full max-w-(--width-page) -translate-x-1/2 justify-center">
+      <div className="fixed bottom-8 left-1/2 z-20 flex w-full max-w-(--width-page) -translate-x-1/2 justify-center">
         {/* Share */}
         <Button
           className={`${location.pathname !== '/game' ? 'hidden' : ''} ${isWrap ? 'bottom-16 scale-75' : 'bottom-24 scale-100'} bg-gradient-pink absolute right-6`}
