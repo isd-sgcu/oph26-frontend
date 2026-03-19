@@ -1,4 +1,4 @@
-import { MERCHANDISE } from '@/components/const/merchandise'
+import { MERCHANDISE } from '@/components/const/Merchandise'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
