@@ -16,8 +16,30 @@
         "merchandise": "Merchandises",
         "account": "My Account",
         "register": "Register",
+        "scan": "Scan QR",
         "login": "Login",
         "logout": "Log out"
+      }
+    },
+    "gameGroup": {
+      "gameFooter": {
+        "myPiece": "My Piece",
+        "redeemCode": "Redeem Code"
+      },
+      "redeemCodePopup": {
+        "title1": "Redeem Code",
+        "body1": "Use the code from your friends!",
+        "title2Success": "Success",
+        "title2InvalidCode": "Invalid or Expired Code",
+        "title2DuplicatedCode": "Already Redeemed",
+        "title2OtherError": "Something went wrong",
+        "body2Success": "You have received a piece from ",
+        "body2InvalidCode": "The code is not correct or has expired. \nPlease try again.",
+        "body2DuplicatedCode": "You have already redeemed this code.",
+        "body2OtherError": "An error occurred while redeeming the code. \nPlease try again.",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "confirm": "Confirm"
       }
     },
     "pageNotFound": { "title": "Page Not Found", "back": "Back to Main Page" }
@@ -25,20 +47,233 @@
   "routes": {
     "authGroup": {
       "loginGroup": {},
-      "profileGroup": {},
-      "registerGroup": {}
+      "profileGroup": {
+        "ticketGroup": {
+          "month": "March 2026",
+          "chulalongkorn": "Chulalongkorn",
+          "university": "University",
+          "student": "Student",
+          "dreamFaculties": "Dream Faculties",
+          "button": {
+            "home": "Home"
+          },
+          "evaluationBanner": {
+            "titleNoPermission": "You are not eligible to complete \n the evaluation and <u>receive a certificate</u> because you did not attend the onsite event at Chulalongkorn University \n on March 28-29, 2026",
+            "titleHasPermission": "You have attended CU Open House 2026 \n at Chulalongkorn University \n on March 28-29, 2026",
+            "detailNoPermission": "You have attended the event, but an error occurred?",
+            "button": {
+              "questionaire": "Complete Evaluation",
+              "certificate": "Receive Certificate",
+              "report": "Report"
+            }
+          }
+        }
+      },
+      "registerGroup": {},
+      "qrGroup": {
+        "greeting": "Welcome! Staff",
+        "home": "Home",
+        "modal": {
+          "success": {
+            "subtitle": "has successfully joined CU OPEN HOUSE 2026 {{faculty}}",
+            "body": "on {{date}} at {{time}}",
+            "detail": "Please inform the participant to refresh their ticket page. If a confirmation message appears indicating that the QR code has been scanned, kindly take a screenshot as proof for certificate collection."
+          },
+          "error": {
+            "title": "ERROR!",
+            "title2": "Failed to check in",
+            "subtitle": {
+              "400": "Not found scanned ID",
+              "401": "User unauthorized",
+              "403": "User forbidden",
+              "404": "Attendee not found",
+              "409": "already checked in with this faculty",
+              "500": "Internal Server Error"
+            }
+          },
+          "confirmBtn": "OK"
+        }
+      }
     },
     "gameGroup": {
-      "achievementGroup": {},
-      "pieceGroup": {}
+      "achievementGroup": {
+        "titleGroup": "Achievements",
+        "cardGroup": {
+          "var1": {
+            "title": "You are the",
+            "description": "to collect all pieces and complete the picture."
+          },
+          "var2": {
+            "title": "You have friends from",
+            "description": "in the top {{top}}% with the most friends from this faculty."
+          },
+          "var3": {
+            "title": "There are",
+            "description": "others finding {{faculty}} friends like you."
+          },
+          "overall": {
+            "title": "You've collected",
+            "statCount": "pieces",
+            "miniCard1": {
+              "title": "Most collected",
+              "description": "{{count}} pieces"
+            },
+            "miniCard2": {
+              "title": "You are the",
+              "description": "to complete"
+            }
+          },
+          "collectedPieces": {
+            "title": "Pieces Collection"
+          }
+        }
+      },
+      "pieceGroup": {
+        "codeCreate": "Create Code",
+        "codeCopied": "Copy your code successfully",
+        "codeExpired": "Code expires on"
+      }
     },
     "infoGroup": {
-      "facultyGroup": {},
+      "facultyGroup": {
+        "title": "Faculties",
+        "inputPlaceholder": "Search for faculties...",
+        "noData": "No faculties found...",
+        "workshopButton": "Workshops",
+        "facultyButton": "View Faculty",
+        "location": "Location: ",
+        "majors": "Majors",
+        "major": "Major",
+        "field": "Fields"
+      },
       "mapGroup": {},
-      "merchandiseGroup": {},
-      "workshopGroup": {}
+      "merchandiseGroup": {
+        "title": "Merchandise",
+        "itemTitle": "Details",
+        "freeShipping": "Free shipping",
+        "variantSelect": "Select a style",
+        "store": "Contact store: ",
+        "buy": "Buy Now"
+      },
+      "workshopGroup": {
+        "title": "Workshops",
+        "inputPlaceholder": "Enter workshop name...",
+        "all": "All Faculties",
+        "loading": "Loading...",
+        "noData": "No workshops found...",
+        "viewDetails": "View Details",
+        "faculty": "Faculty",
+        "location": "Location",
+        "time": "Time",
+        "back": "Back",
+        "notFound": "Workshop Not Found",
+        "details": "Details",
+        "owner": "Owner",
+        "howToParticipate": "How to Participate",
+        "preregistered": "Pre-registered",
+        "walkin": "Walk-in Available",
+        "hasLimitParticipants": "There is a limit of participants per round",
+        "noLimitParticipants": "No limit of participants per round",
+        "numRoundsPerDay": "Number of rounds per day",
+        "contactTitle": "To receive more information",
+        "registerTitle": "Register for this workshop",
+        "register": "Register"
+      }
     },
-    "questionaireGroup": {},
+    "questionaireGroup": {
+      "title": "Questionaire",
+      "infoPopup": {
+        "title": "For high school students",
+        "detail": "Please complete the questionnaire before receiving your certificate."
+      },
+      "part1": {
+        "header": "Part 1",
+        "title": "Satisfaction with the Activity",
+        "q1": {
+          "question": "How did you hear about CU Open House 2025?",
+          "options": {
+            "social": "Social Media",
+            "website": "Website",
+            "friends": "Friends",
+            "school": "School",
+            "other": "Other (Please specify)"
+          },
+          "placeholder": "Please specify"
+        },
+
+        "q2": {
+          "question": "Overall satisfaction with the activity"
+        },
+        "q3": {
+          "question": "The booths and activities were interesting and provided useful information"
+        },
+        "q4": {
+          "question": "The information about the faculties within the university was clear"
+        },
+        "q5": {
+          "question": "If given the opportunity, would you recommend CU Open House to others?"
+        },
+
+        "q6": {
+          "question": "Which booth did you find most satisfying? (e.g., faculty booths, club booths, activity booths)",
+          "placeholder": "Enter booth name"
+        },
+        "rating": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+      "partCertificate": {
+        "description": "Please check your full name carefully before submitting the evaluation.",
+        "firstNamePlaceholder": "Firstname",
+        "lastNamePlaceholder": "Lastname",
+        "information": "The certificate will be sent via email within 1–2 days. Please check your email in the ‘My Account’ menu.",
+        "caution": "*Once confirmed, this cannot be edited.",
+        "confirmation": {
+          "title": "Please Review!",
+          "body": "The name that will appear on your certificate is"
+        }
+      },
+      "partLast": {
+        "highSchoolInformation": "The certificate will be sent via email within 1–2 days. Please check your email in the ‘My Account’ menu.",
+        "description": "Thank you for joining us on an adventurous journey aboard the train of dreams, racing through fields of flowers with us.\nBecause we believe that every flower has its own time to bloom,\nand that everyone is a beautiful flower in their own unique way.\nTherefore, please believe in yourself and do not hesitate to choose the path\nthat allows you to blossom and continue shining brightly."
+      },
+
+      "back": "Back",
+      "next": "Next",
+      "home": "Home",
+      "accept": "Accept",
+      "submit": "Submit"
+    },
+    "landingGroup": {
+      "date": "28-29 March 2026",
+      "time": {
+        "day": "Day",
+        "hour": "Hour",
+        "minute": "Min",
+        "second": "Sec"
+      },
+      "buttonGroup": {
+        "register": "Register",
+        "login": "Login",
+        "ticket": "CU Ticket",
+        "privacy": "Privacy Policy"
+      },
+      "event": {
+        "faculty": "Faculties",
+        "facultyWorkshop": "Workshop",
+        "mainEvent": "Event",
+        "missingPiece": "Missing Pieces",
+        "merchandise": "Souvenir"
+      },
+      "faq": {
+        "title": "FAQs ?"
+      }
+    },
+    "privacyGroup": {
+      "title": "Privacy Policy",
+      "back": "Back to Main Page"
+    },
 
     "title": "Title"
   }

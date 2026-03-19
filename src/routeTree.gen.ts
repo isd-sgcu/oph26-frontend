@@ -9,35 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as GameRouteRouteImport } from './routes/game/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
+import { Route as PrivacyIndexRouteImport } from './routes/privacy/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
-import { Route as TestNameRouteImport } from './routes/test/$name'
-import { Route as TestComponentIndexRouteImport } from './routes/test/component/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
-import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
 import { Route as InfoFacultyIndexRouteImport } from './routes/info/faculty/index'
+import { Route as GameShareIndexRouteImport } from './routes/game/share/index'
 import { Route as GamePieceIndexRouteImport } from './routes/game/piece/index'
 import { Route as GameAchievementIndexRouteImport } from './routes/game/achievement/index'
-import { Route as AuthProfileIndexRouteImport } from './routes/auth/profile/index'
+import { Route as AuthQrIndexRouteImport } from './routes/auth/qr/index'
 import { Route as AuthOnboardingIndexRouteImport } from './routes/auth/onboarding/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
+import { Route as InfoMerchandiseItemIdRouteImport } from './routes/info/merchandise/$itemId'
 import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/workshop/$workshopId/index'
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
-import { Route as AuthStaffOnboardingIndexRouteImport } from './routes/auth/staff/onboarding/index'
 import { Route as AuthStaffLoginIndexRouteImport } from './routes/auth/staff/login/index'
-import { Route as AuthProfileEditIndexRouteImport } from './routes/auth/profile/edit/index'
+import { Route as AuthProfileTicketIndexRouteImport } from './routes/auth/profile/ticket/index'
 
+const GameRouteRoute = GameRouteRouteImport.update({
+  id: '/game',
+  path: '/game',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestIndexRoute = TestIndexRouteImport.update({
-  id: '/test/',
-  path: '/test/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuestionaireIndexRoute = QuestionaireIndexRouteImport.update({
@@ -45,20 +44,15 @@ const QuestionaireIndexRoute = QuestionaireIndexRouteImport.update({
   path: '/questionaire/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyIndexRoute = PrivacyIndexRouteImport.update({
+  id: '/privacy/',
+  path: '/privacy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GameIndexRoute = GameIndexRouteImport.update({
-  id: '/game/',
-  path: '/game/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestNameRoute = TestNameRouteImport.update({
-  id: '/test/$name',
-  path: '/test/$name',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestComponentIndexRoute = TestComponentIndexRouteImport.update({
-  id: '/test/component/',
-  path: '/test/component/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => GameRouteRoute,
 } as any)
 const InfoWorkshopIndexRoute = InfoWorkshopIndexRouteImport.update({
   id: '/info/workshop/',
@@ -70,29 +64,29 @@ const InfoMerchandiseIndexRoute = InfoMerchandiseIndexRouteImport.update({
   path: '/info/merchandise/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InfoMapIndexRoute = InfoMapIndexRouteImport.update({
-  id: '/info/map/',
-  path: '/info/map/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
   id: '/info/faculty/',
   path: '/info/faculty/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GameShareIndexRoute = GameShareIndexRouteImport.update({
+  id: '/share/',
+  path: '/share/',
+  getParentRoute: () => GameRouteRoute,
+} as any)
 const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
-  id: '/game/piece/',
-  path: '/game/piece/',
-  getParentRoute: () => rootRouteImport,
+  id: '/piece/',
+  path: '/piece/',
+  getParentRoute: () => GameRouteRoute,
 } as any)
 const GameAchievementIndexRoute = GameAchievementIndexRouteImport.update({
-  id: '/game/achievement/',
-  path: '/game/achievement/',
-  getParentRoute: () => rootRouteImport,
+  id: '/achievement/',
+  path: '/achievement/',
+  getParentRoute: () => GameRouteRoute,
 } as any)
-const AuthProfileIndexRoute = AuthProfileIndexRouteImport.update({
-  id: '/auth/profile/',
-  path: '/auth/profile/',
+const AuthQrIndexRoute = AuthQrIndexRouteImport.update({
+  id: '/auth/qr/',
+  path: '/auth/qr/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthOnboardingIndexRoute = AuthOnboardingIndexRouteImport.update({
@@ -103,6 +97,11 @@ const AuthOnboardingIndexRoute = AuthOnboardingIndexRouteImport.update({
 const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   id: '/auth/login/',
   path: '/auth/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoMerchandiseItemIdRoute = InfoMerchandiseItemIdRouteImport.update({
+  id: '/info/merchandise/$itemId',
+  path: '/info/merchandise/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InfoWorkshopWorkshopIdIndexRoute =
@@ -117,87 +116,77 @@ const InfoFacultyFacultyIdIndexRoute =
     path: '/info/faculty/$facultyId/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AuthStaffOnboardingIndexRoute =
-  AuthStaffOnboardingIndexRouteImport.update({
-    id: '/auth/staff/onboarding/',
-    path: '/auth/staff/onboarding/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const AuthStaffLoginIndexRoute = AuthStaffLoginIndexRouteImport.update({
   id: '/auth/staff/login/',
   path: '/auth/staff/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthProfileEditIndexRoute = AuthProfileEditIndexRouteImport.update({
-  id: '/auth/profile/edit/',
-  path: '/auth/profile/edit/',
+const AuthProfileTicketIndexRoute = AuthProfileTicketIndexRouteImport.update({
+  id: '/auth/profile/ticket/',
+  path: '/auth/profile/ticket/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/test/$name': typeof TestNameRoute
+  '/game': typeof GameRouteRouteWithChildren
   '/game/': typeof GameIndexRoute
+  '/privacy/': typeof PrivacyIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
-  '/test/': typeof TestIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
-  '/auth/profile/': typeof AuthProfileIndexRoute
+  '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
+  '/game/share/': typeof GameShareIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
-  '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
-  '/test/component/': typeof TestComponentIndexRoute
-  '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId/': typeof InfoWorkshopWorkshopIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/test/$name': typeof TestNameRoute
   '/game': typeof GameIndexRoute
+  '/privacy': typeof PrivacyIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
-  '/test': typeof TestIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/onboarding': typeof AuthOnboardingIndexRoute
-  '/auth/profile': typeof AuthProfileIndexRoute
+  '/auth/qr': typeof AuthQrIndexRoute
   '/game/achievement': typeof GameAchievementIndexRoute
   '/game/piece': typeof GamePieceIndexRoute
+  '/game/share': typeof GameShareIndexRoute
   '/info/faculty': typeof InfoFacultyIndexRoute
-  '/info/map': typeof InfoMapIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
   '/info/workshop': typeof InfoWorkshopIndexRoute
-  '/test/component': typeof TestComponentIndexRoute
-  '/auth/profile/edit': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId': typeof InfoWorkshopWorkshopIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/test/$name': typeof TestNameRoute
+  '/game': typeof GameRouteRouteWithChildren
   '/game/': typeof GameIndexRoute
+  '/privacy/': typeof PrivacyIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
-  '/test/': typeof TestIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
-  '/auth/profile/': typeof AuthProfileIndexRoute
+  '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
+  '/game/share/': typeof GameShareIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
-  '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
-  '/test/component/': typeof TestComponentIndexRoute
-  '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
+  '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId/': typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -205,108 +194,99 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/test/$name'
+    | '/game'
     | '/game/'
+    | '/privacy/'
     | '/questionaire/'
-    | '/test/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
-    | '/auth/profile/'
+    | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
+    | '/game/share/'
     | '/info/faculty/'
-    | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
-    | '/test/component/'
-    | '/auth/profile/edit/'
+    | '/auth/profile/ticket/'
     | '/auth/staff/login/'
-    | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
     | '/info/workshop/$workshopId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/test/$name'
     | '/game'
+    | '/privacy'
     | '/questionaire'
-    | '/test'
+    | '/info/merchandise/$itemId'
     | '/auth/login'
     | '/auth/onboarding'
-    | '/auth/profile'
+    | '/auth/qr'
     | '/game/achievement'
     | '/game/piece'
+    | '/game/share'
     | '/info/faculty'
-    | '/info/map'
     | '/info/merchandise'
     | '/info/workshop'
-    | '/test/component'
-    | '/auth/profile/edit'
+    | '/auth/profile/ticket'
     | '/auth/staff/login'
-    | '/auth/staff/onboarding'
     | '/info/faculty/$facultyId'
     | '/info/workshop/$workshopId'
   id:
     | '__root__'
     | '/'
-    | '/test/$name'
+    | '/game'
     | '/game/'
+    | '/privacy/'
     | '/questionaire/'
-    | '/test/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
-    | '/auth/profile/'
+    | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
+    | '/game/share/'
     | '/info/faculty/'
-    | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
-    | '/test/component/'
-    | '/auth/profile/edit/'
+    | '/auth/profile/ticket/'
     | '/auth/staff/login/'
-    | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
     | '/info/workshop/$workshopId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  TestNameRoute: typeof TestNameRoute
-  GameIndexRoute: typeof GameIndexRoute
+  GameRouteRoute: typeof GameRouteRouteWithChildren
+  PrivacyIndexRoute: typeof PrivacyIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
-  TestIndexRoute: typeof TestIndexRoute
+  InfoMerchandiseItemIdRoute: typeof InfoMerchandiseItemIdRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
-  AuthProfileIndexRoute: typeof AuthProfileIndexRoute
-  GameAchievementIndexRoute: typeof GameAchievementIndexRoute
-  GamePieceIndexRoute: typeof GamePieceIndexRoute
+  AuthQrIndexRoute: typeof AuthQrIndexRoute
   InfoFacultyIndexRoute: typeof InfoFacultyIndexRoute
-  InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
-  TestComponentIndexRoute: typeof TestComponentIndexRoute
-  AuthProfileEditIndexRoute: typeof AuthProfileEditIndexRoute
+  AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
   AuthStaffLoginIndexRoute: typeof AuthStaffLoginIndexRoute
-  AuthStaffOnboardingIndexRoute: typeof AuthStaffOnboardingIndexRoute
   InfoFacultyFacultyIdIndexRoute: typeof InfoFacultyFacultyIdIndexRoute
   InfoWorkshopWorkshopIdIndexRoute: typeof InfoWorkshopWorkshopIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/game': {
+      id: '/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof GameRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test/': {
-      id: '/test/'
-      path: '/test'
-      fullPath: '/test/'
-      preLoaderRoute: typeof TestIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/questionaire/': {
@@ -316,26 +296,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuestionaireIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy/': {
+      id: '/privacy/'
+      path: '/privacy'
+      fullPath: '/privacy/'
+      preLoaderRoute: typeof PrivacyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/game/': {
       id: '/game/'
-      path: '/game'
+      path: '/'
       fullPath: '/game/'
       preLoaderRoute: typeof GameIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test/$name': {
-      id: '/test/$name'
-      path: '/test/$name'
-      fullPath: '/test/$name'
-      preLoaderRoute: typeof TestNameRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test/component/': {
-      id: '/test/component/'
-      path: '/test/component'
-      fullPath: '/test/component/'
-      preLoaderRoute: typeof TestComponentIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof GameRouteRoute
     }
     '/info/workshop/': {
       id: '/info/workshop/'
@@ -351,13 +324,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InfoMerchandiseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/info/map/': {
-      id: '/info/map/'
-      path: '/info/map'
-      fullPath: '/info/map/'
-      preLoaderRoute: typeof InfoMapIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/info/faculty/': {
       id: '/info/faculty/'
       path: '/info/faculty'
@@ -365,25 +331,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InfoFacultyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/game/share/': {
+      id: '/game/share/'
+      path: '/share'
+      fullPath: '/game/share/'
+      preLoaderRoute: typeof GameShareIndexRouteImport
+      parentRoute: typeof GameRouteRoute
+    }
     '/game/piece/': {
       id: '/game/piece/'
-      path: '/game/piece'
+      path: '/piece'
       fullPath: '/game/piece/'
       preLoaderRoute: typeof GamePieceIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof GameRouteRoute
     }
     '/game/achievement/': {
       id: '/game/achievement/'
-      path: '/game/achievement'
+      path: '/achievement'
       fullPath: '/game/achievement/'
       preLoaderRoute: typeof GameAchievementIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof GameRouteRoute
     }
-    '/auth/profile/': {
-      id: '/auth/profile/'
-      path: '/auth/profile'
-      fullPath: '/auth/profile/'
-      preLoaderRoute: typeof AuthProfileIndexRouteImport
+    '/auth/qr/': {
+      id: '/auth/qr/'
+      path: '/auth/qr'
+      fullPath: '/auth/qr/'
+      preLoaderRoute: typeof AuthQrIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/onboarding/': {
@@ -400,6 +373,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/info/merchandise/$itemId': {
+      id: '/info/merchandise/$itemId'
+      path: '/info/merchandise/$itemId'
+      fullPath: '/info/merchandise/$itemId'
+      preLoaderRoute: typeof InfoMerchandiseItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/info/workshop/$workshopId/': {
       id: '/info/workshop/$workshopId/'
       path: '/info/workshop/$workshopId'
@@ -414,13 +394,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InfoFacultyFacultyIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/staff/onboarding/': {
-      id: '/auth/staff/onboarding/'
-      path: '/auth/staff/onboarding'
-      fullPath: '/auth/staff/onboarding/'
-      preLoaderRoute: typeof AuthStaffOnboardingIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth/staff/login/': {
       id: '/auth/staff/login/'
       path: '/auth/staff/login'
@@ -428,35 +401,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthStaffLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/profile/edit/': {
-      id: '/auth/profile/edit/'
-      path: '/auth/profile/edit'
-      fullPath: '/auth/profile/edit/'
-      preLoaderRoute: typeof AuthProfileEditIndexRouteImport
+    '/auth/profile/ticket/': {
+      id: '/auth/profile/ticket/'
+      path: '/auth/profile/ticket'
+      fullPath: '/auth/profile/ticket/'
+      preLoaderRoute: typeof AuthProfileTicketIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  TestNameRoute: TestNameRoute,
+interface GameRouteRouteChildren {
+  GameIndexRoute: typeof GameIndexRoute
+  GameAchievementIndexRoute: typeof GameAchievementIndexRoute
+  GamePieceIndexRoute: typeof GamePieceIndexRoute
+  GameShareIndexRoute: typeof GameShareIndexRoute
+}
+
+const GameRouteRouteChildren: GameRouteRouteChildren = {
   GameIndexRoute: GameIndexRoute,
-  QuestionaireIndexRoute: QuestionaireIndexRoute,
-  TestIndexRoute: TestIndexRoute,
-  AuthLoginIndexRoute: AuthLoginIndexRoute,
-  AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
-  AuthProfileIndexRoute: AuthProfileIndexRoute,
   GameAchievementIndexRoute: GameAchievementIndexRoute,
   GamePieceIndexRoute: GamePieceIndexRoute,
+  GameShareIndexRoute: GameShareIndexRoute,
+}
+
+const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
+  GameRouteRouteChildren,
+)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  GameRouteRoute: GameRouteRouteWithChildren,
+  PrivacyIndexRoute: PrivacyIndexRoute,
+  QuestionaireIndexRoute: QuestionaireIndexRoute,
+  InfoMerchandiseItemIdRoute: InfoMerchandiseItemIdRoute,
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
+  AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
+  AuthQrIndexRoute: AuthQrIndexRoute,
   InfoFacultyIndexRoute: InfoFacultyIndexRoute,
-  InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
-  TestComponentIndexRoute: TestComponentIndexRoute,
-  AuthProfileEditIndexRoute: AuthProfileEditIndexRoute,
+  AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
   AuthStaffLoginIndexRoute: AuthStaffLoginIndexRoute,
-  AuthStaffOnboardingIndexRoute: AuthStaffOnboardingIndexRoute,
   InfoFacultyFacultyIdIndexRoute: InfoFacultyFacultyIdIndexRoute,
   InfoWorkshopWorkshopIdIndexRoute: InfoWorkshopWorkshopIdIndexRoute,
 }

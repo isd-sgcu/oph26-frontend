@@ -9,15 +9,39 @@
       "sidebar": {
         "home": "หน้าหลัก",
         "faculty": "คณะ",
-        "facultyWorkshop": "เวิร์คชอปคณะ",
+        "facultyWorkshop": "เวิร์คช็อปคณะ",
         "mainEvent": "กิจกรรมส่วนกลาง",
         "map": "แผนที่",
         "missingPiece": "ชิ้นส่วนที่หายไป",
         "merchandise": "สินค้าที่ระลึก",
         "account": "บัญชีของฉัน",
         "register": "ลงทะเบียน",
+        "scan": "Scan QR",
         "login": "เข้าสู่ระบบ",
         "logout": "ออกจากระบบ"
+      }
+    },
+
+    "gameGroup": {
+      "gameFooter": {
+        "myPiece": "My Piece",
+        "redeemCode": "กรอก Code"
+      },
+      "redeemCodePopup": {
+        "title1": "กรอก Code",
+        "body1": "กรอกรหัสที่ได้รับมาจากเพื่อน ๆ เลย!",
+        "title2Success": "กรอก Code สำเร็จ",
+        "title2InvalidCode": "Code ไม่ถูกต้องหรือหมดอายุ",
+        "title2DuplicatedCode": "Code นี้ถูกใช้ไปแล้ว",
+        "title2OtherError": "เกิดข้อผิดพลาด",
+        "body2Success": "คุณได้รับชิ้นจาก ",
+        "body2InvalidCode": "Code ไม่ถูกต้องหรือหมดอายุ \nโปรดลองอีกครั้ง",
+        "body2ExpiredCode": "Code เกินระยะเวลาที่กำหนด",
+        "body2DuplicatedCode": "คุณได้ใช้ Code นี้ไปแล้ว",
+        "body2OtherError": "เกิดข้อผิดพลาดในการกรอก Code \nโปรดลองอีกครั้งในภายหลัง",
+        "cancel": "ยกเลิก",
+        "submit": "ตกลง",
+        "confirm": "ตกลง"
       }
     },
     "pageNotFound": {
@@ -28,20 +52,232 @@
   "routes": {
     "authGroup": {
       "loginGroup": {},
-      "profileGroup": {},
-      "registerGroup": {}
+      "profileGroup": {
+        "ticketGroup": {
+          "month": "มีนาคม 2569",
+          "chulalongkorn": "จุฬาลงกรณ์",
+          "university": "มหาวิทยาลัย",
+          "student": "นักเรียน",
+          "dreamFaculties": "คณะที่ฝันไว้",
+          "button": {
+            "home": "หน้าหลัก"
+          },
+          "evaluationBanner": {
+            "titleNoPermission": "ท่านไม่มีสิทธิทำแบบประเมิน \n และ <u>ไม่มีสิทธิรับเกียรติบัตร</u> \n เนื่องจากไม่ได้เข้าร่วม งาน Onsite \n ณ จุฬาลงกรณ์มหาวิทยาลัย \n เมื่อวันที่ 28-29 มีนาคม 2569",
+            "titleHasPermission": "ท่านได้เข้าร่วม CU Open House 2026 \n ณ จุฬาลงกรณ์มหาวิทยาลัย \n เมื่อวันที่ 28 - 29 มีนาคม 2569",
+            "detailNoPermission": "เข้าร่วมงานแล้ว แต่พบข้อผิดพลาด?",
+            "button": {
+              "questionaire": "ทำแบบสอบถาม",
+              "certificate": "รับเกียรติบัตร",
+              "report": "รายงาน"
+            }
+          }
+        }
+      },
+      "registerGroup": {},
+      "qrGroup": {
+        "greeting": "ยินดีต้อนรับ! สตาฟ",
+        "home": "หน้าหลัก",
+        "modal": {
+          "success": {
+            "subtitle": "ได้เข้าร่วมกิจกรรม CU OPEN HOUSE 2026 {{faculty}}",
+            "body": "เมื่อวันที่ {{date}} เวลา {{time}}",
+            "detail": "แจ้งน้องรีเฟรชหน้า ticket ของตัวเอง ถ้ามีข้อความยืนยันว่าสแกนแล้วให้ถ่ายหน้าจอเก็บไว้เป็นหลักฐานเพื่อสำหรับรับเกียรติบัตร"
+          },
+          "error": {
+            "title": "เกิดข้อผิดพลาด!",
+            "title2": "ไม่สามารถเช็คอินได้",
+            "subtitle": {
+              "400": "ไม่พบ ID ที่สแกน",
+              "401": "ไม่พบผู้ใช้งาน",
+              "403": "ผู้ใช้งานไม่ได้รับอนุญาต",
+              "404": "ไม่พบผู้เข้าร่วมงาน",
+              "409": "ได้รับการลงทะเบียนไปแล้ว",
+              "500": "เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์"
+            }
+          },
+          "confirmBtn": "ตกลง"
+        }
+      }
     },
     "gameGroup": {
-      "achievementGroup": {},
-      "pieceGroup": {}
+      "achievementGroup": {
+        "titleGroup": "ภาพรวมความสำเร็จ",
+        "cardGroup": {
+          "var1": {
+            "title": "คุณเป็นคนที่",
+            "description": "ที่เก็บจิ๊กซอว์มาประกอบเป็นภาพครบ"
+          },
+          "var2": {
+            "title": "คุณมีเพื่อนคณะ",
+            "description": "สูงเป็น {{top}}% แรกจากทั้งหมด"
+          },
+          "var3": {
+            "title": "มีคนจำนวน",
+            "description": "กำลังตามหาเพื่อนคณะ{{faculty}}เช่นเดียวกับคุณ"
+          },
+          "overall": {
+            "title": "คุณเก็บชิ้นส่วนไป",
+            "statCount": "ชิ้น",
+            "miniCard1": {
+              "title": "คณะที่เก็บได้มากสุด",
+              "description": "จำนวน {{count}} ชิ้น"
+            },
+            "miniCard2": {
+              "title": "คุณเป็นคนที่",
+              "description": "ที่เก็บครบ"
+            }
+          },
+          "collectedPieces": {
+            "title": "บันทึกการเก็บชิ้นส่วน"
+          }
+        }
+      },
+      "pieceGroup": {
+        "codeCreate": "สร้าง Code",
+        "codeCopied": "คัดลอก Code สำเร็จ",
+        "codeExpired": "หมดอายุ"
+      }
     },
     "infoGroup": {
-      "facultyGroup": {},
+      "facultyGroup": {
+        "title": "คณะ",
+        "inputPlaceholder": "ค้นหาคณะ...",
+        "noData": "ไม่พบคณะที่กำลังค้นหา...",
+        "workshopButton": "Workshops",
+        "facultyButton": "เกี่ยวกับคณะ",
+        "location": "ที่ตั้งคณะ: ",
+        "majors": "ภาควิชา",
+        "major": "ภาควิชา",
+        "fields": "สาขา"
+      },
       "mapGroup": {},
-      "merchandiseGroup": {},
-      "workshopGroup": {}
+      "merchandiseGroup": {
+        "title": "สินค้าที่ระลึก",
+        "itemTitle": "รายละเอียด",
+        "freeShipping": "ส่งฟรีไม่มีขั้นต่ำ",
+        "variantSelect": "เลือกรูปแบบ",
+        "store": "ติดต่อร้านค้า: ",
+        "buy": "สั่งซื้อสินค้า"
+      },
+      "workshopGroup": {
+        "title": "ข้อมูลเวิร์คชอป",
+        "inputPlaceholder": "กรอกชื่อเวิร์คชอป...",
+        "all": "ทุกคณะ",
+        "loading": "Loading...",
+        "noData": "ไม่พบเวิร์คชอปที่กำลังค้นหา...",
+        "viewDetails": "ดูรายละเอียดเพิ่มเติม",
+        "faculty": "คณะ",
+        "location": "สถานที่",
+        "time": "เวลา",
+        "back": "ย้อนกลับ",
+        "notFound": "ไม่พบเวิร์คชอป",
+        "details": "รายละเอียดกิจกรรม",
+        "owner": "ผู้จัดกิจกรรม",
+        "howToParticipate": "วิธีการเข้าร่วม",
+        "preregistered": "จำเป็นต้องลงทะเบียนล่วงหน้า",
+        "walkin": "สามารถ walk-in ที่หน้างานได้เลย",
+        "hasLimitParticipants": "จำกัดจำนวนผู้เข้าร่วม/รอบ",
+        "noLimitParticipants": "ไม่จำกัดจำนวนผู้เข้าร่วม/รอบ",
+        "numRoundsPerDay": "จำนวนรอบต่อวัน",
+        "contactTitle": "ติดตามรายละเอียดเพิ่มเติมได้ที่",
+        "registerTitle": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
+        "register": "ลงทะเบียน"
+      }
     },
-    "questionaireGroup": {},
+    "questionaireGroup": {
+      "title": "แบบประเมิน",
+      "infoPopup": {
+        "title": "สำหรับน้องๆ มัธยม",
+        "detail": "ขอความร่วมมือกรอกแบบสอบถามก่อนรับเกียรติบัตร"
+      },
+      "part1": {
+        "header": "ส่วนที่ 1",
+        "title": "ความพึงพอใจต่อกิจกรรม",
+        "q1": {
+          "question": "ท่านทราบข้อมูลเกี่ยวกับ CU Open House 2025 ผ่านช่องทางใด?",
+          "options": {
+            "social": "โซเซียลออนไลน์",
+            "website": "เว็บไซต์",
+            "friends": "เพื่อน",
+            "school": "โรงเรียน",
+            "other": "อื่น ๆ (โปรดระบุ)"
+          },
+          "placeholder": "โปรดระบุ"
+        },
+
+        "q2": {
+          "question": "กิจกรรมในภาพรวม (Overall)"
+        },
+        "q3": {
+          "question": "กิจกรรมในบูธต่างๆ น่าสนใจและให้ข้อมูลที่เป็นประโยชน์"
+        },
+        "q4": {
+          "question": "ท่านได้รับข้อมูลเกี่ยวกับคณะต่างๆ ภายในมหาวิทยาลัยอย่างชัดเจน"
+        },
+        "q5": {
+          "question": "หากมีโอกาสหน้าท่านจะแนะนำกิจกรรม CU Open House ให้ผู้อื่น"
+        },
+
+        "q6": {
+          "question": "บูธที่ท่านพึงพอใจเป็นพิเศษ เช่น บูธคณะ บูธชมรม บูธกิจกรรม",
+          "placeholder": "กรอกชื่อบูธ"
+        },
+        "rating": {
+          "low": "น้อย",
+          "high": "มาก"
+        }
+      },
+      "partCertificate": {
+        "description": "โปรดตรวจสอบชื่อ-นามสกุลของท่านก่อนส่งแบบประเมิน",
+        "firstNamePlaceholder": "ชื่อ",
+        "lastNamePlaceholder": "นามสกุล",
+        "information": "เกียรติบัตรจะถูกจัดส่งผ่านอีเมลใน 1-2 วัน โปรดตรวจสอบอีเมลที่เมนู 'บัญชีของฉัน'",
+        "caution": "*หากยืนยันแล้วจะไม่สามารถแก้ไขได้",
+        "confirmation": {
+          "title": "ตรวจสอบ!",
+          "body": "ชื่อ-นามสกุลบนเกียรติบัตรของท่านคือ"
+        }
+      },
+      "partLast": {
+        "highSchoolInformation": "เกียรติบัตรจะถูกจัดส่งผ่านอีเมลใน 1-2 วัน โปรดตรวจสอบอีเมลที่เมนู 'บัญชีของฉัน'",
+        "description": "ขอบคุณที่มาร่วมเดินทางผจญภัยไปกับรถไฟแห่งความฝันที่โลดแล่นผ่านทุ่งดอกไม้ไปกับเรา\nเพราะพวกเราเชื่อว่าดอกไม้แต่ละดอกมีช่วงเวลา\nในการเบ่งบานที่แตกต่างกัน และทุกคน\nต่างก็เป็นดอกไม้ที่สวยงามในแบบของตนเอง\nฉะนั้น โปรดจงเชื่อมั่นและอย่าลังเลที่จะเลือกเดิน\nไปในเส้นทางที่จะได้ผลิบาน เป็นดอกไม้ที่สดใสต่อไป"
+      },
+      "back": "ย้อนกลับ",
+      "next": "ถัดไป",
+      "home": "หน้าหลัก",
+      "accept": "ตกลง",
+      "submit": "ส่ง"
+    },
+    "landingGroup": {
+      "date": "28-29 มีนาคม 2569",
+      "time": {
+        "day": "วัน",
+        "hour": "ชั่วโมง",
+        "minute": "นาที",
+        "second": "วินาที"
+      },
+      "buttonGroup": {
+        "register": "ลงทะเบียน",
+        "login": "เข้าสู่ระบบ",
+        "ticket": "CU Ticket",
+        "privacy": "ข้อตกลงและเงื่อนไข"
+      },
+      "event": {
+        "faculty": "คณะ",
+        "facultyWorkshop": "เวิร์คช็อปคณะ",
+        "mainEvent": "กิจกรรมส่วนกลาง",
+        "missingPiece": "ชิ้นส่วนที่หายไป",
+        "merchandise": "สินค้าที่ระลึก"
+      },
+      "faq": {
+        "title": "คำถามที่พบบ่อย"
+      }
+    },
+    "privacyGroup": {
+      "title": "ข้อตกลงและเงื่อนไข",
+      "back": "กลับสู่หน้าหลัก"
+    },
 
     "title": "หัวข้อ"
   }
