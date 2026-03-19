@@ -33,3 +33,28 @@ export type Achievement =
       scii: number
       cusar: number
     }
+
+export interface AchievementCollectedPieces {
+  variant: 'collectedPieces'
+  stat: number
+  edu: number
+  psy: number
+  pharm: number
+  dent: number
+  commarts: number
+  ahs: number
+  faa: number
+  vet: number
+  law: number
+  arch: number
+  eng: number
+  arts: number
+  md: number
+  sci: number
+  econ: number
+  polsci: number
+  cbs: number
+  spsc: number
+  scii: number
+  cusar: number
+}

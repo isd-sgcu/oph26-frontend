@@ -33,7 +33,7 @@ function RouteComponent() {
   }, [searchInput])
 
   return (
-    <div className="bg-main-light-pink relative flex w-full flex-col">
+    <div className="bg-main-light-pink relative flex min-h-screen w-full flex-col">
       {/* Content */}
       <div className="relative z-10 flex h-full w-full flex-col gap-6 px-4 py-8">
         <h1 className="text-center text-3xl font-bold text-white text-shadow-md">

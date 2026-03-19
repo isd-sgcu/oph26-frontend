@@ -1,5 +1,4 @@
 import { env } from '@/env'
-import { refreshToken } from '@/services/auth/auth'
 import axios from 'axios'
 
 export const Axios = axios.create({
@@ -28,14 +27,8 @@ Axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      try {
-        const refreshData = await refreshToken()
-        localStorage.setItem('token', refreshData.accessToken)
-        window.dispatchEvent(new Event('tokenChanged'))
-      } catch (error) {
-        localStorage.removeItem('token')
-        window.location.href = '/'
-      }
+      localStorage.removeItem('token')
+      window.location.href = '/'
     }
     return Promise.reject(error)
   }

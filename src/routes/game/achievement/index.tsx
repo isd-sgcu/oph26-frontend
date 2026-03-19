@@ -1,8 +1,12 @@
+import { FACULTIES } from '@/components/const/faculty'
 import AchievementCard from '@/components/game/achievement/AchievementCard'
 import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
 import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
-import { Achievement } from '@/types/achievement'
+import { useUser } from '@/contexts/UserContext'
+import { getMyLeaderboard } from '@/services/leaderboard/leaderboard'
+import { getCollectedPieces } from '@/services/pieces/piece'
+import { Achievement, AchievementCollectedPieces } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
@@ -16,6 +20,10 @@ function RouteComponent() {
   const { t, i18n } = useTranslation()
   const isEnglish = i18n.language.startsWith('en')
   const [loading, setLoading] = useState(true)
+  const userContext = useUser()
+  if (!userContext) return null
+
+  const attendee = userContext.attendee
 
   const [achievements, setAchievements] = useState<Achievement[]>([])
 
@@ -26,61 +34,118 @@ function RouteComponent() {
 
   useEffect(() => {
     async function fetchAchievements() {
+      const data: Achievement[] = []
+
+      // The 'var1' Data
+
+      // The 'var2' Data
+      let var2Data: Achievement | null = null
       try {
-        const data: Achievement[] = [
-          {
-            variant: 'var1',
-            stat: 1000,
-          },
-          {
+        const leaderboardData = await getMyLeaderboard()
+        const allTopsIndexFromLeaderboard = leaderboardData.is_top
+          .map((item, index) => (item === true ? index : -1))
+          .filter((index) => index !== -1)
+        const allTopsFacultyFromLeaderboard = allTopsIndexFromLeaderboard.map(
+          (index) => FACULTIES[index]
+        )
+
+        if (allTopsFacultyFromLeaderboard.length > 0) {
+          const randomTopFaculty =
+            allTopsFacultyFromLeaderboard[
+              Math.floor(Math.random() * allTopsFacultyFromLeaderboard.length)
+            ]
+
+          var2Data = {
             variant: 'var2',
-            stat: 'cusar',
-            top: 5,
-          },
-          {
-            variant: 'var3',
-            stat: '23',
-            faculty: 'scii',
-          },
-          {
-            variant: 'overall',
-            stat: 99,
-            miniCard1Faculty: 'cusar',
-            miniCard1Count: 42,
-            miniCard2Rank: -1,
-          },
-          {
-            variant: 'collectedPieces',
-            stat: 120,
-            edu: 10,
-            psy: 1,
-            pharm: 1,
-            dent: 1,
-            commarts: 1,
-            ahs: 0,
-            faa: 1,
-            vet: 1,
-            law: 1,
-            arch: 1,
-            eng: 1,
-            arts: 1,
-            md: 1,
-            sci: 1,
-            econ: 1,
-            polsci: 1,
-            cbs: 1,
-            spsc: 1,
-            scii: 1,
-            cusar: 1,
-          },
+            stat: randomTopFaculty.value,
+            top: 1,
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching leaderboard data:', error)
+      } finally {
+        if (var2Data != null) {
+          data.push(var2Data)
+        }
+      }
+
+      // The 'var3' Data
+
+      // The 'overall' Data
+
+      // The 'collectedPieces' Data
+      const collectedPiecesData: AchievementCollectedPieces = {
+        variant: 'collectedPieces',
+        stat: 0,
+        edu: 0,
+        psy: 0,
+        pharm: 0,
+        dent: 0,
+        commarts: 0,
+        ahs: 0,
+        faa: 0,
+        vet: 0,
+        law: 0,
+        arch: 0,
+        eng: 0,
+        arts: 0,
+        md: 0,
+        sci: 0,
+        econ: 0,
+        polsci: 0,
+        cbs: 0,
+        spsc: 0,
+        scii: 0,
+        cusar: 0,
+      }
+      try {
+        const fetchedCollectedPiecesData = await getCollectedPieces()
+        const allFacultyStats =
+          fetchedCollectedPiecesData.stats.collected_by_faculty
+        collectedPiecesData.stat =
+          fetchedCollectedPiecesData.stats.total_collected
+
+        const facultyKeys: Array<keyof AchievementCollectedPieces> = [
+          'edu',
+          'psy',
+          'pharm',
+          'dent',
+          'commarts',
+          'ahs',
+          'faa',
+          'vet',
+          'law',
+          'arch',
+          'eng',
+          'arts',
+          'md',
+          'sci',
+          'econ',
+          'polsci',
+          'cbs',
+          'spsc',
+          'scii',
+          'cusar',
         ]
 
-        setAchievements(data)
-      } catch (err) {
-        console.error('Failed to fetch achievements', err)
+        Object.entries(allFacultyStats).forEach(([faculty, value]) => {
+          if (
+            value &&
+            typeof value.count === 'number' &&
+            facultyKeys.includes(faculty as keyof AchievementCollectedPieces)
+          ) {
+            collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
+              value.count
+          }
+        })
+      } catch (error) {
+        console.error('Error fetching collected pieces data:', error)
       } finally {
-        setLoading(false)
+        data.push(collectedPiecesData)
       }
+
+      setAchievements(data)
+      setLoading(false)
     }
 
     fetchAchievements()
@@ -124,7 +189,7 @@ function RouteComponent() {
             open={isShareOpen}
             achievement={selectedAchievement}
             onClose={() => setShareOpen(false)}
-            name={'John Doe'}
+            name={attendee?.firstname + ' ' + attendee?.surname}
           />
         </div>
       )}

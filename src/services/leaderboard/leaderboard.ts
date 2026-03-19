@@ -1,10 +1,15 @@
 import { Axios } from '@/lib/axios'
+import { AxiosError } from 'axios'
 
 export interface Leaderboard {
-  isTop: boolean[]
+  is_top: boolean[]
 }
 
 export const getMyLeaderboard = async (): Promise<Leaderboard> => {
-  const { data } = await Axios.get(`/leaderboards/me`)
-  return data
+  try {
+    const { data } = await Axios.get(`/leaderboards/me`)
+    return data
+  } catch (error) {
+    throw error as AxiosError
+  }
 }

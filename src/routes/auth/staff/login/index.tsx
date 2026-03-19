@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
 import { getMe, login } from '@/services/auth/auth'
-import { useUser } from '@/contexts/UserContext'
 
 declare global {
   interface Window {

@@ -27,23 +27,22 @@ const GameFooter = () => {
   }, [])
 
   return (
-    <div className="relative w-full max-w-(--width-page)">
-      {/* Share */}
-      <Button
-        className={` ${location.pathname !== '/game' ? 'hidden' : ''} ${isWrap ? 'bottom-25 scale-75' : 'bottom-30 scale-100'} bg-gradient-pink absolute right-6`}
-        size="icon"
-        onClick={() => {
-          setOpenSharePopup(true)
-        }}
-      >
-        <FlatIcon name="fi-rr-share" size={20} className="text-white" />
-      </Button>
-      <footer
-        className={`fixed bottom-8 left-1/2 z-10 flex max-w-(--width-page) -translate-x-1/2 ${isWrap && 'scale-75'} flex-col gap-2 px-6`}
-      >
+    <>
+      <div className="fixed bottom-8 left-1/2 z-20 flex w-full max-w-(--width-page) -translate-x-1/2 justify-center">
+        {/* Share */}
+        <Button
+          className={`${location.pathname !== '/game' ? 'hidden' : ''} ${isWrap ? 'bottom-16 scale-75' : 'bottom-24 scale-100'} bg-gradient-pink absolute right-6`}
+          size="icon"
+          onClick={() => {
+            setOpenSharePopup(true)
+          }}
+        >
+          <FlatIcon name="fi-rr-share" size={20} className="text-white" />
+        </Button>
+
         {/* Navigation */}
         <div
-          className={`bg-gradient-beige flex justify-center gap-2 rounded-full px-6 py-4`}
+          className={`${isWrap ? 'scale-75' : 'scale-100'} bg-gradient-beige flex w-fit justify-center gap-2 rounded-full px-6 py-4`}
         >
           <div className="flex items-center justify-center gap-2">
             <Button
@@ -95,7 +94,7 @@ const GameFooter = () => {
             </Button>
           </div>
         </div>
-      </footer>
+      </div>
 
       {openSharePopup && (
         <SharePopup
@@ -110,7 +109,7 @@ const GameFooter = () => {
           setOpen={setOpenRedeemCodePopup}
         />
       )}
-    </div>
+    </>
   )
 }
 
