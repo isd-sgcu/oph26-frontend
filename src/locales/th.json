@@ -141,8 +141,9 @@
         "workshopButton": "Workshops",
         "facultyButton": "เกี่ยวกับคณะ",
         "location": "ที่ตั้งคณะ: ",
+        "majors": "ภาควิชา",
         "major": "ภาควิชา",
-        "field": "สาขา"
+        "fields": "สาขา"
       },
       "mapGroup": {},
       "merchandiseGroup": {

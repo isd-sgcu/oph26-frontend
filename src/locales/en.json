@@ -136,7 +136,8 @@
         "workshopButton": "Workshops",
         "facultyButton": "View Faculty",
         "location": "Location: ",
-        "major": "Majors",
+        "majors": "Majors",
+        "major": "Major",
         "field": "Fields"
       },
       "mapGroup": {},

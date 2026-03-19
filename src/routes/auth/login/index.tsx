@@ -105,7 +105,7 @@ function RouteComponent() {
   return (
     <section className="bg-main-light-pink relative flex w-full flex-col">
       <div className="flex min-h-screen flex-col items-center justify-center">
-        <img src="/logo.svg" alt="logo" className="w-96" />
+        <img src="/logo/cu-journey.webp" alt="logo" className="w-96" />
         <h1 className="text-2xl font-semibold text-white text-shadow-sm">
           CU Open House 2026
         </h1>
