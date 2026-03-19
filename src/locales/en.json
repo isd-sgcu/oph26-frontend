@@ -250,7 +250,8 @@
       "buttonGroup": {
         "register": "Register",
         "login": "Login",
-        "agenda": "Booklet"
+        "agenda": "Booklet",
+        "privacy": "Privacy Policy"
       },
       "event": {
         "faculty": "Faculties",
@@ -262,6 +263,10 @@
       "faq": {
         "title": "FAQs ?"
       }
+    },
+    "privacyGroup": {
+      "title": "Privacy Policy",
+      "back": "Back to Main Page"
     },
 
     "title": "Title"

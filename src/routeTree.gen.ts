@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as GameRouteRouteImport } from './routes/game/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
+import { Route as PrivacyIndexRouteImport } from './routes/privacy/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
@@ -41,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
 const QuestionaireIndexRoute = QuestionaireIndexRouteImport.update({
   id: '/questionaire/',
   path: '/questionaire/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyIndexRoute = PrivacyIndexRouteImport.update({
+  id: '/privacy/',
+  path: '/privacy/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GameIndexRoute = GameIndexRouteImport.update({
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
   '/game/': typeof GameIndexRoute
+  '/privacy/': typeof PrivacyIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game': typeof GameIndexRoute
+  '/privacy': typeof PrivacyIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
   '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login': typeof AuthLoginIndexRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
   '/game/': typeof GameIndexRoute
+  '/privacy/': typeof PrivacyIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
   '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/game/'
+    | '/privacy/'
     | '/questionaire/'
     | '/info/merchandise/$itemId'
     | '/auth/login/'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/game'
+    | '/privacy'
     | '/questionaire'
     | '/info/merchandise/$itemId'
     | '/auth/login'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/game/'
+    | '/privacy/'
     | '/questionaire/'
     | '/info/merchandise/$itemId'
     | '/auth/login/'
@@ -246,6 +258,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
+  PrivacyIndexRoute: typeof PrivacyIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
   InfoMerchandiseItemIdRoute: typeof InfoMerchandiseItemIdRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
@@ -281,6 +294,13 @@ declare module '@tanstack/react-router' {
       path: '/questionaire'
       fullPath: '/questionaire/'
       preLoaderRoute: typeof QuestionaireIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy/': {
+      id: '/privacy/'
+      path: '/privacy'
+      fullPath: '/privacy/'
+      preLoaderRoute: typeof PrivacyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/game/': {
@@ -412,6 +432,7 @@ const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
+  PrivacyIndexRoute: PrivacyIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
   InfoMerchandiseItemIdRoute: InfoMerchandiseItemIdRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
