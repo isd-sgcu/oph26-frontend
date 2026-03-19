@@ -1,4 +1,5 @@
-import { Attendee } from '@/contexts/UserContext'
+import { FacultyType } from '@/components/const/faculty'
+import { AttendeeType } from '@/contexts/UserContext'
 import { Axios } from '@/lib/axios'
 import { AxiosError } from 'axios'
 
@@ -21,7 +22,7 @@ export type CreateAttendeeRequest = {
 
 export interface GetMyAttendeeResponse {
   date_of_birth: string;
-  attendee_type: string;
+  attendee_type: AttendeeType;
   certificate_name: string | null;
   checked_in_at: string | null;
   checkin_staff_id: string | null;
@@ -29,8 +30,8 @@ export interface GetMyAttendeeResponse {
   favorite_workshops: string[];
   firstname: string;
   id: string;
-  initial_first_interested_faculty: string;
-  interested_faculty: string[];
+  initial_first_interested_faculty: FacultyType;
+  interested_faculty: FacultyType[];
   news_sources_other: string;
   news_sources_selected: string[];
   objective_other: string;

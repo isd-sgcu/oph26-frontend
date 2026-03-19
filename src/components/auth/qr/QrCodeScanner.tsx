@@ -3,16 +3,17 @@ import { useState } from 'react'
 import CustomModal from '@/components/CustomModal'
 import { useTranslation } from 'react-i18next'
 import { useUser } from '@/contexts/UserContext'
-import { notFound } from '@tanstack/react-router'
+import { notFound, useNavigate } from '@tanstack/react-router'
 import { checkIn, CheckInErrorResponse, CheckInResponse } from '@/services/checkin/checkin'
 import { facultyEnum } from '@/const/faculty'
 
 export default function QrCodeScanner() {
   const { t, i18n } = useTranslation()
   const userContext = useUser()
+  const navigate = useNavigate()
 
   if (!userContext) {
-    notFound()
+    navigate({ to: '/' })
     return null
   }
 

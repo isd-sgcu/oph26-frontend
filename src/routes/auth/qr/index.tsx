@@ -32,13 +32,6 @@ function RouteComponent() {
     return null
   }
 
-  const user = {
-    firstName: 'John',
-    lastName: 'Doe',
-    studentId: '12345678',
-    faculty: 'Engineering',
-  }
-
   return (
     <div className="relative flex flex-col bg-gradient-pink pt-20 w-full h-full min-h-dvh">
       <div className="z-10 flex flex-col flex-1 justify-center items-center gap-7.5 p-5 pb-15 w-full">
@@ -46,14 +39,6 @@ function RouteComponent() {
           <h1 className="font-bold text-4xl">
             {t('routes.authGroup.qrGroup.greeting')}
           </h1>
-          {/* <div className="font-medium text-xl">
-            <p className="text-pretty">
-              {user.firstName + ' ' + user.lastName}
-            </p>
-            <p className="text-pretty">
-              {user.studentId + ' | ' + user.faculty}
-            </p>
-          </div> */}
         </div>
 
         <QrCodeScanner />
