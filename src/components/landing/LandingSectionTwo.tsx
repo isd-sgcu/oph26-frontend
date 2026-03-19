@@ -1,10 +1,14 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
 import { useNavigate } from '@tanstack/react-router'
+import { useUser } from '@/contexts/UserContext'
 
 export default function LandingSectionTwo() {
   const { t } = useTranslation()
-  const isRoleStudent = true
+  const userContext = useUser()
+  if (!userContext) return null
+
+  const attendee = userContext.attendee
   const navigate = useNavigate()
 
   const handleNavigation = (path: string) => {
@@ -78,7 +82,7 @@ export default function LandingSectionTwo() {
             </button>
 
             {/* Missing Pieces */}
-            {isRoleStudent ? (
+            {attendee && attendee.attendee_type === 'student' ? (
               <button
                 className="absolute top-[53%] left-[56%] z-10 flex flex-col items-center justify-center gap-1"
                 aria-label="Missing Pieces"
@@ -112,12 +116,14 @@ export default function LandingSectionTwo() {
       </div>
 
       <div className="bg-main-pink bg-pink flex w-full flex-col items-center justify-center gap-4 py-8">
-        <Button
-          className="bg-main-beige text-main-pink"
-          onClick={() => handleNavigation('/auth/profile/ticket')}
-        >
-          {t('routes.landingGroup.buttonGroup.agenda')}
-        </Button>
+        {attendee && (
+          <Button
+            className="bg-main-beige text-main-pink"
+            onClick={() => handleNavigation('/auth/profile/ticket')}
+          >
+            {t('routes.landingGroup.buttonGroup.agenda')}
+          </Button>
+        )}
         <Button
           expanded
           className="bg-main-beige text-main-pink"
