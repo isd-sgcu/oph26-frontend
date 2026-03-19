@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { PRIVACY_TEXT } from '@/const/privacy'
+import { PRIVACY_TEXT } from '@/components/const/privacy'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
