@@ -105,7 +105,7 @@ function RouteComponent() {
                 placeholder={t('routes.infoGroup.workshopGroup.all')}
               />
             </SelectTrigger>
-            <SelectContent className="z-50 h-50 overflow-y-auto">
+            <SelectContent className="z-50 max-h-60 w-full overflow-y-auto border border-gray-200 bg-white">
               <SelectItem value="all">
                 {t('routes.infoGroup.workshopGroup.all')}
               </SelectItem>
