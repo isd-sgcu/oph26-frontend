@@ -43,7 +43,7 @@ function RootDocument() {
       <head>
         <HeadContent />
       </head>
-      <body className="flex w-full flex-col items-center justify-center bg-black">
+      <body className="flex flex-col justify-start items-center bg-black w-full">
         <QueryClientProvider client={queryClient}>
           <UserProvider>
             <Header />
