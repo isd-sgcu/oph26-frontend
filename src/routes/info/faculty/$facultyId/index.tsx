@@ -30,7 +30,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className="bg-main-beige relative flex w-full flex-col">
+    <div className="bg-main-beige relative flex min-h-screen w-full flex-col">
       {/* Content */}
       <div className="relative z-10 flex h-full w-full flex-col items-center gap-6 px-8 py-8">
         {/* Header */}

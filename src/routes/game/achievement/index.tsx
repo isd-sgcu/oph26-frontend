@@ -5,6 +5,7 @@ import SharePopup from '@/components/game/achievement/SharePopup'
 import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { useUser } from '@/contexts/UserContext'
 import { getMyLeaderboard } from '@/services/leaderboard/leaderboard'
+import { getCollectedPieces } from '@/services/pieces/piece'
 import { Achievement } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
@@ -73,6 +74,38 @@ function RouteComponent() {
       // The 'overall' Data
 
       // The 'collectedPieces' Data
+      const collectedPiecesData: Achievement = {
+        variant: 'collectedPieces',
+        stat: 0,
+        edu: 0,
+        psy: 0,
+        pharm: 0,
+        dent: 0,
+        commarts: 0,
+        ahs: 0,
+        faa: 0,
+        vet: 0,
+        law: 0,
+        arch: 0,
+        eng: 0,
+        arts: 0,
+        md: 0,
+        sci: 0,
+        econ: 0,
+        polsci: 0,
+        cbs: 0,
+        spsc: 0,
+        scii: 0,
+        cusar: 0,
+      }
+      try {
+        const fetchedCollectedPiecesData = await getCollectedPieces()
+        console.log(fetchedCollectedPiecesData)
+      } catch (error) {
+        console.error('Error fetching collected pieces data:', error)
+      } finally {
+        data.push(collectedPiecesData)
+      }
 
       setAchievements(data)
       setLoading(false)
