@@ -30,11 +30,13 @@
         "title1": "Redeem Code",
         "body1": "Use the code from your friends!",
         "title2Success": "Success",
-        "title2InvalidCode": "Invalid Code",
-        "title2ExpiredCode": "Expired Code",
+        "title2InvalidCode": "Invalid or Expired Code",
+        "title2DuplicatedCode": "Already Redeemed",
+        "title2OtherError": "Something went wrong",
         "body2Success": "You have received a piece from ",
-        "body2InvalidCode": "The code is not correct. Please try again.",
-        "body2ExpiredCode": "This code has expired.",
+        "body2InvalidCode": "The code is not correct or has expired. \nPlease try again.",
+        "body2DuplicatedCode": "You have already redeemed this code.",
+        "body2OtherError": "An error occurred while redeeming the code. \nPlease try again.",
         "cancel": "Cancel",
         "submit": "Submit",
         "confirm": "Confirm"
@@ -54,6 +56,16 @@
           "dreamFaculties": "Dream Faculties",
           "button": {
             "home": "Home"
+          },
+          "evaluationBanner": {
+            "titleNoPermission": "You are not eligible to complete \n the evaluation and <u>receive a certificate</u> because you did not attend the onsite event at Chulalongkorn University \n on March 28-29, 2026",
+            "titleHasPermission": "You have attended CU Open House 2026 \n at Chulalongkorn University \n on March 28-29, 2026",
+            "detailNoPermission": "You have attended the event, but an error occurred?",
+            "button": {
+              "questionaire": "Complete Evaluation",
+              "certificate": "Receive Certificate",
+              "report": "Report"
+            }
           }
         }
       },
@@ -122,10 +134,49 @@
       }
     },
     "infoGroup": {
-      "facultyGroup": {},
+      "facultyGroup": {
+        "title": "Faculties",
+        "inputPlaceholder": "Search for faculties...",
+        "noData": "No faculties found...",
+        "workshopButton": "Workshops",
+        "facultyButton": "View Faculty",
+        "location": "Location: ",
+        "major": "Majors",
+        "field": "Fields"
+      },
       "mapGroup": {},
-      "merchandiseGroup": {},
-      "workshopGroup": {}
+      "merchandiseGroup": {
+        "title": "Merchandise",
+        "itemTitle": "Details",
+        "freeShipping": "Free shipping",
+        "variantSelect": "Select a style",
+        "store": "Contact store: ",
+        "buy": "Buy Now"
+      },
+      "workshopGroup": {
+        "title": "Workshops",
+        "inputPlaceholder": "Enter workshop name...",
+        "all": "All Faculties",
+        "loading": "Loading...",
+        "noData": "No workshops found...",
+        "viewDetails": "View Details",
+        "faculty": "Faculty",
+        "location": "Location",
+        "time": "Time",
+        "back": "Back",
+        "notFound": "Workshop Not Found",
+        "details": "Details",
+        "owner": "Owner",
+        "howToParticipate": "How to Participate",
+        "preregistered": "Pre-registered",
+        "walkin": "Walk-in Available",
+        "hasLimitParticipants": "There is a limit of participants per round",
+        "noLimitParticipants": "No limit of participants per round",
+        "numRoundsPerDay": "Number of rounds per day",
+        "contactTitle": "To receive more information",
+        "registerTitle": "Register for this workshop",
+        "register": "Register"
+      }
     },
     "questionaireGroup": {
       "title": "Questionaire",

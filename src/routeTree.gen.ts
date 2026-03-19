@@ -13,25 +13,20 @@ import { Route as GameRouteRouteImport } from './routes/game/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuestionaireIndexRouteImport } from './routes/questionaire/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
-import { Route as CertificateIndexRouteImport } from './routes/certificate/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
-import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
 import { Route as InfoFacultyIndexRouteImport } from './routes/info/faculty/index'
-import { Route as InfoEventIndexRouteImport } from './routes/info/event/index'
 import { Route as GameShareIndexRouteImport } from './routes/game/share/index'
 import { Route as GamePieceIndexRouteImport } from './routes/game/piece/index'
 import { Route as GameAchievementIndexRouteImport } from './routes/game/achievement/index'
 import { Route as AuthQrIndexRouteImport } from './routes/auth/qr/index'
-import { Route as AuthProfileIndexRouteImport } from './routes/auth/profile/index'
 import { Route as AuthOnboardingIndexRouteImport } from './routes/auth/onboarding/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/auth/login/index'
+import { Route as InfoMerchandiseItemIdRouteImport } from './routes/info/merchandise/$itemId'
 import { Route as InfoWorkshopWorkshopIdIndexRouteImport } from './routes/info/workshop/$workshopId/index'
 import { Route as InfoFacultyFacultyIdIndexRouteImport } from './routes/info/faculty/$facultyId/index'
-import { Route as AuthStaffOnboardingIndexRouteImport } from './routes/auth/staff/onboarding/index'
 import { Route as AuthStaffLoginIndexRouteImport } from './routes/auth/staff/login/index'
 import { Route as AuthProfileTicketIndexRouteImport } from './routes/auth/profile/ticket/index'
-import { Route as AuthProfileEditIndexRouteImport } from './routes/auth/profile/edit/index'
 
 const GameRouteRoute = GameRouteRouteImport.update({
   id: '/game',
@@ -53,11 +48,6 @@ const GameIndexRoute = GameIndexRouteImport.update({
   path: '/',
   getParentRoute: () => GameRouteRoute,
 } as any)
-const CertificateIndexRoute = CertificateIndexRouteImport.update({
-  id: '/certificate/',
-  path: '/certificate/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InfoWorkshopIndexRoute = InfoWorkshopIndexRouteImport.update({
   id: '/info/workshop/',
   path: '/info/workshop/',
@@ -68,19 +58,9 @@ const InfoMerchandiseIndexRoute = InfoMerchandiseIndexRouteImport.update({
   path: '/info/merchandise/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InfoMapIndexRoute = InfoMapIndexRouteImport.update({
-  id: '/info/map/',
-  path: '/info/map/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
   id: '/info/faculty/',
   path: '/info/faculty/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InfoEventIndexRoute = InfoEventIndexRouteImport.update({
-  id: '/info/event/',
-  path: '/info/event/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GameShareIndexRoute = GameShareIndexRouteImport.update({
@@ -103,11 +83,6 @@ const AuthQrIndexRoute = AuthQrIndexRouteImport.update({
   path: '/auth/qr/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthProfileIndexRoute = AuthProfileIndexRouteImport.update({
-  id: '/auth/profile/',
-  path: '/auth/profile/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthOnboardingIndexRoute = AuthOnboardingIndexRouteImport.update({
   id: '/auth/onboarding/',
   path: '/auth/onboarding/',
@@ -116,6 +91,11 @@ const AuthOnboardingIndexRoute = AuthOnboardingIndexRouteImport.update({
 const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   id: '/auth/login/',
   path: '/auth/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoMerchandiseItemIdRoute = InfoMerchandiseItemIdRouteImport.update({
+  id: '/info/merchandise/$itemId',
+  path: '/info/merchandise/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InfoWorkshopWorkshopIdIndexRoute =
@@ -130,12 +110,6 @@ const InfoFacultyFacultyIdIndexRoute =
     path: '/info/faculty/$facultyId/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AuthStaffOnboardingIndexRoute =
-  AuthStaffOnboardingIndexRouteImport.update({
-    id: '/auth/staff/onboarding/',
-    path: '/auth/staff/onboarding/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const AuthStaffLoginIndexRoute = AuthStaffLoginIndexRouteImport.update({
   id: '/auth/staff/login/',
   path: '/auth/staff/login/',
@@ -146,58 +120,43 @@ const AuthProfileTicketIndexRoute = AuthProfileTicketIndexRouteImport.update({
   path: '/auth/profile/ticket/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthProfileEditIndexRoute = AuthProfileEditIndexRouteImport.update({
-  id: '/auth/profile/edit/',
-  path: '/auth/profile/edit/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
-  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
-  '/auth/profile/': typeof AuthProfileIndexRoute
   '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
   '/game/share/': typeof GameShareIndexRoute
-  '/info/event/': typeof InfoEventIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
-  '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
-  '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId/': typeof InfoWorkshopWorkshopIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/certificate': typeof CertificateIndexRoute
   '/game': typeof GameIndexRoute
   '/questionaire': typeof QuestionaireIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login': typeof AuthLoginIndexRoute
   '/auth/onboarding': typeof AuthOnboardingIndexRoute
-  '/auth/profile': typeof AuthProfileIndexRoute
   '/auth/qr': typeof AuthQrIndexRoute
   '/game/achievement': typeof GameAchievementIndexRoute
   '/game/piece': typeof GamePieceIndexRoute
   '/game/share': typeof GameShareIndexRoute
-  '/info/event': typeof InfoEventIndexRoute
   '/info/faculty': typeof InfoFacultyIndexRoute
-  '/info/map': typeof InfoMapIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
   '/info/workshop': typeof InfoWorkshopIndexRoute
-  '/auth/profile/edit': typeof AuthProfileEditIndexRoute
   '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId': typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -205,25 +164,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/game': typeof GameRouteRouteWithChildren
-  '/certificate/': typeof CertificateIndexRoute
   '/game/': typeof GameIndexRoute
   '/questionaire/': typeof QuestionaireIndexRoute
+  '/info/merchandise/$itemId': typeof InfoMerchandiseItemIdRoute
   '/auth/login/': typeof AuthLoginIndexRoute
   '/auth/onboarding/': typeof AuthOnboardingIndexRoute
-  '/auth/profile/': typeof AuthProfileIndexRoute
   '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
   '/game/share/': typeof GameShareIndexRoute
-  '/info/event/': typeof InfoEventIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
-  '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
-  '/auth/profile/edit/': typeof AuthProfileEditIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
   '/auth/staff/login/': typeof AuthStaffLoginIndexRoute
-  '/auth/staff/onboarding/': typeof AuthStaffOnboardingIndexRoute
   '/info/faculty/$facultyId/': typeof InfoFacultyFacultyIdIndexRoute
   '/info/workshop/$workshopId/': typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -232,74 +186,59 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/game'
-    | '/certificate/'
     | '/game/'
     | '/questionaire/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
-    | '/auth/profile/'
     | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
     | '/game/share/'
-    | '/info/event/'
     | '/info/faculty/'
-    | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
-    | '/auth/profile/edit/'
     | '/auth/profile/ticket/'
     | '/auth/staff/login/'
-    | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
     | '/info/workshop/$workshopId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/certificate'
     | '/game'
     | '/questionaire'
+    | '/info/merchandise/$itemId'
     | '/auth/login'
     | '/auth/onboarding'
-    | '/auth/profile'
     | '/auth/qr'
     | '/game/achievement'
     | '/game/piece'
     | '/game/share'
-    | '/info/event'
     | '/info/faculty'
-    | '/info/map'
     | '/info/merchandise'
     | '/info/workshop'
-    | '/auth/profile/edit'
     | '/auth/profile/ticket'
     | '/auth/staff/login'
-    | '/auth/staff/onboarding'
     | '/info/faculty/$facultyId'
     | '/info/workshop/$workshopId'
   id:
     | '__root__'
     | '/'
     | '/game'
-    | '/certificate/'
     | '/game/'
     | '/questionaire/'
+    | '/info/merchandise/$itemId'
     | '/auth/login/'
     | '/auth/onboarding/'
-    | '/auth/profile/'
     | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
     | '/game/share/'
-    | '/info/event/'
     | '/info/faculty/'
-    | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
-    | '/auth/profile/edit/'
     | '/auth/profile/ticket/'
     | '/auth/staff/login/'
-    | '/auth/staff/onboarding/'
     | '/info/faculty/$facultyId/'
     | '/info/workshop/$workshopId/'
   fileRoutesById: FileRoutesById
@@ -307,21 +246,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameRouteRoute: typeof GameRouteRouteWithChildren
-  CertificateIndexRoute: typeof CertificateIndexRoute
   QuestionaireIndexRoute: typeof QuestionaireIndexRoute
+  InfoMerchandiseItemIdRoute: typeof InfoMerchandiseItemIdRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
-  AuthProfileIndexRoute: typeof AuthProfileIndexRoute
   AuthQrIndexRoute: typeof AuthQrIndexRoute
-  InfoEventIndexRoute: typeof InfoEventIndexRoute
   InfoFacultyIndexRoute: typeof InfoFacultyIndexRoute
-  InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
-  AuthProfileEditIndexRoute: typeof AuthProfileEditIndexRoute
   AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
   AuthStaffLoginIndexRoute: typeof AuthStaffLoginIndexRoute
-  AuthStaffOnboardingIndexRoute: typeof AuthStaffOnboardingIndexRoute
   InfoFacultyFacultyIdIndexRoute: typeof InfoFacultyFacultyIdIndexRoute
   InfoWorkshopWorkshopIdIndexRoute: typeof InfoWorkshopWorkshopIdIndexRoute
 }
@@ -356,13 +290,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameIndexRouteImport
       parentRoute: typeof GameRouteRoute
     }
-    '/certificate/': {
-      id: '/certificate/'
-      path: '/certificate'
-      fullPath: '/certificate/'
-      preLoaderRoute: typeof CertificateIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/info/workshop/': {
       id: '/info/workshop/'
       path: '/info/workshop'
@@ -377,25 +304,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InfoMerchandiseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/info/map/': {
-      id: '/info/map/'
-      path: '/info/map'
-      fullPath: '/info/map/'
-      preLoaderRoute: typeof InfoMapIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/info/faculty/': {
       id: '/info/faculty/'
       path: '/info/faculty'
       fullPath: '/info/faculty/'
       preLoaderRoute: typeof InfoFacultyIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/info/event/': {
-      id: '/info/event/'
-      path: '/info/event'
-      fullPath: '/info/event/'
-      preLoaderRoute: typeof InfoEventIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/game/share/': {
@@ -426,13 +339,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthQrIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/profile/': {
-      id: '/auth/profile/'
-      path: '/auth/profile'
-      fullPath: '/auth/profile/'
-      preLoaderRoute: typeof AuthProfileIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth/onboarding/': {
       id: '/auth/onboarding/'
       path: '/auth/onboarding'
@@ -445,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/login'
       fullPath: '/auth/login/'
       preLoaderRoute: typeof AuthLoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info/merchandise/$itemId': {
+      id: '/info/merchandise/$itemId'
+      path: '/info/merchandise/$itemId'
+      fullPath: '/info/merchandise/$itemId'
+      preLoaderRoute: typeof InfoMerchandiseItemIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/info/workshop/$workshopId/': {
@@ -461,13 +374,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InfoFacultyFacultyIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/staff/onboarding/': {
-      id: '/auth/staff/onboarding/'
-      path: '/auth/staff/onboarding'
-      fullPath: '/auth/staff/onboarding/'
-      preLoaderRoute: typeof AuthStaffOnboardingIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth/staff/login/': {
       id: '/auth/staff/login/'
       path: '/auth/staff/login'
@@ -480,13 +386,6 @@ declare module '@tanstack/react-router' {
       path: '/auth/profile/ticket'
       fullPath: '/auth/profile/ticket/'
       preLoaderRoute: typeof AuthProfileTicketIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/profile/edit/': {
-      id: '/auth/profile/edit/'
-      path: '/auth/profile/edit'
-      fullPath: '/auth/profile/edit/'
-      preLoaderRoute: typeof AuthProfileEditIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -513,21 +412,16 @@ const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameRouteRoute: GameRouteRouteWithChildren,
-  CertificateIndexRoute: CertificateIndexRoute,
   QuestionaireIndexRoute: QuestionaireIndexRoute,
+  InfoMerchandiseItemIdRoute: InfoMerchandiseItemIdRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
-  AuthProfileIndexRoute: AuthProfileIndexRoute,
   AuthQrIndexRoute: AuthQrIndexRoute,
-  InfoEventIndexRoute: InfoEventIndexRoute,
   InfoFacultyIndexRoute: InfoFacultyIndexRoute,
-  InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
-  AuthProfileEditIndexRoute: AuthProfileEditIndexRoute,
   AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
   AuthStaffLoginIndexRoute: AuthStaffLoginIndexRoute,
-  AuthStaffOnboardingIndexRoute: AuthStaffOnboardingIndexRoute,
   InfoFacultyFacultyIdIndexRoute: InfoFacultyFacultyIdIndexRoute,
   InfoWorkshopWorkshopIdIndexRoute: InfoWorkshopWorkshopIdIndexRoute,
 }

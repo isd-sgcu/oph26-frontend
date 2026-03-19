@@ -5,6 +5,8 @@ import Ticket from '@/components/auth/profile/ticket'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
 import { getMyAttendee, GetMyAttendeeResponse } from '@/services/attendee/attendee'
+import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
+import { useUser } from '@/contexts/UserContext'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -13,6 +15,45 @@ export const Route = createFileRoute('/auth/profile/ticket/')({
 function RouteComponent() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
+
+  useEffect(() => {
+    if (!attendee) {
+      navigate({ to: '/' })
+    }
+  }, [attendee, navigate])
+
+  if (!attendee) {
+    return null
+  }
+
+  const [showEvaluationBanner, setShowEvaluationBanner] = useState(false)
+  const [hasPermission, setHasPermission] = useState(false)
+  const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
+
+  useEffect(() => {
+    const currentDate = new Date()
+    const targetDate = new Date('2026-03-30T00:00:00')
+    if (currentDate >= targetDate) {
+      setShowEvaluationBanner(false)
+    } else {
+      setShowEvaluationBanner(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    // TODO: Fetch user's attendance data
+    const permission = Math.random() < 0.5
+    const isHighSchool = Math.random() < 0.5
+
+    setIsHighSchoolStudent(isHighSchool)
+    setHasPermission(permission)
+  }, [])
 
   const [attendee, setAttendee] = useState<GetMyAttendeeResponse | null>(null)
 
@@ -77,5 +118,17 @@ function RouteComponent() {
         </div>
       </div>
     </div>
+
+      {
+    showEvaluationBanner && (
+      <EvaluationBanner
+        open={showEvaluationBanner}
+        setOpen={setShowEvaluationBanner}
+        hasPermission={hasPermission}
+        isHighSchoolStudent={isHighSchoolStudent}
+      />
+    )
+  }
+    </>
   )
 }

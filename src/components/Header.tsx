@@ -17,11 +17,13 @@ export enum HeaderEnum {
   MAINLIGHTPINK = 'main-light-pink',
   TRANSPARENT = 'transparent',
   NONE = 'none',
+  MAINBEIGE = 'main-beige',
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
 const PATHNAME_TRANSPARENT = ['/auth/profile/ticket', '/auth/qr', '/auth/login', '']
 const PATHNAME_NONE = ['/']
+const PATHNAME_MAINBEIGE = ['/info/faculty/']
 
 const headerClass: Record<HeaderEnum, string> = {
   [HeaderEnum.MAINPINK]:
@@ -30,6 +32,7 @@ const headerClass: Record<HeaderEnum, string> = {
     'bg-linear-to-b from-main-beige from-30% to-90% to-main-light-pink relative',
   [HeaderEnum.TRANSPARENT]: 'absolute top-0 left-1/2 -translate-x-1/2',
   [HeaderEnum.NONE]: 'bg-none absolute',
+  [HeaderEnum.MAINBEIGE]: 'bg-main-beige relative',
 }
 
 const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
@@ -40,16 +43,16 @@ const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  {
-    title: 'mainEvent',
-    icon: 'fi-rr-balloons',
-    to: '/info/event',
-  },
-  {
-    title: 'map',
-    icon: 'fi-rr-map-marker',
-    to: '/info/map',
-  },
+  // {
+  //   title: 'mainEvent',
+  //   icon: 'fi-rr-balloons',
+  //   to: '/info/event',
+  // },
+  // {
+  //   title: 'map',
+  //   icon: 'fi-rr-map-marker',
+  //   to: '/info/map',
+  // },
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
@@ -57,7 +60,7 @@ const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
   },
 ]
 
-const AUTHENTICATED_ATTENDEE_NAV_ITEMS: NavItem[] = [
+const AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS: NavItem[] = [
   { title: 'home', to: '/', icon: 'fi-rr-home' },
   { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
@@ -65,16 +68,41 @@ const AUTHENTICATED_ATTENDEE_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
+  // {
+  //   title: 'mainEvent',
+  //   icon: 'fi-rr-balloons',
+  //   to: '/info/event',
+  // },
+  // {
+  //   title: 'map',
+  //   icon: 'fi-rr-map-marker',
+  //   to: '/info/map',
+  // },
   {
-    title: 'mainEvent',
-    icon: 'fi-rr-balloons',
-    to: '/info/event',
+    title: 'merchandise',
+    icon: 'fi-rr-gift',
+    to: '/info/merchandise',
   },
+]
+
+const AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS: NavItem[] = [
+  { title: 'home', to: '/', icon: 'fi-rr-home' },
+  { title: 'faculty', to: '/info/faculty', icon: 'fi-rr-graduation-cap' },
   {
-    title: 'map',
-    icon: 'fi-rr-map-marker',
-    to: '/info/map',
+    title: 'facultyWorkshop',
+    icon: 'fi-rr-playing-cards',
+    to: '/info/workshop',
   },
+  // {
+  //   title: 'mainEvent',
+  //   icon: 'fi-rr-balloons',
+  //   to: '/info/event',
+  // },
+  // {
+  //   title: 'map',
+  //   icon: 'fi-rr-map-marker',
+  //   to: '/info/map',
+  // },
   {
     title: 'missingPiece',
     icon: 'fi-rr-layout-fluid',
@@ -95,16 +123,16 @@ const AUTHENTICATED_STAFF_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  {
-    title: 'mainEvent',
-    icon: 'fi-rr-balloons',
-    to: '/info/event',
-  },
-  {
-    title: 'map',
-    icon: 'fi-rr-map-marker',
-    to: '/info/map',
-  },
+  // {
+  //   title: 'mainEvent',
+  //   icon: 'fi-rr-balloons',
+  //   to: '/info/event',
+  // },
+  // {
+  //   title: 'map',
+  //   icon: 'fi-rr-map-marker',
+  //   to: '/info/map',
+  // },
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
@@ -122,7 +150,12 @@ export default function Header() {
   const router = useRouter()
   const location = useLocation()
   const userContext = useUser()
-  const role = userContext?.role
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
+  const attendee = userContext.attendee
   const [openSidebar, setOpenSidebar] = useState(false)
   const [isClosingSidebar, setIsClosingSidebar] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -138,6 +171,8 @@ export default function Header() {
       setToColor(HeaderEnum.MAINPINK)
     } else if (PATHNAME_TRANSPARENT.includes(pathname)) {
       setToColor(HeaderEnum.TRANSPARENT)
+    } else if (PATHNAME_MAINBEIGE.some((path) => pathname.startsWith(path))) {
+      setToColor(HeaderEnum.MAINBEIGE)
     } else {
       setToColor(HeaderEnum.MAINLIGHTPINK)
     }
@@ -169,16 +204,18 @@ export default function Header() {
   }
 
   const selectedNavItems =
-    role == 'attendee'
-      ? AUTHENTICATED_ATTENDEE_NAV_ITEMS
-      : role == 'staff'
-        ? AUTHENTICATED_STAFF_NAV_ITEMS
-        : UNAUTHENTICATED_NAV_ITEMS
+    role == 'attendee' && attendee?.attendee_type == 'student'
+      ? AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS
+      : role == 'attendee'
+        ? AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS
+        : role == 'staff'
+          ? AUTHENTICATED_STAFF_NAV_ITEMS
+          : UNAUTHENTICATED_NAV_ITEMS
 
   return (
     <>
       <header
-        className={`${headerClass[toColor]} z-500 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
+        className={`${headerClass[toColor]} z-50 mx-auto flex h-16 w-full max-w-(--width-page) items-center justify-between p-4`}
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
@@ -233,7 +270,7 @@ export default function Header() {
           <>
             {/* Overlay */}
             <div
-              className={`fixed inset-0 z-500 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
+              className={`fixed inset-0 z-50 ${isClosingSidebar ? 'animate-fade-out' : 'animate-fade-in'} `}
               onClick={closeSidebar}
             />
 
@@ -312,8 +349,7 @@ export default function Header() {
                     onClick={async () => {
                       setOpenSidebar(false)
                       await logout()
-                      router.navigate({ to: '/' })
-                      window.location.reload()
+                      router.navigate({ to: '/', reloadDocument: true })
                     }}
                   >
                     {t('components.header.sidebar.logout')}
