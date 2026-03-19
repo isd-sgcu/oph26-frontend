@@ -44,7 +44,7 @@ const MajorAccordion = ({ major }: MajorAccordionProps) => {
                 <br />
                 <div>
                   <p className="text-sm font-semibold text-black">
-                    {t('routes.infoGroup.facultyGroup.field')}
+                    {t('routes.infoGroup.facultyGroup.fields')}
                   </p>
                   <span className="text-xs text-black">{fieldDescription}</span>
                 </div>

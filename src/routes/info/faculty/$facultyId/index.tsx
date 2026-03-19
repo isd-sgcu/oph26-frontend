@@ -108,7 +108,7 @@ function RouteComponent() {
         {/* Majors */}
         <div className="flex w-full flex-col gap-4">
           <h2 className="text-xl font-semibold text-black">
-            {t('routes.infoGroup.facultyGroup.major')}
+            {t('routes.infoGroup.facultyGroup.majors')}
           </h2>
           {targetFaculty.majors.map((major) => (
             <MajorAccordion key={major.id} major={major} />
