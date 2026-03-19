@@ -4,7 +4,7 @@ export default function LandingSectionThree() {
   return (
     <div className="flex justify-center items-center bg-gradient-pink-oval py-8 w-full text-white">
       <a
-        href="https://www.youtube.com/@seeyouatcu8904"
+        href="https://youtube.com/@cu.openhouse?si=q2Z-HK0zN_SL-9dH"
         className="flex justify-center items-center gap-8"
         target="_blank"
         rel="noopener noreferrer"
