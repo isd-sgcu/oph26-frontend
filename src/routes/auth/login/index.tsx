@@ -33,7 +33,7 @@ function RouteComponent() {
           error instanceof AxiosError &&
           error.response?.status === 404 &&
           error.response?.data?.error ===
-            'Attendee data not found for the current user'
+          'Attendee data not found for the current user'
         ) {
           try {
             const refreshData = await refreshToken()
@@ -47,7 +47,7 @@ function RouteComponent() {
                 error instanceof AxiosError &&
                 error.response?.status === 404 &&
                 error.response?.data?.error ===
-                  'Attendee data not found for the current user'
+                'Attendee data not found for the current user'
               ) {
                 router.navigate({ to: '/auth/onboarding' })
               }

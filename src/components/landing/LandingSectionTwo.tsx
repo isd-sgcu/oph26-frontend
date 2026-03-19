@@ -116,6 +116,21 @@ export default function LandingSectionTwo() {
         </div>
       </div>
 
+      <div className="flex flex-col justify-center items-center gap-4 bg-main-pink bg-pink py-8 w-full">
+        <Button
+          className="bg-main-beige text-main-pink"
+          onClick={() => handleNavigation('/agenda')}
+        >
+          {t('routes.landingGroup.buttonGroup.agenda')}
+        </Button>
+        <Button
+          expanded
+          className="bg-main-beige text-main-pink"
+          onClick={() => handleNavigation('/privacy')}
+        >
+          {t('routes.landingGroup.buttonGroup.privacy')}
+        </Button>
+      </div>
       {
         role === 'attendee' && (
           <div className="flex justify-center items-center bg-main-pink bg-pink py-8 w-full">

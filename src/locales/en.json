@@ -141,7 +141,8 @@
         "workshopButton": "Workshops",
         "facultyButton": "View Faculty",
         "location": "Location: ",
-        "major": "Majors",
+        "majors": "Majors",
+        "major": "Major",
         "field": "Fields"
       },
       "mapGroup": {},
@@ -254,7 +255,8 @@
       "buttonGroup": {
         "register": "Register",
         "login": "Login",
-        "ticket": "CU Ticket"
+        "ticket": "CU Ticket",
+        "privacy": "Privacy Policy"
       },
       "event": {
         "faculty": "Faculties",
@@ -266,6 +268,10 @@
       "faq": {
         "title": "FAQs ?"
       }
+    },
+    "privacyGroup": {
+      "title": "Privacy Policy",
+      "back": "Back to Main Page"
     },
 
     "title": "Title"

@@ -16,7 +16,7 @@ export type CreateAttendeeRequest = {
   news_sources_other: string
   objective_selected: string[]
   objective_other: string
-  interested_faculty: string[]
+  interested_faculty: (FacultyType | undefined)[]
   transportation_method: string
 }
 

@@ -146,8 +146,9 @@
         "workshopButton": "Workshops",
         "facultyButton": "เกี่ยวกับคณะ",
         "location": "ที่ตั้งคณะ: ",
+        "majors": "ภาควิชา",
         "major": "ภาควิชา",
-        "field": "สาขา"
+        "fields": "สาขา"
       },
       "mapGroup": {},
       "merchandiseGroup": {
@@ -258,7 +259,8 @@
       "buttonGroup": {
         "register": "ลงทะเบียน",
         "login": "เข้าสู่ระบบ",
-        "ticket": "CU Ticket"
+        "ticket": "CU Ticket",
+        "privacy": "ข้อตกลงและเงื่อนไข"
       },
       "event": {
         "faculty": "คณะ",
@@ -270,6 +272,10 @@
       "faq": {
         "title": "คำถามที่พบบ่อย"
       }
+    },
+    "privacyGroup": {
+      "title": "ข้อตกลงและเงื่อนไข",
+      "back": "กลับสู่หน้าหลัก"
     },
 
     "title": "หัวข้อ"

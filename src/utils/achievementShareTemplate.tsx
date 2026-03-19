@@ -1,4 +1,4 @@
-import logoUrl from '/logo.svg'
+import logoUrl from '/logo/cu-journey.webp'
 import shareTemplate3 from '/background/shareTemplate3.svg'
 import shareTemplate4 from '/background/shareTemplate4.svg'
 import shareTemplate5 from '/background/shareTemplate5.svg'
