@@ -16,7 +16,6 @@ import { Route as GameIndexRouteImport } from './routes/game/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
 import { Route as InfoFacultyIndexRouteImport } from './routes/info/faculty/index'
-import { Route as GameShareIndexRouteImport } from './routes/game/share/index'
 import { Route as GamePieceIndexRouteImport } from './routes/game/piece/index'
 import { Route as GameAchievementIndexRouteImport } from './routes/game/achievement/index'
 import { Route as AuthQrIndexRouteImport } from './routes/auth/qr/index'
@@ -62,11 +61,6 @@ const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
   id: '/info/faculty/',
   path: '/info/faculty/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const GameShareIndexRoute = GameShareIndexRouteImport.update({
-  id: '/share/',
-  path: '/share/',
-  getParentRoute: () => GameRouteRoute,
 } as any)
 const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
   id: '/piece/',
@@ -132,7 +126,6 @@ export interface FileRoutesByFullPath {
   '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
-  '/game/share/': typeof GameShareIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
@@ -151,7 +144,6 @@ export interface FileRoutesByTo {
   '/auth/qr': typeof AuthQrIndexRoute
   '/game/achievement': typeof GameAchievementIndexRoute
   '/game/piece': typeof GamePieceIndexRoute
-  '/game/share': typeof GameShareIndexRoute
   '/info/faculty': typeof InfoFacultyIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
   '/info/workshop': typeof InfoWorkshopIndexRoute
@@ -172,7 +164,6 @@ export interface FileRoutesById {
   '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
-  '/game/share/': typeof GameShareIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
@@ -194,7 +185,6 @@ export interface FileRouteTypes {
     | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
-    | '/game/share/'
     | '/info/faculty/'
     | '/info/merchandise/'
     | '/info/workshop/'
@@ -213,7 +203,6 @@ export interface FileRouteTypes {
     | '/auth/qr'
     | '/game/achievement'
     | '/game/piece'
-    | '/game/share'
     | '/info/faculty'
     | '/info/merchandise'
     | '/info/workshop'
@@ -233,7 +222,6 @@ export interface FileRouteTypes {
     | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
-    | '/game/share/'
     | '/info/faculty/'
     | '/info/merchandise/'
     | '/info/workshop/'
@@ -310,13 +298,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/info/faculty/'
       preLoaderRoute: typeof InfoFacultyIndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/game/share/': {
-      id: '/game/share/'
-      path: '/share'
-      fullPath: '/game/share/'
-      preLoaderRoute: typeof GameShareIndexRouteImport
-      parentRoute: typeof GameRouteRoute
     }
     '/game/piece/': {
       id: '/game/piece/'
@@ -395,14 +376,12 @@ interface GameRouteRouteChildren {
   GameIndexRoute: typeof GameIndexRoute
   GameAchievementIndexRoute: typeof GameAchievementIndexRoute
   GamePieceIndexRoute: typeof GamePieceIndexRoute
-  GameShareIndexRoute: typeof GameShareIndexRoute
 }
 
 const GameRouteRouteChildren: GameRouteRouteChildren = {
   GameIndexRoute: GameIndexRoute,
   GameAchievementIndexRoute: GameAchievementIndexRoute,
   GamePieceIndexRoute: GamePieceIndexRoute,
-  GameShareIndexRoute: GameShareIndexRoute,
 }
 
 const GameRouteRouteWithChildren = GameRouteRoute._addFileChildren(
