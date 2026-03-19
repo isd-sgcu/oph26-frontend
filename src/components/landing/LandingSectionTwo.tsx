@@ -114,7 +114,7 @@ export default function LandingSectionTwo() {
       <div className="bg-main-pink bg-pink flex w-full flex-col items-center justify-center gap-4 py-8">
         <Button
           className="bg-main-beige text-main-pink"
-          onClick={() => handleNavigation('/agenda')}
+          onClick={() => handleNavigation('/auth/profile/ticket')}
         >
           {t('routes.landingGroup.buttonGroup.agenda')}
         </Button>

@@ -294,7 +294,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://docs.google.com/forms/d/1W2OqaYGGN1G5XRHWcYiFlmdnFYgdDjCgxlIqqVp0gWo/edit',
     faculty: 'law',
     timeSlot:
-      '09:00 - 10:00 / 10:00 - 11:00 / 11:00 - 12:00 / 13:00 - 14:00 / 14:00 - 15:00 / 15:00 - 16:00',
+      '09:00 - 10:30 / 10:30 - 12:00 / 13:00 - 14:30 / 14:30 - 16:00 / 14:00 - 15:00 / 15:00 - 16:00',
     locationName:
       'ห้อง 605, 606, 904, 905 อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
     locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
@@ -322,7 +322,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     hasLimitParticipants: true,
     url: 'https://docs.google.com/forms/d/1W2OqaYGGN1G5XRHWcYiFlmdnFYgdDjCgxlIqqVp0gWo/edit',
     faculty: 'law',
-    timeSlot: '10:00 - 12:00 / 13:00 - 15:00',
+    timeSlot: '09:30 - 11:30 / 13:30 - 15:30',
     locationName:
       'ห้อง 1205, 1005 อาคารเทพทวารวดี คณะนิติศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
     locationURL: 'https://maps.app.goo.gl/tJokfjJPY3N4Ae5n8?g_st=ic',
@@ -681,7 +681,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://docs.google.com/forms/d/e/1FAIpQLSdICBgxJ_kYVQiQui5SncdKsYWLG6nm78J1bCxhGjkneAI59A/viewform?usp=publish-editor',
     faculty: 'polsci',
     timeSlot: '13:00 - 13.45 / 14.00 - 14.45 / 15.00 - 15.45',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 607-608',
+    locationName: 'ห้อง 514, 515 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี)',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
@@ -694,7 +694,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://www.instagram.com/polscicu.oph',
     faculty: 'polsci',
     timeSlot: '13:00 - 16:00',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 614',
+    locationName: 'ห้อง 509 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 614',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
@@ -702,12 +702,13 @@ export const WORKSHOP_DATA: Workshop[] = [
     name: 'SD Career Talks (เวทีพูดคุยเส้นทางอาชีพกับศิษย์เก่าสิงห์ดำ)',
     description:
       'กิจกรรม "เสวนาเส้นทางอาชีพ" เป็นกิจกรรมที่พี่ ๆ ศิษย์เก่าจะมาร่วมแบ่งปันประสบการณ์ตั้งแต่ในช่วงที่ยังเป็นนิสิต รวมไปถึงการแนะนำในพาร์ทของการทำงาน และความเป็นรัฐศาสตร์สามารถนำไปปรับใช้กับการทำงานได้อย่างไรบ้าง ซึ่งจะช่วยให้ผู้เข้าร่วมมองเห็นเส้นทางอาชีพของผู้ที่จบการศึกษาจากคณะรัฐศาสตร์ได้ชัดเจนมากขึ้น',
-    hasPreregistered: false,
+    hasPreregistered: true,
     hasLimitParticipants: false,
-    url: 'https://www.instagram.com/polscicu.oph',
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSfCjHCTaNOf2R96PHCU6Y2G6N1LlRQSCsRvdRe_WLX1JJwoVQ/viewform?usp=publish-editor',
     faculty: 'polsci',
     timeSlot: '10.00 - 12.30',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) Singhdam Space',
+    locationName:
+      'ห้อง 1308 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) Singhdam Space',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
@@ -720,7 +721,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://www.instagram.com/polscicu.oph',
     faculty: 'polsci',
     timeSlot: '10.00 - 12.30 / 13.00 - 16.00',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 614',
+    locationName: 'ห้อง 513 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 614',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
@@ -733,7 +734,8 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://www.instagram.com/polscicu.oph',
     faculty: 'polsci',
     timeSlot: '08:00 - 17:00',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 507-508 และ 1308',
+    locationName:
+      'ห้อง 509, 514, 515 ห้อง 1308 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 507-508 และ 1308',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
@@ -746,7 +748,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://www.instagram.com/polscicu.oph',
     faculty: 'polsci',
     timeSlot: '13:00 - 14:30',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 609',
+    locationName: 'ห้อง 510 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี) ห้อง 609',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   {
@@ -772,7 +774,7 @@ export const WORKSHOP_DATA: Workshop[] = [
     url: 'https://www.instagram.com/polscicu.oph',
     faculty: 'polsci',
     timeSlot: '8.30-15.00',
-    locationName: 'อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี)',
+    locationName: 'ห้อง 1308 อาคารเกษม อุทยานิน (รัฐศาสตร์ 60 ปี)',
     locationURL: 'https://maps.app.goo.gl/7bC9QwXTxRhomXvE9',
   },
   // คณะวิทยาศาสตร์
