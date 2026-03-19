@@ -22,6 +22,29 @@ export const Route = createFileRoute('/game/achievement/')({
   component: RouteComponent,
 })
 
+const facultyKeys: Array<keyof AchievementCollectedPieces> = [
+  'edu',
+  'psy',
+  'pharm',
+  'dent',
+  'commarts',
+  'ahs',
+  'faa',
+  'vet',
+  'law',
+  'arch',
+  'eng',
+  'arts',
+  'md',
+  'sci',
+  'econ',
+  'polsci',
+  'cbs',
+  'spsc',
+  'scii',
+  'cusar',
+]
+
 function RouteComponent() {
   const { t, i18n } = useTranslation()
   const isEnglish = i18n.language.startsWith('en')
@@ -90,6 +113,41 @@ function RouteComponent() {
       // The 'var3' Data
 
       // The 'overall' Data
+      const overallData: Achievement = {
+        variant: 'overall',
+        stat: 0,
+        miniCard1Faculty: 'edu',
+        miniCard1Count: 0,
+        miniCard2Rank: -1,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        const allFacultyStats =
+          fetchedCollectedPiecesData.stats.collected_by_faculty
+
+        overallData.stat = fetchedCollectedPiecesData.stats.total_collected
+
+        let maxFaculty: keyof AchievementCollectedPieces | null = null
+        let maxCount = -1
+
+        facultyKeys.forEach((faculty) => {
+          // @ts-ignore
+          const value = allFacultyStats[faculty]
+          if (value && typeof value.count === 'number') {
+            if (value.count > maxCount) {
+              maxCount = value.count
+              maxFaculty = faculty
+            }
+          }
+        })
+
+        if (maxFaculty) {
+          overallData.miniCard1Faculty = maxFaculty
+          overallData.miniCard1Count = maxCount
+        }
+      }
+
+      data.push(overallData)
 
       // The 'collectedPieces' Data
       const collectedPiecesData: AchievementCollectedPieces = {
@@ -122,29 +180,6 @@ function RouteComponent() {
           fetchedCollectedPiecesData.stats.collected_by_faculty
         collectedPiecesData.stat =
           fetchedCollectedPiecesData.stats.total_collected
-
-        const facultyKeys: Array<keyof AchievementCollectedPieces> = [
-          'edu',
-          'psy',
-          'pharm',
-          'dent',
-          'commarts',
-          'ahs',
-          'faa',
-          'vet',
-          'law',
-          'arch',
-          'eng',
-          'arts',
-          'md',
-          'sci',
-          'econ',
-          'polsci',
-          'cbs',
-          'spsc',
-          'scii',
-          'cusar',
-        ]
 
         Object.entries(allFacultyStats).forEach(([faculty, value]) => {
           if (
