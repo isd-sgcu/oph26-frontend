@@ -55,6 +55,9 @@
           "chulalongkorn": "Chulalongkorn",
           "university": "University",
           "student": "Student",
+          "parent": "Parent",
+          "educationstaff": "Educational Staff",
+          "other": "Other",
           "dreamFaculties": "Dream Faculties",
           "button": {
             "home": "Home"
