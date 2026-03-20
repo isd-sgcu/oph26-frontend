@@ -78,7 +78,7 @@ function RouteComponent() {
       </div>
 
       {showPopup && (
-        <div className="fixed inset-0 top-1/2 left-1/2 z-550 flex w-[80vw] max-w-(--width-page) -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+        <div className="fixed inset-0 top-1/2 left-1/2 z-550 flex w-[80vw] max-w-(--width-page) -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white/50">
           <div className="relative rounded-2xl bg-white p-3 shadow-xl">
             <img
               src="/info/merchandise/popup.png"
@@ -88,7 +88,7 @@ function RouteComponent() {
 
             <button
               onClick={() => setShowPopup(false)}
-              className="text-main-pink absolute -bottom-10 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-md"
+              className="bg-main-pink absolute -bottom-10 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full text-white shadow-md"
             >
               ✕
             </button>
