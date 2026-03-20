@@ -59,6 +59,9 @@
           "chulalongkorn": "จุฬาลงกรณ์",
           "university": "มหาวิทยาลัย",
           "student": "นักเรียน",
+          "parent": "ผู้ปกครอง",
+          "educationstaff": "บุคลากรทางการศึกษา",
+          "other": "อื่น ๆ",
           "dreamFaculties": "คณะที่ฝันไว้",
           "button": {
             "home": "หน้าหลัก"

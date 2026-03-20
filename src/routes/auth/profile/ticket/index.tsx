@@ -29,7 +29,11 @@ function RouteComponent() {
   useEffect(() => {
     const currentDate = new Date()
     const targetDate = new Date('2026-03-30T00:00:00')
-    const allowedAttendeeLevels = ['matthayom_ton', 'matthayom_plai', 'vocational']
+    const allowedAttendeeLevels = [
+      'matthayom_ton',
+      'matthayom_plai',
+      'vocational',
+    ]
 
     if (!userAttendee) {
       setShowEvaluationBanner(false)
@@ -49,45 +53,46 @@ function RouteComponent() {
     }
 
     if (userAttendee?.attendee_type === 'student') {
-      setIsHighSchoolStudent(allowedAttendeeLevels.includes(userAttendee.study_level || '') || false)
+      setIsHighSchoolStudent(
+        allowedAttendeeLevels.includes(userAttendee.study_level || '') || false
+      )
     } else {
       setIsHighSchoolStudent(false)
     }
-
   }, [])
 
   return (
     <>
-      <div className="relative p-5 w-full h-full min-h-dvh">
+      <div className="relative h-full min-h-dvh w-full p-5">
         <img
           src="/background/background-1.webp"
           alt=""
-          className="z-0 absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 z-0 h-full w-full object-cover"
         />
-        <div className="z-10 relative flex flex-col justify-center items-center gap-5">
+        <div className="relative z-10 flex flex-col items-center justify-center gap-5">
           {/* --- Ticket Container --- */}
-          {
-            userAttendee && (
-              <Ticket
-                id={userAttendee.ticket_code}
-                firstName={userAttendee.firstname}
-                lastName={userAttendee.surname}
-                status={false}
-                dreamFaculties={userAttendee.interested_faculty}
-              />
-            )
-          }
+          {userAttendee && (
+            <Ticket
+              id={userAttendee.ticket_code}
+              firstName={userAttendee.firstname}
+              lastName={userAttendee.surname}
+              status={false}
+              role={userAttendee.attendee_type}
+              dreamFaculties={userAttendee.interested_faculty}
+            />
+          )}
 
           {/* --- Footer Buttons --- */}
-          <div className="flex flex-wrap justify-center items-center gap-6 pb-5 w-full">
+          <div className="flex w-full flex-wrap items-center justify-center gap-6 pb-5">
             <Button
               size={'lg'}
               className="bg-main-beige text-main-pink"
               onClick={() => {
                 navigate({
-                  to: '/info/workshop', search: {
+                  to: '/info/workshop',
+                  search: {
                     faculty: 'all',
-                  }
+                  },
                 })
               }}
             >
@@ -107,16 +112,14 @@ function RouteComponent() {
         </div>
       </div>
 
-      {
-        showEvaluationBanner && (
-          <EvaluationBanner
-            open={showEvaluationBanner}
-            setOpen={setShowEvaluationBanner}
-            hasPermission={hasPermission}
-            isHighSchoolStudent={isHighSchoolStudent}
-          />
-        )
-      }
+      {showEvaluationBanner && (
+        <EvaluationBanner
+          open={showEvaluationBanner}
+          setOpen={setShowEvaluationBanner}
+          hasPermission={hasPermission}
+          isHighSchoolStudent={isHighSchoolStudent}
+        />
+      )}
     </>
   )
 }
