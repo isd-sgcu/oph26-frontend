@@ -195,27 +195,27 @@ export async function processFramedTemplate(
   ctx.textBaseline = 'middle'
 
   // Name
-  ctx.font = 'bold 80px "IBM Plex Sans Thai"'
+  ctx.font = 'bold 40px "IBM Plex Sans Thai"'
   ctx.fillText(username, canvas.width / 2, 185)
 
   // Count
   ctx.fillText(userData, canvas.width / 2 - 25, 810)
 
   // /20 text
-  ctx.font = '600 60px "IBM Plex Sans Thai"'
+  ctx.font = '600 30px "IBM Plex Sans Thai"'
   ctx.fillText('/20', canvas.width / 2 + 25, 812)
 
   // Missing pieces text
   ctx.fillStyle = '#000000'
-  ctx.font = '500 65px "IBM Plex Sans Thai"'
+  ctx.font = '500 32px "IBM Plex Sans Thai"'
   ctx.fillText(
     localizedText[lang === 0 ? 'th' : 'en'].missingPieces,
     canvas.width / 2,
-    550
+    275
   )
 
   // collected
-  ctx.font = '500 50px "IBM Plex Sans Thai"'
+  ctx.font = '500 25px "IBM Plex Sans Thai"'
   ctx.fillText(
     localizedText[lang === 0 ? 'th' : 'en'].collected,
     canvas.width * 0.25,
@@ -230,10 +230,10 @@ export async function processFramedTemplate(
   )
 
   // 5️⃣ Draw logo
-  const logoWidth = logo.width * 0.25
+  const logoWidth = logo.width * 0.125
   const logoHeight = (logo.height / logo.width) * logoWidth
 
-  ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 90, logoWidth, logoHeight)
+  ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 45, logoWidth, logoHeight)
 
   return canvas.toDataURL('image/png')
 }
