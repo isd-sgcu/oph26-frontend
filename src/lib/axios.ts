@@ -1,5 +1,4 @@
 import { env } from '@/env'
-import { refreshToken } from '@/services/auth/auth'
 import axios from 'axios'
 
 export const Axios = axios.create({
@@ -24,17 +23,59 @@ Axios.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
+let isRefreshing = false
+let pendingRequests: Array<{
+  resolve: (token: string) => void
+  reject: (error: unknown) => void
+}> = []
+
 Axios.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
+    const originalRequest = error.config
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          pendingRequests.push({
+            resolve: (token: string) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`
+              resolve(Axios(originalRequest))
+            },
+            reject,
+          })
+        })
+      }
+
+      originalRequest._retry = true
+      isRefreshing = true
+
       try {
-        const refreshData = await refreshToken()
-        localStorage.setItem('token', refreshData.accessToken)
+        const { data } = await axios.post(
+          `${env.VITE_PUBLIC_API_URL}/auth/refresh`,
+          {},
+          { withCredentials: true }
+        )
+        const newToken = data.accessToken
+        localStorage.setItem('token', newToken)
         window.dispatchEvent(new Event('tokenChanged'))
-      } catch (error) {
-        localStorage.removeItem('token')
-        window.location.href = '/'
+
+        pendingRequests.forEach((req) => req.resolve(newToken))
+        pendingRequests = []
+
+        originalRequest.headers.Authorization = `Bearer ${newToken}`
+        return Axios(originalRequest)
+      } catch (refreshError: any) {
+        pendingRequests.forEach((req) => req.reject(refreshError))
+        pendingRequests = []
+
+        if (refreshError?.response?.status === 401) {
+          localStorage.removeItem('token')
+          window.location.href = '/'
+        }
+
+        return Promise.reject(refreshError)
+      } finally {
+        isRefreshing = false
       }
     }
     return Promise.reject(error)

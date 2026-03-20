@@ -51,8 +51,22 @@ export default function GameMap() {
     return window.innerHeight / 2000
   })
 
-  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } =
-    useCamera(containerRef, cameraWrapperRef, baseScale)
+  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } = useCamera(containerRef, cameraWrapperRef, baseScale)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const handler = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+
+    el.addEventListener('touchmove', handler, { passive: false })
+
+    return () => {
+      el.removeEventListener('touchmove', handler)
+    }
+  }, [])
 
   // Compute base scale
   useLayoutEffect(() => {
@@ -76,23 +90,25 @@ export default function GameMap() {
   useEffect(() => {
     async function fetchPieces() {
       const collectedPiecesData: PieceCountType = {} as PieceCountType
-      const fetchedCollectedPiecesData = await getCollectedPieces()
-      if (fetchedCollectedPiecesData) {
-        const allFacultyStats =
-          fetchedCollectedPiecesData.stats.collected_by_faculty
+      try {
+        const fetchedCollectedPiecesData = await getCollectedPieces()
+        if (fetchedCollectedPiecesData) {
+          const allFacultyStats =
+            fetchedCollectedPiecesData.stats.collected_by_faculty
 
-        Object.entries(allFacultyStats).forEach(([faculty, value]) => {
-          if (
-            value &&
-            typeof value.count === 'number' &&
-            FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
-          ) {
-            // @ts-ignore
-            collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
-              value.count
-          }
-        })
-      }
+          Object.entries(allFacultyStats).forEach(([faculty, value]) => {
+            if (
+              value &&
+              typeof value.count === 'number' &&
+              FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
+            ) {
+              // @ts-ignore
+              collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
+                value.count
+            }
+          })
+        }
+      } catch {}
 
       setPieceCount(collectedPiecesData)
     }
@@ -131,6 +147,7 @@ export default function GameMap() {
         touchAction: 'none',
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
       }}
       onClick={() => {
         if (isZoomed) resetZoom()

@@ -67,19 +67,19 @@ useEffect(() => {
 //-----------------------------------------
 
   return (
-  <div className='bg-gradient-pink flex-1 p-5'>
-    {/* Header */}
-    <div className="relative flex items-center justify-center">
-      <FlatIcon
-        name="fi-rr-angle-left"
-        className="absolute left-0 text-white"
-        onClick={() => navigate({ to: '/info/merchandise' })}
-      />
+    <div className="bg-gradient-pink min-h-screen flex-1 p-5">
+      {/* Header */}
+      <div className="relative flex items-center justify-center">
+        <FlatIcon
+          name="fi-rr-angle-left"
+          className="absolute left-0 text-white"
+          onClick={() => navigate({ to: '/info/merchandise' })}
+        />
 
-      <span className="text-white text-3xl font-bold text-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-        {t('routes.infoGroup.merchandiseGroup.itemTitle')}
-      </span>
-    </div>
+        <span className="text-3xl font-bold text-white text-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+          {t('routes.infoGroup.merchandiseGroup.itemTitle')}
+        </span>
+      </div>
 
     {/* Image */}
     <div className='my-5'>
