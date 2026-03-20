@@ -134,8 +134,8 @@ export async function processFramedTemplate(
 
   if (!ctx) throw new Error('Canvas not supported')
 
-  canvas.width = 1080
-  canvas.height = 1920
+  canvas.width = 540
+  canvas.height = 960
 
   // Helper to load image
   const loadImage = (src: string) =>
@@ -157,10 +157,10 @@ export async function processFramedTemplate(
   ctx.drawImage(bg, 0, 0, canvas.width, canvas.height)
 
   // 3️⃣ Draw rounded map
-  const mapWidth = 900
-  const mapHeight = 900
+  const mapWidth = 450
+  const mapHeight = 450
   const mapX = (canvas.width - mapWidth) / 2
-  const mapY = 620
+  const mapY = 310
 
   // Draw shadow shape first
   ctx.save()
@@ -196,14 +196,14 @@ export async function processFramedTemplate(
 
   // Name
   ctx.font = 'bold 80px "IBM Plex Sans Thai"'
-  ctx.fillText(username, canvas.width / 2, 370)
+  ctx.fillText(username, canvas.width / 2, 185)
 
   // Count
-  ctx.fillText(userData, canvas.width / 2 - 50, 1620)
+  ctx.fillText(userData, canvas.width / 2 - 25, 810)
 
   // /20 text
   ctx.font = '600 60px "IBM Plex Sans Thai"'
-  ctx.fillText('/20', canvas.width / 2 + 50, 1625)
+  ctx.fillText('/20', canvas.width / 2 + 25, 812)
 
   // Missing pieces text
   ctx.fillStyle = '#000000'
@@ -219,14 +219,14 @@ export async function processFramedTemplate(
   ctx.fillText(
     localizedText[lang === 0 ? 'th' : 'en'].collected,
     canvas.width * 0.25,
-    1620
+    810
   )
 
   // faculty
   ctx.fillText(
     localizedText[lang === 0 ? 'th' : 'en'].faculty,
     canvas.width * 0.75,
-    1620
+    810
   )
 
   // 5️⃣ Draw logo
