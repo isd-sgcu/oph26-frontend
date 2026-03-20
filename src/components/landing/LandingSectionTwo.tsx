@@ -12,7 +12,8 @@ export default function LandingSectionTwo() {
     return null
   }
 
-  const role = userContext?.role
+  const role = userContext.role
+  const attendee = userContext.attendee
 
   const handleNavigation = (path: string) => {
     navigate({ to: path })
@@ -85,7 +86,7 @@ export default function LandingSectionTwo() {
             </button>
 
             {/* Missing Pieces */}
-            {role === 'attendee' ? (
+            {role === 'attendee' && attendee?.attendee_type === 'student' ? (
               <button
                 className="absolute top-[53%] left-[56%] z-10 flex flex-col items-center justify-center gap-1"
                 aria-label="Missing Pieces"
