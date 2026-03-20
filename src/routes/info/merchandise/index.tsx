@@ -27,7 +27,13 @@ function RouteComponent() {
   return (
   <div className='bg-gradient-pink flex-1 p-5 flex flex-col gap-5'>
       
-    <img src="/info/merchandise/banner.png" alt="banner" className='rounded-2xl shadow-[0_1px_2px_0_rgba(0,0,0,0.5)]'/>
+    <a
+      href="https://www.instagram.com/cu.item?igsh=YzB5dGl5dmlzdHpj"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/info/merchandise/banner.png" alt="banner" className='rounded-2xl shadow-[0_1px_2px_0_rgba(0,0,0,0.5)]'/>
+    </a>
 
     <h1 className='text-white text-2xl font-bold text-shadow-[0_1px_2px_rgba(0,0,0,0.5)]'>{t('routes.infoGroup.merchandiseGroup.title')}</h1>
     
@@ -67,13 +73,13 @@ function RouteComponent() {
     </div>
 
     {showPopup && (
-      <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-white/50 flex items-center justify-center z-550">
         <div className="relative bg-white rounded-2xl p-3 shadow-xl">
           
           <img
             src="/info/merchandise/popup.png"
             alt="popup"
-            className="w-[90vw] rounded-xl object-contain"
+            className="w-[80vw] rounded-xl object-contain"
           />
 
           <button
