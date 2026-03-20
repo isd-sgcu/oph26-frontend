@@ -19,9 +19,9 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
   const [step, setStep] = useState(1)
   const [code, setCode] = useState('')
   const [success, setSuccess] = useState(false)
-  const [error, setError] = useState<'invalid' | 'duplicated' | 'other' | null>(
-    null
-  )
+  const [error, setError] = useState<
+    'invalid' | 'duplicated' | 'ownCode' | 'expired' | 'other' | null
+  >(null)
   const [facultyPiece, setFacultyPiece] = useState<FacultyType>()
 
   const selectedFaculty = FACULTIES.find((f) => f.value === facultyPiece)
@@ -88,6 +88,14 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
                       const status = axiosError.response?.status
                       switch (status) {
                         case 400:
+                          if (
+                            // @ts-ignore
+                            axiosError.response?.data?.error ===
+                            'Cannot collect your own piece'
+                          ) {
+                            setError('ownCode')
+                          }
+                          break
                         case 404:
                           setError('invalid')
                           break
@@ -123,14 +131,18 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
               {success
                 ? t('components.gameGroup.redeemCodePopup.title2Success')
                 : error === 'invalid'
-                  ? t('components.gameGroup.redeemCodePopup.title2InvalidCode')
+                  ? t(
+                      'components.gameGroup.redeemCodePopup.title2InvalidOrExpiredCode'
+                    )
                   : error === 'duplicated'
                     ? t(
                         'components.gameGroup.redeemCodePopup.title2DuplicatedCode'
                       )
-                    : t(
-                        'components.gameGroup.redeemCodePopup.title2OtherError'
-                      )}
+                    : error === 'ownCode'
+                      ? t('components.gameGroup.redeemCodePopup.title2OwnCode')
+                      : t(
+                          'components.gameGroup.redeemCodePopup.title2OtherError'
+                        )}
             </DialogTitle>
 
             {/* Body */}
@@ -140,12 +152,18 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
                     selectedFaculty?.label[i18n.language as 'th' | 'en'] ?? ''
                   }`
                 : error === 'invalid'
-                  ? t('components.gameGroup.redeemCodePopup.body2InvalidCode')
+                  ? t(
+                      'components.gameGroup.redeemCodePopup.body2InvalidOrExpiredCode'
+                    )
                   : error === 'duplicated'
                     ? t(
                         'components.gameGroup.redeemCodePopup.body2DuplicatedCode'
                       )
-                    : t('components.gameGroup.redeemCodePopup.body2OtherError')}
+                    : error === 'ownCode'
+                      ? t('components.gameGroup.redeemCodePopup.body2OwnCode')
+                      : t(
+                          'components.gameGroup.redeemCodePopup.body2OtherError'
+                        )}
             </p>
 
             {/* Piece */}
