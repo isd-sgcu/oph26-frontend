@@ -44,8 +44,8 @@ export default function CarouselLanding() {
     },
     {
       id: 2,
-      type: 'video',
-      path: 'gulfVideo.webm',
+      type: 'youtube',
+      path: 'https://www.youtube.com/embed/KUd_aWty2cY',
     },
     {
       id: 3,
@@ -108,7 +108,7 @@ export default function CarouselLanding() {
           setApi={setApi}
           plugins={[
             Autoplay({
-              delay: data[current - 1]?.type === 'video' ? 15000 : 3000,
+              delay: data[current - 1]?.type === 'youtube' ? 17000 : 3000,
               stopOnInteraction: false,
             }),
           ]}
@@ -123,15 +123,21 @@ export default function CarouselLanding() {
                   rel="noopener noreferrer"
                   className="aspect-video w-full overflow-hidden rounded-2xl"
                 >
-                  {item.type === 'video' ? (
-                    <video
-                      src={`landing/banner/${item.path}`}
-                      className="aspect-video w-full rounded-2xl object-cover"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                    />
+                  {item.type === 'youtube' ? (
+                    current === item.id ? (
+                      <iframe
+                        src={`${item.path}?autoplay=1&mute=1&playsinline=1`}
+                        className="aspect-video w-full rounded-2xl object-cover"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                      />
+                    ) : (
+                      // Placeholder when not active
+                      <img
+                        src={`https://img.youtube.com/vi/KUd_aWty2cY/hqdefault.jpg`}
+                        className="aspect-video w-full rounded-2xl object-cover"
+                      />
+                    )
                   ) : (
                     <img
                       src={`landing/banner/${item.path}`}
