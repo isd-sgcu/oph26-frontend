@@ -21,6 +21,10 @@ export function useCamera(
 
   const velocityRef = useRef<number>(0)
 
+  const isIOS =
+  typeof window !== 'undefined' &&
+  /iPad|iPhone|iPod/.test(navigator.userAgent)
+
   // Apply transform to DOM
   const applyTransform = () => {
     const wrapper = wrapperRef.current
@@ -213,13 +217,63 @@ export function useCamera(
     setIsZoomed(false)
   }
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (isZoomed) return
+
+    const touch = e.touches[0]
+
+    isDragging.current = true
+    lastPos.current = { x: touch.clientX, y: touch.clientY }
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging.current || isZoomed) return
+
+    e.preventDefault()
+
+    const touch = e.touches[0]
+
+    const dx = touch.clientX - lastPos.current.x
+    velocityRef.current = dx
+
+    lastPos.current = { x: touch.clientX, y: touch.clientY }
+
+    const container = containerRef.current
+    if (!container) return
+
+    const effectiveScale = baseScale * cameraRef.current.scale
+    const worldWidth = 2000 * effectiveScale
+    const containerWidth = container.clientWidth
+
+    const minX = containerWidth - worldWidth
+    const maxX = 0
+
+    let nextX = cameraRef.current.x + dx
+    nextX = Math.min(maxX, Math.max(minX, nextX))
+
+    cameraRef.current.x = nextX
+
+    applyTransform()
+  }
+
+  const onTouchEnd = () => {
+    isDragging.current = false
+    velocityRef.current = 0
+  }
+
   return {
-    bind: {
-      onPointerDown,
-      onPointerMove,
-      onPointerUp,
-      onPointerLeave: onPointerUp,
-    },
+    bind: isIOS
+    ? {
+        onTouchStart,
+        onTouchMove,
+        onTouchEnd,
+      }
+    : {
+        onPointerDown,
+        onPointerMove,
+        onPointerUp,
+        onPointerLeave: onPointerUp,
+      },
     zoomToZone,
     resetZoom,
     isZoomed,
