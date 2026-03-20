@@ -76,23 +76,25 @@ export default function GameMap() {
   useEffect(() => {
     async function fetchPieces() {
       const collectedPiecesData: PieceCountType = {} as PieceCountType
-      const fetchedCollectedPiecesData = await getCollectedPieces()
-      if (fetchedCollectedPiecesData) {
-        const allFacultyStats =
-          fetchedCollectedPiecesData.stats.collected_by_faculty
+      try {
+        const fetchedCollectedPiecesData = await getCollectedPieces()
+        if (fetchedCollectedPiecesData) {
+          const allFacultyStats =
+            fetchedCollectedPiecesData.stats.collected_by_faculty
 
-        Object.entries(allFacultyStats).forEach(([faculty, value]) => {
-          if (
-            value &&
-            typeof value.count === 'number' &&
-            FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
-          ) {
-            // @ts-ignore
-            collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
-              value.count
-          }
-        })
-      }
+          Object.entries(allFacultyStats).forEach(([faculty, value]) => {
+            if (
+              value &&
+              typeof value.count === 'number' &&
+              FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
+            ) {
+              // @ts-ignore
+              collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
+                value.count
+            }
+          })
+        }
+      } catch {}
 
       setPieceCount(collectedPiecesData)
     }
