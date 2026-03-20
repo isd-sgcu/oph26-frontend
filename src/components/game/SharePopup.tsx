@@ -149,9 +149,12 @@ const GameSharePopup = ({ open, onClose, collectedNumber }: Props) => {
   const handleClose = () => {
     setVisible(false)
     setTimeout(() => {
+      if (image) {
+        image.forEach((url) => URL.revokeObjectURL(url))
+      }
       setImage(null)
       onClose()
-    }, 300) // match animation duration
+    }, 300)
   }
 
   if (!open) return null

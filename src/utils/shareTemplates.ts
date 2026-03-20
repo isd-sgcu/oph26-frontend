@@ -1,10 +1,10 @@
 export async function processWatermarkTemplate(
-  base64Image: string,
+  blobUrl: string,
   logoUrl: string
 ): Promise<string> {
   return new Promise((resolve, reject) => {
     const baseImg = new Image()
-    baseImg.src = base64Image
+    baseImg.src = blobUrl
 
     baseImg.onload = () => {
       const canvas = document.createElement('canvas')
