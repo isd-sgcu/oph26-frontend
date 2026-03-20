@@ -337,7 +337,7 @@ export default function Header() {
               </nav>
 
               {/* Buttons */}
-              <div className="mt-auto flex flex-col items-center justify-center gap-4">
+              <div className="flex flex-col items-center justify-center gap-4">
                 {role == undefined ? (
                   <>
                     <Button
