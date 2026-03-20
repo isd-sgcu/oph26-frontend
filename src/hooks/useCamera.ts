@@ -61,6 +61,8 @@ export function useCamera(
   const onPointerDown = (e: React.PointerEvent) => {
     if (isZoomed) return
 
+    e.preventDefault()
+
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current)
       animationRef.current = null
@@ -68,11 +70,18 @@ export function useCamera(
 
     isDragging.current = true
     lastPos.current = { x: e.clientX, y: e.clientY }
-    e.currentTarget.setPointerCapture(e.pointerId)
+
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {
+      
+    }
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!isDragging.current || isZoomed) return
+
+    e.preventDefault()
 
     const dx = e.clientX - lastPos.current.x
     velocityRef.current = dx
