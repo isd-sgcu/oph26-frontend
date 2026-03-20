@@ -131,6 +131,7 @@ export default function GameMap() {
         touchAction: 'none',
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
       }}
       onClick={() => {
         if (isZoomed) resetZoom()
