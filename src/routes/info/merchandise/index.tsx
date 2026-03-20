@@ -60,13 +60,13 @@ function RouteComponent() {
                   />
                 </div>
 
-                <span className="text-main-beige line-clamp-1 text-xl leading-6 font-bold">
-                  {variant.title}
-                </span>
+              <span className='text-main-beige font-bold text-xl leading-6 line-clamp-1'>
+                {variant.title}
+              </span>
 
-                <span className="line-clamp-2 text-base leading-4.5 font-normal text-white">
-                  {item.name}
-                </span>
+              <span className='text-white text-base leading-4.5 font-normal line-clamp-2'>
+                {item.name}
+              </span>
 
                 <span className="text-main-beige text-xl leading-6 font-bold">
                   ฿ {item.price}
@@ -78,7 +78,7 @@ function RouteComponent() {
       </div>
 
       {showPopup && (
-        <div className="fixed inset-0 top-1/2 left-1/2 z-550 flex w-[80vw] max-w-(--width-page) -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white/50">
+        <div className="fixed inset-0 top-1/2 left-1/2 z-550 flex w-[80vw] max-w-(--width-page) -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white/50 backdrop-blur-md">
           <div className="relative rounded-2xl bg-white p-3 shadow-xl">
             <img
               src="/info/merchandise/popup.png"
