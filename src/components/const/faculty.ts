@@ -1,3 +1,5 @@
+import { AchievementCollectedPieces } from '@/types/achievement'
+
 export type FacultyType =
   | 'edu'
   | 'psy'
@@ -219,6 +221,7 @@ export interface Faculty {
   majors: Major[]
   imagePath: string
   location: string
+  websiteUrl: string
 }
 
 export interface Major {
@@ -282,6 +285,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/edu.webp',
     location: 'https://maps.app.goo.gl/v38UG7L3eFqTKWfy8',
+    websiteUrl: 'https://www.edu.chula.ac.th/',
   },
   // คณะจิตวิทยา
   {
@@ -305,6 +309,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/psy.webp',
     location: 'https://maps.app.goo.gl/ULZ4goJU4S4iKGQ2A',
+    websiteUrl: 'https://www.psy.chula.ac.th/',
   },
   // คณะทันตแพทยศาสตร์
   {
@@ -321,6 +326,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/dent.webp',
     location: 'https://maps.app.goo.gl/dqZ8HhyHuQKy7ojU8',
+    websiteUrl: 'https://www.dent.chula.ac.th/',
   },
   // คณะนิติศาสตร์
   {
@@ -354,6 +360,7 @@ export const FACULTY_DATA: Faculty[] = [
     imagePath: '/info/faculty/law.webp',
     location:
       'https://www.google.com/maps/place/Faculty+of+Law,+Chulalongkorn+University/@13.7354035,100.5258816,17z/data=!3m1!4b1!4m6!3m5!1s0x30e29ed24512a467:0x99830f05cd376eab!8m2!3d13.7354035!4d100.5284565!16s%2Fg%2F122p31p6?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D',
+    websiteUrl: 'https://www.law.chula.ac.th/',
   },
   // คณะนิเทศศาสตร์
   {
@@ -411,6 +418,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/commarts.webp',
     location: 'https://maps.app.goo.gl/nENwDBqJisD5Ztnq6',
+    websiteUrl: 'https://www.commarts.chula.ac.th/',
   },
   // คณะพาณิชยศาสตร์และการบัญชี
   {
@@ -451,6 +459,8 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/cbs.webp',
     location: 'https://maps.app.goo.gl/r8MfrgePqCJQKFSL8',
+    websiteUrl:
+      'https://www.chula.ac.th/academic/faculty-of-commerce-and-accountancy/',
   },
   // คณะแพทยศาสตร์
   {
@@ -467,6 +477,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/md.webp',
     location: 'https://maps.app.goo.gl/5qe8o1XU2Jxj7rPK8?g_st=ic',
+    websiteUrl: 'https://www.md.chula.ac.th/',
   },
   // คณะเภสัชศาสตร์
   {
@@ -484,6 +495,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/pharm.webp',
     location: 'https://maps.app.goo.gl/tN1YCBJ75JMeaT6a7',
+    websiteUrl: 'https://www.pharm.chula.ac.th/',
   },
   // คณะรัฐศาสตร์
   {
@@ -533,6 +545,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/polsci.webp',
     location: 'https://maps.app.goo.gl/vEXK7KRokbV4fJri6',
+    websiteUrl: 'https://www.polsci.chula.ac.th/',
   },
   // คณะวิทยาศาสตร์
   {
@@ -672,6 +685,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/6Hm29bEcGzWCBEtz5',
     imagePath: '/info/faculty/sci.webp',
+    websiteUrl: 'https://web.sc.chula.ac.th/',
   },
   // คณะวิทยาศาสตร์การกีฬา
   {
@@ -689,6 +703,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/spsc.webp',
     location: 'https://maps.app.goo.gl/vUs2nhmuBwT66tgH6',
+    websiteUrl: 'https://www.spsc.chula.ac.th/',
   },
   // คณะวิศวกรรมศาสตร์
   {
@@ -789,6 +804,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     imagePath: '/info/faculty/eng.webp',
     location: 'https://maps.app.goo.gl/Yrdn7tiRvRFSh6LdA?g_st=ic',
+    websiteUrl: 'https://www.eng.chula.ac.th/',
   },
   // คณะศิลปกรรมศาสตร์
   {
@@ -829,6 +845,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://share.google/9TS6eZaymKHG5xrSo',
     imagePath: '/info/faculty/faa.webp',
+    websiteUrl: 'https://www.faa.chula.ac.th/',
   },
   // คณะเศรษฐศาสตร์
   {
@@ -854,6 +871,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/RaFfYpJvQzeDdYyJA',
     imagePath: '/info/faculty/econ.webp',
+    websiteUrl: 'https://www.econ.chula.ac.th/',
   },
   // คณะสถาปัตยกรรมศาสตร์
   {
@@ -919,6 +937,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/wRYfUTKsSASzW1uz8',
     imagePath: '/info/faculty/arch.webp',
+    websiteUrl: 'https://www.arch.chula.ac.th/',
   },
   // คณะสหเวชศาสตร์
   {
@@ -959,6 +978,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/NYFfZPegMsyjzeEa8',
     imagePath: '/info/faculty/ahs.webp',
+    websiteUrl: 'https://www.ahs.chula.ac.th/',
   },
   // คณะสัตวแพทยศาสตร์
   {
@@ -975,6 +995,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/wzMwLsX41NHa8F8J6?g_st=ic',
     imagePath: '/info/faculty/vet.webp',
+    websiteUrl: 'https://www.vet.chula.ac.th/',
   },
   // คณะอักษรศาสตร์
   {
@@ -1117,6 +1138,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/SQnx4op4EhptLACR9?g_st=ipc',
     imagePath: '/info/faculty/arts.webp',
+    websiteUrl: 'https://www.arts.chula.ac.th/',
   },
   // สถาบันนวัตกรรมบูรณาการแห่งจุฬาลงกรณ์มหาวิทยาลัย
   {
@@ -1147,6 +1169,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/BtArHZ9HWn5bFRxYA',
     imagePath: '/info/faculty/scii.webp',
+    websiteUrl: 'https://csii.chula.ac.th/',
   },
   // คณะเกษตรศาสตร์บูรณาการ
   {
@@ -1163,6 +1186,7 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/SNsRCSRWT2vdqGyW8',
     imagePath: '/info/faculty/cusar.webp',
+    websiteUrl: 'https://www.cusar.chula.ac.th/',
   },
   // หอพักนิสิตจุฬาลงกรณ์มหาวิทยาลัย
   {
@@ -1207,5 +1231,29 @@ export const FACULTY_DATA: Faculty[] = [
     ],
     location: 'https://maps.app.goo.gl/j1DDqX6zEiLo2KXX6?g_st=ac',
     imagePath: '/info/faculty/dorm.webp',
+    websiteUrl: 'https://www.rcu.sa.chula.ac.th/',
   },
+]
+
+export const FACULTY_KEYS: Array<keyof AchievementCollectedPieces> = [
+  'edu',
+  'psy',
+  'pharm',
+  'dent',
+  'commarts',
+  'ahs',
+  'faa',
+  'vet',
+  'law',
+  'arch',
+  'eng',
+  'arts',
+  'md',
+  'sci',
+  'econ',
+  'polsci',
+  'cbs',
+  'spsc',
+  'scii',
+  'cusar',
 ]

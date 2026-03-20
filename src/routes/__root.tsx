@@ -43,11 +43,11 @@ function RootDocument() {
       <head>
         <HeadContent />
       </head>
-      <body className="flex min-h-screen w-full max-w-(--width-page) flex-col justify-self-center">
+      <body className="flex flex-col justify-start items-center bg-black w-full">
         <QueryClientProvider client={queryClient}>
           <UserProvider>
             <Header />
-            <main className="flex flex-1 bg-white">
+            <main className="mx-auto min-h-screen w-full max-w-(--width-page) bg-white">
               <Outlet />
             </main>
           </UserProvider>

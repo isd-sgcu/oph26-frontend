@@ -1,11 +1,19 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
 import { useNavigate } from '@tanstack/react-router'
+import { useUser } from '@/contexts/UserContext'
+import clsx from 'clsx'
 
 export default function LandingSectionTwo() {
   const { t } = useTranslation()
-  const isRoleStudent = true
   const navigate = useNavigate()
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
+  const attendee = userContext.attendee
 
   const handleNavigation = (path: string) => {
     navigate({ to: path })
@@ -78,18 +86,24 @@ export default function LandingSectionTwo() {
             </button>
 
             {/* Missing Pieces */}
-            {isRoleStudent ? (
+            {role === 'attendee' && attendee?.attendee_type === 'student' ? (
               <button
                 className="absolute top-[53%] left-[56%] z-10 flex flex-col items-center justify-center gap-1"
                 aria-label="Missing Pieces"
                 onClick={() => handleNavigation('/game/piece')}
+                disabled={role === undefined}
               >
                 <img
                   src="/landing/jigsaws.svg"
                   alt=""
                   className="h-auto w-18"
                 />
-                <span className="text-center text-base font-bold whitespace-nowrap text-white text-shadow-lg sm:text-lg md:text-xl">
+                <span
+                  className={clsx(
+                    'text-center text-base font-bold whitespace-nowrap text-shadow-lg sm:text-lg md:text-xl',
+                    role === undefined ? 'text-white/60' : 'text-white'
+                  )}
+                >
                   {t('routes.landingGroup.event.missingPiece')}
                 </span>
               </button>
@@ -111,12 +125,21 @@ export default function LandingSectionTwo() {
         </div>
       </div>
 
-      <div className="bg-main-pink bg-pink flex w-full items-center justify-center py-8">
+      <div className="bg-main-pink bg-pink flex w-full flex-col items-center justify-center gap-4 py-8">
+        {role === 'attendee' && (
+          <Button
+            className="bg-main-beige text-main-pink"
+            onClick={() => handleNavigation('/auth/profile/ticket')}
+          >
+            {t('routes.landingGroup.buttonGroup.ticket')}
+          </Button>
+        )}
         <Button
+          expanded
           className="bg-main-beige text-main-pink"
-          onClick={() => handleNavigation('/agenda')}
+          onClick={() => handleNavigation('/privacy')}
         >
-          {t('routes.landingGroup.buttonGroup.agenda')}
+          {t('routes.landingGroup.buttonGroup.privacy')}
         </Button>
       </div>
     </div>

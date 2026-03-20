@@ -2,8 +2,9 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { env } from '@/env'
-import { login } from '@/services/auth/auth'
+import { login, refreshToken } from '@/services/auth/auth'
 import { getMyAttendee } from '@/services/attendee/attendee'
+import { AxiosError } from 'axios'
 
 declare global {
   interface Window {
@@ -24,13 +25,51 @@ function RouteComponent() {
     onSuccess: async (data) => {
       localStorage.setItem('token', data.accessToken)
       window.dispatchEvent(new Event('tokenChanged'))
-      const attendeeData = await getMyAttendee()
-      if (attendeeData != null) {
-        // If attendee data exists, navigate to the home page
-        router.navigate({ to: '/' })
-      } else {
-        // If attendee data does not exist, navigate to the onboarding page
-        router.navigate({ to: '/auth/onboarding' })
+      try {
+        await getMyAttendee()
+        router.navigate({ to: '/', reloadDocument: true })
+      } catch (error) {
+        if (
+          error instanceof AxiosError &&
+          error.response?.status === 404 &&
+          error.response?.data?.error ===
+          'Attendee data not found for the current user'
+        ) {
+          try {
+            const refreshData = await refreshToken()
+            localStorage.setItem('token', refreshData.accessToken)
+            window.dispatchEvent(new Event('tokenChanged'))
+            try {
+              await getMyAttendee()
+              router.navigate({ to: '/', reloadDocument: true })
+            } catch (error) {
+              if (
+                error instanceof AxiosError &&
+                error.response?.status === 404 &&
+                error.response?.data?.error ===
+                'Attendee data not found for the current user'
+              ) {
+                router.navigate({ to: '/auth/onboarding' })
+              } else if (
+                error instanceof AxiosError &&
+                error.response?.status === 403 &&
+                error.response?.data?.error ===
+                  'Forbidden, staff accounts cannot access attendee data'
+              ) {
+                router.navigate({ to: '/' })
+              }
+            }
+          } catch (error) {
+            router.navigate({ to: '/', reloadDocument: true })
+          }
+        } else if (
+          error instanceof AxiosError &&
+          error.response?.status === 403 &&
+          error.response?.data?.error ===
+            'Forbidden, staff accounts cannot access attendee data'
+        ) {
+          router.navigate({ to: '/' })
+        }
       }
     },
   })
@@ -64,10 +103,10 @@ function RouteComponent() {
   }, [])
 
   return (
-    <section className="bg-main-light-pink relative flex w-full flex-col">
-      <div className="flex min-h-screen flex-col items-center justify-center">
-        <img src="/logo.svg" alt="logo" className="w-96" />
-        <h1 className="text-2xl font-semibold text-white text-shadow-sm">
+    <section className="relative flex flex-col bg-main-light-pink w-full">
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <img src="/logo/cu-journey.webp" alt="logo" className="w-96" />
+        <h1 className="text-shadow-sm font-semibold text-white text-2xl">
           CU Open House 2026
         </h1>
         <div ref={googleButtonRef} />

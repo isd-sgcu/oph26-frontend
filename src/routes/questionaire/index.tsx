@@ -64,6 +64,15 @@ function RouteComponent() {
     setOpenHighSchoolInformationPopup(highSchool)
   }, [])
 
+  // Check Date (Can access after 30 March 2026)
+  useEffect(() => {
+    const currentDate = new Date()
+    const targetDate = new Date('2026-03-30T00:00:00')
+    if (currentDate < targetDate) {
+      router.navigate({ to: '/' })
+    }
+  }, [])
+
   // Check Step 1
   useEffect(() => {
     if (
@@ -113,7 +122,7 @@ function RouteComponent() {
 
   return (
     <>
-      <div className="bg-main-light-pink relative flex w-full flex-col">
+      <div className="bg-main-light-pink relative flex min-h-screen w-full flex-col">
         {/* Decorations */}
         <img
           src="/questionaire/blue_flower.png"
