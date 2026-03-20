@@ -477,8 +477,8 @@ export async function achievementShareCollectedPieces(
 
   if (!ctx) throw new Error('Canvas not supported')
 
-  canvas.width = 1080
-  canvas.height = 1920
+  canvas.width = 540
+  canvas.height = 960
 
   const [bg, logo] = await Promise.all([
     loadImage(shareTemplate4),
@@ -495,15 +495,15 @@ export async function achievementShareCollectedPieces(
   ctx.textBaseline = 'middle'
 
   // Name
-  ctx.font = 'bold 80px "IBM Plex Sans Thai"'
-  ctx.fillText(name, canvas.width / 2, 370)
+  ctx.font = 'bold 40px "IBM Plex Sans Thai"'
+  ctx.fillText(name, canvas.width / 2, 185)
 
   ctx.fillStyle = '#000000'
   // Start
-  ctx.font = '500 60px "IBM Plex Sans Thai"'
+  ctx.font = '500 30px "IBM Plex Sans Thai"'
   const rankText =
     lang === 0 ? `${localizedText.th.start}` : `${localizedText.en.start}`
-  ctx.fillText(rankText, canvas.width / 2, 470)
+  ctx.fillText(rankText, canvas.width / 2, 235)
 
   const piecesPng = await renderComponentToPng(
     <PiecesShareGrid props={facultyCounts} lang={lang} />,
@@ -513,13 +513,13 @@ export async function achievementShareCollectedPieces(
 
   const piecesImage = await loadImage(piecesPng)
 
-  ctx.drawImage(piecesImage, 0, 500, 1080, 1500)
+  ctx.drawImage(piecesImage, 0, 250, 540, 750)
 
   // Logo
-  const logoWidth = logo.width * 0.25
+  const logoWidth = logo.width * 0.125
   const logoHeight = (logo.height / logo.width) * logoWidth
 
-  ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 90, logoWidth, logoHeight)
+  ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 45, logoWidth, logoHeight)
 
   return canvas.toDataURL('image/png')
 }
