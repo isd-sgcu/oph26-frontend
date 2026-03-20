@@ -136,7 +136,7 @@ export default function Footer() {
               className="h-4 w-auto rounded-sm object-contain"
             />
             <img
-              src="/logo/sponsor/5_camphub.webp"
+              src="/logo/sponsor/5_Camphub.webp"
               alt="Camphub"
               width={100}
               height={40}
