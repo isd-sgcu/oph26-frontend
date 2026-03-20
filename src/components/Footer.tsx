@@ -117,7 +117,7 @@ export default function Footer() {
               alt="Gulf"
               width={100}
               height={40}
-              className="h-4 w-auto rounded-md object-contain"
+              className="h-4 w-18 rounded-md object-contain"
             />
             <img
               src="/logo/sponsor/3_major.webp"
