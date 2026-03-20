@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import RedeemCodePopup from './RedeemCodePopup'
 import SharePopup from './SharePopup'
 import { useTranslation } from 'react-i18next'
+import { getCollectedPieces } from '@/services/pieces/piece'
 
 const GameFooter = () => {
   const location = useLocation()
@@ -14,6 +15,7 @@ const GameFooter = () => {
   const [openRedeemCodePopup, setOpenRedeemCodePopup] = useState(false)
   const [openSharePopup, setOpenSharePopup] = useState(false)
   const [isWrap, setIsWrap] = useState(false)
+  const [collectedNumber, setCollectedNumber] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,27 +25,37 @@ const GameFooter = () => {
     handleResize()
     window.addEventListener('resize', handleResize)
 
+    const fetchCollectedPieces = async () => {
+      try {
+        const collectedPieces = await getCollectedPieces()
+        setCollectedNumber(collectedPieces.stats.total_collected)
+      } catch (error) {
+        setCollectedNumber(0)
+      }
+    }
+
+    fetchCollectedPieces()
+
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
-    <div className="relative w-full max-w-(--width-page)">
-      {/* Share */}
-      <Button
-        className={` ${location.pathname !== '/game' ? 'hidden' : ''} ${isWrap ? 'bottom-25 scale-75' : 'bottom-30 scale-100'} bg-gradient-pink absolute right-6`}
-        size="icon"
-        onClick={() => {
-          setOpenSharePopup(true)
-        }}
-      >
-        <FlatIcon name="fi-rr-share" size={20} className="text-white" />
-      </Button>
-      <footer
-        className={`fixed bottom-8 left-1/2 z-10 flex max-w-(--width-page) -translate-x-1/2 ${isWrap && 'scale-75'} flex-col gap-2 px-6`}
-      >
+    <>
+      <div className="fixed bottom-8 left-1/2 z-20 flex w-full max-w-(--width-page) -translate-x-1/2 justify-center">
+        {/* Share */}
+        <Button
+          className={`${location.pathname !== '/game' ? 'hidden' : ''} ${isWrap ? 'bottom-16 scale-75' : 'bottom-24 scale-100'} bg-gradient-pink absolute right-6`}
+          size="icon"
+          onClick={() => {
+            setOpenSharePopup(true)
+          }}
+        >
+          <FlatIcon name="fi-rr-share" size={20} className="text-white" />
+        </Button>
+
         {/* Navigation */}
         <div
-          className={`bg-gradient-beige flex justify-center gap-2 rounded-full px-6 py-4`}
+          className={`${isWrap ? 'scale-75' : 'scale-100'} bg-gradient-beige flex w-fit justify-center gap-2 rounded-full px-6 py-4`}
         >
           <div className="flex items-center justify-center gap-2">
             <Button
@@ -95,12 +107,13 @@ const GameFooter = () => {
             </Button>
           </div>
         </div>
-      </footer>
+      </div>
 
       {openSharePopup && (
         <SharePopup
           open={openSharePopup}
           onClose={() => setOpenSharePopup(false)}
+          collectedNumber={collectedNumber}
         />
       )}
 
@@ -110,7 +123,7 @@ const GameFooter = () => {
           setOpen={setOpenRedeemCodePopup}
         />
       )}
-    </div>
+    </>
   )
 }
 

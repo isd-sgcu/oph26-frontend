@@ -850,7 +850,9 @@ const FollowForm = () => {
               fill="#2A2A2A"
             />
           </svg>
-          <p className="text-sm font-semibold">@cu_openhouse</p>
+          <a href="https://www.tiktok.com/@cu_openhouse">
+            <p className="text-sm font-semibold">@cu_openhouse</p>
+          </a>
         </div>
       </div>
     </FormCard>

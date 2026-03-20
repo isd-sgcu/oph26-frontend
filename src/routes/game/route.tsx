@@ -30,7 +30,7 @@ function GameLayout() {
   }
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex min-h-screen w-full flex-col">
       <CaptureProvider>
         <div className="flex flex-1">
           <Outlet />

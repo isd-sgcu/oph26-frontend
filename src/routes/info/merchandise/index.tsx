@@ -10,7 +10,7 @@ function RouteComponent() {
   const { t } = useTranslation()
 
   return (
-    <div className="bg-gradient-pink flex-1 p-5">
+    <div className="bg-gradient-pink min-h-screen flex-1 p-5">
       <div className="mb-6 h-48.5 self-stretch rounded-2xl">
         <img
           src="/info/merchandise/banner.png"

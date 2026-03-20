@@ -65,7 +65,7 @@ function RouteComponent() {
   //-----------------------------------------
 
   return (
-    <div className="bg-gradient-pink flex-1 p-5">
+    <div className="bg-gradient-pink min-h-screen flex-1 p-5">
       {/* Header */}
       <div className="relative flex items-center justify-center">
         <FlatIcon

@@ -30,37 +30,40 @@ function RouteComponent() {
   }
 
   return (
-    <div className="bg-main-beige relative flex w-full flex-col">
+    <div className="bg-main-beige relative flex min-h-screen w-full flex-col">
       {/* Content */}
       <div className="relative z-10 flex h-full w-full flex-col items-center gap-6 px-8 py-8">
         {/* Header */}
-        <div>
+        <div className="flex w-full flex-col items-center">
           <img
             src={targetFaculty.imagePath}
             height={222}
             className="mx-auto mb-4 rounded-xl object-cover"
             alt={getFacultyLabel(targetFaculty.id).th}
           />
-          <h1 className="relative w-full text-center text-2xl font-semibold text-black">
+          <div className="relative flex w-full max-w-[90%] flex-col gap-1">
             <span
               onClick={() => {
                 router.navigate({
                   to: '/info/faculty',
                 })
               }}
-              className="absolute left-0 cursor-pointer text-4xl font-semibold"
+              className="absolute -left-6 cursor-pointer text-4xl font-semibold"
             >
               {'<'}
             </span>
-            <span>{getFacultyLabel(targetFaculty.id).th}</span>
-          </h1>
-          <h2 className="text-center text-base text-black">
-            {getFacultyLabel(targetFaculty.id).en}
-          </h2>
+
+            <h1 className="text-center text-2xl font-semibold text-black">
+              {getFacultyLabel(targetFaculty.id).th}
+            </h1>
+            <h2 className="text-center text-base text-black">
+              {getFacultyLabel(targetFaculty.id).en}
+            </h2>
+          </div>
         </div>
 
         {/* ฺButtons */}
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Button
             onClick={() => {
               window.open(targetFaculty.websiteUrl, '_blank')
@@ -86,7 +89,7 @@ function RouteComponent() {
         <BreakLine width={350} variant="purple" />
 
         {/* Location */}
-        <div className="flex w-full items-center gap-4">
+        <div className="flex w-full flex-wrap items-center gap-4">
           <p className="text-base text-black">
             {t('routes.infoGroup.facultyGroup.location')}
           </p>

@@ -28,14 +28,14 @@ export const getMyPiece = async (): Promise<MyPiece | null> => {
 
 export interface AttendeePiecesStats {
   collected_by_faculty: {
-    value: {
-      [faculty in FacultyType]?: {
-        count: number
-        is_top_1: boolean
-      }
+    [faculty in FacultyType]?: {
+      count: number
+      is_top_1: boolean
     }
   }
   total_collected: number
+  same_missing_count: Record<number, number>
+  rank: number
 }
 
 export interface CollectedPiecesResponse {

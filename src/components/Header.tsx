@@ -21,7 +21,12 @@ export enum HeaderEnum {
 }
 
 const PATHNAME_MAINPINK = ['/game', '/game/achievement']
-const PATHNAME_TRANSPARENT = ['/auth/profile/ticket', '/auth/qr', '/auth/login', '']
+const PATHNAME_TRANSPARENT = [
+  '/auth/profile/ticket',
+  '/auth/qr',
+  '/auth/login',
+  '',
+]
 const PATHNAME_NONE = ['/']
 const PATHNAME_MAINBEIGE = ['/info/faculty/']
 
@@ -219,33 +224,47 @@ export default function Header() {
       >
         {/* Clouds */}
         {toColor === HeaderEnum.TRANSPARENT && (
-          <div className="top-0 right-0 left-0 -z-1 absolute bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent w-full h-24"></div>
+          <div className="absolute top-0 right-0 left-0 -z-1 h-24 w-full bg-linear-to-b from-[#FAFAE6]/95 from-35% to-transparent"></div>
         )}
 
         {/* Logo */}
-        <img
-          src="/logo/cu-journey.webp"
-          width={74}
-          height={48}
-          alt="Logo"
-          className="cursor-pointer"
-          onClick={() => {
-            router.navigate({ to: '/' })
-          }}
-        />
+        <div className="flex items-center gap-2">
+          <img
+            src="/logo/cu-journey.webp"
+            width={74}
+            height={48}
+            alt="Logo"
+            className="cursor-pointer"
+            onClick={() => {
+              router.navigate({ to: '/' })
+            }}
+          />
+
+          <img
+            src="/logo/sponsor/1_centralretail.webp"
+            width={74}
+            height={48}
+            alt="Logo"
+            className="cursor-pointer"
+            onClick={() => {
+              router.navigate({ to: '/' })
+            }}
+          />
+        </div>
 
         {/* Right menu */}
         <div className="flex items-center gap-2">
           {/* Lang */}
-          <div className="flex shadow-sm rounded-lg overflow-hidden">
+          <div className="flex overflow-hidden rounded-lg shadow-sm">
             {['th', 'en'].map((lng) => (
               <button
                 key={lng}
                 onClick={() => i18n.changeLanguage(lng)}
-                className={`px-3 py-2 text-sm font-bold transition ${i18n.language === lng
-                  ? 'bg-main-pink cursor-default text-white'
-                  : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
-                  }`}
+                className={`px-3 py-2 text-sm font-bold transition ${
+                  i18n.language === lng
+                    ? 'bg-main-pink cursor-default text-white'
+                    : 'bg-main-beige text-grey hover:bg-main-beige/80 cursor-pointer'
+                }`}
               >
                 {lng.toUpperCase()}
               </button>
@@ -295,7 +314,7 @@ export default function Header() {
               </div>
 
               {/* Navigation */}
-              <nav className="flex flex-col gap-10 mb-10">
+              <nav className="mb-10 flex flex-col gap-10">
                 {selectedNavItems.map((item) => (
                   <div
                     key={item.title}
@@ -303,14 +322,14 @@ export default function Header() {
                       router.navigate({ to: item.to })
                       setOpenSidebar(false)
                     }}
-                    className="flex items-center gap-4 w-fit cursor-pointer"
+                    className="flex w-fit cursor-pointer items-center gap-4"
                   >
                     <FlatIcon
                       name={item.icon}
                       size={24}
                       className="text-main-pink"
                     />
-                    <span className="font-bold text-xl">
+                    <span className="text-xl font-bold">
                       {t(`components.header.sidebar.${item.title}`)}
                     </span>
                   </div>
@@ -318,7 +337,7 @@ export default function Header() {
               </nav>
 
               {/* Buttons */}
-              <div className="flex flex-col justify-center items-center gap-4 mt-auto">
+              <div className="flex flex-col items-center justify-center gap-4">
                 {role == undefined ? (
                   <>
                     <Button
