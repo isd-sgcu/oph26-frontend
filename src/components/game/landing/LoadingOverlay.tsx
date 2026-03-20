@@ -3,7 +3,7 @@ import cloudImg from '@/assets/game/deco/cloud.svg'
 
 export default function LoadingOverlay({ text }: { text: string }) {
   return (
-    <div className="from-main-pink absolute inset-0 z-50 flex items-center justify-center bg-linear-to-b via-[#F6C1DE] to-[#F9B5D0]">
+    <div className="from-main-pink absolute inset-0 z-40 flex items-center justify-center bg-linear-to-b via-[#F6C1DE] to-[#F9B5D0]">
       <div className="flex flex-col items-center gap-6">
         {/* Floating Cloud */}
         <div className="animate-float">
