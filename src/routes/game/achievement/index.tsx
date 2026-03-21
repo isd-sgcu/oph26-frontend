@@ -126,7 +126,7 @@ function RouteComponent() {
             ]
           var3Data = {
             variant: 'var3',
-            stat: randomSameMissingItem.count.toString(),
+            stat: `${Math.round(randomSameMissingItem.count)}`,
             faculty: randomSameMissingItem.missingFaculty,
           }
         }
