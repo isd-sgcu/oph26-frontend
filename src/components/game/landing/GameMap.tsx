@@ -69,6 +69,21 @@ export default function GameMap() {
     }
   }, [])
 
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const handler = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+
+    el.addEventListener('touchmove', handler, { passive: false })
+
+    return () => {
+      el.removeEventListener('touchmove', handler)
+    }
+  }, [])
+
   // Compute base scale
   useLayoutEffect(() => {
     const container = containerRef.current
