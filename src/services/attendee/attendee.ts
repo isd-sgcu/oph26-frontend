@@ -66,3 +66,13 @@ export const getMyAttendee =
       throw error as AxiosError
     }
   }
+
+export const updateCertificateName = async (
+  fullname: string
+): Promise<void> => {
+  try {
+    await Axios.put(`/attendees/me/certificate_name`, { fullname })
+  } catch (error) {
+    throw error as AxiosError
+  }
+}

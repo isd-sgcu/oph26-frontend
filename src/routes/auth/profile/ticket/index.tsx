@@ -45,7 +45,7 @@ function RouteComponent() {
       // ยังไม่ถึงวันที่ 30 มีนาคม 2026
       setShowEvaluationBanner(false)
       setHasPermission(false)
-    } else if (userAttendee?.checked_in_at) {
+    } else if (userAttendee.checked_in_at) {
       // ผู้ใช้เช็คอินแล้ว
       setShowEvaluationBanner(true)
       setHasPermission(true)
@@ -55,7 +55,7 @@ function RouteComponent() {
       setHasPermission(false)
     }
 
-    if (userAttendee?.attendee_type === 'student') {
+    if (userAttendee.attendee_type === 'student') {
       setIsHighSchoolStudent(
         allowedAttendeeLevels.includes(userAttendee.study_level || '') || false
       )
