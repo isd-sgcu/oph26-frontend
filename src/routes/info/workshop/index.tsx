@@ -28,7 +28,11 @@ function RouteComponent() {
   const { i18n, t } = useTranslation()
   const faculty = Route.useSearch() as { faculty: string }
   const userContext = useUser()
-  const role = userContext?.role
+  if (!userContext) {
+    return null
+  }
+
+  const role = userContext.role
   const [selectedFaculty, setSelectedFaculty] = useState<string>(
     faculty.faculty || 'all'
   )
@@ -73,7 +77,7 @@ function RouteComponent() {
   }, [searchInput, selectedFaculty])
 
   return (
-    <div className="from-main-light-pink to-main-pink relative flex w-full flex-col bg-linear-to-b">
+    <div className="from-main-light-pink to-main-pink relative flex min-h-screen w-full flex-col bg-linear-to-b">
       {/* Content */}
       <div className="relative z-10 flex h-full w-full flex-col gap-6 px-4 py-8">
         <h1 className="text-center text-3xl font-bold text-white text-shadow-md">
@@ -101,7 +105,7 @@ function RouteComponent() {
                 placeholder={t('routes.infoGroup.workshopGroup.all')}
               />
             </SelectTrigger>
-            <SelectContent className="z-50 h-50 overflow-y-auto">
+            <SelectContent className="z-50 max-h-60 w-full overflow-y-auto border border-gray-200 bg-white">
               <SelectItem value="all">
                 {t('routes.infoGroup.workshopGroup.all')}
               </SelectItem>

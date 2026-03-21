@@ -49,9 +49,7 @@ export default function Footer() {
   if (!shouldShowFooter) return null
 
   return (
-    <footer
-      className={`flex h-fit w-full max-w-(--width-page) flex-col`}
-    >
+    <footer className={`flex h-fit w-full max-w-(--width-page) flex-col`}>
       {/* Content */}
       <div
         className={`bg-gradient-pink flex w-full flex-1 flex-col items-center gap-4 px-8 py-4`}
@@ -75,7 +73,7 @@ export default function Footer() {
               width={40}
               height={40}
             />
-            <p className="font-semibold text-black text-xs underline">
+            <p className="text-xs font-semibold text-black underline">
               Instagram
             </p>
           </a>
@@ -90,7 +88,7 @@ export default function Footer() {
               width={40}
               height={40}
             />
-            <p className="font-semibold text-black text-xs underline">
+            <p className="text-xs font-semibold text-black underline">
               Facebook
             </p>
           </a>
@@ -100,86 +98,86 @@ export default function Footer() {
             href="https://www.tiktok.com/@cu_openhouse"
           >
             <img src="/logo/tiktok.svg" alt="Tiktok" width={40} height={40} />
-            <p className="font-semibold text-black text-xs underline">Tiktok</p>
+            <p className="text-xs font-semibold text-black underline">Tiktok</p>
           </a>
         </div>
 
         {/* Sponsors */}
-        <div className="flex flex-wrap justify-center items-center gap-3 w-full">
-          <div className='flex justify-center items-center gap-6 w-full'>
+        <div className="flex w-full flex-wrap items-center justify-center gap-3">
+          <div className="flex w-full items-center justify-center gap-6">
             <img
-              src='/logo/sponsor/1_centralretail.webp'
-              alt='Central Retail'
+              src="/logo/sponsor/1_centralretail.webp"
+              alt="Central Retail"
               width={100}
               height={40}
-              className="rounded-md w-18 object-contain"
+              className="w-18 rounded-md object-contain"
             />
             <img
-              src='/logo/sponsor/2_Gulf.webp'
-              alt='Gulf'
+              src="/logo/sponsor/2_Gulf.webp"
+              alt="Gulf"
               width={100}
               height={40}
-              className="rounded-md w-auto h-4 object-contain"
+              className="h-4 w-18 rounded-md object-contain"
             />
             <img
-              src='/logo/sponsor/3_major.webp'
-              alt='Major'
+              src="/logo/sponsor/3_major.webp"
+              alt="Major"
               width={100}
               height={200}
-              className="rounded-sm w-auto h-8 object-contain"
+              className="h-8 w-auto rounded-sm object-contain"
             />
           </div>
-          <div className='flex justify-center items-center gap-6 w-full'>
+          <div className="flex w-full items-center justify-center gap-6">
             <img
-              src='/logo/sponsor/4_CUNEX.webp'
-              alt='CUNex'
+              src="/logo/sponsor/4_CUNEX.webp"
+              alt="CUNex"
               width={100}
               height={40}
-              className="rounded-sm w-auto h-4 object-contain"
+              className="h-4 w-auto rounded-sm object-contain"
             />
             <img
-              src='/logo/sponsor/5_camphub.webp'
-              alt='Camphub'
+              src="/logo/sponsor/5_Camphub.webp"
+              alt="Camphub"
               width={100}
               height={40}
-              className="rounded-sm w-auto h-4 object-contain"
+              className="h-4 w-auto rounded-sm object-contain"
             />
             <img
-              src='/logo/sponsor/6_เต่าเหยียบโลก.webp'
-              alt='เต่าเหยียบโลก'
+              src="/logo/sponsor/6_เต่าเหยียบโลก.webp"
+              alt="เต่าเหยียบโลก"
               width={100}
               height={40}
-              className="rounded-sm w-11 h-11 object-contain aspect-square"
+              className="aspect-square h-11 w-11 rounded-sm object-contain"
             />
           </div>
-          <div className='flex justify-center items-center gap-6 w-full'>
+          <div className="flex w-full items-center justify-center gap-6">
             <img
-              src='/logo/sponsor/7_cher.webp'
-              alt='Cher'
+              src="/logo/sponsor/7_cher.webp"
+              alt="Cher"
               width={100}
               height={40}
-              className="rounded-sm w-10 h-10 object-contain aspect-square"
+              className="aspect-square h-10 w-10 rounded-sm object-contain"
             />
             <img
-              src='/logo/sponsor/8_lineman.webp'
-              alt='Lineman'
+              src="/logo/sponsor/8_lineman.webp"
+              alt="Lineman"
               width={100}
               height={40}
-              className="rounded-sm w-12 h-12 object-contain aspect-square"
+              className="aspect-square h-12 w-12 rounded-sm object-contain"
             />
             <img
-              src='/logo/sponsor/9_bright_hair.webp'
-              alt='Bright Hair'
+              src="/logo/sponsor/9_bright_hair.webp"
+              alt="Bright Hair"
               width={100}
               height={40}
-              className="rounded-sm w-auto h-8 object-contain"
+              className="h-8 w-auto rounded-sm object-contain"
             />
           </div>
         </div>
       </div>
 
       {/* Authors */}
-      <div className="flex justify-center items-center gap-4 bg-[#1C1B1F] px-8 py-2 w-full h-fit">
+      <div className="flex h-fit w-full items-center justify-center gap-4 bg-[#1C1B1F] px-8 py-2">
         <img alt="ISD Logo" src="/logo/isd.svg" width={40} height={20} />
         <img
           alt="AORBORJOR Logo"

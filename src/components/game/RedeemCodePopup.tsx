@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Dialog, DialogContent, DialogTitle } from '../ui/dialog'
 import { FlatIcon } from '../FlatIcon'
 import { useTranslation } from 'react-i18next'
@@ -7,6 +7,7 @@ import { Button } from '../ui/button'
 import { FACULTIES, FacultyType } from '../const/faculty'
 import { Piece } from './Piece'
 import { collectFriendPiece } from '@/services/pieces/piece'
+import { AxiosError } from 'axios'
 
 interface RedeemCodePopupProps {
   open: boolean
@@ -18,16 +19,10 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
   const [step, setStep] = useState(1)
   const [code, setCode] = useState('')
   const [success, setSuccess] = useState(false)
-  const [validCode, setValidCode] = useState(false)
+  const [error, setError] = useState<
+    'invalid' | 'duplicated' | 'ownCode' | 'expired' | 'other' | null
+  >(null)
   const [facultyPiece, setFacultyPiece] = useState<FacultyType>()
-
-  useEffect(() => {
-    if (code.length == 6) {
-      setValidCode(true)
-    } else {
-      setValidCode(false)
-    }
-  }, [code])
 
   const selectedFaculty = FACULTIES.find((f) => f.value === facultyPiece)
 
@@ -81,17 +76,36 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
                 className="bg-gradient-pink text-main-beige justify-self-center"
                 size={'sm'}
                 onClick={async () => {
-                  if (!validCode) {
-                    setSuccess(false)
+                  if (code.length !== 6) {
+                    setError('invalid')
                   } else {
                     try {
                       const friendPiece = await collectFriendPiece(code)
-                      if (!friendPiece || !friendPiece.faculty) {
-                        throw new Error('Invalid code')
-                      }
-                      setFacultyPiece(friendPiece.faculty)
+                      setFacultyPiece(friendPiece.collected_piece.faculty)
                       setSuccess(true)
                     } catch (error) {
+                      const axiosError = error as AxiosError
+                      const status = axiosError.response?.status
+                      switch (status) {
+                        case 400:
+                          if (
+                            // @ts-ignore
+                            axiosError.response?.data?.error ===
+                            'Cannot collect your own piece'
+                          ) {
+                            setError('ownCode')
+                          }
+                          break
+                        case 404:
+                          setError('invalid')
+                          break
+                        case 409:
+                          setError('duplicated')
+                          break
+                        default:
+                          setError('other')
+                      }
+
                       setSuccess(false)
                     }
                   }
@@ -116,20 +130,40 @@ const RedeemCodePopup = ({ open, setOpen }: RedeemCodePopupProps) => {
             <DialogTitle className="mt-2 text-center text-2xl font-bold text-black">
               {success
                 ? t('components.gameGroup.redeemCodePopup.title2Success')
-                : validCode
-                  ? t('components.gameGroup.redeemCodePopup.title2ExpiredCode')
-                  : t('components.gameGroup.redeemCodePopup.title2InvalidCode')}
+                : error === 'invalid'
+                  ? t(
+                      'components.gameGroup.redeemCodePopup.title2InvalidOrExpiredCode'
+                    )
+                  : error === 'duplicated'
+                    ? t(
+                        'components.gameGroup.redeemCodePopup.title2DuplicatedCode'
+                      )
+                    : error === 'ownCode'
+                      ? t('components.gameGroup.redeemCodePopup.title2OwnCode')
+                      : t(
+                          'components.gameGroup.redeemCodePopup.title2OtherError'
+                        )}
             </DialogTitle>
 
             {/* Body */}
-            <p className="mb-4 text-center text-sm text-black">
+            <p className="mb-4 text-center text-sm whitespace-pre-wrap text-black">
               {success
                 ? `${t('components.gameGroup.redeemCodePopup.body2Success')} ${
                     selectedFaculty?.label[i18n.language as 'th' | 'en'] ?? ''
                   }`
-                : validCode
-                  ? t('components.gameGroup.redeemCodePopup.body2ExpiredCode')
-                  : t('components.gameGroup.redeemCodePopup.body2InvalidCode')}
+                : error === 'invalid'
+                  ? t(
+                      'components.gameGroup.redeemCodePopup.body2InvalidOrExpiredCode'
+                    )
+                  : error === 'duplicated'
+                    ? t(
+                        'components.gameGroup.redeemCodePopup.body2DuplicatedCode'
+                      )
+                    : error === 'ownCode'
+                      ? t('components.gameGroup.redeemCodePopup.body2OwnCode')
+                      : t(
+                          'components.gameGroup.redeemCodePopup.body2OtherError'
+                        )}
             </p>
 
             {/* Piece */}

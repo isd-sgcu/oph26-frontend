@@ -43,13 +43,13 @@ const QuestionaireStepCertificate = ({
             'routes.questionaireGroup.partCertificate.lastNamePlaceholder'
           )}
           className="placeholder:text-grey w-[80%] border-black text-black"
-          value={formData.certificate_lastname}
+          value={formData.certificate_surname}
           onChange={(e) => {
             const value = e.target.value
             if (value === '' || nameRegex.test(value)) {
               setFormData({
                 ...formData,
-                certificate_lastname: value,
+                certificate_surname: value,
               })
             }
           }}

@@ -1,5 +1,5 @@
 export function preloadImages(srcList: string[]) {
-  return Promise.all(
+  return Promise.allSettled(
     srcList.map(
       (src) =>
         new Promise<void>((resolve, reject) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import {
@@ -19,11 +19,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { provinces } from '@/const/province'
-import { faculties, facultyEnum } from '@/const/faculty'
+import { provinces } from '@/components/const/province'
 import { FormProgress } from '@/components/auth/FormProgress'
 import { Checkbox } from '@/components/ui/checkbox'
 import { createAttendee } from '@/services/attendee/attendee'
+import { AttendeeType, useUser } from '@/contexts/UserContext'
+import { PRIVACY_TEXT } from '@/components/const/privacy'
+import { FACULTIES } from '@/components/const/faculty'
 
 export const Route = createFileRoute('/auth/onboarding/')({
   component: RouteComponent,
@@ -73,16 +75,6 @@ const objectivesOptions: Option[] = [
   { value: 'other', label: 'อื่น ๆ' },
 ]
 
-const enumValueToKey = Object.fromEntries(
-  Object.entries(facultyEnum).map(([key, value]) => [
-    value as string,
-    key.toLowerCase(),
-  ])
-)
-const facultyThToCode: Record<string, string> = Object.fromEntries(
-  faculties.map((f) => [f.th, enumValueToKey[f.facultyEnum]])
-)
-
 const convertStudyLevel = (level: string) => {
   switch (level) {
     case 'ประถมศึกษา':
@@ -94,7 +86,7 @@ const convertStudyLevel = (level: string) => {
     case 'ปวช.':
       return 'vocational'
     case 'ปวส.':
-      return 'high_vocational'
+      return 'highervocational'
     case 'ปริญญาตรี':
       return 'undergraduate'
     case 'ปริญญาโท':
@@ -110,7 +102,7 @@ type IRegistrationForm = {
   firstName: string
   lastName: string
   birthDate: string
-  status: 'student' | 'parent' | 'educationstaff' | 'other'
+  status: AttendeeType
   email: string
   province: string
   district: string
@@ -147,11 +139,28 @@ function getEmailFromToken(): string {
 function RouteComponent() {
   const navigate = useNavigate()
   const [currentFormPage, setCurrentFormPage] = useState<number>(1)
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
+  const user = userContext.user
+
+  useEffect(() => {
+    if (attendee || !user || user.role !== 'attendee') {
+      navigate({ to: '/' })
+    }
+  }, [attendee, user, navigate])
+
+  if (attendee || !user || user.role !== 'attendee') {
+    return null
+  }
 
   const createAttendeeMutation = useMutation({
     mutationFn: createAttendee,
     onSuccess: () => {
-      navigate({ to: '/' })
+      navigate({ to: '/', reloadDocument: true })
     },
   })
 
@@ -228,7 +237,7 @@ function RouteComponent() {
       data.interestedFaculties3,
     ]
       .filter((f) => f && f !== 'ยังไม่ได้ตัดสินใจเลือก')
-      .map((f) => facultyThToCode[f!])
+      .map((f) => FACULTIES.find((fac) => fac.value === f)?.value)
       .filter(Boolean)
 
     const newsSourceSelected = data.acknowledged
@@ -238,8 +247,6 @@ function RouteComponent() {
     const objectiveSelected = data.objectives
       .map((i) => objectivesOptions[i])
       .map((option) => option.value)
-
-    console.log(objectiveSelected)
 
     createAttendeeMutation.mutate({
       firstname: data.firstName,
@@ -275,7 +282,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="bg-main-light-pink relative flex w-full flex-col">
+    <section className="bg-main-light-pink relative flex h-full min-h-screen w-full flex-col">
       <div className="pt-6">
         <h1 className="px-4 text-4xl font-bold text-white text-shadow-md">
           ลงทะเบียน
@@ -348,7 +355,7 @@ const ProfileForm = () => {
     <FormCard>
       <div>
         <p className="text-main-pink text-lg font-semibold">ข้อมูลส่วนตัว</p>
-        <div className="h-[1px] w-full bg-[#AFAFAF]"></div>
+        <div className="h-px w-full bg-[#AFAFAF]"></div>
       </div>
       <div className="flex flex-col gap-3 text-sm">
         <div>
@@ -483,7 +490,7 @@ const ProfileForm = () => {
               <p className="text-main-pink mt-3 text-lg font-semibold">
                 การศึกษา
               </p>
-              <div className="h-[1px] w-full bg-[#AFAFAF]"></div>
+              <div className="h-px w-full bg-[#AFAFAF]"></div>
             </div>
             <div>
               <p className="font-semibold">
@@ -549,6 +556,7 @@ const FacultiesForm = () => {
     register,
     formState: { errors },
     control,
+    setValue,
     watch,
   } = useFormContext<IRegistrationForm>()
   const fieldNames = [
@@ -557,68 +565,93 @@ const FacultiesForm = () => {
     'interestedFaculties2',
     'interestedFaculties3',
   ] as const
+
+  const handleFacultiesChange = (index: number, value: string) => {
+    setValue(fieldNames[index], value)
+    if (index === 1 && value === 'ยังไม่ได้ตัดสินใจเลือก') {
+      setValue(fieldNames[2], 'ยังไม่ได้ตัดสินใจเลือก')
+      setValue(fieldNames[3], 'ยังไม่ได้ตัดสินใจเลือก')
+    }
+    if (index === 2 && value === 'ยังไม่ได้ตัดสินใจเลือก') {
+      setValue(fieldNames[3], 'ยังไม่ได้ตัดสินใจเลือก')
+    }
+  }
   return (
     <FormCard>
       <div>
         <p className="text-main-pink text-lg font-semibold">
           จัดอันดับคณะที่สนใจ
         </p>
-        <div className="h-[1px] w-full bg-[#AFAFAF]"></div>
+        <div className="h-px w-full bg-[#AFAFAF]"></div>
       </div>
-      {fieldNames.map((fieldName, index) => (
-        <div key={index}>
-          <p className="font-semibold">
-            อันดับ {index + 1}
-            <span className="text-[#ff0000]">*</span>
-          </p>
-          <Controller
-            name={fieldName}
-            control={control}
-            render={({ field }) => {
-              const otherValues = fieldNames
-                .filter((name) => name !== fieldName)
-                .map((name) => watch(name))
-                .filter((v) => v && v !== 'ยังไม่ได้ตัดสินใจเลือก')
-              const filteredFaculties = faculties.filter(
-                (fac) => !otherValues.includes(fac.th)
-              )
-              return (
-                <>
-                  <input
-                    type="hidden"
-                    {...register(fieldName, {
-                      required: 'กรุณาเลือกคณะที่สนใจ',
-                    })}
-                    value={field.value}
-                  />
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className="data-placeholder:text-main-light-pink w-full shadow-none">
-                      <SelectValue placeholder="เลือกคณะ" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-40 max-w-full overflow-y-auto">
-                      {index > 0 && (
-                        <SelectItem value="ยังไม่ได้ตัดสินใจเลือก">
-                          ยังไม่ได้ตัดสินใจเลือก
-                        </SelectItem>
-                      )}
-                      {filteredFaculties.map((fac) => (
-                        <SelectItem key={fac.th} value={fac.th}>
-                          {fac.th}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors[fieldName] && (
-                    <p className="mt-0.5 text-xs text-[#ff0000]">
-                      กรุณาเลือกคณะที่สนใจ
-                    </p>
-                  )}
-                </>
-              )
-            }}
-          />
-        </div>
-      ))}
+
+      {fieldNames.map((fieldName, index) => {
+        const prevAllSelected = fieldNames.slice(0, index).every((name) => {
+          const v = watch(name)
+          return v && v !== 'ยังไม่ได้ตัดสินใจเลือก'
+        })
+
+        return (
+          <div key={index}>
+            <p className="font-semibold">
+              อันดับ {index + 1}
+              <span className="text-[#ff0000]">*</span>
+            </p>
+            <Controller
+              name={fieldName}
+              control={control}
+              render={({ field }) => {
+                const otherValues = fieldNames
+                  .filter((name) => name !== fieldName)
+                  .map((name) => watch(name))
+                  .filter((v) => v && v !== 'ยังไม่ได้ตัดสินใจเลือก')
+                const filteredFaculties = FACULTIES.filter(
+                  (fac) => !otherValues.includes(fac.value)
+                )
+                return (
+                  <>
+                    <input
+                      type="hidden"
+                      {...register(fieldName, {
+                        required: 'กรุณาเลือกคณะที่สนใจ',
+                      })}
+                      value={field.value}
+                    />
+                    <Select
+                      onValueChange={(value) =>
+                        handleFacultiesChange(index, value)
+                      }
+                      value={field.value}
+                      disabled={index > 0 && !prevAllSelected}
+                    >
+                      <SelectTrigger className="data-placeholder:text-main-light-pink w-full shadow-none">
+                        <SelectValue placeholder="เลือกคณะ" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-40 max-w-full overflow-y-auto">
+                        {index > 0 && (
+                          <SelectItem value="ยังไม่ได้ตัดสินใจเลือก">
+                            ยังไม่ได้ตัดสินใจเลือก
+                          </SelectItem>
+                        )}
+                        {filteredFaculties.map((fac) => (
+                          <SelectItem key={fac.value} value={fac.value}>
+                            {fac.label.th}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {errors[fieldName] && (
+                      <p className="mt-0.5 text-xs text-[#ff0000]">
+                        กรุณาเลือกคณะที่สนใจ
+                      </p>
+                    )}
+                  </>
+                )
+              }}
+            />
+          </div>
+        )
+      })}
     </FormCard>
   )
 }
@@ -817,7 +850,9 @@ const FollowForm = () => {
               fill="#2A2A2A"
             />
           </svg>
-          <p className="text-sm font-semibold">@cu_openhouse</p>
+          <a href="https://www.tiktok.com/@cu_openhouse">
+            <p className="text-sm font-semibold">@cu_openhouse</p>
+          </a>
         </div>
       </div>
     </FormCard>
@@ -833,141 +868,9 @@ const NoticeForm = () => {
           ข้อตกลงและเงื่อนไข
         </p>
       </div>
-      <div className="max-h-80 overflow-y-auto rounded-md border p-4">
-        <p className="font-semibold">1. บทนิยาม</p>
-        1.1 “โครงการฯ” หมายความว่า CU Open House 2026 1.2 “ลงทะเบียนเข้าร่วมงาน”
-        หมายความว่า การลงทะเบียนเพื่อเข้าร่วมกิจกรรมต่าง ๆ ที่จัดขึ้นโดยโครงการ
-        CU Open House 2026 ผ่านเว็บไซต์ของโครงการ 1.3 “ข้อมูลส่วนบุคคล”
-        หมายความว่า
-        ข้อมูลที่สามารถเชื่อมโยงกับบุคคลได้หรือสามารถระบุตัวตนของบุคคลนั้นได้
-        แต่ไม่รวมถึงข้อมูลที่ไม่สามารถระบุตัวตนได้ 2. การเป็นผู้ใช้งาน 2.1
-        หากท่านประสงค์จะลงทะเบียนเข้าร่วมกิจกรรมของโครงการฯ
-        สามารถดำเนินการได้ที่เว็บไซต์ที่จัดทำขึ้นโดยโครงการ CU Open House 2026
-        2.2 ข้อตกลงในการใช้บริการและเงื่อนไขต่าง ๆ ของโครงการฯ
-        จะเป็นไปตามข้อกำหนดและเงื่อนไขของแต่ละประเภทบริการ
-        ซึ่งจะมีการแจ้งให้สมาชิกทราบล่วงหน้าก่อนการใช้บริการ 3.
-        เกี่ยวกับข้อมูลส่วนบุคคล 3.1 แหล่งที่มาและข้อมูลที่โครงการฯ เก็บรวบรวม
-        โครงการฯ
-        จะเก็บรวบรวมข้อมูลส่วนบุคคลจากผู้ให้ข้อมูลเฉพาะในกรณีที่จำเป็นเท่านั้น
-        ซึ่งข้อมูลที่โครงการฯ เก็บรวบรวมจะประกอบด้วย: ข้อมูลส่วนบุคคล ได้แก่
-        ชื่อ-นามสกุล วัน/เดือน/ปีเกิด สถานภาพปัจจุบัน อีเมล จังหวัดที่อยู่
-        การศึกษา ได้แก่ สถานศึกษา 3.2 โครงการฯ
-        จะเก็บรวบรวมข้อมูลส่วนบุคคลเพียงเท่าที่จำเป็นตามวัตถุประสงค์ในการเก็บรวบรวมข้อมูล
-        และจะปฏิบัติตามกฎหมายที่เกี่ยวข้องในการจัดเก็บและใช้ข้อมูล 3.3
-        วัตถุประสงค์ในการเก็บรวบรวมข้อมูล
-        ข้อมูลส่วนบุคคลที่ท่านให้ไว้จะถูกนำไปใช้ในวัตถุประสงค์ดังต่อไปนี้:
-        เพื่อการพัฒนาบริการและการประชาสัมพันธ์งาน CU Open House 2026
-        เพื่อการดำเนินการตามคำขอของท่านในการใช้บริการ
-        เพื่อการพัฒนาเว็บไซต์หรือกิจกรรมต่าง ๆ
-        เพื่อการปฏิบัติตามข้อกำหนดทางกฎหมายและข้อบังคับ
-        เพื่อการเก็บรวบรวมสถิติและตรวจสอบจำนวนผู้เข้าร่วมกิจกรรม 4.
-        เงื่อนไขสำคัญของการเป็นผู้ใช้งาน 4.1 เงื่อนไขการเป็นผู้ใช้งาน โครงการฯ
-        ขอสงวนสิทธิ์ในการให้สิทธิประโยชน์และบริการต่าง ๆ เฉพาะสำหรับงาน CU Open
-        House 2026 เท่านั้น การสมัครสมาชิกต้องใช้ชื่อ -
-        นามสกุลจริงตรงกับบัตรประชาชน (ทั้งภาษาไทยและภาษาอังกฤษ)
-        หากข้อมูลที่ท่านกรอกไม่ถูกต้องหรือไม่ครบถ้วน
-        อาจส่งผลให้ท่านไม่สามารถใช้สิทธิประโยชน์หรือบริการจากโครงการฯ ได้
-        เมื่อการลงทะเบียนเสร็จสมบูรณ์
-        ผู้ใช้งานจะได้รับสิทธิประโยชน์ตามที่โครงการฯ กำหนด
-        การใช้สิทธิประโยชน์จะต้องยืนยันตัวตนด้วยการแสดงบัตรประชาชนและข้อมูลต้องตรงกับที่ลงทะเบียน
-        สิทธิประโยชน์ที่ได้รับขึ้นอยู่กับเงื่อนไขที่โครงการฯ
-        แจ้งให้ทราบในแต่ละครั้ง สิทธิประโยชน์ทั้งหมดของโครงการฯ
-        เริ่มมีผลทันทีเมื่อท่านทำการลงทะเบียนเสร็จสมบูรณ์ โครงการฯ
-        ขอสงวนสิทธิ์ในการยกเลิกการเป็นสมาชิกหากท่านกระทำการที่อาจสร้างความเสียหายให้กับโครงการฯ
-        5. สิทธิประโยชน์ 5.1 ผู้ที่ลงทะเบียนกับโครงการฯ
-        จะได้รับสิทธิประโยชน์ดังต่อไปนี้:
-        สิทธิประโยชน์พิเศษจากผู้สนับสนุนโครงการฯ สิทธิประโยชน์ในการเข้าชมงาน CU
-        Open House 2026 ผ่าน QR Code
-        สิทธิประโยชน์ในการรับข่าวสารหรือข้อมูลประชาสัมพันธ์จากโครงการฯ
-        สิทธิประโยชน์ในการรับเกียรติบัตรสำหรับเข้าร่วมงาน 5.
-        การเข้าถึงสิทธิประโยชน์ 5.1
-        สิทธิประโยชน์ที่ท่านได้รับจะจัดส่งในรูปแบบของ QR Code หรือรูปแบบอื่นๆ
-        ตามที่โครงการฯ กำหนด 6. นโยบายการยกเลิก 6.1 โครงการฯ
-        ขอสงวนสิทธิ์ในการยกเลิกการเป็นผู้ใช้งานหลังจากการลงทะเบียนเสร็จสมบูรณ์
-        7. กรณีข้อโต้แย้งหรือทุจริต 7.1
-        ในกรณีที่มีข้อโต้แย้งเกี่ยวกับสิทธิประโยชน์จากการเป็นผู้ใช้งาน
-        ท่านตกลงและยอมรับว่าโครงการฯ
-        มีสิทธิ์ในการตรวจสอบและปรับปรุงสิทธิประโยชน์ให้กับผู้ใช้งาน 7.2
-        หากมีการฉ้อฉล ปลอมแปลง หรือกระทำการทุจริตใด ๆ
-        เพื่อให้ได้มาซึ่งสิทธิประโยชน์ โครงการฯ
-        ขอสงวนสิทธิ์ในการปฏิเสธการโอนสิทธิประโยชน์ให้กับผู้ใช้งาน 8.
-        การเปลี่ยนแปลง แก้ไข หรือเพิ่มเติม 8.1 โครงการฯ
-        ขอตกลงในการพิจารณาทบทวนนโยบายคุ้มครองข้อมูลส่วนบุคคลและข้อตกลงนี้ให้สอดคล้องกับกฎหมายที่เกี่ยวข้อง
-        และจะเผยแพร่การเปลี่ยนแปลงผ่านเว็บไซต์หรือสื่อออนไลน์ของโครงการฯ 9.
-        ภาษาและกฎหมายที่ใช้บังคับ 9.1
-        ข้อตกลงและเงื่อนไขนี้ให้ใช้ภาษาไทยเป็นภาษาที่ใช้บังคับ
-        และจะปฏิบัติตามกฎหมายไทย 9.2 หากมีการโต้แย้งหรือข้อพิพาทเกิดขึ้น
-        ให้ศาลไทยมีอำนาจในการพิจารณาคดี ผู้ให้ข้อมูลได้อ่านศึกษา
-        พิจารณาและตรวจสอบข้อกำหนดตามข้อตกลงและเงื่อนไขการใช้บริการ CU Open House
-        2026 ของโครงการฯแล้ว และผู้ให้ข้อมูลตกลงยอมรับ
-        และตกลงเข้าผูกพันตามข้อตกลงและเงื่อนไขการใช้บริการข้างต้นทุกประการ 1.
-        บทนิยาม 1.1 “โครงการฯ” หมายความว่า CU Open House 2026 1.2
-        “ลงทะเบียนเข้าร่วมงาน” หมายความว่า การลงทะเบียนเพื่อเข้าร่วมกิจกรรมต่าง
-        ๆ ที่จัดขึ้นโดยโครงการ CU Open House 2026 ผ่านเว็บไซต์ของโครงการ 1.3
-        “ข้อมูลส่วนบุคคล” หมายความว่า
-        ข้อมูลที่สามารถเชื่อมโยงกับบุคคลได้หรือสามารถระบุตัวตนของบุคคลนั้นได้
-        แต่ไม่รวมถึงข้อมูลที่ไม่สามารถระบุตัวตนได้ 2. การเป็นผู้ใช้งาน 2.1
-        หากท่านประสงค์จะลงทะเบียนเข้าร่วมกิจกรรมของโครงการฯ
-        สามารถดำเนินการได้ที่เว็บไซต์ที่จัดทำขึ้นโดยโครงการ CU Open House 2026
-        2.2 ข้อตกลงในการใช้บริการและเงื่อนไขต่าง ๆ ของโครงการฯ
-        จะเป็นไปตามข้อกำหนดและเงื่อนไขของแต่ละประเภทบริการ
-        ซึ่งจะมีการแจ้งให้สมาชิกทราบล่วงหน้าก่อนการใช้บริการ 3.
-        เกี่ยวกับข้อมูลส่วนบุคคล 3.1 แหล่งที่มาและข้อมูลที่โครงการฯ เก็บรวบรวม
-        โครงการฯ
-        จะเก็บรวบรวมข้อมูลส่วนบุคคลจากผู้ให้ข้อมูลเฉพาะในกรณีที่จำเป็นเท่านั้น
-        ซึ่งข้อมูลที่โครงการฯ เก็บรวบรวมจะประกอบด้วย: ข้อมูลส่วนบุคคล ได้แก่
-        ชื่อ-นามสกุล วัน/เดือน/ปีเกิด สถานภาพปัจจุบัน อีเมล จังหวัดที่อยู่
-        การศึกษา ได้แก่ สถานศึกษา 3.2 โครงการฯ
-        จะเก็บรวบรวมข้อมูลส่วนบุคคลเพียงเท่าที่จำเป็นตามวัตถุประสงค์ในการเก็บรวบรวมข้อมูล
-        และจะปฏิบัติตามกฎหมายที่เกี่ยวข้องในการจัดเก็บและใช้ข้อมูล 3.3
-        วัตถุประสงค์ในการเก็บรวบรวมข้อมูล
-        ข้อมูลส่วนบุคคลที่ท่านให้ไว้จะถูกนำไปใช้ในวัตถุประสงค์ดังต่อไปนี้:
-        เพื่อการพัฒนาบริการและการประชาสัมพันธ์งาน CU Open House 2026
-        เพื่อการดำเนินการตามคำขอของท่านในการใช้บริการ
-        เพื่อการพัฒนาเว็บไซต์หรือกิจกรรมต่าง ๆ
-        เพื่อการปฏิบัติตามข้อกำหนดทางกฎหมายและข้อบังคับ
-        เพื่อการเก็บรวบรวมสถิติและตรวจสอบจำนวนผู้เข้าร่วมกิจกรรม 4.
-        เงื่อนไขสำคัญของการเป็นผู้ใช้งาน 4.1 เงื่อนไขการเป็นผู้ใช้งาน โครงการฯ
-        ขอสงวนสิทธิ์ในการให้สิทธิประโยชน์และบริการต่าง ๆ เฉพาะสำหรับงาน CU Open
-        House 2026 เท่านั้น การสมัครสมาชิกต้องใช้ชื่อ -
-        นามสกุลจริงตรงกับบัตรประชาชน (ทั้งภาษาไทยและภาษาอังกฤษ)
-        หากข้อมูลที่ท่านกรอกไม่ถูกต้องหรือไม่ครบถ้วน
-        อาจส่งผลให้ท่านไม่สามารถใช้สิทธิประโยชน์หรือบริการจากโครงการฯ ได้
-        เมื่อการลงทะเบียนเสร็จสมบูรณ์
-        ผู้ใช้งานจะได้รับสิทธิประโยชน์ตามที่โครงการฯ กำหนด
-        การใช้สิทธิประโยชน์จะต้องยืนยันตัวตนด้วยการแสดงบัตรประชาชนและข้อมูลต้องตรงกับที่ลงทะเบียน
-        สิทธิประโยชน์ที่ได้รับขึ้นอยู่กับเงื่อนไขที่โครงการฯ
-        แจ้งให้ทราบในแต่ละครั้ง สิทธิประโยชน์ทั้งหมดของโครงการฯ
-        เริ่มมีผลทันทีเมื่อท่านทำการลงทะเบียนเสร็จสมบูรณ์ โครงการฯ
-        ขอสงวนสิทธิ์ในการยกเลิกการเป็นสมาชิกหากท่านกระทำการที่อาจสร้างความเสียหายให้กับโครงการฯ
-        5. สิทธิประโยชน์ 5.1 ผู้ที่ลงทะเบียนกับโครงการฯ
-        จะได้รับสิทธิประโยชน์ดังต่อไปนี้:
-        สิทธิประโยชน์พิเศษจากผู้สนับสนุนโครงการฯ สิทธิประโยชน์ในการเข้าชมงาน CU
-        Open House 2026 ผ่าน QR Code
-        สิทธิประโยชน์ในการรับข่าวสารหรือข้อมูลประชาสัมพันธ์จากโครงการฯ
-        สิทธิประโยชน์ในการรับเกียรติบัตรสำหรับเข้าร่วมงาน 5.
-        การเข้าถึงสิทธิประโยชน์ 5.1
-        สิทธิประโยชน์ที่ท่านได้รับจะจัดส่งในรูปแบบของ QR Code หรือรูปแบบอื่นๆ
-        ตามที่โครงการฯ กำหนด 6. นโยบายการยกเลิก 6.1 โครงการฯ
-        ขอสงวนสิทธิ์ในการยกเลิกการเป็นผู้ใช้งานหลังจากการลงทะเบียนเสร็จสมบูรณ์
-        7. กรณีข้อโต้แย้งหรือทุจริต 7.1
-        ในกรณีที่มีข้อโต้แย้งเกี่ยวกับสิทธิประโยชน์จากการเป็นผู้ใช้งาน
-        ท่านตกลงและยอมรับว่าโครงการฯ
-        มีสิทธิ์ในการตรวจสอบและปรับปรุงสิทธิประโยชน์ให้กับผู้ใช้งาน 7.2
-        หากมีการฉ้อฉล ปลอมแปลง หรือกระทำการทุจริตใด ๆ
-        เพื่อให้ได้มาซึ่งสิทธิประโยชน์ โครงการฯ
-        ขอสงวนสิทธิ์ในการปฏิเสธการโอนสิทธิประโยชน์ให้กับผู้ใช้งาน 8.
-        การเปลี่ยนแปลง แก้ไข หรือเพิ่มเติม 8.1 โครงการฯ
-        ขอตกลงในการพิจารณาทบทวนนโยบายคุ้มครองข้อมูลส่วนบุคคลและข้อตกลงนี้ให้สอดคล้องกับกฎหมายที่เกี่ยวข้อง
-        และจะเผยแพร่การเปลี่ยนแปลงผ่านเว็บไซต์หรือสื่อออนไลน์ของโครงการฯ 9.
-        ภาษาและกฎหมายที่ใช้บังคับ 9.1
-        ข้อตกลงและเงื่อนไขนี้ให้ใช้ภาษาไทยเป็นภาษาที่ใช้บังคับ
-        และจะปฏิบัติตามกฎหมายไทย 9.2 หากมีการโต้แย้งหรือข้อพิพาทเกิดขึ้น
-        ให้ศาลไทยมีอำนาจในการพิจารณาคดี ผู้ให้ข้อมูลได้อ่านศึกษา
-        พิจารณาและตรวจสอบข้อกำหนดตามข้อตกลงและเงื่อนไขการใช้บริการ CU Open House
-        2026 ของโครงการฯแล้ว และผู้ให้ข้อมูลตกลงยอมรับ
-        และตกลงเข้าผูกพันตามข้อตกลงและเงื่อนไขการใช้บริการข้างต้นทุกประการ
-      </div>
+      <p className="max-h-80 overflow-y-auto rounded-md border p-4 whitespace-pre-wrap">
+        {PRIVACY_TEXT}
+      </p>
       <div className="flex flex-row items-center justify-start gap-2">
         <Controller
           name="acceptedTerms"

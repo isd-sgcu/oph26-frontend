@@ -5,6 +5,8 @@ import QuestionaireStepCertificate from '@/components/questionaire/QuestionaireS
 import QuestionaireStepLast from '@/components/questionaire/QuestionaireStepLast'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
+import { useUser } from '@/contexts/UserContext'
+import { updateCertificateName } from '@/services/attendee/attendee'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +22,7 @@ export interface QuestionaireInterface {
   q5: number | null
   q6: string
   certificate_firstname: string
-  certificate_lastname: string
+  certificate_surname: string
 }
 
 export const Route = createFileRoute('/questionaire/')({
@@ -28,11 +30,26 @@ export const Route = createFileRoute('/questionaire/')({
 })
 
 function RouteComponent() {
-  const lastStep = 3
-  const highSchool = true
+  const lastStep = 3 // Step1, Step Certificate (for high school student), Step Last
 
   const { t } = useTranslation()
   const router = useRouter()
+  const userContext = useUser()
+  if (!userContext) {
+    return null
+  }
+
+  const attendee = userContext.attendee
+  useEffect(() => {
+    if (
+      !attendee ||
+      attendee.attendee_type != 'student' ||
+      attendee.checked_in_at == null
+    ) {
+      router.navigate({ to: '/auth/profile/ticket' })
+    }
+  }, [attendee, router])
+
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<QuestionaireInterface>({
     q1: {
@@ -44,25 +61,45 @@ function RouteComponent() {
     q4: null,
     q5: null,
     q6: '',
-    certificate_firstname: '',
-    certificate_lastname: '',
+    certificate_firstname: attendee?.firstname || '',
+    certificate_surname: attendee?.surname || '',
   })
   const [canSubmitStep1, setCanSubmitStep1] = useState(false)
   const [canSubmitStepCertificate, setCanSubmitStepCertificate] =
     useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
   const [openHighSchoolInformationPopup, setOpenHighSchoolInformationPopup] =
-    useState(true)
+    useState(false)
   const [openHighSchoolConfirmationPopup, setOpenHighSchoolConfirmationPopup] =
     useState(false)
 
   // Check User Information
   useEffect(() => {
+    const allowedAttendeeLevels = [
+      'matthayom_ton',
+      'matthayom_plai',
+      'vocational',
+    ]
+
+    const highSchool =
+      attendee?.attendee_type === 'student' &&
+      allowedAttendeeLevels.includes(attendee.study_level)
+
     setIsHighSchoolStudent(highSchool)
     setOpenHighSchoolInformationPopup(highSchool)
-  }, [])
+  }, [attendee])
+
+  useEffect(() => {
+    const currentDate = new Date()
+    const targetDate = new Date('2026-03-30T00:00:00')
+    if (currentDate < targetDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+      router.navigate({ to: '/auth/profile/ticket' })
+    }
+  }, [router])
 
   // Check Step 1
   useEffect(() => {
@@ -85,7 +122,7 @@ function RouteComponent() {
       !isHighSchoolStudent ||
       (isHighSchoolStudent &&
         formData.certificate_firstname &&
-        formData.certificate_lastname)
+        formData.certificate_surname)
     ) {
       setCanSubmitStepCertificate(true)
     } else {
@@ -111,9 +148,52 @@ function RouteComponent() {
     return true
   }
 
+  const handleSubmitNonHighSchool = async () => {
+    if (step == lastStep - 2 && canSubmit) {
+      try {
+        setIsSubmitting(true)
+
+        // TODO: Form Submission API
+
+        setStep(lastStep)
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      } catch (error) {
+        console.error('Error submitting form:', error)
+      } finally {
+        setIsSubmitting(false)
+      }
+    }
+  }
+
+  const handleSubmitHighSchool = async () => {
+    if (step == lastStep - 1 && canSubmit) {
+      try {
+        setIsSubmitting(true)
+
+        // TODO: Form Submission API
+
+        // Certificate Name Submission
+        await updateCertificateName(
+          formData.certificate_firstname.trim() +
+            ' ' +
+            formData.certificate_surname.trim()
+        )
+        setStep((prev) => prev + 1)
+      } catch (error) {
+        console.error('Error submitting form:', error)
+      } finally {
+        setOpenHighSchoolConfirmationPopup(false)
+        setIsSubmitting(false)
+      }
+    }
+  }
+
   return (
     <>
-      <div className="bg-main-light-pink relative flex w-full flex-col">
+      <div className="bg-main-light-pink relative flex min-h-screen w-full flex-col">
         {/* Decorations */}
         <img
           src="/questionaire/blue_flower.png"
@@ -251,7 +331,7 @@ function RouteComponent() {
               <QuestionaireStepLast isHighSchoolStudent={isHighSchoolStudent} />
             )}
 
-            {/* ฺForm Buttons for Normal User */}
+            {/* Form Buttons for Non-High School User */}
             {step < lastStep && !isHighSchoolStudent && (
               <div className="flex items-center justify-between gap-4">
                 {/* Back */}
@@ -284,19 +364,8 @@ function RouteComponent() {
 
                 {/* Submit */}
                 <Button
-                  onClick={() => {
-                    if (step == lastStep - 2 && canSubmit) {
-                      // TODO: Send Information
-
-                      console.log(formData)
-                      setStep(lastStep)
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                      })
-                    }
-                  }}
-                  disabled={!canSubmit}
+                  onClick={handleSubmitNonHighSchool}
+                  disabled={!canSubmit || isSubmitting}
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step == lastStep - 2 ? 'block' : 'hidden'}`}
                 >
@@ -343,7 +412,7 @@ function RouteComponent() {
                       setOpenHighSchoolConfirmationPopup(true)
                     }
                   }}
-                  disabled={!canSubmit}
+                  disabled={!canSubmit || isSubmitting}
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step == lastStep - 1 ? 'block' : 'hidden'}`}
                 >
@@ -409,9 +478,9 @@ function RouteComponent() {
 
             {/* Name */}
             <div className="border-main-pink text-main-pink h-fit min-h-9 w-full max-w-[80%] rounded-md border-2 px-3 py-1 text-center">
-              {formData.certificate_firstname +
+              {formData.certificate_firstname.trim() +
                 ' ' +
-                formData.certificate_lastname}
+                formData.certificate_surname.trim()}
             </div>
 
             <p className="text-center text-base font-normal text-red-500">
@@ -436,16 +505,8 @@ function RouteComponent() {
 
                 {/* Submit */}
                 <Button
-                  onClick={() => {
-                    if (step == lastStep - 1 && canSubmit) {
-                      // TODO: Form Submission
-
-                      console.log(formData)
-                      setStep((prev) => prev + 1)
-                      setOpenHighSchoolConfirmationPopup(false)
-                    }
-                  }}
-                  disabled={step != lastStep - 1 || !canSubmit}
+                  onClick={handleSubmitHighSchool}
+                  disabled={step != lastStep - 1 || !canSubmit || isSubmitting}
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step == lastStep - 1 ? 'block' : 'hidden'}`}
                 >

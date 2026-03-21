@@ -16,6 +16,7 @@
         "merchandise": "สินค้าที่ระลึก",
         "account": "บัญชีของฉัน",
         "register": "ลงทะเบียน",
+        "scan": "Scan QR",
         "login": "เข้าสู่ระบบ",
         "logout": "ออกจากระบบ"
       }
@@ -30,11 +31,15 @@
         "title1": "กรอก Code",
         "body1": "กรอกรหัสที่ได้รับมาจากเพื่อน ๆ เลย!",
         "title2Success": "กรอก Code สำเร็จ",
-        "title2InvalidCode": "Invalid Code",
-        "title2ExpiredCode": "Code หมดอายุ",
+        "title2InvalidOrExpiredCode": "Code ไม่ถูกต้องหรือหมดอายุ",
+        "title2OwnCode": "ไม่สามารถกรอก Code ของตัวเองได้",
+        "title2DuplicatedCode": "Code นี้ถูกใช้ไปแล้ว",
+        "title2OtherError": "เกิดข้อผิดพลาด",
         "body2Success": "คุณได้รับชิ้นจาก ",
-        "body2InvalidCode": "Code ไม่ถูกต้อง โปรดลองอีกครั้ง",
-        "body2ExpiredCode": "Code เกินระยะเวลาที่กำหนด",
+        "body2InvalidOrExpiredCode": "Code ไม่ถูกต้องหรือหมดอายุ \nโปรดลองอีกครั้ง",
+        "body2OwnCode": "คุณไม่สามารถกรอก Code ของตัวเองได้",
+        "body2DuplicatedCode": "คุณเคยกรอก Code จากเพื่อนคนนี้ไปแล้ว",
+        "body2OtherError": "เกิดข้อผิดพลาดในการกรอก Code \nโปรดลองอีกครั้งในภายหลัง",
         "cancel": "ยกเลิก",
         "submit": "ตกลง",
         "confirm": "ตกลง"
@@ -54,9 +59,22 @@
           "chulalongkorn": "จุฬาลงกรณ์",
           "university": "มหาวิทยาลัย",
           "student": "นักเรียน",
+          "parent": "ผู้ปกครอง",
+          "educationstaff": "บุคลากรทางการศึกษา",
+          "other": "อื่น ๆ",
           "dreamFaculties": "คณะที่ฝันไว้",
           "button": {
             "home": "หน้าหลัก"
+          },
+          "evaluationBanner": {
+            "titleNoPermission": "ท่านไม่มีสิทธิทำแบบประเมิน \n และ <u>ไม่มีสิทธิรับเกียรติบัตร</u> \n เนื่องจากไม่ได้เข้าร่วม งาน Onsite \n ณ จุฬาลงกรณ์มหาวิทยาลัย \n เมื่อวันที่ 28-29 มีนาคม 2569",
+            "titleHasPermission": "ท่านได้เข้าร่วม CU Open House 2026 \n ณ จุฬาลงกรณ์มหาวิทยาลัย \n เมื่อวันที่ 28 - 29 มีนาคม 2569",
+            "detailNoPermission": "เข้าร่วมงานแล้ว แต่พบข้อผิดพลาด?",
+            "button": {
+              "questionaire": "ทำแบบสอบถาม",
+              "certificate": "รับเกียรติบัตร",
+              "report": "รายงาน"
+            }
           }
         }
       },
@@ -66,15 +84,20 @@
         "home": "หน้าหลัก",
         "modal": {
           "success": {
-            "subtitle": "ได้เข้าร่วมกิจกรรม",
-            "body": "รับลงทะเบียนโดย<br />{{StaffName}} จากคณะ {{FacultyName}}<br />เมื่อวันที่ {{Date}} เวลา {{Time}}",
+            "subtitle": "ได้เข้าร่วมกิจกรรม CU OPEN HOUSE 2026 {{faculty}}",
+            "body": "เมื่อวันที่ {{date}} เวลา {{time}}",
             "detail": "แจ้งน้องรีเฟรชหน้า ticket ของตัวเอง ถ้ามีข้อความยืนยันว่าสแกนแล้วให้ถ่ายหน้าจอเก็บไว้เป็นหลักฐานเพื่อสำหรับรับเกียรติบัตร"
           },
           "error": {
             "title": "เกิดข้อผิดพลาด!",
+            "title2": "ไม่สามารถเช็คอินได้",
             "subtitle": {
-              "error_01": "ไม่พบ ID ที่สแกน",
-              "error_02": "ได้รับการลงทะเบียนไปแล้ว"
+              "400": "ไม่พบ ID ที่สแกน",
+              "401": "ไม่พบผู้ใช้งาน",
+              "403": "ผู้ใช้งานไม่ได้รับอนุญาต",
+              "404": "ไม่พบผู้เข้าร่วมงาน",
+              "409": "ได้รับการลงทะเบียนไปแล้ว",
+              "500": "เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์"
             }
           },
           "confirmBtn": "ตกลง"
@@ -128,6 +151,7 @@
         "workshopButton": "Workshops",
         "facultyButton": "เกี่ยวกับคณะ",
         "location": "ที่ตั้งคณะ: ",
+        "majors": "ภาควิชา",
         "major": "ภาควิชา",
         "field": "สาขา"
       },
@@ -147,7 +171,14 @@
           "park": "ที่จอดรถ"
         }
       },
-      "merchandiseGroup": {},
+      "merchandiseGroup": {
+        "title": "สินค้าที่ระลึก",
+        "itemTitle": "รายละเอียด",
+        "freeShipping": "ส่งฟรีไม่มีขั้นต่ำ",
+        "variantSelect": "เลือกรูปแบบ",
+        "store": "ติดต่อร้านค้า: ",
+        "buy": "สั่งซื้อสินค้า"
+      },
       "workshopGroup": {
         "title": "ข้อมูลเวิร์คชอป",
         "inputPlaceholder": "กรอกชื่อเวิร์คชอป...",
@@ -248,7 +279,8 @@
       "buttonGroup": {
         "register": "ลงทะเบียน",
         "login": "เข้าสู่ระบบ",
-        "agenda": "สูจิบัตร"
+        "ticket": "CU Ticket",
+        "privacy": "ข้อตกลงและเงื่อนไข"
       },
       "event": {
         "faculty": "คณะ",
@@ -260,6 +292,10 @@
       "faq": {
         "title": "คำถามที่พบบ่อย"
       }
+    },
+    "privacyGroup": {
+      "title": "ข้อตกลงและเงื่อนไข",
+      "back": "กลับสู่หน้าหลัก"
     },
 
     "title": "หัวข้อ"

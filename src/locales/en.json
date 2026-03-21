@@ -16,6 +16,7 @@
         "merchandise": "Merchandises",
         "account": "My Account",
         "register": "Register",
+        "scan": "Scan QR",
         "login": "Login",
         "logout": "Log out"
       }
@@ -29,11 +30,15 @@
         "title1": "Redeem Code",
         "body1": "Use the code from your friends!",
         "title2Success": "Success",
-        "title2InvalidCode": "Invalid Code",
-        "title2ExpiredCode": "Expired Code",
+        "title2InvalidOrExpiredCode": "Invalid or Expired Code",
+        "title2OwnCode": "Cannot Redeem Your Own Code",
+        "title2DuplicatedCode": "Already Redeemed",
+        "title2OtherError": "Something went wrong",
         "body2Success": "You have received a piece from ",
-        "body2InvalidCode": "The code is not correct. Please try again.",
-        "body2ExpiredCode": "This code has expired.",
+        "body2InvalidOrExpiredCode": "The code is not correct or has expired. \nPlease try again.",
+        "body2DuplicatedCode": "You have already redeemed the code from this friend.",
+        "body2OwnCode": "You cannot redeem your own code.",
+        "body2OtherError": "An error occurred while redeeming the code. \nPlease try again.",
         "cancel": "Cancel",
         "submit": "Submit",
         "confirm": "Confirm"
@@ -50,9 +55,22 @@
           "chulalongkorn": "Chulalongkorn",
           "university": "University",
           "student": "Student",
+          "parent": "Parent",
+          "educationstaff": "Educational Staff",
+          "other": "Other",
           "dreamFaculties": "Dream Faculties",
           "button": {
             "home": "Home"
+          },
+          "evaluationBanner": {
+            "titleNoPermission": "You are not eligible to complete \n the evaluation and <u>receive a certificate</u> because you did not attend the onsite event at Chulalongkorn University \n on March 28-29, 2026",
+            "titleHasPermission": "You have attended CU Open House 2026 \n at Chulalongkorn University \n on March 28-29, 2026",
+            "detailNoPermission": "You have attended the event, but an error occurred?",
+            "button": {
+              "questionaire": "Complete Evaluation",
+              "certificate": "Receive Certificate",
+              "report": "Report"
+            }
           }
         }
       },
@@ -62,15 +80,20 @@
         "home": "Home",
         "modal": {
           "success": {
-            "subtitle": "has successfully joined",
-            "body": "Registered by<br />{{StaffName}} from the {{FacultyName}}<br />on {{Date}} at {{Time}}",
+            "subtitle": "has successfully joined CU OPEN HOUSE 2026 {{faculty}}",
+            "body": "on {{date}} at {{time}}",
             "detail": "Please inform the participant to refresh their ticket page. If a confirmation message appears indicating that the QR code has been scanned, kindly take a screenshot as proof for certificate collection."
           },
           "error": {
             "title": "ERROR!",
+            "title2": "Failed to check in",
             "subtitle": {
-              "error_01": "Scanned ID not found",
-              "error_02": "has already been registered"
+              "400": "Not found scanned ID",
+              "401": "User unauthorized",
+              "403": "User forbidden",
+              "404": "Attendee not found",
+              "409": "already checked in with this faculty",
+              "500": "Internal Server Error"
             }
           },
           "confirmBtn": "OK"
@@ -117,31 +140,18 @@
       }
     },
     "infoGroup": {
-      "facultyGroup": { 
+      "facultyGroup": {
         "title": "Faculties",
         "inputPlaceholder": "Search for faculties...",
         "noData": "No faculties found...",
         "workshopButton": "Workshops",
         "facultyButton": "View Faculty",
         "location": "Location: ",
-        "major": "Majors",
-        "field": "Fields"},
-      "mapGroup": {
-        "title": "Map",
-        "Location": {
-          "title": "Location",
-          "overview": "overview",
-          "place1": "Siam MBK",
-          "place2": "Samyan",
-          "place3": "????"
-        },
-        "PoI": {
-          "title": "Facilities",
-          "restroom": "Restrooms",
-          "food": "Food Court",
-          "park": "Parking"
-        }
+        "majors": "Majors",
+        "major": "Major",
+        "field": "Field"
       },
+      "mapGroup": {},
       "merchandiseGroup": {},
       "workshopGroup": {
         "title": "Workshops",
@@ -244,7 +254,8 @@
       "buttonGroup": {
         "register": "Register",
         "login": "Login",
-        "agenda": "Booklet"
+        "ticket": "CU Ticket",
+        "privacy": "Privacy Policy"
       },
       "event": {
         "faculty": "Faculties",
@@ -256,6 +267,10 @@
       "faq": {
         "title": "FAQs ?"
       }
+    },
+    "privacyGroup": {
+      "title": "Privacy Policy",
+      "back": "Back to Main Page"
     },
 
     "title": "Title"

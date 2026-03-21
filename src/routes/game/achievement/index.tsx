@@ -1,8 +1,18 @@
+import { FACULTIES, FACULTY_KEYS } from '@/components/const/faculty'
 import AchievementCard from '@/components/game/achievement/AchievementCard'
 import AchievementSlider from '@/components/game/achievement/AchievementSlider'
 import SharePopup from '@/components/game/achievement/SharePopup'
 import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
-import { Achievement } from '@/types/achievement'
+import { useUser } from '@/contexts/UserContext'
+import {
+  getMyLeaderboard,
+  Leaderboard,
+} from '@/services/leaderboard/leaderboard'
+import {
+  CollectedPiecesResponse,
+  getCollectedPieces,
+} from '@/services/pieces/piece'
+import { Achievement, AchievementCollectedPieces } from '@/types/achievement'
 import { transformAchievement } from '@/utils/achievementTransformer'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
@@ -16,6 +26,10 @@ function RouteComponent() {
   const { t, i18n } = useTranslation()
   const isEnglish = i18n.language.startsWith('en')
   const [loading, setLoading] = useState(true)
+  const userContext = useUser()
+  if (!userContext) return null
+
+  const attendee = userContext.attendee
 
   const [achievements, setAchievements] = useState<Achievement[]>([])
 
@@ -26,61 +40,188 @@ function RouteComponent() {
 
   useEffect(() => {
     async function fetchAchievements() {
-      try {
-        const data: Achievement[] = [
-          {
-            variant: 'var1',
-            stat: 1000,
-          },
-          {
-            variant: 'var2',
-            stat: 'cusar',
-            top: 5,
-          },
-          {
-            variant: 'var3',
-            stat: '23',
-            faculty: 'scii',
-          },
-          {
-            variant: 'overall',
-            stat: 99,
-            miniCard1Faculty: 'cusar',
-            miniCard1Count: 42,
-            miniCard2Rank: -1,
-          },
-          {
-            variant: 'collectedPieces',
-            stat: 120,
-            edu: 10,
-            psy: 1,
-            pharm: 1,
-            dent: 1,
-            commarts: 1,
-            ahs: 0,
-            faa: 1,
-            vet: 1,
-            law: 1,
-            arch: 1,
-            eng: 1,
-            arts: 1,
-            md: 1,
-            sci: 1,
-            econ: 1,
-            polsci: 1,
-            cbs: 1,
-            spsc: 1,
-            scii: 1,
-            cusar: 1,
-          },
-        ]
+      const data: Achievement[] = []
+      let fetchedCollectedPiecesData: CollectedPiecesResponse | undefined
+      let leaderboardData: Leaderboard | undefined
 
-        setAchievements(data)
-      } catch (err) {
-        console.error('Failed to fetch achievements', err)
-      } finally {
-        setLoading(false)
+      try {
+        fetchedCollectedPiecesData = await getCollectedPieces()
+      } catch (error) {
+        console.error('Error fetching collected pieces data:', error)
       }
+
+      try {
+        leaderboardData = await getMyLeaderboard()
+      } catch (error) {
+        console.error('Error fetching leaderboard data:', error)
+      }
+
+      // The 'var1' Data
+      const var1Data: Achievement = {
+        variant: 'var1',
+        stat: -1,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        var1Data.stat = fetchedCollectedPiecesData.stats.rank
+        if (var1Data.stat > 0) {
+          data.push(var1Data)
+        }
+      }
+
+      // The 'var2' Data
+      let var2Data: Achievement | null = null
+
+      if (leaderboardData) {
+        const allTopsIndexFromLeaderboard = leaderboardData.is_top
+          .map((item, index) => (item === true ? index : -1))
+          .filter((index) => index !== -1)
+        const allTopsFacultyFromLeaderboard = allTopsIndexFromLeaderboard.map(
+          (index) => FACULTIES[index]
+        )
+
+        if (allTopsFacultyFromLeaderboard.length > 0) {
+          const randomTopFaculty =
+            allTopsFacultyFromLeaderboard[
+              Math.floor(Math.random() * allTopsFacultyFromLeaderboard.length)
+            ]
+
+          var2Data = {
+            variant: 'var2',
+            stat: randomTopFaculty.value,
+            top: 1,
+          }
+        }
+
+        if (var2Data != null) {
+          data.push(var2Data)
+        }
+      }
+
+      // The 'var3' Data
+      let var3Data: Achievement = {
+        variant: 'var3',
+        stat: '0',
+        faculty: 'edu',
+      }
+
+      if (fetchedCollectedPiecesData) {
+        const sameMissingCounter =
+          fetchedCollectedPiecesData.stats.same_missing_count
+        const sameMissingCountsArray = Object.entries(sameMissingCounter).map(
+          ([missingCount, attendeeCount]) => ({
+            missingFaculty: FACULTIES[Number(missingCount) - 1].value,
+            count: attendeeCount,
+          })
+        )
+
+        const no0SameMissingCountArray = sameMissingCountsArray.filter(
+          (item) => item.count > 0
+        )
+
+        if (no0SameMissingCountArray.length > 0) {
+          const randomSameMissingItem =
+            no0SameMissingCountArray[
+              Math.floor(Math.random() * no0SameMissingCountArray.length)
+            ]
+          var3Data = {
+            variant: 'var3',
+            stat: `${Math.round(randomSameMissingItem.count)}`,
+            faculty: randomSameMissingItem.missingFaculty,
+          }
+        }
+      }
+
+      data.push(var3Data)
+
+      // The 'overall' Data
+      const overallData: Achievement = {
+        variant: 'overall',
+        stat: 0,
+        miniCard1Faculty: 'edu',
+        miniCard1Count: 0,
+        miniCard2Rank: -1,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        overallData.miniCard2Rank = fetchedCollectedPiecesData.stats.rank ?? -1
+
+        const allFacultyStats =
+          fetchedCollectedPiecesData.stats.collected_by_faculty
+
+        overallData.stat = fetchedCollectedPiecesData.stats.total_collected
+
+        let maxFaculty: keyof AchievementCollectedPieces | null = null
+        let maxCount = -1
+
+        FACULTY_KEYS.forEach((faculty) => {
+          // @ts-ignore
+          const value = allFacultyStats[faculty]
+          if (value && typeof value.count === 'number') {
+            if (value.count > maxCount) {
+              maxCount = value.count
+              maxFaculty = faculty
+            }
+          }
+        })
+
+        if (maxFaculty) {
+          overallData.miniCard1Faculty = maxFaculty
+          overallData.miniCard1Count = maxCount
+        }
+      }
+
+      data.push(overallData)
+
+      // The 'collectedPieces' Data
+      const collectedPiecesData: AchievementCollectedPieces = {
+        variant: 'collectedPieces',
+        stat: 0,
+        edu: 0,
+        psy: 0,
+        pharm: 0,
+        dent: 0,
+        commarts: 0,
+        ahs: 0,
+        faa: 0,
+        vet: 0,
+        law: 0,
+        arch: 0,
+        eng: 0,
+        arts: 0,
+        md: 0,
+        sci: 0,
+        econ: 0,
+        polsci: 0,
+        cbs: 0,
+        spsc: 0,
+        scii: 0,
+        cusar: 0,
+      }
+
+      if (fetchedCollectedPiecesData) {
+        const allFacultyStats =
+          fetchedCollectedPiecesData.stats.collected_by_faculty
+        collectedPiecesData.stat =
+          fetchedCollectedPiecesData.stats.total_collected
+
+        Object.entries(allFacultyStats).forEach(([faculty, value]) => {
+          if (
+            value &&
+            typeof value.count === 'number' &&
+            FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
+          ) {
+            // @ts-ignore
+            collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
+              value.count
+          }
+        })
+      }
+
+      data.push(collectedPiecesData)
+
+      setAchievements(data)
+      setLoading(false)
     }
 
     fetchAchievements()
@@ -124,7 +265,7 @@ function RouteComponent() {
             open={isShareOpen}
             achievement={selectedAchievement}
             onClose={() => setShareOpen(false)}
-            name={'John Doe'}
+            name={attendee?.firstname + ' ' + attendee?.surname}
           />
         </div>
       )}

@@ -7,9 +7,37 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useCapture } from '@/contexts/CaptureContext'
 import { useCamera } from '@/hooks/useCamera'
 import CloudLayer from './CloudLayer'
+import { getCollectedPieces } from '@/services/pieces/piece'
+import { AchievementCollectedPieces } from '@/types/achievement'
+import { FACULTY_KEYS } from '@/components/const/faculty'
+
+type PieceCountType = {
+  edu: number
+  psy: number
+  dent: number
+  law: number
+  commarts: number
+  cbs: number
+  md: number
+  pharm: number
+  polsci: number
+  sci: number
+  spsc: number
+  eng: number
+  faa: number
+  econ: number
+  arch: number
+  ahs: number
+  vet: number
+  arts: number
+  scii: number
+  cusar: number
+}
 
 export default function GameMap() {
-  const [pieceCount, setPieceCount] = useState<Record<string, number>>({})
+  const [pieceCount, setPieceCount] = useState<PieceCountType>(
+    {} as PieceCountType
+  )
   const [binaryPieceCount, setBinaryPieceCount] = useState<
     Record<string, number>
   >({})
@@ -25,6 +53,36 @@ export default function GameMap() {
 
   const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } =
     useCamera(containerRef, cameraWrapperRef, baseScale)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const handler = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+
+    el.addEventListener('touchmove', handler, { passive: false })
+
+    return () => {
+      el.removeEventListener('touchmove', handler)
+    }
+  }, [])
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const handler = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+
+    el.addEventListener('touchmove', handler, { passive: false })
+
+    return () => {
+      el.removeEventListener('touchmove', handler)
+    }
+  }, [])
 
   // Compute base scale
   useLayoutEffect(() => {
@@ -46,28 +104,32 @@ export default function GameMap() {
 
   // Fake data
   useEffect(() => {
-    setPieceCount({
-      edu: Math.floor(Math.random() * 6),
-      psy: Math.floor(Math.random() * 6),
-      dent: Math.floor(Math.random() * 6),
-      law: Math.floor(Math.random() * 6),
-      commarts: Math.floor(Math.random() * 6),
-      cbs: Math.floor(Math.random() * 6),
-      md: Math.floor(Math.random() * 6),
-      pharm: Math.floor(Math.random() * 6),
-      polsci: Math.floor(Math.random() * 6),
-      sci: Math.floor(Math.random() * 6),
-      spsc: Math.floor(Math.random() * 6),
-      eng: Math.floor(Math.random() * 6),
-      faa: Math.floor(Math.random() * 6),
-      econ: Math.floor(Math.random() * 6),
-      arch: Math.floor(Math.random() * 6),
-      ahs: Math.floor(Math.random() * 6),
-      vet: Math.floor(Math.random() * 6),
-      arts: Math.floor(Math.random() * 6),
-      scii: Math.floor(Math.random() * 6),
-      cusar: Math.floor(Math.random() * 6),
-    })
+    async function fetchPieces() {
+      const collectedPiecesData: PieceCountType = {} as PieceCountType
+      try {
+        const fetchedCollectedPiecesData = await getCollectedPieces()
+        if (fetchedCollectedPiecesData) {
+          const allFacultyStats =
+            fetchedCollectedPiecesData.stats.collected_by_faculty
+
+          Object.entries(allFacultyStats).forEach(([faculty, value]) => {
+            if (
+              value &&
+              typeof value.count === 'number' &&
+              FACULTY_KEYS.includes(faculty as keyof AchievementCollectedPieces)
+            ) {
+              // @ts-ignore
+              collectedPiecesData[faculty as keyof AchievementCollectedPieces] =
+                value.count
+            }
+          })
+        }
+      } catch {}
+
+      setPieceCount(collectedPiecesData)
+    }
+
+    fetchPieces()
   }, [])
 
   useEffect(() => {
@@ -101,6 +163,7 @@ export default function GameMap() {
         touchAction: 'none',
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
       }}
       onClick={() => {
         if (isZoomed) resetZoom()
