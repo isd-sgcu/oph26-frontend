@@ -41,15 +41,18 @@ function RouteComponent() {
       return
     }
 
-    if (currentDate >= targetDate) {
+    if (currentDate < targetDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
       setShowEvaluationBanner(false)
       setHasPermission(false)
     } else if (userAttendee?.checked_in_at) {
+      // ผู้ใช้เช็คอินแล้ว
       setShowEvaluationBanner(true)
       setHasPermission(true)
     } else {
-      setShowEvaluationBanner(false)
-      setHasPermission(true)
+      // ผู้ใช้ยังไม่ได้เช็คอิน
+      setShowEvaluationBanner(true)
+      setHasPermission(false)
     }
 
     if (userAttendee?.attendee_type === 'student') {
