@@ -193,35 +193,22 @@
       },
       "part1": {
         "header": "Part 1",
-        "title": "Satisfaction with the Activity",
+        "title": "Satisfaction with the Activity – Inside Sala Phra Kiao",
         "q1": {
-          "question": "How did you hear about CU Open House 2025?",
-          "options": {
-            "social": "Social Media",
-            "website": "Website",
-            "friends": "Friends",
-            "school": "School",
-            "other": "Other (Please specify)"
-          },
-          "placeholder": "Please specify"
+          "question": "The booths and activities were interesting and gave useful information"
         },
-
         "q2": {
-          "question": "Overall satisfaction with the activity"
+          "question": "The information about the faculties was clear"
         },
         "q3": {
-          "question": "The booths and activities were interesting and provided useful information"
+          "question": "The central stage activities were fun and interesting, and the speakers were suitable for the activities"
         },
         "q4": {
-          "question": "The information about the faculties within the university was clear"
+          "question": "The booth that you were satisfied with, such as the faculty booth, club booth, or activity booth",
+          "placeholder": "Enter booth name"
         },
         "q5": {
-          "question": "If given the opportunity, would you recommend CU Open House to others?"
-        },
-
-        "q6": {
-          "question": "Which booth did you find most satisfying? (e.g., faculty booths, club booths, activity booths)",
-          "placeholder": "Enter booth name"
+          "question": "Overall, how satisfied were you with the activities inside Sala Phra Kiao?"
         },
         "rating": {
           "low": "Low",

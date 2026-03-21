@@ -11,16 +11,27 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+// =========================================
+// TODO: DONT FORGET TO REMOVE THIS
+const disableMiddleware = true
+// =========================================
+
 export interface QuestionaireInterface {
-  q1: {
-    selected: string[]
-    other?: string
+  part1: {
+    q1: number | null
+    q2: number | null
+    q3: number | null
+    q4: string
+    q5: number | null
   }
-  q2: number | null
-  q3: number | null
-  q4: number | null
-  q5: number | null
-  q6: string
+  part2: {
+    q1: number | null
+    q2: number | null
+    q3: number | null
+    q4: number | null
+    q5: number | null
+    q6: string
+  }
   certificate_firstname: string
   certificate_surname: string
 }
@@ -30,7 +41,7 @@ export const Route = createFileRoute('/questionaire/')({
 })
 
 function RouteComponent() {
-  const lastStep = 3 // Step1, Step Certificate (for high school student), Step Last
+  const lastStep = 5 // Step1, Step2, Step3, Step Certificate (for high school student), Step Last
 
   const { t } = useTranslation()
   const router = useRouter()
@@ -41,26 +52,34 @@ function RouteComponent() {
 
   const attendee = userContext.attendee
   useEffect(() => {
-    if (
-      !attendee ||
-      attendee.attendee_type != 'student' ||
-      attendee.checked_in_at == null
-    ) {
-      router.navigate({ to: '/auth/profile/ticket' })
+    if (!disableMiddleware) {
+      if (
+        !attendee ||
+        attendee.attendee_type != 'student' ||
+        attendee.checked_in_at == null
+      ) {
+        router.navigate({ to: '/auth/profile/ticket' })
+      }
     }
   }, [attendee, router])
 
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<QuestionaireInterface>({
-    q1: {
-      selected: [],
-      other: '',
+    part1: {
+      q1: null,
+      q2: null,
+      q3: null,
+      q4: '',
+      q5: null,
     },
-    q2: null,
-    q3: null,
-    q4: null,
-    q5: null,
-    q6: '',
+    part2: {
+      q1: null,
+      q2: null,
+      q3: null,
+      q4: null,
+      q5: null,
+      q6: '',
+    },
     certificate_firstname: attendee?.firstname || '',
     certificate_surname: attendee?.surname || '',
   })
@@ -93,28 +112,32 @@ function RouteComponent() {
   }, [attendee])
 
   useEffect(() => {
-    const currentDate = new Date()
-    const targetDate = new Date('2026-03-30T00:00:00')
-    if (currentDate < targetDate) {
-      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
-      router.navigate({ to: '/auth/profile/ticket' })
+    if (!disableMiddleware) {
+      const currentDate = new Date()
+      const targetDate = new Date('2026-03-30T00:00:00')
+      if (currentDate < targetDate) {
+        // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+        router.navigate({ to: '/auth/profile/ticket' })
+      }
     }
   }, [router])
 
   // Check Step 1
   useEffect(() => {
     if (
-      isQ1Valid(formData.q1) &&
-      formData.q2 &&
-      formData.q3 &&
-      formData.q4 &&
-      formData.q5
+      formData.part1.q1 !== null &&
+      formData.part1.q2 !== null &&
+      formData.part1.q3 !== null &&
+      formData.part1.q5 !== null
     ) {
       setCanSubmitStep1(true)
     } else {
       setCanSubmitStep1(false)
     }
   }, [formData])
+
+  // Check Step 2
+  useEffect(() => {})
 
   // Check Step Certificate
   useEffect(() => {
@@ -137,16 +160,6 @@ function RouteComponent() {
       setCanSubmit(false)
     }
   }, [canSubmitStep1, canSubmitStepCertificate])
-
-  const isQ1Valid = (q1: QuestionaireInterface['q1']) => {
-    if (q1.selected.length === 0) return false
-
-    if (q1.selected.includes('other')) {
-      return q1.other !== undefined && q1.other.trim().length > 0
-    }
-
-    return true
-  }
 
   const handleSubmitNonHighSchool = async () => {
     if (step == lastStep - 2 && canSubmit) {
