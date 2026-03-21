@@ -202,6 +202,9 @@
         "contactTitle": "ติดตามรายละเอียดเพิ่มเติมได้ที่",
         "registerTitle": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
         "register": "ลงทะเบียน"
+      },
+      "eventGroup": {
+        "title": "กิจกรรมส่วนกลาง"
       }
     },
     "questionaireGroup": {

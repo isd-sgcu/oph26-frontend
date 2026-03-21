@@ -48,11 +48,11 @@ const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
   {
     title: 'map',
     icon: 'fi-rr-map-marker',
@@ -73,11 +73,11 @@ const AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
   {
     title: 'map',
     icon: 'fi-rr-map-marker',
@@ -98,11 +98,11 @@ const AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
   {
     title: 'map',
     icon: 'fi-rr-map-marker',
@@ -128,11 +128,11 @@ const AUTHENTICATED_STAFF_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
   {
     title: 'map',
     icon: 'fi-rr-map-marker',

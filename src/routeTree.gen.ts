@@ -18,6 +18,7 @@ import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/in
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
 import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
 import { Route as InfoFacultyIndexRouteImport } from './routes/info/faculty/index'
+import { Route as InfoEventIndexRouteImport } from './routes/info/event/index'
 import { Route as GamePieceIndexRouteImport } from './routes/game/piece/index'
 import { Route as GameAchievementIndexRouteImport } from './routes/game/achievement/index'
 import { Route as AuthQrIndexRouteImport } from './routes/auth/qr/index'
@@ -72,6 +73,11 @@ const InfoMapIndexRoute = InfoMapIndexRouteImport.update({
 const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
   id: '/info/faculty/',
   path: '/info/faculty/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoEventIndexRoute = InfoEventIndexRouteImport.update({
+  id: '/info/event/',
+  path: '/info/event/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamePieceIndexRoute = GamePieceIndexRouteImport.update({
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
+  '/info/event/': typeof InfoEventIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
   '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/auth/qr': typeof AuthQrIndexRoute
   '/game/achievement': typeof GameAchievementIndexRoute
   '/game/piece': typeof GamePieceIndexRoute
+  '/info/event': typeof InfoEventIndexRoute
   '/info/faculty': typeof InfoFacultyIndexRoute
   '/info/map': typeof InfoMapIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
@@ -181,6 +189,7 @@ export interface FileRoutesById {
   '/auth/qr/': typeof AuthQrIndexRoute
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
+  '/info/event/': typeof InfoEventIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
   '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
@@ -204,6 +213,7 @@ export interface FileRouteTypes {
     | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
+    | '/info/event/'
     | '/info/faculty/'
     | '/info/map/'
     | '/info/merchandise/'
@@ -224,6 +234,7 @@ export interface FileRouteTypes {
     | '/auth/qr'
     | '/game/achievement'
     | '/game/piece'
+    | '/info/event'
     | '/info/faculty'
     | '/info/map'
     | '/info/merchandise'
@@ -245,6 +256,7 @@ export interface FileRouteTypes {
     | '/auth/qr/'
     | '/game/achievement/'
     | '/game/piece/'
+    | '/info/event/'
     | '/info/faculty/'
     | '/info/map/'
     | '/info/merchandise/'
@@ -264,6 +276,7 @@ export interface RootRouteChildren {
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
   AuthQrIndexRoute: typeof AuthQrIndexRoute
+  InfoEventIndexRoute: typeof InfoEventIndexRoute
   InfoFacultyIndexRoute: typeof InfoFacultyIndexRoute
   InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
@@ -337,6 +350,13 @@ declare module '@tanstack/react-router' {
       path: '/info/faculty'
       fullPath: '/info/faculty/'
       preLoaderRoute: typeof InfoFacultyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info/event/': {
+      id: '/info/event/'
+      path: '/info/event'
+      fullPath: '/info/event/'
+      preLoaderRoute: typeof InfoEventIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/game/piece/': {
@@ -437,6 +457,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
   AuthQrIndexRoute: AuthQrIndexRoute,
+  InfoEventIndexRoute: InfoEventIndexRoute,
   InfoFacultyIndexRoute: InfoFacultyIndexRoute,
   InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,

@@ -198,6 +198,9 @@
         "contactTitle": "To receive more information",
         "registerTitle": "Register for this workshop",
         "register": "Register"
+      },
+      "eventGroup": {
+        "title": "Main Event"
       }
     },
     "questionaireGroup": {
