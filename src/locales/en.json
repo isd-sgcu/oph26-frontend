@@ -151,7 +151,22 @@
         "major": "Major",
         "field": "Field"
       },
-      "mapGroup": {},
+      "mapGroup": {
+        "title": "Map",
+        "Location": {
+          "title": "Location",
+          "overview": "Overview",
+          "siam": "Siam MBK",
+          "samyan": "Samyan",
+          "triamudom": "Triamudom"
+        },
+        "PoI": {
+          "title": "Facilities",
+          "restroom": "Restrooms",
+          "food": "Food Court",
+          "park": "Parking"
+        }
+      },
       "merchandiseGroup": {},
       "workshopGroup": {
         "title": "Workshops",
