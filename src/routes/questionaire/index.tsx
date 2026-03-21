@@ -2,6 +2,7 @@ import CustomModal from '@/components/CustomModal'
 import { FlatIcon } from '@/components/FlatIcon'
 import QuestionaireStep1 from '@/components/questionaire/QuestionaireStep1'
 import QuestionaireStep2 from '@/components/questionaire/QuestionaireStep2'
+import QuestionaireStep3 from '@/components/questionaire/QuestionaireStep3'
 import QuestionaireStepCertificate from '@/components/questionaire/QuestionaireStepCertificate'
 import QuestionaireStepLast from '@/components/questionaire/QuestionaireStepLast'
 import { Button } from '@/components/ui/button'
@@ -33,6 +34,13 @@ export interface QuestionaireInterface {
     q5: number | null
     q6: string
   }
+  part3: {
+    q1: number | null
+    q2: number | null
+    q3: number | null
+    q4: number | null
+    q5: string
+  }
   certificate_firstname: string
   certificate_surname: string
 }
@@ -42,7 +50,12 @@ export const Route = createFileRoute('/questionaire/')({
 })
 
 function RouteComponent() {
-  const lastStep = 5 // Step1, Step2, Step3, Step Certificate (for high school student), Step Last
+  const lastStep = 5
+  // Step1,
+  // Step2,
+  // Step3,
+  // Step Certificate (for high school student),
+  // Step Last
 
   const { t } = useTranslation()
   const router = useRouter()
@@ -81,11 +94,19 @@ function RouteComponent() {
       q5: null,
       q6: '',
     },
+    part3: {
+      q1: null,
+      q2: null,
+      q3: null,
+      q4: null,
+      q5: '',
+    },
     certificate_firstname: attendee?.firstname || '',
     certificate_surname: attendee?.surname || '',
   })
   const [canSubmitStep1, setCanSubmitStep1] = useState(false)
   const [canSubmitStep2, setCanSubmitStep2] = useState(false)
+  const [canSubmitStep3, setCanSubmitStep3] = useState(false)
   const [canSubmitStepCertificate, setCanSubmitStepCertificate] =
     useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
@@ -153,6 +174,20 @@ function RouteComponent() {
     }
   }, [formData])
 
+  // Check Step 3
+  useEffect(() => {
+    if (
+      formData.part3.q1 !== null &&
+      formData.part3.q2 !== null &&
+      formData.part3.q3 !== null &&
+      formData.part3.q4 !== null
+    ) {
+      setCanSubmitStep3(true)
+    } else {
+      setCanSubmitStep3(false)
+    }
+  }, [formData])
+
   // Check Step Certificate
   useEffect(() => {
     if (
@@ -168,12 +203,17 @@ function RouteComponent() {
   }, [formData])
 
   useEffect(() => {
-    if (canSubmitStep1 && canSubmitStep2 && canSubmitStepCertificate) {
+    if (
+      canSubmitStep1 &&
+      canSubmitStep2 &&
+      canSubmitStep3 &&
+      canSubmitStepCertificate
+    ) {
       setCanSubmit(true)
     } else {
       setCanSubmit(false)
     }
-  }, [canSubmitStep1, canSubmitStep2, canSubmitStepCertificate])
+  }, [canSubmitStep1, canSubmitStep2, canSubmitStep3, canSubmitStepCertificate])
 
   const handleSubmitNonHighSchool = async () => {
     if (step == lastStep - 2 && canSubmit) {
@@ -355,6 +395,14 @@ function RouteComponent() {
               />
             )}
 
+            {/* Form Step 3 */}
+            {step === 3 && (
+              <QuestionaireStep3
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
+
             {/* Form Step Certificate */}
             {step == lastStep - 1 && isHighSchoolStudent && (
               <QuestionaireStepCertificate
@@ -390,14 +438,16 @@ function RouteComponent() {
                   onClick={() => {
                     if (
                       (step == 1 && canSubmitStep1) ||
-                      (step == 2 && canSubmitStep2)
+                      (step == 2 && canSubmitStep2) ||
+                      (step == 3 && canSubmitStep3)
                     ) {
                       setStep((prev) => prev + 1)
                     }
                   }}
                   disabled={
                     (step == 1 && !canSubmitStep1) ||
-                    (step == 2 && !canSubmitStep2)
+                    (step == 2 && !canSubmitStep2) ||
+                    (step == 3 && !canSubmitStep3)
                   }
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step < lastStep - 2 ? 'block' : 'hidden'}`}
@@ -439,14 +489,16 @@ function RouteComponent() {
                   onClick={() => {
                     if (
                       (step == 1 && canSubmitStep1) ||
-                      (step == 2 && canSubmitStep2)
+                      (step == 2 && canSubmitStep2) ||
+                      (step == 3 && canSubmitStep3)
                     ) {
                       setStep((prev) => prev + 1)
                     }
                   }}
                   disabled={
                     (step == 1 && !canSubmitStep1) ||
-                    (step == 2 && !canSubmitStep2)
+                    (step == 2 && !canSubmitStep2) ||
+                    (step == 3 && !canSubmitStep3)
                   }
                   size={'sm'}
                   className={`bg-gradient-purple text-white ${step < lastStep - 1 ? 'block' : 'hidden'}`}

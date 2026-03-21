@@ -242,6 +242,30 @@
           "high": "High"
         }
       },
+      "part3": {
+        "header": "Part 3",
+        "title": "Satisfaction with the CU Open House 2026 Website",
+        "q1": {
+          "question": "Ease of registration"
+        },
+        "q2": {
+          "question": "Website aesthetics"
+        },
+        "q3": {
+          "question": "Enjoyment of website activities, such as the missing pieces activity"
+        },
+        "q4": {
+          "question": "The website provides complete information for participating in the event, including both the central activities at Sala Phra Kiao and the faculty activities"
+        },
+        "q5": {
+          "question": "Other suggestions",
+          "placeholder": "Enter your suggestions"
+        },
+        "rating": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
 
       "partCertificate": {
         "description": "Please check your full name carefully before submitting the evaluation.",
