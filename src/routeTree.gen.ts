@@ -16,6 +16,7 @@ import { Route as PrivacyIndexRouteImport } from './routes/privacy/index'
 import { Route as GameIndexRouteImport } from './routes/game/index'
 import { Route as InfoWorkshopIndexRouteImport } from './routes/info/workshop/index'
 import { Route as InfoMerchandiseIndexRouteImport } from './routes/info/merchandise/index'
+import { Route as InfoMapIndexRouteImport } from './routes/info/map/index'
 import { Route as InfoFacultyIndexRouteImport } from './routes/info/faculty/index'
 import { Route as GamePieceIndexRouteImport } from './routes/game/piece/index'
 import { Route as GameAchievementIndexRouteImport } from './routes/game/achievement/index'
@@ -61,6 +62,11 @@ const InfoWorkshopIndexRoute = InfoWorkshopIndexRouteImport.update({
 const InfoMerchandiseIndexRoute = InfoMerchandiseIndexRouteImport.update({
   id: '/info/merchandise/',
   path: '/info/merchandise/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoMapIndexRoute = InfoMapIndexRouteImport.update({
+  id: '/info/map/',
+  path: '/info/map/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InfoFacultyIndexRoute = InfoFacultyIndexRouteImport.update({
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
+  '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/game/achievement': typeof GameAchievementIndexRoute
   '/game/piece': typeof GamePieceIndexRoute
   '/info/faculty': typeof InfoFacultyIndexRoute
+  '/info/map': typeof InfoMapIndexRoute
   '/info/merchandise': typeof InfoMerchandiseIndexRoute
   '/info/workshop': typeof InfoWorkshopIndexRoute
   '/auth/profile/ticket': typeof AuthProfileTicketIndexRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/game/achievement/': typeof GameAchievementIndexRoute
   '/game/piece/': typeof GamePieceIndexRoute
   '/info/faculty/': typeof InfoFacultyIndexRoute
+  '/info/map/': typeof InfoMapIndexRoute
   '/info/merchandise/': typeof InfoMerchandiseIndexRoute
   '/info/workshop/': typeof InfoWorkshopIndexRoute
   '/auth/profile/ticket/': typeof AuthProfileTicketIndexRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/game/achievement/'
     | '/game/piece/'
     | '/info/faculty/'
+    | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
     | '/auth/profile/ticket/'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/game/achievement'
     | '/game/piece'
     | '/info/faculty'
+    | '/info/map'
     | '/info/merchandise'
     | '/info/workshop'
     | '/auth/profile/ticket'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/game/achievement/'
     | '/game/piece/'
     | '/info/faculty/'
+    | '/info/map/'
     | '/info/merchandise/'
     | '/info/workshop/'
     | '/auth/profile/ticket/'
@@ -253,6 +265,7 @@ export interface RootRouteChildren {
   AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
   AuthQrIndexRoute: typeof AuthQrIndexRoute
   InfoFacultyIndexRoute: typeof InfoFacultyIndexRoute
+  InfoMapIndexRoute: typeof InfoMapIndexRoute
   InfoMerchandiseIndexRoute: typeof InfoMerchandiseIndexRoute
   InfoWorkshopIndexRoute: typeof InfoWorkshopIndexRoute
   AuthProfileTicketIndexRoute: typeof AuthProfileTicketIndexRoute
@@ -310,6 +323,13 @@ declare module '@tanstack/react-router' {
       path: '/info/merchandise'
       fullPath: '/info/merchandise/'
       preLoaderRoute: typeof InfoMerchandiseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info/map/': {
+      id: '/info/map/'
+      path: '/info/map'
+      fullPath: '/info/map/'
+      preLoaderRoute: typeof InfoMapIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/info/faculty/': {
@@ -418,6 +438,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
   AuthQrIndexRoute: AuthQrIndexRoute,
   InfoFacultyIndexRoute: InfoFacultyIndexRoute,
+  InfoMapIndexRoute: InfoMapIndexRoute,
   InfoMerchandiseIndexRoute: InfoMerchandiseIndexRoute,
   InfoWorkshopIndexRoute: InfoWorkshopIndexRoute,
   AuthProfileTicketIndexRoute: AuthProfileTicketIndexRoute,
