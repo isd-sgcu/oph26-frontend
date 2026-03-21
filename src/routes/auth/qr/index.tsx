@@ -33,10 +33,10 @@ function RouteComponent() {
   }
 
   return (
-    <div className="relative flex flex-col bg-gradient-pink pt-20 w-full h-full min-h-dvh">
-      <div className="z-10 flex flex-col flex-1 justify-center items-center gap-7.5 p-5 pb-15 w-full">
-        <div className="flex flex-col gap-3 text-white text-center">
-          <h1 className="font-bold text-4xl">
+    <div className="bg-gradient-pink relative flex h-full min-h-dvh w-full flex-col pt-20">
+      <div className="z-10 flex w-full flex-1 flex-col items-center justify-center gap-7.5 p-5 pb-15">
+        <div className="flex flex-col gap-3 text-center text-white">
+          <h1 className="text-4xl font-bold">
             {t('routes.authGroup.qrGroup.greeting')}
           </h1>
         </div>
@@ -55,7 +55,7 @@ function RouteComponent() {
       <img
         alt=""
         src="/auth/qr/decoration.webp"
-        className="bottom-0 left-0 absolute w-full pointer-events-none select-none"
+        className="pointer-events-none absolute bottom-0 left-0 w-full select-none"
       />
     </div>
   )

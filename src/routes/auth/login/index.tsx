@@ -33,7 +33,7 @@ function RouteComponent() {
           error instanceof AxiosError &&
           error.response?.status === 404 &&
           error.response?.data?.error ===
-          'Attendee data not found for the current user'
+            'Attendee data not found for the current user'
         ) {
           try {
             const refreshData = await refreshToken()
@@ -47,7 +47,7 @@ function RouteComponent() {
                 error instanceof AxiosError &&
                 error.response?.status === 404 &&
                 error.response?.data?.error ===
-                'Attendee data not found for the current user'
+                  'Attendee data not found for the current user'
               ) {
                 router.navigate({ to: '/auth/onboarding' })
               } else if (
@@ -103,10 +103,10 @@ function RouteComponent() {
   }, [])
 
   return (
-    <section className="relative flex flex-col bg-main-light-pink w-full">
-      <div className="flex flex-col justify-center items-center min-h-screen">
+    <section className="bg-main-light-pink relative flex w-full flex-col">
+      <div className="flex min-h-screen flex-col items-center justify-center">
         <img src="/logo/cu-journey.webp" alt="logo" className="w-96" />
-        <h1 className="text-shadow-sm font-semibold text-white text-2xl">
+        <h1 className="text-2xl font-semibold text-white text-shadow-sm">
           CU Open House 2026
         </h1>
         <div ref={googleButtonRef} />

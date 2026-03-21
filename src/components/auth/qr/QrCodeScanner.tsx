@@ -4,7 +4,11 @@ import CustomModal from '@/components/CustomModal'
 import { useTranslation } from 'react-i18next'
 import { useUser } from '@/contexts/UserContext'
 import { useNavigate } from '@tanstack/react-router'
-import { checkIn, CheckInErrorResponse, CheckInResponse } from '@/services/checkin/checkin'
+import {
+  checkIn,
+  CheckInErrorResponse,
+  CheckInResponse,
+} from '@/services/checkin/checkin'
 import { FACULTIES } from '@/components/const/faculty'
 // import { facultyEnum } from '@/const/faculty'
 
@@ -62,39 +66,46 @@ export default function QrCodeScanner() {
     const now = new Date()
     const locale = i18n.language
     const data = response.data
-    const faculty = FACULTIES.find(f => f.value === data.faculty)
+    const faculty = FACULTIES.find((f) => f.value === data.faculty)
 
     setModalContent({
       isSuccess: true,
       title: (
         <div className="flex flex-col gap-1">
-          <p className="font-bold text-2xl">{`${data.firstname} ${data.surname}`}</p>
-          <p className="font-normal text-grey text-sm">ID: {data.ticket_code}</p>
+          <p className="text-2xl font-bold">{`${data.firstname} ${data.surname}`}</p>
+          <p className="text-grey text-sm font-normal">
+            ID: {data.ticket_code}
+          </p>
         </div>
       ),
       subtitle: (
-        <div className="font-semibold text-xl text-center text-pretty">
-          <p>{t('routes.authGroup.qrGroup.modal.success.subtitle', {
-            faculty: locale === 'th' ? faculty?.label.th : faculty?.label.en,
-          })}</p>
+        <div className="text-center text-xl font-semibold text-pretty">
+          <p>
+            {t('routes.authGroup.qrGroup.modal.success.subtitle', {
+              faculty: locale === 'th' ? faculty?.label.th : faculty?.label.en,
+            })}
+          </p>
         </div>
       ),
       body: (
         <div
-          className="text-sm text-center text-pretty"
+          className="text-center text-sm text-pretty"
           dangerouslySetInnerHTML={{
             __html: t('routes.authGroup.qrGroup.modal.success.body', {
               date: new Date(data.check_in_at).toLocaleDateString(
                 locale === 'th' ? 'th-TH' : 'en-US',
                 { year: 'numeric', month: 'short', day: 'numeric' }
               ),
-              time: now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
+              time: now.toLocaleTimeString(locale, {
+                hour: '2-digit',
+                minute: '2-digit',
+              }),
             }),
           }}
         ></div>
       ),
       detail: (
-        <div className="px-3 py-2 border-2 border-main-pink rounded-2xl text-main-pink text-sm text-center text-pretty">
+        <div className="border-main-pink text-main-pink rounded-2xl border-2 px-3 py-2 text-center text-sm text-pretty">
           {t('routes.authGroup.qrGroup.modal.success.detail')}
         </div>
       ),
@@ -109,21 +120,15 @@ export default function QrCodeScanner() {
     setModalContent({
       isSuccess: false,
       title: (
-        <p className="font-bold text-error-base text-2xl">
-          {
-            status === 409 ?
-              t('routes.authGroup.qrGroup.modal.error.title2') :
-              t('routes.authGroup.qrGroup.modal.error.title')
-          }
+        <p className="text-error-base text-2xl font-bold">
+          {status === 409
+            ? t('routes.authGroup.qrGroup.modal.error.title2')
+            : t('routes.authGroup.qrGroup.modal.error.title')}
         </p>
       ),
       subtitle: (
-        <div className="font-semibold text-xl text-center text-pretty">
-          {
-            status === 409 && (
-              <p>{data.firstname + " " + data.surname}</p>
-            )
-          }
+        <div className="text-center text-xl font-semibold text-pretty">
+          {status === 409 && <p>{data.firstname + ' ' + data.surname}</p>}
           <p>{t(`routes.authGroup.qrGroup.modal.error.subtitle.${status}`)}</p>
         </div>
       ),
@@ -136,12 +141,12 @@ export default function QrCodeScanner() {
     setModalContent({
       isSuccess: false,
       title: (
-        <p className="font-bold text-error-base text-2xl">
+        <p className="text-error-base text-2xl font-bold">
           {t('routes.authGroup.qrGroup.modal.error.title')}
         </p>
       ),
       subtitle: (
-        <div className="font-semibold text-xl text-center text-pretty">
+        <div className="text-center text-xl font-semibold text-pretty">
           <p>{t('routes.authGroup.qrGroup.modal.error.subtitle.400')}</p>
         </div>
       ),
@@ -153,14 +158,20 @@ export default function QrCodeScanner() {
   const handleCloseModal = () => {
     setIsModalOpen(false)
     setTimeout(() => {
-      setModalContent({ title: '', subtitle: '', body: '', detail: '', isSuccess: false })
+      setModalContent({
+        title: '',
+        subtitle: '',
+        body: '',
+        detail: '',
+        isSuccess: false,
+      })
       setIsScanning(true)
     }, 300)
   }
 
   return (
     <>
-      <div className="relative flex flex-col justify-center items-center bg-primary-bg rounded-2xl w-full md:w-120 max-w-full aspect-square! overflow-hidden">
+      <div className="bg-primary-bg relative flex aspect-square! w-full max-w-full flex-col items-center justify-center overflow-hidden rounded-2xl md:w-120">
         <Scanner
           onScan={handleScanQrCode}
           onError={() => console.error('Scanner error')}
@@ -196,7 +207,9 @@ export default function QrCodeScanner() {
       <CustomModal
         open={isModalOpen}
         onOpenChange={(open) => !open && handleCloseModal()}
-        iconName={modalContent.isSuccess ? 'fi-rr-check-circle' : 'fi-rr-cross-circle'}
+        iconName={
+          modalContent.isSuccess ? 'fi-rr-check-circle' : 'fi-rr-cross-circle'
+        }
         title={modalContent.title}
         subtitle={modalContent.subtitle}
         body={modalContent.body}

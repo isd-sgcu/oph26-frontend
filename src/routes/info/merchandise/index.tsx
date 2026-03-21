@@ -60,13 +60,13 @@ function RouteComponent() {
                   />
                 </div>
 
-              <span className='text-main-beige font-bold text-xl leading-6 line-clamp-1'>
-                {variant.title}
-              </span>
+                <span className="text-main-beige line-clamp-1 text-xl leading-6 font-bold">
+                  {variant.title}
+                </span>
 
-              <span className='text-white text-base leading-4.5 font-normal line-clamp-2'>
-                {item.name}
-              </span>
+                <span className="line-clamp-2 text-base leading-4.5 font-normal text-white">
+                  {item.name}
+                </span>
 
                 <span className="text-main-beige text-xl leading-6 font-bold">
                   ฿ {item.price}
