@@ -13,11 +13,6 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-// =========================================
-// TODO: DONT FORGET TO REMOVE THIS
-const disableMiddleware = true
-// =========================================
-
 export interface QuestionaireInterface {
   part1: {
     q1: number | null
@@ -66,14 +61,12 @@ function RouteComponent() {
 
   const attendee = userContext.attendee
   useEffect(() => {
-    if (!disableMiddleware) {
-      if (
-        !attendee ||
-        attendee.attendee_type != 'student' ||
-        attendee.checked_in_at == null
-      ) {
-        router.navigate({ to: '/auth/profile/ticket' })
-      }
+    if (
+      !attendee ||
+      attendee.attendee_type != 'student' ||
+      attendee.checked_in_at == null
+    ) {
+      router.navigate({ to: '/auth/profile/ticket' })
     }
   }, [attendee, router])
 
@@ -135,13 +128,27 @@ function RouteComponent() {
   }, [attendee])
 
   useEffect(() => {
-    if (!disableMiddleware) {
-      const currentDate = new Date()
-      const targetDate = new Date('2026-03-30T00:00:00')
-      if (currentDate < targetDate) {
-        // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+    async function fetchEvaluationInformation() {
+      try {
+        // TODO: Fetch whether this attendee has already submitted the evaluation form or not
+        const hasSubmitted = false
+        if (hasSubmitted) {
+          router.navigate({ to: '/auth/profile/ticket' })
+        }
+      } catch (error) {
         router.navigate({ to: '/auth/profile/ticket' })
       }
+    }
+
+    fetchEvaluationInformation()
+  }, [])
+
+  useEffect(() => {
+    const currentDate = new Date()
+    const targetDate = new Date('2026-03-30T00:00:00')
+    if (currentDate < targetDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+      router.navigate({ to: '/auth/profile/ticket' })
     }
   }, [router])
 
@@ -243,12 +250,12 @@ function RouteComponent() {
 
         // TODO: Form Submission API
 
-        // // Certificate Name Submission
-        // await updateCertificateName(
-        //   formData.certificate_firstname.trim() +
-        //     ' ' +
-        //     formData.certificate_surname.trim()
-        // )
+        // Certificate Name Submission
+        await updateCertificateName(
+          formData.certificate_firstname.trim() +
+            ' ' +
+            formData.certificate_surname.trim()
+        )
         console.log('Form Data to Submit:', formData)
         setStep((prev) => prev + 1)
       } catch (error) {
