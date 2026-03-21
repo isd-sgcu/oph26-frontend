@@ -169,11 +169,23 @@
 
 @layer base {
   * {
+    color-scheme: light;
     @apply border-border outline-ring/50;
   }
 
   body {
+    color-scheme: light;
     @apply bg-background text-foreground;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    * {
+      color-scheme: light;
+    }
+
+    body {
+      color-scheme: light;
+    }
   }
 }
 
