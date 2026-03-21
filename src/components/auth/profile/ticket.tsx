@@ -12,6 +12,7 @@ interface Props {
   lastName: string
   status: boolean
   role: AttendeeType
+  ticketNumber: string
   dreamFaculties: string[]
 }
 
@@ -21,6 +22,7 @@ export default function Ticket({
   lastName,
   status,
   role,
+  ticketNumber,
   dreamFaculties,
 }: Props) {
   const { t, i18n } = useTranslation()
@@ -169,7 +171,7 @@ export default function Ticket({
               fgColor={'#000'}
               level={'H'}
             />
-            <p className="text-sm font-medium">ID2341242456767</p>
+            <p className="text-sm font-medium">{ticketNumber}</p>
           </div>
         </div>
       </div>
