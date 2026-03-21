@@ -13,6 +13,11 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+// ===============================================
+// TODO: Don't forget to remove
+const disableMiddleware = true
+// ===============================================
+
 export interface QuestionaireInterface {
   part1: {
     q1: number | null
@@ -61,12 +66,14 @@ function RouteComponent() {
 
   const attendee = userContext.attendee
   useEffect(() => {
-    if (
-      !attendee ||
-      attendee.attendee_type != 'student' ||
-      attendee.checked_in_at == null
-    ) {
-      router.navigate({ to: '/auth/profile/ticket' })
+    if (!disableMiddleware) {
+      if (
+        !attendee ||
+        attendee.attendee_type != 'student' ||
+        attendee.checked_in_at == null
+      ) {
+        router.navigate({ to: '/auth/profile/ticket' })
+      }
     }
   }, [attendee, router])
 
@@ -144,11 +151,13 @@ function RouteComponent() {
   }, [])
 
   useEffect(() => {
-    const currentDate = new Date()
-    const targetDate = new Date('2026-03-30T00:00:00')
-    if (currentDate < targetDate) {
-      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
-      router.navigate({ to: '/auth/profile/ticket' })
+    if (!disableMiddleware) {
+      const currentDate = new Date()
+      const targetDate = new Date('2026-03-30T00:00:00')
+      if (currentDate < targetDate) {
+        // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+        router.navigate({ to: '/auth/profile/ticket' })
+      }
     }
   }, [router])
 
