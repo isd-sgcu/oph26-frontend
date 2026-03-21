@@ -38,7 +38,7 @@
         "body2Success": "คุณได้รับชิ้นจาก ",
         "body2InvalidOrExpiredCode": "Code ไม่ถูกต้องหรือหมดอายุ \nโปรดลองอีกครั้ง",
         "body2OwnCode": "คุณไม่สามารถกรอก Code ของตัวเองได้",
-        "body2DuplicatedCode": "คุณได้ใช้ Code นี้ไปแล้ว",
+        "body2DuplicatedCode": "คุณเคยกรอก Code จากเพื่อนคนนี้ไปแล้ว",
         "body2OtherError": "เกิดข้อผิดพลาดในการกรอก Code \nโปรดลองอีกครั้งในภายหลัง",
         "cancel": "ยกเลิก",
         "submit": "ตกลง",

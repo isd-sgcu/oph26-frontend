@@ -36,7 +36,7 @@
         "title2OtherError": "Something went wrong",
         "body2Success": "You have received a piece from ",
         "body2InvalidOrExpiredCode": "The code is not correct or has expired. \nPlease try again.",
-        "body2DuplicatedCode": "You have already redeemed this code.",
+        "body2DuplicatedCode": "You have already redeemed the code from this friend.",
         "body2OwnCode": "You cannot redeem your own code.",
         "body2OtherError": "An error occurred while redeeming the code. \nPlease try again.",
         "cancel": "Cancel",
