@@ -19,6 +19,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'color-scheme', content: 'light' },
       { title: 'CU Openhouse 2026' },
     ],
     links: [
@@ -43,7 +44,7 @@ function RootDocument() {
       <head>
         <HeadContent />
       </head>
-      <body className="flex flex-col justify-start items-center bg-black w-full">
+      <body className="flex w-full flex-col items-center justify-start bg-black">
         <QueryClientProvider client={queryClient}>
           <UserProvider>
             <Header />

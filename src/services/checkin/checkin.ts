@@ -6,7 +6,7 @@ export type CheckInRequest = {
 }
 
 export type CheckInSuccessResponse = {
-  ok: boolean,
+  ok: boolean
   attendee: {
     checked_in_at: string
     user_id: string
@@ -48,7 +48,10 @@ export const checkIn = async (
   payload: CheckInRequest
 ): Promise<CheckInResponse | CheckInErrorResponse> => {
   try {
-    const { data } = await Axios.post<CheckInSuccessResponse>(`/checkin/`, payload)
+    const { data } = await Axios.post<CheckInSuccessResponse>(
+      `/checkin/`,
+      payload
+    )
     return {
       success: data.ok,
       status: 200,

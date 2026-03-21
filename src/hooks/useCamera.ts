@@ -22,8 +22,8 @@ export function useCamera(
   const velocityRef = useRef<number>(0)
 
   const isIOS =
-  typeof window !== 'undefined' &&
-  /iPad|iPhone|iPod/.test(navigator.userAgent)
+    typeof window !== 'undefined' &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   // Apply transform to DOM
   const applyTransform = () => {
@@ -77,9 +77,7 @@ export function useCamera(
 
     try {
       e.currentTarget.setPointerCapture(e.pointerId)
-    } catch {
-      
-    }
+    } catch {}
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -263,17 +261,17 @@ export function useCamera(
 
   return {
     bind: isIOS
-    ? {
-        onTouchStart,
-        onTouchMove,
-        onTouchEnd,
-      }
-    : {
-        onPointerDown,
-        onPointerMove,
-        onPointerUp,
-        onPointerLeave: onPointerUp,
-      },
+      ? {
+          onTouchStart,
+          onTouchMove,
+          onTouchEnd,
+        }
+      : {
+          onPointerDown,
+          onPointerMove,
+          onPointerUp,
+          onPointerLeave: onPointerUp,
+        },
     zoomToZone,
     resetZoom,
     isZoomed,

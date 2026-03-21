@@ -51,7 +51,23 @@ export default function GameMap() {
     return window.innerHeight / 2000
   })
 
-  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } = useCamera(containerRef, cameraWrapperRef, baseScale)
+  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } =
+    useCamera(containerRef, cameraWrapperRef, baseScale)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const handler = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+
+    el.addEventListener('touchmove', handler, { passive: false })
+
+    return () => {
+      el.removeEventListener('touchmove', handler)
+    }
+  }, [])
 
   useEffect(() => {
     const el = containerRef.current

@@ -77,6 +77,7 @@ function RouteComponent() {
               firstName={userAttendee.firstname}
               lastName={userAttendee.surname}
               status={false}
+              ticketNumber={userAttendee.ticket_code}
               role={userAttendee.attendee_type}
               dreamFaculties={userAttendee.interested_faculty}
             />

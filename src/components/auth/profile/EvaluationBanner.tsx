@@ -25,11 +25,11 @@ const EvaluationBanner = ({
         onInteractOutside={(e) => {
           e.preventDefault()
         }}
-        className={`${!hasPermission ? 'bg-white' : 'bg-gradient-pink-oval'} flex h-fit w-full max-w-(--width-page) flex-col items-center justify-center gap-4 rounded-none p-6 border-none!`}
+        className={`${!hasPermission ? 'bg-white' : 'bg-gradient-pink-oval'} flex h-fit w-full max-w-(--width-page) flex-col items-center justify-center gap-4 rounded-none border-none! p-6`}
       >
         {!hasPermission ? (
           <>
-            <DialogTitle className="font-bold text-error-base text-lg text-center whitespace-pre-line">
+            <DialogTitle className="text-error-base text-center text-lg font-bold whitespace-pre-line">
               <Trans
                 i18nKey="routes.authGroup.profileGroup.ticketGroup.evaluationBanner.titleNoPermission"
                 components={{
@@ -38,7 +38,7 @@ const EvaluationBanner = ({
               />
             </DialogTitle>
 
-            <p className="font-medium text-black text-center">
+            <p className="text-center font-medium text-black">
               {t(
                 'routes.authGroup.profileGroup.ticketGroup.evaluationBanner.detailNoPermission'
               )}
@@ -59,7 +59,7 @@ const EvaluationBanner = ({
           </>
         ) : (
           <>
-            <DialogTitle className="font-bold text-main-beige text-lg text-center whitespace-pre-line">
+            <DialogTitle className="text-main-beige text-center text-lg font-bold whitespace-pre-line">
               {t(
                 'routes.authGroup.profileGroup.ticketGroup.evaluationBanner.titleHasPermission'
               )}
@@ -75,11 +75,11 @@ const EvaluationBanner = ({
             >
               {isHighSchoolStudent
                 ? t(
-                  'routes.authGroup.profileGroup.ticketGroup.evaluationBanner.button.certificate'
-                )
+                    'routes.authGroup.profileGroup.ticketGroup.evaluationBanner.button.certificate'
+                  )
                 : t(
-                  'routes.authGroup.profileGroup.ticketGroup.evaluationBanner.button.questionaire'
-                )}
+                    'routes.authGroup.profileGroup.ticketGroup.evaluationBanner.button.questionaire'
+                  )}
             </Button>
           </>
         )}
