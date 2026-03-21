@@ -204,17 +204,45 @@
           "question": "The central stage activities were fun and interesting, and the speakers were suitable for the activities"
         },
         "q4": {
-          "question": "The booth that you were satisfied with, such as the faculty booth, club booth, or activity booth",
-          "placeholder": "Enter booth name"
+          "question": "Overall, how satisfied were you with the activities inside Sala Phra Kiao?"
         },
         "q5": {
-          "question": "Overall, how satisfied were you with the activities inside Sala Phra Kiao?"
+          "question": "The booth that you were satisfied with, such as the faculty booth, club booth, or activity booth",
+          "placeholder": "Enter booth name"
         },
         "rating": {
           "low": "Low",
           "high": "High"
         }
       },
+      "part2": {
+        "header": "Part 2",
+        "title": "Ability to Organize Activities – Inside Sala Phra Kiao",
+        "q1": {
+          "question": "Variety of activities"
+        },
+        "q2": {
+          "question": "Density within the activities"
+        },
+        "q3": {
+          "question": "You can access all the booths you want"
+        },
+        "q4": {
+          "question": "Facilities within the university, such as restrooms and waiting areas"
+        },
+        "q5": {
+          "question": "Convenience of transportation within the university, such as shuttle buses"
+        },
+        "q6": {
+          "question": "Other suggestions",
+          "placeholder": "Enter your suggestions"
+        },
+        "rating": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+
       "partCertificate": {
         "description": "Please check your full name carefully before submitting the evaluation.",
         "firstNamePlaceholder": "Firstname",
