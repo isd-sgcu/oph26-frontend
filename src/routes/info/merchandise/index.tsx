@@ -78,12 +78,12 @@ function RouteComponent() {
       </div>
 
       {showPopup && (
-        <div className="fixed inset-0 top-1/2 left-1/2 z-550 flex w-[80vw] max-w-(--width-page) -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white/50 backdrop-blur-md">
-          <div className="relative rounded-2xl bg-white p-3 shadow-xl">
+        <div className="fixed inset-0 z-550 flex items-center justify-center bg-white/30 backdrop-blur-md">
+          <div className="relative w-fit max-w-(--width-page) rounded-2xl bg-white p-3 shadow-xl">
             <img
-              src="/info/merchandise/popup.png"
+              src="/info/merchandise/popup.webp"
               alt="popup"
-              className="max-h-[60vh] w-full rounded-xl object-contain"
+              className="w-[80vw] max-w-85 rounded-xl object-cover"
             />
 
             <button
