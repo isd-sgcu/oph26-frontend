@@ -35,7 +35,7 @@ function App() {
           <div className="relative w-fit max-w-(--width-page) rounded-2xl bg-white p-3 shadow-xl">
             <Link to="/info/merchandise">
               <img
-                src="/info/merchandise/landing_popup.webp"
+                src="/info/merchandise/landing_popup2.webp"
                 alt="popup"
                 className="w-[80vw] max-w-85 rounded-xl object-cover"
               />
