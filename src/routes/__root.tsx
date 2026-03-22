@@ -40,7 +40,12 @@ export const Route = createRootRoute({
 
 function RootDocument() {
   return (
-    <html lang={i18n.language} suppressHydrationWarning className="bg-black">
+    <html
+      lang={i18n.language}
+      translate="no"
+      suppressHydrationWarning
+      className="bg-black"
+    >
       <head>
         <HeadContent />
       </head>
