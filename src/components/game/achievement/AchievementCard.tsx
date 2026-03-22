@@ -353,7 +353,7 @@ export default function AchievementCard({
                 key: 'cusar',
                 label:
                   i18n.language === 'th'
-                    ? 'สำนักวิชาทรัพยากร\nการเกษตร'
+                    ? 'คณะเกษตร\nบูรณาการ'
                     : 'Agricultural\nResources',
                 count: props.cusar,
                 variant: 5,
