@@ -49,7 +49,7 @@ export const checkIn = async (
 ): Promise<CheckInResponse | CheckInErrorResponse> => {
   try {
     const { data } = await Axios.post<CheckInSuccessResponse>(
-      `/checkin/`,
+      `/checkin`,
       payload
     )
     return {
