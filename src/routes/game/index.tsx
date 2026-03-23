@@ -4,6 +4,10 @@ import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { preloadImages } from '@/utils/preloadAssets'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import { Link } from '@tanstack/react-router'
+
+const POPUP_KEY = 'game_popup_last_seen'
+const COOLDOWN = 1000 * 60 * 10 // 10 mins
 
 export const Route = createFileRoute('/game/')({
   component: RouteComponent,
@@ -11,6 +15,17 @@ export const Route = createFileRoute('/game/')({
 
 function RouteComponent() {
   const [ready, setReady] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
+  
+  useEffect(() => {
+    const lastSeen = localStorage.getItem(POPUP_KEY)
+    const now = Date.now()
+
+    if (!lastSeen || now - Number(lastSeen) > COOLDOWN) {
+      setShowPopup(true)
+      localStorage.setItem(POPUP_KEY, now.toString())
+    }
+  }, [])
 
   useEffect(() => {
     async function load() {
@@ -54,6 +69,27 @@ function RouteComponent() {
           </div>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 z-550 flex items-center justify-center bg-white/30 backdrop-blur-md">
+          <div className="relative w-fit max-w-(--width-page) rounded-2xl bg-white p-3 shadow-xl">
+            <Link to="/info/merchandise">
+              <img
+                src="/info/merchandise/popup.webp"
+                alt="popup"
+                className="w-[80vw] max-w-85 rounded-xl object-cover"
+              />
+            </Link>
+
+            <button
+              onClick={() => setShowPopup(false)}
+              className="bg-main-pink absolute -bottom-10 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full text-white shadow-md"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
