@@ -26,16 +26,11 @@ function RouteComponent() {
 
   // --------------Carousel-----------------
   const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
 
   useEffect(() => {
     if (!api) return
 
-    setCurrent(api.selectedScrollSnap())
-
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap())
-    })
+    api.on('select', () => {})
   }, [api])
 
   return (
@@ -47,12 +42,12 @@ function RouteComponent() {
         </h1>
       </div>
 
-      <div className="w-[80vw] max-w-[382.5px]">
+      <div className="w-[80vw] max-w-(--width-page) px-4">
         <Carousel className="w-full" setApi={setApi}>
           <CarouselContent>
             {EVENTS.map((img, i) => (
               <CarouselItem key={i}>
-                <div className="w-full overflow-hidden rounded-xl border-5 border-white bg-white">
+                <div className="border-main-beige bg-main-beige w-full overflow-hidden rounded-xl border-5">
                   <img src={img} className="h-full w-full object-cover" />
                 </div>
               </CarouselItem>
