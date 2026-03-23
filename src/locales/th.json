@@ -155,7 +155,22 @@
         "major": "ภาควิชา",
         "field": "สาขา"
       },
-      "mapGroup": {},
+      "mapGroup": {
+        "title": "แผนที่",
+        "Location": {
+          "title": "สถานที่",
+          "overview": "ภาพรวม",
+          "siam": "สยาม MBK",
+          "samyan": "สามย่าน",
+          "triamudom": "เตรียมอุดมศึกษา"
+        },
+        "PoI": {
+          "title": "สิ่งอำนวยความสะดวก",
+          "restroom": "ห้องน้ำ",
+          "food": "โรงอาหาร",
+          "park": "ที่จอดรถ"
+        }
+      },
       "merchandiseGroup": {
         "title": "สินค้าที่ระลึก",
         "itemTitle": "รายละเอียด",
@@ -187,6 +202,9 @@
         "contactTitle": "ติดตามรายละเอียดเพิ่มเติมได้ที่",
         "registerTitle": "ช่องทางการลงทะเบียนเพื่อเข้าร่วม",
         "register": "ลงทะเบียน"
+      },
+      "eventGroup": {
+        "title": "กิจกรรมส่วนกลาง"
       }
     },
     "questionaireGroup": {

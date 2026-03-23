@@ -10,6 +10,7 @@ const SHOW_FOOTER_PATHS = [
   '/info/faculty/*',
   '/info/map',
   '/info/merchandise',
+  '/info/event',
 ]
 
 function matchPath(pathname: string, rule: string) {
