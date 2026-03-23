@@ -151,7 +151,22 @@
         "major": "Major",
         "field": "Field"
       },
-      "mapGroup": {},
+      "mapGroup": {
+        "title": "Map",
+        "Location": {
+          "title": "Location",
+          "overview": "Overview",
+          "siam": "Siam MBK",
+          "samyan": "Samyan",
+          "triamudom": "Triamudom"
+        },
+        "PoI": {
+          "title": "Facilities",
+          "restroom": "Restrooms",
+          "food": "Food Court",
+          "park": "Parking"
+        }
+      },
       "merchandiseGroup": {
         "title": "Merchandise",
         "itemTitle": "Details",
@@ -183,6 +198,9 @@
         "contactTitle": "To receive more information",
         "registerTitle": "Register for this workshop",
         "register": "Register"
+      },
+      "eventGroup": {
+        "title": "Main Event"
       }
     },
     "questionaireGroup": {

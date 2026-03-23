@@ -1,28 +1,28 @@
 import { MERCHANDISE } from '@/components/const/Merchandise'
 import { createFileRoute, Link } from '@tanstack/react-router'
-// import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/info/merchandise/')({
   component: RouteComponent,
 })
 
-// const POPUP_KEY = 'merch_popup_last_seen'
-// const COOLDOWN = 1000 * 60 * 10 // 10 mins
+const POPUP_KEY = 'merch_popup_last_seen'
+const COOLDOWN = 1000 * 60 * 10 // 10 mins
 
 function RouteComponent() {
   const { t } = useTranslation()
-  // const [showPopup, setShowPopup] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
 
-  // useEffect(() => {
-  //   const lastSeen = localStorage.getItem(POPUP_KEY)
-  //   const now = Date.now()
+  useEffect(() => {
+    const lastSeen = localStorage.getItem(POPUP_KEY)
+    const now = Date.now()
 
-  //   if (!lastSeen || now - Number(lastSeen) > COOLDOWN) {
-  //     setShowPopup(true)
-  //     localStorage.setItem(POPUP_KEY, now.toString())
-  //   }
-  // }, [])
+    if (!lastSeen || now - Number(lastSeen) > COOLDOWN) {
+      setShowPopup(true)
+      localStorage.setItem(POPUP_KEY, now.toString())
+    }
+  }, [])
 
   return (
     <div className="bg-gradient-pink flex flex-1 flex-col gap-5 p-5">
@@ -77,7 +77,7 @@ function RouteComponent() {
         )}
       </div>
 
-      {/* {showPopup && (
+      {showPopup && (
         <div className="fixed inset-0 z-550 flex items-center justify-center bg-white/30 backdrop-blur-md">
           <div className="relative w-fit max-w-(--width-page) rounded-2xl bg-white p-3 shadow-xl">
             <img
@@ -94,7 +94,7 @@ function RouteComponent() {
             </button>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   )
 }
