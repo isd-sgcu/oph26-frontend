@@ -34,7 +34,7 @@ async function ensureFontsLoaded() {
     '500 55px "IBM Plex Sans Thai"',
     '400 50px "IBM Plex Sans Thai"',
     '400 110px "IBM Plex Sans Thai"',
-    '500 14px "IBM Plex Sans Thai"'
+    '500 14px "IBM Plex Sans Thai"',
   ]
 
   await Promise.all(fonts.map((f) => document.fonts.load(f)))
@@ -540,17 +540,17 @@ export async function achievementShareCollectedPieces(
   ctx.fillText(rankText, canvas.width / 2, 235)
 
   // Draw pieces in a grid
-  const gridCols = 4;
-  const gridSpacingX = 115;
-  const gridSpacingY = 125;
-  const startX = 35;
-  const startY = 250;
+  const gridCols = 4
+  const gridSpacingX = 115
+  const gridSpacingY = 125
+  const startX = 35
+  const startY = 250
 
-  const facultyKeys = Object.keys(facultyVariants) as FacultyKey[];
+  const facultyKeys = Object.keys(facultyVariants) as FacultyKey[]
   for (let i = 0; i < facultyKeys.length; i++) {
-    const facultyKey = facultyKeys[i];
-    const variant = facultyVariants[facultyKey];
-    const count = facultyCounts[facultyKey];
+    const facultyKey = facultyKeys[i]
+    const variant = facultyVariants[facultyKey]
+    const count = facultyCounts[facultyKey]
 
     await drawPiece({
       ctx,
@@ -560,7 +560,7 @@ export async function achievementShareCollectedPieces(
       imgPath: `/faculty/${facultyKey}.webp`,
       variant,
       count,
-    });
+    })
   }
 
   // Label
@@ -596,7 +596,7 @@ async function drawPiece({
   size,
   imgPath,
   variant,
-  count
+  count,
 }: DrawPieceParams) {
   const path = new Path2D(JIGSAW_PATH[variant])
   const img = await loadImage(imgPath)
@@ -608,13 +608,13 @@ async function drawPiece({
 
   // --- SHADOW ---
   ctx.save()
-  ctx.shadowColor = 'rgba(0,0,0,0.25)'  // lighter shadow
-  ctx.shadowBlur = 6                   // reasonable blur
+  ctx.shadowColor = 'rgba(0,0,0,0.25)' // lighter shadow
+  ctx.shadowBlur = 6 // reasonable blur
   ctx.shadowOffsetX = 4
   ctx.shadowOffsetY = 4
-  ctx.fillStyle = 'white'              // fill is required to show shadow
+  ctx.fillStyle = 'white' // fill is required to show shadow
 
-  ctx.fill(path)                       // shadow will be drawn here
+  ctx.fill(path) // shadow will be drawn here
   ctx.restore()
 
   // --- CLIP AND DRAW IMAGE ---
@@ -666,36 +666,36 @@ interface LabelPosition {
 async function addThaiText(ctx: CanvasRenderingContext2D) {
   // Example positions for each piece — adjust x/y to match your grid
   const thaiLabels: LabelPosition[] = [
-  { label: 'ครุศาสตร์', x: 95, y: 360 },
-  { label: 'จิตวิทยา', x: 210, y: 360 },
-  { label: 'เภสัชศาสตร์', x: 325, y: 360 },
-  { label: 'ทันตแพทยศาสตร์', x: 440, y: 360 },
+    { label: 'ครุศาสตร์', x: 95, y: 360 },
+    { label: 'จิตวิทยา', x: 210, y: 360 },
+    { label: 'เภสัชศาสตร์', x: 325, y: 360 },
+    { label: 'ทันตแพทยศาสตร์', x: 440, y: 360 },
 
-  { label: 'นิเทศศาสตร์', x: 95, y: 485 },
-  { label: 'สหเวชศาสตร์', x: 210, y: 485 },
-  { label: 'ศิลปกรรมศาสตร์', x: 325, y: 485 },
-  { label: 'สัตวแพทยศาสตร์', x: 440, y: 485 },
+    { label: 'นิเทศศาสตร์', x: 95, y: 485 },
+    { label: 'สหเวชศาสตร์', x: 210, y: 485 },
+    { label: 'ศิลปกรรมศาสตร์', x: 325, y: 485 },
+    { label: 'สัตวแพทยศาสตร์', x: 440, y: 485 },
 
-  { label: 'นิติศาสตร์', x: 95, y: 610 },
-  { label: 'สถาปัตยกรรมศาสตร์', x: 205, y: 610 },
-  { label: 'วิศวกรรมศาสตร์', x: 325, y: 610 },
-  { label: 'อักษรศาสตร์', x: 440, y: 610 },
+    { label: 'นิติศาสตร์', x: 95, y: 610 },
+    { label: 'สถาปัตยกรรมศาสตร์', x: 205, y: 610 },
+    { label: 'วิศวกรรมศาสตร์', x: 325, y: 610 },
+    { label: 'อักษรศาสตร์', x: 440, y: 610 },
 
-  { label: 'แพทยศาสตร์', x: 95, y: 735 },
-  { label: 'วิทยาศาสตร์', x: 210, y: 735 },
-  { label: 'เศรษฐศาสตร์', x: 325, y: 735 },
-  { label: 'รัฐศาสตร์', x: 440, y: 735 },
+    { label: 'แพทยศาสตร์', x: 95, y: 735 },
+    { label: 'วิทยาศาสตร์', x: 210, y: 735 },
+    { label: 'เศรษฐศาสตร์', x: 325, y: 735 },
+    { label: 'รัฐศาสตร์', x: 440, y: 735 },
 
-  { label: 'พาณิชยศาสตร์', x: 95, y: 855 },
-  { label: 'วิทยาศาสตร์', x: 210, y: 855 },
-  { label: 'คณะเกษตร', x: 325, y: 855 },
-  { label: 'สถาบันนวัตกรรม', x: 440, y: 855 },
+    { label: 'พาณิชยศาสตร์', x: 95, y: 855 },
+    { label: 'วิทยาศาสตร์', x: 210, y: 855 },
+    { label: 'คณะเกษตร', x: 325, y: 855 },
+    { label: 'สถาบันนวัตกรรม', x: 440, y: 855 },
 
-  { label: 'และการบัญชี', x: 95, y: 870 },
-  { label: 'การกีฬา', x: 210, y: 870 },
-  { label: 'บูรณาการ', x: 325, y: 870 },
-  { label: 'บูรณาการ', x: 440, y: 870 },
-]
+    { label: 'และการบัญชี', x: 95, y: 870 },
+    { label: 'การกีฬา', x: 210, y: 870 },
+    { label: 'บูรณาการ', x: 325, y: 870 },
+    { label: 'บูรณาการ', x: 440, y: 870 },
+  ]
 
   ctx.fillStyle = '#000'
   ctx.textAlign = 'center'
