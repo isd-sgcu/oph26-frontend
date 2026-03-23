@@ -10,7 +10,7 @@ interface Props {
   id: string
   firstName: string
   lastName: string
-  hasScanned: boolean
+  hasCheckedIn: boolean
   role: AttendeeType
   ticketNumber: string
   dreamFaculties: string[]
@@ -20,7 +20,7 @@ export default function Ticket({
   id,
   firstName,
   lastName,
-  hasScanned,
+  hasCheckedIn,
   role,
   ticketNumber,
   dreamFaculties,
@@ -115,7 +115,7 @@ export default function Ticket({
                   </p>
                 ))}
               </div>
-              {hasScanned && (
+              {hasCheckedIn && (
                 <img
                   src="/auth/profile/ticket/landing/scanned.svg"
                   alt=""

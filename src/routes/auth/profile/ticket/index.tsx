@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
 import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
 import { useUser } from '@/contexts/UserContext'
+import { getCheckInStatus } from '@/services/checkin/checkin'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -19,12 +20,25 @@ function RouteComponent() {
   const [showEvaluationBanner, setShowEvaluationBanner] = useState(false)
   const [hasPermission, setHasPermission] = useState(false)
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
+  const [hasCheckedIn, setHasCheckedIn] = useState(false)
 
   useEffect(() => {
     if (!userAttendee) {
       navigate({ to: '/' })
     }
   }, [userAttendee, navigate])
+
+  useEffect(() => {
+    const fetchCheckInStatus = async () => {
+      try {
+        const checkInStatus = await getCheckInStatus()
+        setHasCheckedIn(checkInStatus.status)
+      } catch (error) {
+        setHasCheckedIn(false)
+      }
+    }
+    fetchCheckInStatus()
+  }, [])
 
   useEffect(() => {
     const currentDate = new Date()
@@ -45,7 +59,7 @@ function RouteComponent() {
       // ยังไม่ถึงวันที่ 30 มีนาคม 2026
       setShowEvaluationBanner(false)
       setHasPermission(false)
-    } else if (userAttendee?.checked_in_at) {
+    } else if (userAttendee.checked_in_at) {
       // ผู้ใช้เช็คอินแล้ว
       setShowEvaluationBanner(true)
       setHasPermission(true)
@@ -55,7 +69,7 @@ function RouteComponent() {
       setHasPermission(false)
     }
 
-    if (userAttendee?.attendee_type === 'student') {
+    if (userAttendee.attendee_type === 'student') {
       setIsHighSchoolStudent(
         allowedAttendeeLevels.includes(userAttendee.study_level || '') || false
       )
@@ -79,7 +93,7 @@ function RouteComponent() {
               id={userAttendee.ticket_code}
               firstName={userAttendee.firstname}
               lastName={userAttendee.surname}
-              hasScanned={userAttendee.checked_in_at ? true : false}
+              hasCheckedIn={hasCheckedIn}
               ticketNumber={userAttendee.ticket_code}
               role={userAttendee.attendee_type}
               dreamFaculties={userAttendee.interested_faculty}
