@@ -135,6 +135,13 @@ export default function GameMap() {
     return () => window.removeEventListener('keydown', handler)
   }, [])
 
+  useEffect(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth", // optional
+    });
+  }, []);
+
   // console.log('GameMap render')
 
   return (

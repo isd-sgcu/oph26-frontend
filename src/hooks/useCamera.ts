@@ -229,7 +229,7 @@ export function useCamera(
   const onTouchMove = (e: React.TouchEvent) => {
     if (!isDragging.current || isZoomed) return
 
-    e.preventDefault()
+    // e.preventDefault()
 
     const touch = e.touches[0]
 
