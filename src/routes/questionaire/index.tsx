@@ -9,41 +9,15 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { useUser } from '@/contexts/UserContext'
 import { updateCertificateName } from '@/services/attendee/attendee'
+import { getCheckInStatus } from '@/services/checkin/checkin'
+import {
+  createEvaluation,
+  getEvaluationResponse,
+  QuestionaireInterface,
+} from '@/services/questionaire/questionaire'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
-// ===============================================
-// TODO: Don't forget to remove
-const disableMiddleware = true
-// ===============================================
-
-export interface QuestionaireInterface {
-  part1: {
-    q1: number | null
-    q2: number | null
-    q3: number | null
-    q4: number | null
-    q5: string
-  }
-  part2: {
-    q1: number | null
-    q2: number | null
-    q3: number | null
-    q4: number | null
-    q5: number | null
-    q6: string
-  }
-  part3: {
-    q1: number | null
-    q2: number | null
-    q3: number | null
-    q4: number | null
-    q5: string
-  }
-  certificate_firstname: string
-  certificate_surname: string
-}
 
 export const Route = createFileRoute('/questionaire/')({
   component: RouteComponent,
@@ -66,14 +40,12 @@ function RouteComponent() {
 
   const attendee = userContext.attendee
   useEffect(() => {
-    if (!disableMiddleware) {
-      if (
-        !attendee ||
-        attendee.attendee_type != 'student' ||
-        attendee.checked_in_at == null
-      ) {
-        router.navigate({ to: '/auth/profile/ticket' })
-      }
+    if (
+      !attendee ||
+      attendee.attendee_type != 'student' ||
+      attendee.checked_in_at == null
+    ) {
+      router.navigate({ to: '/auth/profile/ticket' })
     }
   }, [attendee, router])
 
@@ -101,16 +73,18 @@ function RouteComponent() {
       q4: null,
       q5: '',
     },
-    certificate_firstname: attendee?.firstname || '',
-    certificate_surname: attendee?.surname || '',
   })
   const [canSubmitStep1, setCanSubmitStep1] = useState(false)
   const [canSubmitStep2, setCanSubmitStep2] = useState(false)
   const [canSubmitStep3, setCanSubmitStep3] = useState(false)
+  const [certificateFirstName, setCertificateFirstName] = useState('')
+  const [certificateSurname, setCertificateSurname] = useState('')
   const [canSubmitStepCertificate, setCanSubmitStepCertificate] =
     useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [hasSubmittedEvaluation, setHasSubmittedEvaluation] = useState(false)
+  const [hasCheckedIn, setHasCheckedIn] = useState(false)
 
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
   const [openHighSchoolInformationPopup, setOpenHighSchoolInformationPopup] =
@@ -137,29 +111,40 @@ function RouteComponent() {
   useEffect(() => {
     async function fetchEvaluationInformation() {
       try {
-        // TODO: Fetch whether this attendee has already submitted the evaluation form or not
-        const hasSubmitted = false
-        if (hasSubmitted) {
-          router.navigate({ to: '/auth/profile/ticket' })
-        }
+        const evaluationResponse = await getEvaluationResponse()
+        const hasSubmitted = evaluationResponse.exists
+        setHasSubmittedEvaluation(hasSubmitted)
       } catch (error) {
-        router.navigate({ to: '/auth/profile/ticket' })
+        setHasSubmittedEvaluation(false)
       }
     }
 
+    async function fetchCheckInStatus() {
+      try {
+        const evaluationResponse = await getCheckInStatus()
+        setHasCheckedIn(evaluationResponse.status)
+      } catch (error) {
+        setHasCheckedIn(false)
+      }
+    }
+
+    fetchCheckInStatus()
     fetchEvaluationInformation()
   }, [])
 
   useEffect(() => {
-    if (!disableMiddleware) {
-      const currentDate = new Date()
-      const targetDate = new Date('2026-03-30T00:00:00')
-      if (currentDate < targetDate) {
-        // ยังไม่ถึงวันที่ 30 มีนาคม 2026
-        router.navigate({ to: '/auth/profile/ticket' })
-      }
+    const currentDate = new Date()
+    const targetDate = new Date('2026-03-30T00:00:00')
+    if (currentDate < targetDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+      router.navigate({ to: '/auth/profile/ticket' })
     }
-  }, [router])
+
+    if (hasSubmittedEvaluation || !hasCheckedIn) {
+      router.navigate({ to: '/auth/profile/ticket' })
+      return
+    }
+  }, [router, hasSubmittedEvaluation, hasCheckedIn])
 
   // Check Step 1
   useEffect(() => {
@@ -208,15 +193,13 @@ function RouteComponent() {
   useEffect(() => {
     if (
       !isHighSchoolStudent ||
-      (isHighSchoolStudent &&
-        formData.certificate_firstname &&
-        formData.certificate_surname)
+      (isHighSchoolStudent && certificateFirstName && certificateSurname)
     ) {
       setCanSubmitStepCertificate(true)
     } else {
       setCanSubmitStepCertificate(false)
     }
-  }, [formData])
+  }, [certificateFirstName, certificateSurname, isHighSchoolStudent])
 
   useEffect(() => {
     if (
@@ -235,10 +218,7 @@ function RouteComponent() {
     if (step == lastStep - 2 && canSubmit) {
       try {
         setIsSubmitting(true)
-        console.log('Form Data to Submit:', formData)
-
-        // TODO: Form Submission API
-
+        await createEvaluation(formData)
         setStep(lastStep)
         window.scrollTo({
           top: 0,
@@ -256,16 +236,11 @@ function RouteComponent() {
     if (step == lastStep - 1 && canSubmit) {
       try {
         setIsSubmitting(true)
-
-        // TODO: Form Submission API
-
-        // Certificate Name Submission
+        await createEvaluation(formData)
         await updateCertificateName(
-          formData.certificate_firstname.trim() +
-            ' ' +
-            formData.certificate_surname.trim()
+          certificateFirstName.trim(),
+          certificateSurname.trim()
         )
-        console.log('Form Data to Submit:', formData)
         setStep((prev) => prev + 1)
       } catch (error) {
         console.error('Error submitting form:', error)
@@ -422,8 +397,10 @@ function RouteComponent() {
             {/* Form Step Certificate */}
             {step == lastStep - 1 && isHighSchoolStudent && (
               <QuestionaireStepCertificate
-                formData={formData}
-                setFormData={setFormData}
+                certificateFirstName={certificateFirstName}
+                setCertificateFirstName={setCertificateFirstName}
+                certificateSurname={certificateSurname}
+                setCertificateSurname={setCertificateSurname}
               />
             )}
 
@@ -595,9 +572,7 @@ function RouteComponent() {
 
             {/* Name */}
             <div className="border-main-pink text-main-pink h-fit min-h-9 w-full max-w-[80%] rounded-md border-2 px-3 py-1 text-center">
-              {formData.certificate_firstname.trim() +
-                ' ' +
-                formData.certificate_surname.trim()}
+              {certificateFirstName.trim() + ' ' + certificateSurname.trim()}
             </div>
 
             <p className="text-center text-base font-normal text-red-500">

@@ -1,17 +1,20 @@
-import { QuestionaireInterface } from '@/routes/questionaire'
 import { useTranslation } from 'react-i18next'
 import { Input } from '../ui/input'
 
 interface QuestionaireStepCertificateProps {
-  formData: QuestionaireInterface
-  setFormData: (formData: QuestionaireInterface) => void
+  certificateFirstName: string
+  setCertificateFirstName: (name: string) => void
+  certificateSurname: string
+  setCertificateSurname: (name: string) => void
 }
 
 const nameRegex = /^[A-Za-zก-๙\s-]+$/
 
 const QuestionaireStepCertificate = ({
-  formData,
-  setFormData,
+  certificateFirstName,
+  setCertificateFirstName,
+  certificateSurname,
+  setCertificateSurname,
 }: QuestionaireStepCertificateProps) => {
   const { t } = useTranslation()
   return (
@@ -27,14 +30,11 @@ const QuestionaireStepCertificate = ({
             'routes.questionaireGroup.partCertificate.firstNamePlaceholder'
           )}
           className="placeholder:text-grey w-[80%] border-black text-black"
-          value={formData.certificate_firstname}
+          value={certificateFirstName}
           onChange={(e) => {
             const value = e.target.value
             if (value === '' || nameRegex.test(value)) {
-              setFormData({
-                ...formData,
-                certificate_firstname: value,
-              })
+              setCertificateFirstName(value)
             }
           }}
         />
@@ -43,14 +43,11 @@ const QuestionaireStepCertificate = ({
             'routes.questionaireGroup.partCertificate.lastNamePlaceholder'
           )}
           className="placeholder:text-grey w-[80%] border-black text-black"
-          value={formData.certificate_surname}
+          value={certificateSurname}
           onChange={(e) => {
             const value = e.target.value
             if (value === '' || nameRegex.test(value)) {
-              setFormData({
-                ...formData,
-                certificate_surname: value,
-              })
+              setCertificateSurname(value)
             }
           }}
         />

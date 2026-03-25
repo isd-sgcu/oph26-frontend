@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
 import { useUser } from '@/contexts/UserContext'
 import { getCheckInStatus } from '@/services/checkin/checkin'
+import { getEvaluationResponse } from '@/services/questionaire/questionaire'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -21,6 +22,8 @@ function RouteComponent() {
   const [hasPermission, setHasPermission] = useState(false)
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
   const [hasCheckedIn, setHasCheckedIn] = useState(false)
+  const [hasSubmittedEvaluation, setHasSubmittedEvaluation] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!userAttendee) {
@@ -29,6 +32,7 @@ function RouteComponent() {
   }, [userAttendee, navigate])
 
   useEffect(() => {
+    setLoading(true)
     const fetchCheckInStatus = async () => {
       try {
         const checkInStatus = await getCheckInStatus()
@@ -37,7 +41,20 @@ function RouteComponent() {
         setHasCheckedIn(false)
       }
     }
+
+    const fetchEvaluationResponse = async () => {
+      try {
+        const evaluationResponse = await getEvaluationResponse()
+        setHasSubmittedEvaluation(evaluationResponse.exists)
+      } catch (error) {
+        setHasSubmittedEvaluation(false)
+      }
+    }
+
+    fetchEvaluationResponse()
     fetchCheckInStatus()
+
+    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -59,7 +76,7 @@ function RouteComponent() {
       // ยังไม่ถึงวันที่ 30 มีนาคม 2026
       setShowEvaluationBanner(false)
       setHasPermission(false)
-    } else if (userAttendee.checked_in_at) {
+    } else if (hasCheckedIn) {
       // ผู้ใช้เช็คอินแล้ว
       setShowEvaluationBanner(true)
       setHasPermission(true)
@@ -76,7 +93,11 @@ function RouteComponent() {
     } else {
       setIsHighSchoolStudent(false)
     }
-  }, [])
+
+    if (hasSubmittedEvaluation) {
+      setShowEvaluationBanner(false)
+    }
+  }, [hasCheckedIn, userAttendee, hasSubmittedEvaluation])
 
   return (
     <>
@@ -130,7 +151,7 @@ function RouteComponent() {
         </div>
       </div>
 
-      {showEvaluationBanner && (
+      {!loading && showEvaluationBanner && !hasSubmittedEvaluation && (
         <EvaluationBanner
           open={showEvaluationBanner}
           setOpen={setShowEvaluationBanner}
