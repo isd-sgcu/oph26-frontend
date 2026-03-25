@@ -15,6 +15,7 @@ import {
   getEvaluationResponse,
   QuestionaireInterface,
 } from '@/services/questionaire/questionaire'
+import { RELEASE_EVALUATION_DATE } from '@/utils/const'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -40,12 +41,8 @@ function RouteComponent() {
 
   const attendee = userContext.attendee
   useEffect(() => {
-    if (
-      !attendee ||
-      attendee.attendee_type != 'student' ||
-      attendee.checked_in_at == null
-    ) {
-      router.navigate({ to: '/auth/profile/ticket' })
+    if (!attendee) {
+      router.navigate({ to: '/' })
     }
   }, [attendee, router])
 
@@ -83,8 +80,6 @@ function RouteComponent() {
     useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [hasSubmittedEvaluation, setHasSubmittedEvaluation] = useState(false)
-  const [hasCheckedIn, setHasCheckedIn] = useState(false)
 
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
   const [openHighSchoolInformationPopup, setOpenHighSchoolInformationPopup] =
@@ -113,38 +108,39 @@ function RouteComponent() {
       try {
         const evaluationResponse = await getEvaluationResponse()
         const hasSubmitted = evaluationResponse.exists
-        setHasSubmittedEvaluation(hasSubmitted)
+        if (hasSubmitted) {
+          router.navigate({ to: '/auth/profile/ticket' })
+          return
+        }
       } catch (error) {
-        setHasSubmittedEvaluation(false)
+        router.navigate({ to: '/auth/profile/ticket' })
       }
     }
 
     async function fetchCheckInStatus() {
       try {
-        const evaluationResponse = await getCheckInStatus()
-        setHasCheckedIn(evaluationResponse.status)
+        const checkInStatus = await getCheckInStatus()
+        if (!checkInStatus.status) {
+          router.navigate({ to: '/auth/profile/ticket' })
+          return
+        }
       } catch (error) {
-        setHasCheckedIn(false)
+        router.navigate({ to: '/auth/profile/ticket' })
+        return
       }
+    }
+
+    const currentDate = new Date()
+    const targetDate = new Date(RELEASE_EVALUATION_DATE)
+    if (currentDate < targetDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+      router.navigate({ to: '/auth/profile/ticket' })
+      return
     }
 
     fetchCheckInStatus()
     fetchEvaluationInformation()
-  }, [])
-
-  useEffect(() => {
-    const currentDate = new Date()
-    const targetDate = new Date('2026-03-30T00:00:00')
-    if (currentDate < targetDate) {
-      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
-      router.navigate({ to: '/auth/profile/ticket' })
-    }
-
-    if (hasSubmittedEvaluation || !hasCheckedIn) {
-      router.navigate({ to: '/auth/profile/ticket' })
-      return
-    }
-  }, [router, hasSubmittedEvaluation, hasCheckedIn])
+  }, [router])
 
   // Check Step 1
   useEffect(() => {

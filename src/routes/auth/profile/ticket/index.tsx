@@ -8,6 +8,7 @@ import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
 import { useUser } from '@/contexts/UserContext'
 import { getCheckInStatus } from '@/services/checkin/checkin'
 import { getEvaluationResponse } from '@/services/questionaire/questionaire'
+import { RELEASE_EVALUATION_DATE } from '@/utils/const'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -59,7 +60,7 @@ function RouteComponent() {
 
   useEffect(() => {
     const currentDate = new Date()
-    const targetDate = new Date('2026-03-30T00:00:00')
+    const targetDate = new Date(RELEASE_EVALUATION_DATE)
     const allowedAttendeeLevels = [
       'matthayom_ton',
       'matthayom_plai',
