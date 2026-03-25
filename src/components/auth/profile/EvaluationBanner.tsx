@@ -27,6 +27,13 @@ const EvaluationBanner = ({
         }}
         className={`${!hasPermission ? 'bg-white' : 'bg-gradient-pink-oval'} flex h-fit w-full max-w-(--width-page) flex-col items-center justify-center gap-4 rounded-none border-none! p-6`}
       >
+        <button
+          aria-label="Close"
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600"
+        >
+          ×
+        </button>
         {!hasPermission ? (
           <>
             <DialogTitle className="text-error-base text-center text-lg font-bold whitespace-pre-line">
