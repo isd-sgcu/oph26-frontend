@@ -7,22 +7,8 @@ export const Route = createFileRoute('/info/merchandise/')({
   component: RouteComponent,
 })
 
-// const POPUP_KEY = 'merch_popup_last_seen'
-// const COOLDOWN = 1000 * 60 * 10 // 10 mins
-
 function RouteComponent() {
   const { t } = useTranslation()
-  // const [showPopup, setShowPopup] = useState(false)
-
-  // useEffect(() => {
-  //   const lastSeen = localStorage.getItem(POPUP_KEY)
-  //   const now = Date.now()
-
-  //   if (!lastSeen || now - Number(lastSeen) > COOLDOWN) {
-  //     setShowPopup(true)
-  //     localStorage.setItem(POPUP_KEY, now.toString())
-  //   }
-  // }, [])
 
   return (
     <div className="bg-gradient-pink flex flex-1 flex-col gap-5 p-5">
@@ -76,25 +62,6 @@ function RouteComponent() {
           ))
         )}
       </div>
-
-      {/* {showPopup && (
-        <div className="fixed inset-0 z-550 flex items-center justify-center bg-white/30 backdrop-blur-md">
-          <div className="relative w-fit max-w-(--width-page) rounded-2xl bg-white p-3 shadow-xl">
-            <img
-              src="/info/merchandise/popup.webp"
-              alt="popup"
-              className="w-[80vw] max-w-85 rounded-xl object-cover"
-            />
-
-            <button
-              onClick={() => setShowPopup(false)}
-              className="bg-main-pink absolute -bottom-10 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full text-white shadow-md"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )} */}
     </div>
   )
 }
