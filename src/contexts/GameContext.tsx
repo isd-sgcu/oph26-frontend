@@ -28,9 +28,8 @@ export type PieceCountType = {
 
 interface GameContextType {
   collectedPieces: PieceCountType
-  setCollectedPieces: React.Dispatch<
-    React.SetStateAction<PieceCountType>
-  >
+  setCollectedPieces: React.Dispatch<React.SetStateAction<PieceCountType>>
+  fetching: boolean
 }
 
 const GameContext = createContext<GameContextType | null>(null)
@@ -66,9 +65,11 @@ export const CaptureProvider = ({
   const [collectedPieces, setCollectedPieces] =
     useState<PieceCountType>(initialPieces)
 
+  const [fetching, setFetching] = useState(true)
+
   useEffect(() => {
     async function fetchPieces() {
-      const collectedPiecesData: PieceCountType = {} as PieceCountType
+      const collectedPiecesData: PieceCountType = { ...initialPieces }
       const fetchedCollectedPiecesData = await getCollectedPieces()
       if (fetchedCollectedPiecesData) {
         const allFacultyStats =
@@ -88,13 +89,18 @@ export const CaptureProvider = ({
       }
 
       setCollectedPieces(collectedPiecesData)
-      }
+      setFetching(false)
+
+      console.log('Data in context: ', collectedPiecesData)
+    }
 
     fetchPieces()
   }, [])
 
   return (
-    <GameContext.Provider value={{ collectedPieces, setCollectedPieces }}>
+    <GameContext.Provider
+      value={{ collectedPieces, setCollectedPieces, fetching }}
+    >
       {children}
     </GameContext.Provider>
   )

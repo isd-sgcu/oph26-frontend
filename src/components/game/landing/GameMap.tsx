@@ -20,7 +20,8 @@ export default function GameMap() {
     return window.innerHeight / 2000
   })
 
-  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } = useCamera(containerRef, cameraWrapperRef, baseScale)
+  const { bind, zoomToZone, resetZoom, isZoomed, velocityRef, getWorldBounds } =
+    useCamera(containerRef, cameraWrapperRef, baseScale)
 
   useEffect(() => {
     const el = containerRef.current
@@ -58,9 +59,13 @@ export default function GameMap() {
   useEffect(() => {
     window.scrollTo({
       top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
-  }, []);
+      behavior: 'smooth',
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log('Data in game: ', collectedPieces)
+  }, [collectedPieces])
 
   return (
     <div
@@ -89,15 +94,12 @@ export default function GameMap() {
       >
         {baseScale !== null && (
           <svg id="game-map-svg" width={2000} height={2000}>
-
             <image href={UniMapBg} x={0} y={0} width={2000} height={2000} />
             <DecorationLayer
               velocityRef={velocityRef}
               getWorldBounds={getWorldBounds}
             />
-            <PieceLayer
-              pieceCount={collectedPieces}
-            />
+            <PieceLayer pieceCount={collectedPieces} />
             <ZoomZoneLayer onZoom={zoomToZone} />
 
             <CloudLayer />

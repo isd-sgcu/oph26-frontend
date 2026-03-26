@@ -29,20 +29,21 @@ const GameSharePopup = ({ open, onClose }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
-  const { collectedPieces } = useGame()
+  const { collectedPieces, fetching } = useGame()
 
   useEffect(() => {
-    if (open) {
+    if (open && !fetching) {
       setVisible(true)
       generateImage()
+      console.log(collectedPieces)
     }
-  }, [open])
+  }, [open, fetching])
 
   const generateImage = async () => {
     try {
       setLoading(true)
 
-      const {img, img2} = await captureGameMap(collectedPieces)
+      const { img, img2 } = await captureGameMap(collectedPieces)
 
       const watermark = await processWatermarkTemplate(
         img,
@@ -55,7 +56,9 @@ const GameSharePopup = ({ open, onClose }: Props) => {
       const framed = await processFramedTemplate(
         img,
         attendee ? attendee.firstname + ' ' + attendee.surname : 'N/A',
-        Object.values(collectedPieces).filter(v => v > 0).length.toString(),
+        Object.values(collectedPieces)
+          .filter((v) => v > 0)
+          .length.toString(),
         '/background/shareTemplate1.svg',
         '/logo/cu-journey.webp',
         lang
@@ -64,7 +67,9 @@ const GameSharePopup = ({ open, onClose }: Props) => {
       const framed2 = await processFramedTemplate(
         img2,
         attendee ? attendee.firstname + ' ' + attendee.surname : 'N/A',
-        Object.values(collectedPieces).filter(v => v > 0).length.toString(),
+        Object.values(collectedPieces)
+          .filter((v) => v > 0)
+          .length.toString(),
         '/background/shareTemplate1.svg',
         '/logo/cu-journey.webp',
         lang
