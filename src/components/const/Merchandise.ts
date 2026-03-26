@@ -60,20 +60,6 @@ export const MERCHANDISE: Merchandise[] = [
     variant: [
       {
         id: 1,
-        title: 'ยันต์น้องต่าย',
-        detail:
-          'ไอเทมลับฉบับสายมู! การ์ดยันต์น้องต่าย พกไว้อุ่นใจ สอบติดชัวร์ ผลิตจากพลาสติก PET หนา 250 ไมครอน ขนาด 85.6 x 54 มิลลิเมตร แข็งแรง พกพาง่าย เสริมดวงน้องๆ ม.ปลายสู่รั้วจุฬาฯ',
-        thumbnail: '/info/merchandise/thumbnail/3.png',
-        imgPath: [
-          '/info/merchandise/pic/bunnycard (1).png',
-          '/info/merchandise/pic/bunnycard (2).png',
-          '/info/merchandise/pic/bunnycard (3).png',
-          '/info/merchandise/pic/bunnycard (4).png',
-          '/info/merchandise/pic/bunnycard (5).png',
-        ],
-      },
-      {
-        id: 2,
         title: 'All in!',
         detail:
           'เทหมดหน้าตักเพื่อจุฬาฯ! การ์ด All in! ไอเทมนำโชคคู่ใจเด็กม.ปลาย ขนาด 85.6 x 54 มิลลิเมตร วัสดุพลาสติก PET หนา 250 ไมครอน ทนทาน พกพาง่าย ให้การสอบติดเป็นแจ็คพอตของน้องๆ!',
@@ -87,7 +73,7 @@ export const MERCHANDISE: Merchandise[] = [
         ],
       },
       {
-        id: 3,
+        id: 2,
         title: 'CU Vibe',
         detail:
           'ไขประตูสู่รั้วจามจุรีด้วย การ์ด CU Vibe ขนาดพกพา 85.6 x 54 มิลลิเมตร ผลิตจากพลาสติก PET หนา 250 ไมครอน ไอเทมมูเตลูเสริมความมั่นใจ ให้น้องม.ปลายสอบติดชัวร์',
