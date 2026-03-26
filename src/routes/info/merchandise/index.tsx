@@ -1,5 +1,6 @@
 import { MERCHANDISE } from '@/components/const/Merchandise'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/info/merchandise/')({
@@ -10,16 +11,20 @@ function RouteComponent() {
   const { t } = useTranslation()
 
   return (
-    <div className="bg-gradient-pink min-h-screen flex-1 p-5">
-      <div className="mb-6 h-48.5 self-stretch rounded-2xl">
+    <div className="bg-gradient-pink flex flex-1 flex-col gap-5 p-5">
+      <a
+        href="https://www.instagram.com/cu.item?igsh=YzB5dGl5dmlzdHpj"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="/info/merchandise/banner.png"
           alt="banner"
           className="rounded-2xl shadow-[0_1px_2px_0_rgba(0,0,0,0.5)]"
         />
-      </div>
+      </a>
 
-      <h1 className="mb-3 text-2xl font-bold text-white text-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+      <h1 className="text-2xl font-bold text-white text-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
         {t('routes.infoGroup.merchandiseGroup.title')}
       </h1>
 

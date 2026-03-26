@@ -4,13 +4,12 @@ import BreakLine from './Breakline'
 import { QuestionaireInterface } from '@/routes/questionaire'
 import { Input } from '../ui/input'
 import RedStar from './RedStar'
+import { RATING_ICONS, RATING_VALUES } from '@/types/questionaire'
 
 interface QuestionaireStep1Props {
   formData: QuestionaireInterface
   setFormData: (formData: QuestionaireInterface) => void
 }
-
-export type RatingValue = 1 | 2 | 3 | 4 | 5
 
 const QuestionaireStep1 = ({
   formData,
@@ -18,36 +17,13 @@ const QuestionaireStep1 = ({
 }: QuestionaireStep1Props) => {
   const { t } = useTranslation()
 
-  const ratingValues: RatingValue[] = [1, 2, 3, 4, 5]
-
-  const ratingIcons = {
-    1: 'fi-rr-frown',
-    2: 'fi-rr-sad',
-    3: 'fi-rr-meh',
-    4: 'fi-rr-smile',
-    5: 'fi-rr-laugh',
-  } as const
-
-  const q1Options = ['social', 'website', 'friends', 'school']
-
-  const toggleQ1 = (value: string) => {
-    const selected = formData.q1.selected.includes(value)
-      ? formData.q1.selected.filter((v) => v !== value)
-      : [...formData.q1.selected, value]
-
+  const setRating = (key: 'q1' | 'q2' | 'q3' | 'q4', value: number) => {
     setFormData({
       ...formData,
-      q1: {
-        ...formData.q1,
-        selected,
+      part1: {
+        ...formData.part1,
+        [key]: value,
       },
-    })
-  }
-
-  const setRating = (key: 'q2' | 'q3' | 'q4' | 'q5', value: number) => {
-    setFormData({
-      ...formData,
-      [key]: value,
     })
   }
 
@@ -64,60 +40,12 @@ const QuestionaireStep1 = ({
 
       <BreakLine />
 
-      {/* Q1 */}
-      <div className="flex flex-col gap-3">
-        <p className="font-semibold">
-          1. {t('routes.questionaireGroup.part1.q1.question')} <RedStar />
-        </p>
-
-        {q1Options.map((opt) => (
-          <label key={opt} className="flex cursor-pointer items-center gap-2">
-            <input
-              type="checkbox"
-              checked={formData.q1.selected.includes(opt)}
-              onChange={() => toggleQ1(opt)}
-              className="border-main-pink checked:bg-main-pink checked:border-main-pink relative h-4 w-4 cursor-pointer appearance-none rounded border after:content-[''] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-xs checked:after:text-white checked:after:content-['✓']"
-            />
-            {t(`routes.questionaireGroup.part1.q1.options.${opt}`)}
-          </label>
-        ))}
-
-        {/* Other */}
-        <label className="flex cursor-pointer items-center gap-2">
-          <input
-            type="checkbox"
-            checked={formData.q1.selected.includes('other')}
-            onChange={() => toggleQ1('other')}
-            className="border-main-pink checked:bg-main-pink checked:border-main-pink relative h-4 w-4 cursor-pointer appearance-none rounded border after:content-[''] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-xs checked:after:text-white checked:after:content-['✓']"
-          />
-          {t('routes.questionaireGroup.part1.q1.options.other')}
-        </label>
-
-        <Input
-          placeholder={t('routes.questionaireGroup.part1.q1.placeholder')}
-          className="border-main-pink text-main-pink placeholder:text-main-light-pink"
-          disabled={!formData.q1.selected.includes('other')}
-          value={formData.q1.other}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              q1: {
-                ...formData.q1,
-                other: e.target.value,
-              },
-            })
-          }
-        />
-      </div>
-
-      <BreakLine />
-
-      {/* Q2 - Q5 */}
-      {(['q2', 'q3', 'q4', 'q5'] as const).map((key, index) => (
+      {/* Q1 - Q4: Rating */}
+      {(['q1', 'q2', 'q3', 'q4'] as const).map((key, index) => (
         <>
           <div key={key} className="flex flex-col gap-2">
             <p className="font-semibold">
-              {index + 2}. {t(`routes.questionaireGroup.part1.${key}.question`)}{' '}
+              {index + 1}. {t(`routes.questionaireGroup.part1.${key}.question`)}{' '}
               <RedStar />
             </p>
 
@@ -129,8 +57,8 @@ const QuestionaireStep1 = ({
 
               {/* Rating Icons */}
               <div className="flex w-full justify-between px-4">
-                {ratingValues.map((r) => {
-                  const isActive = formData[key] === r
+                {RATING_VALUES.map((r) => {
+                  const isActive = formData.part1[key] === r
 
                   return (
                     <button
@@ -142,7 +70,7 @@ const QuestionaireStep1 = ({
                       } `}
                     >
                       <FlatIcon
-                        name={ratingIcons[r]}
+                        name={RATING_ICONS[r]}
                         size={24}
                         className={isActive ? 'text-white' : 'text-main-pink'}
                       />
@@ -161,23 +89,28 @@ const QuestionaireStep1 = ({
         </>
       ))}
 
-      {/* Q6 */}
+      {/* Q5: Short Answer */}
       <div className="flex flex-col gap-2">
         <p className="font-semibold">
-          6. {t('routes.questionaireGroup.part1.q6.question')}
+          5. {t('routes.questionaireGroup.part1.q5.question')}
         </p>
         <Input
-          placeholder={t('routes.questionaireGroup.part1.q6.placeholder')}
+          placeholder={t('routes.questionaireGroup.part1.q5.placeholder')}
           className="border-main-pink text-main-pink placeholder:text-main-light-pink"
-          value={formData.q6}
+          value={formData.part1.q5}
           onChange={(e) =>
             setFormData({
               ...formData,
-              q6: e.target.value,
+              part1: {
+                ...formData.part1,
+                q5: e.target.value,
+              },
             })
           }
         />
       </div>
+
+      <BreakLine />
     </div>
   )
 }

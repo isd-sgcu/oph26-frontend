@@ -4,6 +4,7 @@ import CountdownTimer from './CountdownTimer'
 import CarouselLanding from './CarouselLanding'
 import { useTranslation } from 'react-i18next'
 import { useUser } from '@/contexts/UserContext'
+import { ChevronDown } from 'lucide-react'
 
 export default function LandingSectionOne() {
   const navigate = useNavigate()
@@ -72,6 +73,10 @@ export default function LandingSectionOne() {
             <CarouselLanding />
           </div>
         </div>
+      </div>
+
+      <div className="absolute bottom-6 left-1/2 z-30 -translate-x-1/2 animate-bounce">
+        <ChevronDown className="h-8 w-8 text-white/70" />
       </div>
     </div>
   )

@@ -4,12 +4,15 @@ import clsx from 'clsx'
 import { FACULTIES } from '@/components/const/faculty'
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
+import { AttendeeType } from '@/contexts/UserContext'
 
 interface Props {
   id: string
   firstName: string
   lastName: string
-  status: boolean
+  hasCheckedIn: boolean
+  role: AttendeeType
+  ticketNumber: string
   dreamFaculties: string[]
 }
 
@@ -17,7 +20,9 @@ export default function Ticket({
   id,
   firstName,
   lastName,
-  status,
+  hasCheckedIn,
+  role,
+  ticketNumber,
   dreamFaculties,
 }: Props) {
   const { t, i18n } = useTranslation()
@@ -79,7 +84,7 @@ export default function Ticket({
 
             <div>
               <p className="text-xs/loose font-medium text-[#8E8E93]">
-                {t('routes.authGroup.profileGroup.ticketGroup.student')}
+                {t(`routes.authGroup.profileGroup.ticketGroup.${role}`)}
               </p>
               <h1 className="text-xl leading-tight font-semibold">
                 {firstName}
@@ -110,7 +115,7 @@ export default function Ticket({
                   </p>
                 ))}
               </div>
-              {status && (
+              {hasCheckedIn && (
                 <img
                   src="/auth/profile/ticket/landing/scanned.svg"
                   alt=""
@@ -166,7 +171,7 @@ export default function Ticket({
               fgColor={'#000'}
               level={'H'}
             />
-            <p className="text-sm font-medium">ID2341242456767</p>
+            <p className="text-sm font-medium">{ticketNumber}</p>
           </div>
         </div>
       </div>

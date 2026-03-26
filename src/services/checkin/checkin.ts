@@ -49,7 +49,7 @@ export const checkIn = async (
 ): Promise<CheckInResponse | CheckInErrorResponse> => {
   try {
     const { data } = await Axios.post<CheckInSuccessResponse>(
-      `/checkin/`,
+      `/checkin`,
       payload
     )
     return {
@@ -75,5 +75,18 @@ export const checkIn = async (
     }
     // Handle unexpected errors
     throw new Error('Unexpected error occurred during check-in.')
+  }
+}
+
+export interface CheckInStatusResponse {
+  status: boolean
+}
+
+export const getCheckInStatus = async (): Promise<CheckInStatusResponse> => {
+  try {
+    const { data } = await Axios.get<CheckInStatusResponse>(`/checkin`)
+    return data
+  } catch (error) {
+    throw error as AxiosError
   }
 }

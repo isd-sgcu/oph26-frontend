@@ -6,6 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
 import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
 import { useUser } from '@/contexts/UserContext'
+import { getCheckInStatus } from '@/services/checkin/checkin'
+import { getEvaluationResponse } from '@/services/questionaire/questionaire'
+import { RELEASE_EVALUATION_DATE } from '@/utils/const'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -19,6 +22,9 @@ function RouteComponent() {
   const [showEvaluationBanner, setShowEvaluationBanner] = useState(false)
   const [hasPermission, setHasPermission] = useState(false)
   const [isHighSchoolStudent, setIsHighSchoolStudent] = useState(false)
+  const [hasCheckedIn, setHasCheckedIn] = useState(false)
+  const [hasSubmittedEvaluation, setHasSubmittedEvaluation] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!userAttendee) {
@@ -27,8 +33,34 @@ function RouteComponent() {
   }, [userAttendee, navigate])
 
   useEffect(() => {
+    setLoading(true)
+    const fetchCheckInStatus = async () => {
+      try {
+        const checkInStatus = await getCheckInStatus()
+        setHasCheckedIn(checkInStatus.status)
+      } catch (error) {
+        setHasCheckedIn(false)
+      }
+    }
+
+    const fetchEvaluationResponse = async () => {
+      try {
+        const evaluationResponse = await getEvaluationResponse()
+        setHasSubmittedEvaluation(evaluationResponse.exists)
+      } catch (error) {
+        setHasSubmittedEvaluation(false)
+      }
+    }
+
+    fetchEvaluationResponse()
+    fetchCheckInStatus()
+
+    setLoading(false)
+  }, [])
+
+  useEffect(() => {
     const currentDate = new Date()
-    const targetDate = new Date('2026-03-30T00:00:00')
+    const targetDate = new Date(RELEASE_EVALUATION_DATE)
     const allowedAttendeeLevels = [
       'matthayom_ton',
       'matthayom_plai',
@@ -41,25 +73,32 @@ function RouteComponent() {
       return
     }
 
-    if (currentDate >= targetDate) {
+    if (currentDate < targetDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
       setShowEvaluationBanner(false)
       setHasPermission(false)
-    } else if (userAttendee?.checked_in_at) {
+    } else if (hasCheckedIn) {
+      // ผู้ใช้เช็คอินแล้ว
       setShowEvaluationBanner(true)
       setHasPermission(true)
     } else {
-      setShowEvaluationBanner(false)
-      setHasPermission(true)
+      // ผู้ใช้ยังไม่ได้เช็คอิน
+      setShowEvaluationBanner(true)
+      setHasPermission(false)
     }
 
-    if (userAttendee?.attendee_type === 'student') {
+    if (userAttendee.attendee_type === 'student') {
       setIsHighSchoolStudent(
         allowedAttendeeLevels.includes(userAttendee.study_level || '') || false
       )
     } else {
       setIsHighSchoolStudent(false)
     }
-  }, [])
+
+    if (hasSubmittedEvaluation) {
+      setShowEvaluationBanner(false)
+    }
+  }, [hasCheckedIn, userAttendee, hasSubmittedEvaluation])
 
   return (
     <>
@@ -76,7 +115,9 @@ function RouteComponent() {
               id={userAttendee.ticket_code}
               firstName={userAttendee.firstname}
               lastName={userAttendee.surname}
-              status={false}
+              hasCheckedIn={hasCheckedIn}
+              ticketNumber={userAttendee.ticket_code}
+              role={userAttendee.attendee_type}
               dreamFaculties={userAttendee.interested_faculty}
             />
           )}
@@ -111,7 +152,7 @@ function RouteComponent() {
         </div>
       </div>
 
-      {showEvaluationBanner && (
+      {!loading && showEvaluationBanner && !hasSubmittedEvaluation && (
         <EvaluationBanner
           open={showEvaluationBanner}
           setOpen={setShowEvaluationBanner}

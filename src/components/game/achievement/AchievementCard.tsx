@@ -123,7 +123,7 @@ export default function AchievementCard({
                 <span
                   className={`${isEnglish && (stat as number) > 999 ? 'text-5xl' : 'text-7xl'} font-bold text-white text-shadow-[2px_2px_8px_#CA2791]`}
                 >
-                  {Math.round(stat as number) + '%'}
+                  {`${stat}%`}
                 </span>
               )}
 
@@ -353,7 +353,7 @@ export default function AchievementCard({
                 key: 'cusar',
                 label:
                   i18n.language === 'th'
-                    ? 'สำนักวิชาทรัพยากร\nการเกษตร'
+                    ? 'เกษตรศาสตร์\nบูรณาการ'
                     : 'Agricultural\nResources',
                 count: props.cusar,
                 variant: 5,
