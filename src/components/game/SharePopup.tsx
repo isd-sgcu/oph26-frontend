@@ -7,16 +7,15 @@ import {
   processFramedTemplate,
 } from '@/utils/shareTemplates'
 import i18n from '@/lib/i18n'
-import { useCapture } from '@/contexts/CaptureContext'
+import { useGame } from '@/contexts/GameContext'
 import { useUser } from '@/contexts/UserContext'
 
 type Props = {
   open: boolean
   onClose: () => void
-  collectedNumber: number
 }
 
-const GameSharePopup = ({ open, onClose, collectedNumber }: Props) => {
+const GameSharePopup = ({ open, onClose }: Props) => {
   const [image, setImage] = useState<string[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -30,7 +29,7 @@ const GameSharePopup = ({ open, onClose, collectedNumber }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
-  const { setMode } = useCapture()
+  const { collectedPieces } = useGame()
 
   useEffect(() => {
     if (open) {
@@ -43,11 +42,7 @@ const GameSharePopup = ({ open, onClose, collectedNumber }: Props) => {
     try {
       setLoading(true)
 
-      setMode('capture')
-      await new Promise((r) => requestAnimationFrame(r))
-      await new Promise((r) => requestAnimationFrame(r))
-
-      const img = await captureGameMap()
+      const {img, img2} = await captureGameMap(collectedPieces)
 
       const watermark = await processWatermarkTemplate(
         img,
@@ -60,22 +55,16 @@ const GameSharePopup = ({ open, onClose, collectedNumber }: Props) => {
       const framed = await processFramedTemplate(
         img,
         attendee ? attendee.firstname + ' ' + attendee.surname : 'N/A',
-        collectedNumber.toString(),
+        Object.values(collectedPieces).filter(v => v > 0).length.toString(),
         '/background/shareTemplate1.svg',
         '/logo/cu-journey.webp',
         lang
       )
 
-      setMode('show')
-      await new Promise((r) => requestAnimationFrame(r))
-      await new Promise((r) => requestAnimationFrame(r))
-
-      const img2 = await captureGameMap()
-
       const framed2 = await processFramedTemplate(
         img2,
         attendee ? attendee.firstname + ' ' + attendee.surname : 'N/A',
-        collectedNumber.toString(),
+        Object.values(collectedPieces).filter(v => v > 0).length.toString(),
         '/background/shareTemplate1.svg',
         '/logo/cu-journey.webp',
         lang
@@ -85,10 +74,10 @@ const GameSharePopup = ({ open, onClose, collectedNumber }: Props) => {
     } catch (err) {
       console.error(err)
     } finally {
-      setMode('normal')
       setLoading(false)
     }
   }
+
   const handleScroll = () => {
     if (!scrollRef.current) return
 
