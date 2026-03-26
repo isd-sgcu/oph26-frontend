@@ -187,7 +187,7 @@ export const FACULTIES: FacultyOption[] = [
     value: 'cusar',
     variant: 6,
     label: {
-      th: 'คณะเกษตรบูรณาการ',
+      th: 'คณะเกษตรศาสตร์บูรณาการ',
       en: 'School of Agricultural Resources',
     },
     abbrLabel: { th: 'เกษตร', en: 'CUSAR' },

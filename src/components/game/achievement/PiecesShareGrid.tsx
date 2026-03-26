@@ -124,7 +124,8 @@ export default function PiecesShareGrid({
         },
         {
           key: 'cusar',
-          label: lang === 0 ? 'คณะเกษตร\nบูรณาการ' : 'Agricultural\nResources',
+          label:
+            lang === 0 ? 'เกษตรศาสตร์\nบูรณาการ' : 'Agricultural\nResources',
           count: props.cusar,
           variant: 5,
         },

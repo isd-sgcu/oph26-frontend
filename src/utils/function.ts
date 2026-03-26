@@ -51,7 +51,7 @@ export function getFacultyLabel(faculty: FacultyType): {
       }
     case 'cusar':
       return {
-        th: 'คณะเกษตรบูรณาการ',
+        th: 'คณะเกษตรศาสตร์บูรณาการ',
         en: 'School of Agricultural Resources',
       }
     case 'dorm':
