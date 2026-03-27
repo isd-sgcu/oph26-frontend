@@ -76,3 +76,4 @@ export const updateCertificateName = async (
   } catch (error) {
     throw error as AxiosError
   }
+}
