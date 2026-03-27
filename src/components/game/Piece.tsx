@@ -35,7 +35,7 @@ const FACULTY_IMAGE: Record<FacultyType, string> = {
   dorm: '',
 }
 
-const JIGSAW_PATH: Record<PieceVariant, string> = {
+export const JIGSAW_PATH: Record<PieceVariant, string> = {
   1: `M10 10 H40 C42 0,58 0,60 10 H90
     V40 C78 42,78 58,90 60 V90 
     H10 

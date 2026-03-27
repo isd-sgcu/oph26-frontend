@@ -4,7 +4,6 @@ import LoadingOverlay from '@/components/game/landing/LoadingOverlay'
 import { preloadImages } from '@/utils/preloadAssets'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/game/')({
   component: RouteComponent,

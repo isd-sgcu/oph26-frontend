@@ -48,16 +48,16 @@ const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
-  // {
-  //   title: 'map',
-  //   icon: 'fi-rr-map-marker',
-  //   to: '/info/map',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
@@ -73,16 +73,16 @@ const AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
-  // {
-  //   title: 'map',
-  //   icon: 'fi-rr-map-marker',
-  //   to: '/info/map',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
@@ -98,16 +98,16 @@ const AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
-  // {
-  //   title: 'map',
-  //   icon: 'fi-rr-map-marker',
-  //   to: '/info/map',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
   {
     title: 'missingPiece',
     icon: 'fi-rr-layout-fluid',
@@ -128,16 +128,16 @@ const AUTHENTICATED_STAFF_NAV_ITEMS: NavItem[] = [
     icon: 'fi-rr-playing-cards',
     to: '/info/workshop',
   },
-  // {
-  //   title: 'mainEvent',
-  //   icon: 'fi-rr-balloons',
-  //   to: '/info/event',
-  // },
-  // {
-  //   title: 'map',
-  //   icon: 'fi-rr-map-marker',
-  //   to: '/info/map',
-  // },
+  {
+    title: 'mainEvent',
+    icon: 'fi-rr-balloons',
+    to: '/info/event',
+  },
+  {
+    title: 'map',
+    icon: 'fi-rr-map-marker',
+    to: '/info/map',
+  },
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',

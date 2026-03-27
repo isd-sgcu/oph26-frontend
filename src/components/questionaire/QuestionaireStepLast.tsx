@@ -25,7 +25,7 @@ const QuestionaireStepLast = ({
         </p>
       )}
 
-      <p className="w-[80%] text-center text-sm font-medium text-white">
+      <p className="w-[80%] text-center text-sm font-medium whitespace-pre-wrap text-white">
         {t('routes.questionaireGroup.partLast.description')}
       </p>
     </div>

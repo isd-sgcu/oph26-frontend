@@ -6,22 +6,22 @@ import { Input } from '../ui/input'
 import RedStar from './RedStar'
 import { RATING_ICONS, RATING_VALUES } from '@/types/questionaire'
 
-interface QuestionaireStep1Props {
+interface QuestionaireStep2Props {
   formData: QuestionaireInterface
   setFormData: (formData: QuestionaireInterface) => void
 }
 
-const QuestionaireStep1 = ({
+const QuestionaireStep2 = ({
   formData,
   setFormData,
-}: QuestionaireStep1Props) => {
+}: QuestionaireStep2Props) => {
   const { t } = useTranslation()
 
-  const setRating = (key: 'q1' | 'q2' | 'q3' | 'q4', value: number) => {
+  const setRating = (key: 'q1' | 'q2' | 'q3' | 'q4' | 'q5', value: number) => {
     setFormData({
       ...formData,
-      part1: {
-        ...formData.part1,
+      part2: {
+        ...formData.part2,
         [key]: value,
       },
     })
@@ -33,32 +33,32 @@ const QuestionaireStep1 = ({
       <div className="flex items-center gap-4">
         <FlatIcon name="fi-rr-edit" className="text-main-pink" size={24} />
         <h2 className="text-base font-bold">
-          <span>{t('routes.questionaireGroup.part1.header')}</span>:{' '}
-          <span>{t('routes.questionaireGroup.part1.title')}</span>
+          <span>{t('routes.questionaireGroup.part2.header')}</span>:{' '}
+          <span>{t('routes.questionaireGroup.part2.title')}</span>
         </h2>
       </div>
 
       <BreakLine />
 
-      {/* Q1 - Q4: Rating */}
-      {(['q1', 'q2', 'q3', 'q4'] as const).map((key, index) => (
+      {/* Q1 - Q5: Rating */}
+      {(['q1', 'q2', 'q3', 'q4', 'q5'] as const).map((key, index) => (
         <>
           <div key={key} className="flex flex-col gap-2">
             <p className="font-semibold">
-              {index + 1}. {t(`routes.questionaireGroup.part1.${key}.question`)}{' '}
+              {index + 1}. {t(`routes.questionaireGroup.part2.${key}.question`)}{' '}
               <RedStar />
             </p>
 
             <div className="flex items-center justify-between">
               {/* Low */}
               <span className="text-sm text-black">
-                {t('routes.questionaireGroup.part1.rating.low')}
+                {t('routes.questionaireGroup.part2.rating.low')}
               </span>
 
               {/* Rating Icons */}
               <div className="flex w-full justify-between px-4">
                 {RATING_VALUES.map((r) => {
-                  const isActive = formData.part1[key] === r
+                  const isActive = formData.part2[key] === r
 
                   return (
                     <button
@@ -81,7 +81,7 @@ const QuestionaireStep1 = ({
 
               {/* High */}
               <span className="text-sm text-black">
-                {t('routes.questionaireGroup.part1.rating.high')}
+                {t('routes.questionaireGroup.part2.rating.high')}
               </span>
             </div>
           </div>
@@ -89,30 +89,28 @@ const QuestionaireStep1 = ({
         </>
       ))}
 
-      {/* Q5: Short Answer */}
+      {/* Q6: Short Answer */}
       <div className="flex flex-col gap-2">
         <p className="font-semibold">
-          5. {t('routes.questionaireGroup.part1.q5.question')}
+          6. {t('routes.questionaireGroup.part2.q6.question')}
         </p>
         <Input
-          placeholder={t('routes.questionaireGroup.part1.q5.placeholder')}
+          placeholder={t('routes.questionaireGroup.part2.q6.placeholder')}
           className="border-main-pink text-main-pink placeholder:text-main-light-pink"
-          value={formData.part1.q5}
+          value={formData.part2.q6}
           onChange={(e) =>
             setFormData({
               ...formData,
-              part1: {
-                ...formData.part1,
-                q5: e.target.value,
+              part2: {
+                ...formData.part2,
+                q6: e.target.value,
               },
             })
           }
         />
       </div>
-
-      <BreakLine />
     </div>
   )
 }
 
-export default QuestionaireStep1
+export default QuestionaireStep2

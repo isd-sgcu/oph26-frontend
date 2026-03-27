@@ -106,33 +106,35 @@ function RouteComponent() {
       }
 
       if (fetchedCollectedPiecesData) {
-        const sameMissingCounter =
-          fetchedCollectedPiecesData.stats.same_missing_count
-        const sameMissingCountsArray = Object.entries(sameMissingCounter).map(
-          ([missingCount, attendeeCount]) => ({
-            missingFaculty: FACULTIES[Number(missingCount) - 1].value,
-            count: attendeeCount,
-          })
-        )
+        if (fetchedCollectedPiecesData.stats.total_collected > 0) {
+          const sameMissingCounter =
+            fetchedCollectedPiecesData.stats.same_missing_count
+          const sameMissingCountsArray = Object.entries(sameMissingCounter).map(
+            ([missingCount, attendeeCount]) => ({
+              missingFaculty: FACULTIES[Number(missingCount) - 1].value,
+              count: attendeeCount,
+            })
+          )
 
-        const no0SameMissingCountArray = sameMissingCountsArray.filter(
-          (item) => item.count > 0
-        )
+          const no0SameMissingCountArray = sameMissingCountsArray.filter(
+            (item) => item.count > 0
+          )
 
-        if (no0SameMissingCountArray.length > 0) {
-          const randomSameMissingItem =
-            no0SameMissingCountArray[
-              Math.floor(Math.random() * no0SameMissingCountArray.length)
-            ]
-          var3Data = {
-            variant: 'var3',
-            stat: `${Math.round(randomSameMissingItem.count)}`,
-            faculty: randomSameMissingItem.missingFaculty,
+          if (no0SameMissingCountArray.length > 0) {
+            const randomSameMissingItem =
+              no0SameMissingCountArray[
+                Math.floor(Math.random() * no0SameMissingCountArray.length)
+              ]
+            var3Data = {
+              variant: 'var3',
+              stat: `${Math.round(randomSameMissingItem.count)}`,
+              faculty: randomSameMissingItem.missingFaculty,
+            }
           }
+
+          data.push(var3Data)
         }
       }
-
-      data.push(var3Data)
 
       // The 'overall' Data
       const overallData: Achievement = {

@@ -4,8 +4,7 @@ import shareTemplate4 from '/background/shareTemplate4.svg'
 import shareTemplate5 from '/background/shareTemplate5.svg'
 import lockedUrl from '/game/locked.svg'
 import { CollectedPiecesProps } from '@/components/game/achievement/AchievementCard'
-import { renderComponentToPng } from './renderComponentToPng'
-import PiecesShareGrid from '@/components/game/achievement/PiecesShareGrid'
+import { PieceVariant, JIGSAW_PATH } from '@/components/game/Piece'
 import {
   getCanvasAbbrFontSize,
   getMiniCardFacultyFontSize,
@@ -35,6 +34,7 @@ async function ensureFontsLoaded() {
     '500 55px "IBM Plex Sans Thai"',
     '400 50px "IBM Plex Sans Thai"',
     '400 110px "IBM Plex Sans Thai"',
+    '500 14px "IBM Plex Sans Thai"',
   ]
 
   await Promise.all(fonts.map((f) => document.fonts.load(f)))
@@ -458,10 +458,36 @@ export async function achievementShareOverall(
   return canvas.toDataURL('image/png')
 }
 
+type FacultyKey = keyof Omit<CollectedPiecesProps, 'variant' | 'stat'>
+
+const facultyVariants: Record<FacultyKey, PieceVariant> = {
+  edu: 1,
+  psy: 2,
+  pharm: 1,
+  dent: 5,
+  commarts: 4,
+  ahs: 6,
+  faa: 2,
+  vet: 1,
+  law: 5,
+  arch: 2,
+  eng: 4,
+  arts: 6,
+  md: 1,
+  sci: 2,
+  econ: 4,
+  polsci: 1,
+  cbs: 6,
+  spsc: 2,
+  scii: 1,
+  cusar: 5,
+}
+
 export async function achievementShareCollectedPieces(
   name: string,
   facultyCounts: CollectedPiecesProps,
-  lang: 0 | 1 // 0 = th, 1 = en
+  lang: 0 | 1, // 0 = th, 1 = en
+  isIOS: boolean
 ) {
   const localizedText = {
     th: {
@@ -487,7 +513,7 @@ export async function achievementShareCollectedPieces(
 
   ctx.drawImage(bg, 0, 0, canvas.width, canvas.height)
 
-  // 4️⃣ Wait for font
+  // Wait for font
   await ensureFontsLoaded()
 
   ctx.fillStyle = '#f481b4'
@@ -505,15 +531,37 @@ export async function achievementShareCollectedPieces(
     lang === 0 ? `${localizedText.th.start}` : `${localizedText.en.start}`
   ctx.fillText(rankText, canvas.width / 2, 235)
 
-  const piecesPng = await renderComponentToPng(
-    <PiecesShareGrid props={facultyCounts} lang={lang} />,
-    1080,
-    1500
-  )
+  // Draw pieces in a grid
+  const gridCols = 4
+  const gridSpacingX = 115
+  const gridSpacingY = 125
+  const startX = 35
+  const startY = 250
 
-  const piecesImage = await loadImage(piecesPng)
+  const facultyKeys = Object.keys(facultyVariants) as FacultyKey[]
+  for (let i = 0; i < facultyKeys.length; i++) {
+    const facultyKey = facultyKeys[i]
+    const variant = facultyVariants[facultyKey]
+    const count = facultyCounts[facultyKey]
 
-  ctx.drawImage(piecesImage, 0, 250, 540, 750)
+    await drawPiece({
+      ctx,
+      x: startX + (i % gridCols) * gridSpacingX,
+      y: startY + Math.floor(i / gridCols) * gridSpacingY,
+      size: 85,
+      imgPath: `/faculty/${facultyKey}.webp`,
+      variant,
+      count,
+      isIOS
+    })
+  }
+
+  // Label
+  if (lang) {
+    addEnglishText(ctx)
+  } else {
+    addThaiText(ctx)
+  }
 
   // Logo
   const logoWidth = logo.width * 0.125
@@ -522,4 +570,187 @@ export async function achievementShareCollectedPieces(
   ctx.drawImage(logo, (canvas.width - logoWidth) / 2, 45, logoWidth, logoHeight)
 
   return canvas.toDataURL('image/png')
+}
+
+interface DrawPieceParams {
+  ctx: CanvasRenderingContext2D
+  x: number
+  y: number
+  size: number
+  imgPath: string
+  variant: PieceVariant
+  count: number
+  isIOS: boolean
+}
+
+async function drawPiece({
+  ctx,
+  x,
+  y,
+  size,
+  imgPath,
+  variant,
+  count,
+  isIOS
+}: DrawPieceParams) {
+  const path = new Path2D(JIGSAW_PATH[variant])
+  const img = await loadImage(imgPath)
+
+  ctx.save()
+  ctx.translate(x, y)
+  ctx.scale(size / 100, size / 100)
+  ctx.translate(20, 20)
+
+  // --- SHADOW ---
+  ctx.save()
+  ctx.shadowColor = 'rgba(0,0,0,0.25)' // lighter shadow
+  ctx.shadowBlur = 6 // reasonable blur
+  ctx.shadowOffsetX = 4
+  ctx.shadowOffsetY = 4
+  ctx.fillStyle = 'white' // fill is required to show shadow
+
+  ctx.fill(path) // shadow will be drawn here
+  ctx.restore()
+
+  // --- CLIP AND DRAW IMAGE ---
+  ctx.save()
+  ctx.clip(path)
+
+  if (count === 0 && !isIOS) {
+    // Normal devices
+    ctx.filter = 'grayscale(100%) brightness(0.75) opacity(90%)'
+    ctx.drawImage(img, 0, 0, 100, 100)
+    ctx.filter = 'none'
+  } else {
+    // Draw normally first
+    ctx.drawImage(img, 0, 0, 100, 100)
+
+    // iOS fallback
+    if (count === 0 && isIOS) {
+      ctx.fillStyle = 'rgba(128,128,128,0.75)'
+      ctx.fillRect(0, 0, 100, 100)
+    }
+  }
+  ctx.restore()
+
+  // --- COUNT BADGE ---
+  if (count > 1) {
+    ctx.save()
+    ctx.scale(size / 100, size / 100)
+    ctx.translate(16, -16)
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 50)
+    gradient.addColorStop(0, '#fafae6')
+    gradient.addColorStop(1, '#ffd285')
+
+    ctx.fillStyle = gradient
+    ctx.beginPath()
+    ctx.arc(90, 25, 25, 0, Math.PI * 2)
+    ctx.fill()
+
+    ctx.fillStyle = '#000'
+    ctx.font = '600 25px sans-serif'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(count > 99 ? '99+' : String(count), 90, 25)
+
+    ctx.restore()
+  }
+
+  ctx.restore()
+}
+
+interface LabelPosition {
+  label: string
+  x: number
+  y: number
+}
+
+async function addThaiText(ctx: CanvasRenderingContext2D) {
+  // Example positions for each piece — adjust x/y to match your grid
+  const thaiLabels: LabelPosition[] = [
+    { label: 'ครุศาสตร์', x: 95, y: 360 },
+    { label: 'จิตวิทยา', x: 210, y: 360 },
+    { label: 'เภสัชศาสตร์', x: 325, y: 360 },
+    { label: 'ทันตแพทยศาสตร์', x: 440, y: 360 },
+
+    { label: 'นิเทศศาสตร์', x: 95, y: 485 },
+    { label: 'สหเวชศาสตร์', x: 210, y: 485 },
+    { label: 'ศิลปกรรมศาสตร์', x: 325, y: 485 },
+    { label: 'สัตวแพทยศาสตร์', x: 440, y: 485 },
+
+    { label: 'นิติศาสตร์', x: 95, y: 610 },
+    { label: 'สถาปัตยกรรมศาสตร์', x: 205, y: 610 },
+    { label: 'วิศวกรรมศาสตร์', x: 325, y: 610 },
+    { label: 'อักษรศาสตร์', x: 440, y: 610 },
+
+    { label: 'แพทยศาสตร์', x: 95, y: 735 },
+    { label: 'วิทยาศาสตร์', x: 210, y: 735 },
+    { label: 'เศรษฐศาสตร์', x: 325, y: 735 },
+    { label: 'รัฐศาสตร์', x: 440, y: 735 },
+
+    { label: 'พาณิชยศาสตร์', x: 95, y: 855 },
+    { label: 'วิทยาศาสตร์', x: 210, y: 855 },
+    { label: 'เกษตรศาสตร์', x: 325, y: 855 },
+    { label: 'สถาบันนวัตกรรม', x: 440, y: 855 },
+
+    { label: 'และการบัญชี', x: 95, y: 870 },
+    { label: 'การกีฬา', x: 210, y: 870 },
+    { label: 'บูรณาการ', x: 325, y: 870 },
+    { label: 'บูรณาการ', x: 440, y: 870 },
+  ]
+
+  ctx.fillStyle = '#000'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'top'
+  ctx.font = '500 14px "IBM Plex Sans Thai"'
+
+  for (const { label, x, y } of thaiLabels) {
+    const lines = label.split('\n')
+    lines.forEach((line, i) => {
+      ctx.fillText(line, x, y + i * 18) // 18 = line height
+    })
+  }
+}
+
+async function addEnglishText(ctx: CanvasRenderingContext2D) {
+  // Example positions for each piece — same positions as Thai labels
+  const englishLabels: LabelPosition[] = [
+    { label: 'Education', x: 95, y: 360 },
+    { label: 'Psychology', x: 210, y: 360 },
+    { label: 'Pharmacy', x: 325, y: 360 },
+    { label: 'Dentistry', x: 440, y: 360 },
+
+    { label: 'Communication\nArts', x: 95, y: 485 },
+    { label: 'Applied Health\nSciences', x: 210, y: 485 },
+    { label: 'Fine and\nApplied Arts', x: 325, y: 485 },
+    { label: 'Veterinary\nMedicine', x: 440, y: 485 },
+
+    { label: 'Law', x: 95, y: 610 },
+    { label: 'Architecture', x: 210, y: 610 },
+    { label: 'Engineering', x: 325, y: 610 },
+    { label: 'Arts', x: 440, y: 610 },
+
+    { label: 'Medicine', x: 95, y: 735 },
+    { label: 'Science', x: 210, y: 735 },
+    { label: 'Economics', x: 325, y: 735 },
+    { label: 'Political Science', x: 440, y: 735 },
+
+    { label: 'Commerce and\nAccountancy', x: 95, y: 855 },
+    { label: 'Sports\nScience', x: 210, y: 855 },
+    { label: 'Agricultural\nResources', x: 325, y: 855 },
+    { label: 'Integrated\nInnovation', x: 440, y: 855 },
+  ]
+
+  ctx.fillStyle = '#000'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'top'
+  ctx.font = '500 14px "IBM Plex Sans Thai"'
+
+  for (const { label, x, y } of englishLabels) {
+    const lines = label.split('\n')
+    lines.forEach((line, i) => {
+      ctx.fillText(line, x, y + i * 18) // 18 = line height
+    })
+  }
 }
