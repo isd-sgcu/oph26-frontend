@@ -15,10 +15,10 @@ export const Route = createFileRoute('/info/event/')({
 })
 
 const EVENTS: string[] = [
-  '/info/event/event_timetable.jpg',
-  '/info/event/event_full.jpg',
-  '/info/event/event_map.jpg',
-  '/info/event/event_name.jpg',
+  '/info/event/event_timetable.webp',
+  '/info/event/event_full.webp',
+  '/info/event/event_map.webp',
+  '/info/event/event_name.webp',
 ]
 
 function RouteComponent() {
