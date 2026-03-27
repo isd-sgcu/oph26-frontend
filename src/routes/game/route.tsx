@@ -1,7 +1,7 @@
 import { Outlet, createFileRoute, useRouter } from '@tanstack/react-router'
 import GameFooter from '@/components/game/GameFooter'
 import PageNotFound from '@/components/PageNotFound'
-import { CaptureProvider } from '@/contexts/CaptureContext'
+import { CaptureProvider } from '@/contexts/GameContext'
 import { useUser } from '@/contexts/UserContext'
 import { useEffect } from 'react'
 
