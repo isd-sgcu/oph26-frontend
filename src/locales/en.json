@@ -151,7 +151,22 @@
         "major": "Major",
         "field": "Field"
       },
-      "mapGroup": {},
+      "mapGroup": {
+        "title": "Map",
+        "Location": {
+          "title": "Location",
+          "overview": "Overview",
+          "siam": "Siam MBK",
+          "samyan": "Samyan",
+          "triamudom": "Triamudom"
+        },
+        "PoI": {
+          "title": "Facilities",
+          "restroom": "Restrooms",
+          "food": "Food Court",
+          "park": "Parking"
+        }
+      },
       "merchandiseGroup": {
         "title": "Merchandise",
         "itemTitle": "Details",
@@ -183,6 +198,9 @@
         "contactTitle": "To receive more information",
         "registerTitle": "Register for this workshop",
         "register": "Register"
+      },
+      "eventGroup": {
+        "title": "Main Event"
       }
     },
     "questionaireGroup": {
@@ -193,34 +211,21 @@
       },
       "part1": {
         "header": "Part 1",
-        "title": "Satisfaction with the Activity",
+        "title": "Satisfaction with the Activity – Inside Sala Phra Kiao",
         "q1": {
-          "question": "How did you hear about CU Open House 2025?",
-          "options": {
-            "social": "Social Media",
-            "website": "Website",
-            "friends": "Friends",
-            "school": "School",
-            "other": "Other (Please specify)"
-          },
-          "placeholder": "Please specify"
+          "question": "The booths and activities were interesting and gave useful information"
         },
-
         "q2": {
-          "question": "Overall satisfaction with the activity"
+          "question": "The information about the faculties was clear"
         },
         "q3": {
-          "question": "The booths and activities were interesting and provided useful information"
+          "question": "The central stage activities were fun and interesting, and the speakers were suitable for the activities"
         },
         "q4": {
-          "question": "The information about the faculties within the university was clear"
+          "question": "Overall, how satisfied were you with the activities inside Sala Phra Kiao?"
         },
         "q5": {
-          "question": "If given the opportunity, would you recommend CU Open House to others?"
-        },
-
-        "q6": {
-          "question": "Which booth did you find most satisfying? (e.g., faculty booths, club booths, activity booths)",
+          "question": "The booth that you were satisfied with, such as the faculty booth, club booth, or activity booth",
           "placeholder": "Enter booth name"
         },
         "rating": {
@@ -228,11 +233,63 @@
           "high": "High"
         }
       },
+      "part2": {
+        "header": "Part 2",
+        "title": "Ability to Organize Activities – Inside Sala Phra Kiao",
+        "q1": {
+          "question": "Variety of activities"
+        },
+        "q2": {
+          "question": "Crowd density within the hall"
+        },
+        "q3": {
+          "question": "You can access all the booths you want"
+        },
+        "q4": {
+          "question": "Facilities within the university, such as restrooms and waiting areas"
+        },
+        "q5": {
+          "question": "Convenience of transportation within the university, such as shuttle buses"
+        },
+        "q6": {
+          "question": "Other suggestions",
+          "placeholder": "Enter your suggestions"
+        },
+        "rating": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+      "part3": {
+        "header": "Part 3",
+        "title": "Satisfaction with the CU Open House 2026 Website",
+        "q1": {
+          "question": "Registration Convenience"
+        },
+        "q2": {
+          "question": "Website aesthetics"
+        },
+        "q3": {
+          "question": "Enjoyment of website activities, such as the missing pieces activity"
+        },
+        "q4": {
+          "question": "The website provides complete information for participating in the event, including both the central activities at Sala Phra Kiao and the faculty activities"
+        },
+        "q5": {
+          "question": "Other suggestions",
+          "placeholder": "Enter your suggestions"
+        },
+        "rating": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+
       "partCertificate": {
         "description": "Please check your full name carefully before submitting the evaluation.",
         "firstNamePlaceholder": "Firstname",
         "lastNamePlaceholder": "Lastname",
-        "information": "The certificate will be sent via email within 1–2 days. Please check your email in the ‘My Account’ menu.",
+        "information": "The certificate will be sent via email within 1-2 weeks. Please check your email in the ‘My Account’ menu.",
         "caution": "*Once confirmed, this cannot be edited.",
         "confirmation": {
           "title": "Please Review!",
@@ -240,8 +297,8 @@
         }
       },
       "partLast": {
-        "highSchoolInformation": "The certificate will be sent via email within 1–2 days. Please check your email in the ‘My Account’ menu.",
-        "description": "Thank you for joining us on an adventurous journey aboard the train of dreams, racing through fields of flowers with us.\nBecause we believe that every flower has its own time to bloom,\nand that everyone is a beautiful flower in their own unique way.\nTherefore, please believe in yourself and do not hesitate to choose the path\nthat allows you to blossom and continue shining brightly."
+        "highSchoolInformation": "The certificate will be sent via email within 1-2 weeks. Please check your email in the ‘My Account’ menu.",
+        "description": "Our heartfelt thanks to everyone for being a part of this vibrant journey with us. \n\nLife is a path woven with smiles, laughter, and tears—yet every step is rich with memories.  \n\nIt’s okay to stumble, and it’s okay to cry; the road to success is rarely a smooth one. But remember, every experience has a lesson to whisper.\n\nSo, have faith in yourself. Do not hesitate to take the path less traveled, for simply finding the courage to take that first step is a triumph in itself. \n\nWe, The Chula Open House 2026 team, are rooting for all of you who are fighting for your dreams. Keep going, don’t give up, and we’ll be waiting to welcome you here at CU."
       },
 
       "back": "Back",

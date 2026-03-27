@@ -688,7 +688,7 @@ async function addThaiText(ctx: CanvasRenderingContext2D) {
 
     { label: 'พาณิชยศาสตร์', x: 95, y: 855 },
     { label: 'วิทยาศาสตร์', x: 210, y: 855 },
-    { label: 'คณะเกษตร', x: 325, y: 855 },
+    { label: 'เกษตรศาสตร์', x: 325, y: 855 },
     { label: 'สถาบันนวัตกรรม', x: 440, y: 855 },
 
     { label: 'และการบัญชี', x: 95, y: 870 },

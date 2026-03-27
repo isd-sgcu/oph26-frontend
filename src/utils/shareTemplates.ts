@@ -95,10 +95,10 @@ export async function processWatermarkTemplate(
 
 async function ensureFontsLoaded() {
   const fonts = [
-    'bold 80px "IBM Plex Sans Thai"',
-    '600 60px "IBM Plex Sans Thai"',
-    '500 65px "IBM Plex Sans Thai"',
-    '500 50px "IBM Plex Sans Thai"',
+    'bold 40px "IBM Plex Sans Thai"',
+    '600 30px "IBM Plex Sans Thai"',
+    '500 32px "IBM Plex Sans Thai"',
+    '500 25px "IBM Plex Sans Thai"',
   ]
 
   await Promise.all(fonts.map((f) => document.fonts.load(f)))

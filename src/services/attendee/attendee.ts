@@ -68,10 +68,11 @@ export const getMyAttendee =
   }
 
 export const updateCertificateName = async (
-  fullname: string
+  name: string,
+  surname: string
 ): Promise<void> => {
   try {
-    await Axios.put(`/attendees/me/certificate_name`, { fullname })
+    await Axios.put(`/attendees/me/certificate_name`, { name, surname })
   } catch (error) {
     throw error as AxiosError
   }
