@@ -23,7 +23,7 @@ export function useCamera(
 
   const isIOS =
     typeof window !== 'undefined' &&
-    /iPad|iPhone|iPod/.test(navigator.userAgent)
+    /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 
   // Apply transform to DOM
   const applyTransform = () => {

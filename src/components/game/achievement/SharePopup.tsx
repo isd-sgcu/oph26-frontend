@@ -26,6 +26,18 @@ const SharePopup = ({ open, onClose, achievement, name }: Props) => {
   const generatingRef = useRef(false)
   const hasGenerated = useRef(false)
 
+  const [isIOSDevice, setIsIOSDevice] = useState(false)
+
+  useEffect(() => {
+    const ua = navigator.userAgent || navigator.vendor
+
+    const isIOS =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (ua.includes('Mac') && 'ontouchend' in document)
+
+    setIsIOSDevice(isIOS)
+  }, [])
+
   useEffect(() => {
     if (!open || hasGenerated.current) return
 
@@ -76,7 +88,8 @@ const SharePopup = ({ open, onClose, achievement, name }: Props) => {
         const result = await achievementShareCollectedPieces(
           name,
           achievement,
-          lang
+          lang,
+          isIOSDevice
         )
         setImage(result)
       }

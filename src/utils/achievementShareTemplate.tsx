@@ -486,7 +486,8 @@ const facultyVariants: Record<FacultyKey, PieceVariant> = {
 export async function achievementShareCollectedPieces(
   name: string,
   facultyCounts: CollectedPiecesProps,
-  lang: 0 | 1 // 0 = th, 1 = en
+  lang: 0 | 1, // 0 = th, 1 = en
+  isIOS: boolean
 ) {
   const localizedText = {
     th: {
@@ -496,15 +497,6 @@ export async function achievementShareCollectedPieces(
       start: 'Pieces Collection',
     },
   }
-
-  // for (const i in facultyCounts) {
-  //   // skip non-faculty keys
-  //   if (i === 'variant' || i === 'stat') continue;
-
-  //   // tell TS this is a faculty key
-  //   const key = i as FacultyKey;
-  //   facultyCounts[key] = 999;
-  // }
 
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
@@ -560,6 +552,7 @@ export async function achievementShareCollectedPieces(
       imgPath: `/faculty/${facultyKey}.webp`,
       variant,
       count,
+      isIOS
     })
   }
 
@@ -587,6 +580,7 @@ interface DrawPieceParams {
   imgPath: string
   variant: PieceVariant
   count: number
+  isIOS: boolean
 }
 
 async function drawPiece({
@@ -597,6 +591,7 @@ async function drawPiece({
   imgPath,
   variant,
   count,
+  isIOS
 }: DrawPieceParams) {
   const path = new Path2D(JIGSAW_PATH[variant])
   const img = await loadImage(imgPath)
@@ -621,13 +616,21 @@ async function drawPiece({
   ctx.save()
   ctx.clip(path)
 
-  if (count === 0) {
+  if (count === 0 && !isIOS) {
+    // Normal devices
     ctx.filter = 'grayscale(100%) brightness(0.75) opacity(90%)'
+    ctx.drawImage(img, 0, 0, 100, 100)
+    ctx.filter = 'none'
+  } else {
+    // Draw normally first
+    ctx.drawImage(img, 0, 0, 100, 100)
+
+    // iOS fallback
+    if (count === 0 && isIOS) {
+      ctx.fillStyle = 'rgba(128,128,128,0.75)'
+      ctx.fillRect(0, 0, 100, 100)
+    }
   }
-
-  ctx.drawImage(img, 0, 0, 100, 100)
-
-  ctx.filter = 'none'
   ctx.restore()
 
   // --- COUNT BADGE ---
