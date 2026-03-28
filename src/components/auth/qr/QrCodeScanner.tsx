@@ -119,18 +119,67 @@ export default function QrCodeScanner() {
     const status = response.status
     const data = response.data
 
+    // 409 = already checked in — treat as success (green) not error (red)
+    if (status === 409) {
+      const locale = i18n.language
+      const faculty = FACULTIES.find((f) => f.value === data.faculty)
+      const checkedInAt = data.checked_in_at ? new Date(data.checked_in_at) : new Date()
+      setModalContent({
+        isSuccess: true,
+        title: (
+          <div className="flex flex-col gap-1">
+            <p className="text-2xl font-bold">{`${data.firstname} ${data.surname}`}</p>
+            {data.ticket_code && (
+              <p className="text-grey text-sm font-normal">
+                ID: {data.ticket_code}
+              </p>
+            )}
+          </div>
+        ),
+        subtitle: (
+          <div className="text-center text-xl font-semibold text-pretty">
+            <p>
+              {t('routes.authGroup.qrGroup.modal.success.subtitle', {
+                faculty: locale === 'th' ? faculty?.label.th : faculty?.label.en,
+              })}
+            </p>
+          </div>
+        ),
+        body: (
+          <div
+            className="text-center text-sm text-pretty"
+            dangerouslySetInnerHTML={{
+              __html: t('routes.authGroup.qrGroup.modal.success.body', {
+                date: checkedInAt.toLocaleDateString(
+                  locale === 'th' ? 'th-TH' : 'en-US',
+                  { year: 'numeric', month: 'short', day: 'numeric' }
+                ),
+                time: checkedInAt.toLocaleTimeString(locale, {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }),
+              }),
+            }}
+          ></div>
+        ),
+        detail: (
+          <div className="border-main-pink text-main-pink rounded-2xl border-2 px-3 py-2 text-center text-sm text-pretty">
+            {t('routes.authGroup.qrGroup.modal.success.detail')}
+          </div>
+        ),
+      })
+      return
+    }
+
     setModalContent({
       isSuccess: false,
       title: (
         <p className="text-error-base text-2xl font-bold">
-          {status === 409
-            ? t('routes.authGroup.qrGroup.modal.error.title2')
-            : t('routes.authGroup.qrGroup.modal.error.title')}
+          {t('routes.authGroup.qrGroup.modal.error.title')}
         </p>
       ),
       subtitle: (
         <div className="text-center text-xl font-semibold text-pretty">
-          {status === 409 && <p>{data.firstname + ' ' + data.surname}</p>}
           <p>{t(`routes.authGroup.qrGroup.modal.error.subtitle.${status}`)}</p>
         </div>
       ),
