@@ -1,5 +1,5 @@
 import { IDetectedBarcode, outline, Scanner } from '@yudiel/react-qr-scanner'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import CustomModal from '@/components/CustomModal'
 import { useTranslation } from 'react-i18next'
 import { useUser } from '@/contexts/UserContext'
@@ -24,6 +24,7 @@ export default function QrCodeScanner() {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isScanning, setIsScanning] = useState(true)
+  const scanLockRef = useRef(false)
   const [modalContent, setModalContent] = useState<{
     title: React.ReactNode
     subtitle: React.ReactNode
@@ -39,7 +40,8 @@ export default function QrCodeScanner() {
   })
 
   const handleScanQrCode = async (data: IDetectedBarcode[]) => {
-    if (!isScanning || !data || data.length === 0) return
+    if (scanLockRef.current || !isScanning || !data || data.length === 0) return
+    scanLockRef.current = true
 
     setIsScanning(false)
 
@@ -165,6 +167,7 @@ export default function QrCodeScanner() {
         detail: '',
         isSuccess: false,
       })
+      scanLockRef.current = false
       setIsScanning(true)
     }, 300)
   }
