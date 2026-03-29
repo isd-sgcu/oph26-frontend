@@ -9,7 +9,6 @@ const SHOW_FOOTER_PATHS = [
   '/info/faculty',
   '/info/faculty/*',
   '/info/map',
-  '/info/merchandise',
   '/info/event',
 ]
 

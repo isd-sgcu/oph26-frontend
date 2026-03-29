@@ -1,14 +1,20 @@
 import { MERCHANDISE } from '@/components/const/Merchandise'
+import PageNotFound from '@/components/PageNotFound'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/info/merchandise/')({
   component: RouteComponent,
 })
 
+const disabledPage = true
+
 function RouteComponent() {
   const { t } = useTranslation()
+
+  if (disabledPage) {
+    return <PageNotFound />
+  }
 
   return (
     <div className="bg-gradient-pink flex flex-1 flex-col gap-5 p-5">

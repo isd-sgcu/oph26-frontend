@@ -1,5 +1,6 @@
 import { getMerchandiseById } from '@/components/const/Merchandise'
 import { FlatIcon } from '@/components/FlatIcon'
+import PageNotFound from '@/components/PageNotFound'
 import { Button } from '@/components/ui/button'
 import {
   Carousel,
@@ -16,6 +17,8 @@ import { useTranslation } from 'react-i18next'
 export const Route = createFileRoute('/info/merchandise/$itemId')({
   component: RouteComponent,
 })
+
+const disabledPage = true
 
 function RouteComponent() {
   const { t } = useTranslation()
@@ -63,6 +66,10 @@ function RouteComponent() {
   }, [merch])
 
   //-----------------------------------------
+
+  if (disabledPage) {
+    return <PageNotFound />
+  }
 
   return (
     <div className="bg-gradient-pink min-h-screen flex-1 p-5">

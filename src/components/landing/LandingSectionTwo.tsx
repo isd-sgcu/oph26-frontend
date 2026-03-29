@@ -77,7 +77,9 @@ export default function LandingSectionTwo() {
             <button
               className="absolute top-[65%] left-[4%] z-10 flex flex-col items-center justify-center"
               aria-label="Souvenir"
-              onClick={() => handleNavigation('/info/merchandise')}
+              onClick={() => {
+                window.open('https://www.instagram.com/cu.item', '_blank')
+              }}
             >
               <img src="/landing/bush.svg" alt="" className="h-auto w-24.25" />
               <span className="text-center text-base font-bold text-white text-shadow-lg sm:text-lg md:text-xl">
