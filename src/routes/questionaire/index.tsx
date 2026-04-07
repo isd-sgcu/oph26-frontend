@@ -15,7 +15,7 @@ import {
   getEvaluationResponse,
   QuestionaireInterface,
 } from '@/services/questionaire/questionaire'
-import { RELEASE_EVALUATION_DATE } from '@/utils/const'
+import { CLOSED_EVALUATION_DATE, RELEASED_EVALUATION_DATE } from '@/utils/const'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -131,9 +131,10 @@ function RouteComponent() {
     }
 
     const currentDate = new Date()
-    const targetDate = new Date(RELEASE_EVALUATION_DATE)
-    if (currentDate < targetDate) {
-      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+    const releasedDate = new Date(RELEASED_EVALUATION_DATE)
+    const closedDate = new Date(CLOSED_EVALUATION_DATE)
+    if (currentDate < releasedDate || currentDate > closedDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026 หรือเกินวันที่ 4 เมษายน 2026
       router.navigate({ to: '/auth/profile/ticket' })
       return
     }

@@ -8,7 +8,7 @@ import EvaluationBanner from '@/components/auth/profile/EvaluationBanner'
 import { useUser } from '@/contexts/UserContext'
 import { getCheckInStatus } from '@/services/checkin/checkin'
 import { getEvaluationResponse } from '@/services/questionaire/questionaire'
-import { RELEASE_EVALUATION_DATE } from '@/utils/const'
+import { CLOSED_EVALUATION_DATE, RELEASED_EVALUATION_DATE } from '@/utils/const'
 
 export const Route = createFileRoute('/auth/profile/ticket/')({
   component: RouteComponent,
@@ -60,7 +60,8 @@ function RouteComponent() {
 
   useEffect(() => {
     const currentDate = new Date()
-    const targetDate = new Date(RELEASE_EVALUATION_DATE)
+    const releasedDate = new Date(RELEASED_EVALUATION_DATE)
+    const closedDate = new Date(CLOSED_EVALUATION_DATE)
     const allowedAttendeeLevels = [
       'matthayom_ton',
       'matthayom_plai',
@@ -73,8 +74,8 @@ function RouteComponent() {
       return
     }
 
-    if (currentDate < targetDate) {
-      // ยังไม่ถึงวันที่ 30 มีนาคม 2026
+    if (currentDate < releasedDate || currentDate > closedDate) {
+      // ยังไม่ถึงวันที่ 30 มีนาคม 2026 หรือเกินวันที่ 4 เมษายน 2026
       setShowEvaluationBanner(false)
       setHasPermission(false)
     } else if (hasCheckedIn) {

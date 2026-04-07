@@ -61,7 +61,7 @@ const UNAUTHENTICATED_NAV_ITEMS: NavItem[] = [
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
-    to: '/info/merchandise',
+    to: 'https://www.instagram.com/cu.item',
   },
 ]
 
@@ -86,7 +86,7 @@ const AUTHENTICATED_ATTENDEE_NONSTUDENT_NAV_ITEMS: NavItem[] = [
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
-    to: '/info/merchandise',
+    to: 'https://www.instagram.com/cu.item',
   },
 ]
 
@@ -116,7 +116,7 @@ const AUTHENTICATED_ATTENDEE_STUDENT_NAV_ITEMS: NavItem[] = [
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
-    to: '/info/merchandise',
+    to: 'https://www.instagram.com/cu.item',
   },
 ]
 
@@ -141,7 +141,7 @@ const AUTHENTICATED_STAFF_NAV_ITEMS: NavItem[] = [
   {
     title: 'merchandise',
     icon: 'fi-rr-gift',
-    to: '/info/merchandise',
+    to: 'https://www.instagram.com/cu.item',
   },
   {
     title: 'scan',
@@ -319,7 +319,13 @@ export default function Header() {
                   <div
                     key={item.title}
                     onClick={() => {
-                      router.navigate({ to: item.to })
+                      if (item.to.startsWith('http')) {
+                        // External link
+                        window.open(item.to, '_blank')
+                      } else {
+                        // Internal link
+                        router.navigate({ to: item.to })
+                      }
                       setOpenSidebar(false)
                     }}
                     className="flex w-fit cursor-pointer items-center gap-4"

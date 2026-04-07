@@ -35,6 +35,7 @@ export type CheckInErrorResponse = {
   status: number
   data: {
     error: string
+    checked_in_at?: string
     check_in_at?: string
     user_id?: string
     firstname?: string

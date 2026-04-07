@@ -289,7 +289,7 @@
         "description": "Please check your full name carefully before submitting the evaluation.",
         "firstNamePlaceholder": "Firstname",
         "lastNamePlaceholder": "Lastname",
-        "information": "The certificate will be sent via email within 1-2 weeks. Please check your email in the ‘My Account’ menu.",
+        "information": "The certificate will be sent via email within 2-3 weeks after the evaluation is submitted.",
         "caution": "*Once confirmed, this cannot be edited.",
         "confirmation": {
           "title": "Please Review!",
@@ -297,7 +297,7 @@
         }
       },
       "partLast": {
-        "highSchoolInformation": "The certificate will be sent via email within 1-2 weeks. Please check your email in the ‘My Account’ menu.",
+        "highSchoolInformation": "The certificate will be sent via email within 2-3 weeks after the evaluation is submitted.",
         "description": "Our heartfelt thanks to everyone for being a part of this vibrant journey with us. \n\nLife is a path woven with smiles, laughter, and tears—yet every step is rich with memories.  \n\nIt’s okay to stumble, and it’s okay to cry; the road to success is rarely a smooth one. But remember, every experience has a lesson to whisper.\n\nSo, have faith in yourself. Do not hesitate to take the path less traveled, for simply finding the courage to take that first step is a triumph in itself. \n\nWe, The Chula Open House 2026 team, are rooting for all of you who are fighting for your dreams. Keep going, don’t give up, and we’ll be waiting to welcome you here at CU."
       },
 
